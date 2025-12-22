@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='rgb(203, 2, 19)'/%3E%3Ctext x='50' y='75' font-size='70' font-weight='800' fill='white' text-anchor='middle' font-family='sans-serif'%3EF%3C/text%3E%3C/svg%3E">
+<title>Françoise | Investor Relations</title>
+<meta name="description" content="Shift-Left Quality Gate for Design Systems & Accessibility.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    :root { --font-sans: 'Inter', sans-serif; --font-heading: 'Alumni Sans', sans-serif; --color-primary: rgb(203, 2, 19); --color-primary-dark: rgb(160, 2, 15); --color-text-main: rgb(17, 24, 39); --color-dark-bg: #0f0f0f; }
+    body { font-family: var(--font-sans); background-color: white; color: var(--color-text-main); font-weight: 300; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4, h5 { font-family: var(--font-heading); line-height: 1; } h1 { font-weight: 800; letter-spacing: -0.02em; }
+    .text-primary { color: var(--color-primary); } .bg-primary { background-color: var(--color-primary); } .border-primary { border-color: var(--color-primary); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 2rem; border-radius: 4px; font-weight: 600; transition: all 0.2s ease; cursor: pointer; font-size: 0.95rem; }
+    .btn-primary { background-color: var(--color-primary); color: white; border: 1px solid var(--color-primary); } .btn-primary:hover { background-color: var(--color-primary-dark); }
+    .btn-outline { border: 1px solid #E5E7EB; color: var(--color-text-main); } .btn-outline:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .bg-grid-pattern { background-size: 40px 40px; background-image: linear-gradient(to right, #f3f4f6 1px, transparent 1px), linear-gradient(to bottom, #f3f4f6 1px, transparent 1px); mask-image: linear-gradient(to bottom, black 40%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%); }
+    .thesis-item { border-left: 2px solid #E5E7EB; padding-left: 1.5rem; transition: border-color 0.3s; } .thesis-item:hover { border-left-color: var(--color-primary); }
+    .thesis-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: #9CA3AF; margin-bottom: 0.5rem; display: block; }
+    .tooltip-container { position: relative; display: inline-flex; align-items: center; justify-content: center; cursor: help; }
+    .tooltip-text { visibility: hidden; width: 260px; background-color: #ffffff; color: #374151; border: 1px solid #e5e7eb; text-align: left; border-radius: 8px; padding: 12px; position: absolute; z-index: 50; bottom: 150%; left: 50%; transform: translateX(-50%); opacity: 0; transition: all 0.2s; font-size: 0.75rem; font-weight: 400; line-height: 1.4; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); pointer-events: none; }
+    .tooltip-text::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -6px; border-width: 6px; border-style: solid; border-color: #ffffff transparent transparent transparent; }
+    .tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(-5px); }
+    .tooltip-right-align .tooltip-text { left: auto; right: -10px; transform: none; } .tooltip-right-align:hover .tooltip-text { transform: translateY(-5px); } .tooltip-right-align .tooltip-text::after { left: auto; right: 14px; margin-left: 0; }
+    .connector-line { position: absolute; z-index: 0; border-color: #E5E7EB; }
+    .figma-ui-header { background-color: #2C2C2C; height: 40px; display: flex; align-items: center; padding: 0 16px; border-bottom: 1px solid #111; }
+    .comment-bubble { background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 12px; width: 240px; position: absolute; z-index: 40; opacity: 0; transform: translateY(10px); animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+    .comment-1 { animation-delay: 1.5s; top: 30%; left: 60%; } .comment-2 { animation-delay: 2.2s; top: 65%; left: 20%; }
+    @keyframes popIn { to { opacity: 1; transform: translateY(0); } }
+    .ui-scanner-line { position: absolute; left: 0; right: 0; height: 2px; background: rgba(203, 2, 19, 0.8); box-shadow: 0 1px 10px rgba(203, 2, 19, 0.5); z-index: 25; top: -10%; animation: uiScan 4s infinite linear; }
+    @keyframes uiScan { 0% { top: -10%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 110%; opacity: 0; } }
+.shift-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    height: 2px;
+    background: var(--color-primary);
+    width: 20%;
+    opacity: 0;
+    animation: shiftLeftSimple 2.5s infinite ease-in-out;
+}
+
+.shift-arrow::before {
+    content: '';
+    position: absolute;
+    /* Центрируем по вертикали относительно родителя */
+    top: 50%;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-left: 2px solid var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    /* Совмещаем поворот и точное центрирование по оси Y */
+    transform: translateY(-50%) rotate(45deg);
+    /* Убираем возможные искажения субпиксельного рендеринга */
+    box-sizing: border-box;
+}
+    @keyframes shiftLeftSimple { 0% { right: 0; width: 10%; opacity: 0; } 20% { opacity: 1; } 80% { right: 85%; width: 15%; opacity: 1; } 100% { right: 100%; width: 5%; opacity: 0; } }
+    .section-divider { border-top: 1px solid #f3f4f6; margin: 4rem 0; }
+</style>
+</head>
+<body class="bg-white">
+    <header class="fixed w-full top-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 z-50">
+        <div class="container max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <a href="#" class="text-3xl font-black font-heading tracking-tight text-gray-900">FRANÇOISE</a>
+                <span class="hidden sm:inline-block h-4 w-px bg-gray-300 mx-2"></span>
+                <span class="hidden sm:inline-block text-xs font-mono text-gray-400 uppercase tracking-widest">Investor Relations</span>
+            </div>
+            <a href="#ask" class="btn btn-primary py-2 px-5 text-sm uppercase tracking-wide">Investment</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- HERO -->
+        <section class="relative pt-20 pb-12 md:pt-32 md:pb-16 overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern -z-10"></div>
+            <div class="container max-w-6xl mx-auto px-6">
+                <div class="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-widest text-gray-500 mb-8 font-mono">
+                    <span class="flex items-center gap-2 text-gray-900"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>Pre-Seed</span>
+                    <span class="text-gray-300">/</span><span>Delaware C-Corp (Q1 2026)</span><span class="text-gray-300">/</span><span>Pre-Revenue</span>
+                </div>
+                <div class="max-w-4xl mb-12">
+                    <h1 class="text-6xl md:text-8xl text-gray-900 mb-6 leading-[0.9]">Shift-Left <span class="text-primary">Quality Gate</span><br><span class="text-gray-400">for Design Systems.</span></h1>
+                    <p class="text-xl md:text-2xl text-gray-600 font-light max-w-2xl leading-relaxed">Enterprise SaaS that ensures production-ready interfaces by validating designs against errors invisible to standard tools.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-gray-100 pt-10">
+                    <div class="thesis-item"><span class="thesis-label">Validation & Traction</span>
+                        <ul class="space-y-3">
+                            <li class="flex flex-col"><span class="font-bold text-gray-900 text-lg leading-tight">NVIDIA Inception Member</span><span class="text-sm text-gray-500">AI Member Program</span></li>
+                            <li class="flex flex-col"><span class="font-bold text-gray-900 text-lg leading-tight">Microsoft for Startups</span><span class="text-sm text-gray-500">Azure Marketplace Partner</span></li>
+                            <li class="flex flex-col"><span class="font-bold text-gray-900 text-lg leading-tight">Paid Pilot Executed</span><span class="text-sm text-gray-500">Global marketplace (800+ product team)</span></li>
+                        </ul>
+                    </div>
+                    <div class="thesis-item"><span class="thesis-label">Market Opportunity</span>
+                        <div class="mb-4"><div class="text-5xl font-heading font-bold text-gray-900 mb-1">$2.9B</div><div class="text-sm text-gray-500 font-medium">TAM: Design Systems + Accessibility</div></div>
+                        <div><div class="text-2xl font-heading font-bold text-gray-900">50,000</div><div class="text-sm text-gray-500">Target Enterprises (> $100k cost of error)</div></div>
+                    </div>
+                    <div class="thesis-item"><span class="thesis-label">Team & Tech</span>
+                        <div class="space-y-4">
+                            <div><div class="text-sm font-bold text-gray-900">Founders</div><div class="text-sm text-gray-600 mt-1"><span class="block"><strong>Daria:</strong> Ex-Head of Product (800+ team scale)</span><span class="block mt-1"><strong>Victor:</strong> Ex-Fortune 500 Tech Lead</span></div></div>
+                            <div><div class="text-sm font-bold text-gray-900">Moat</div><div class="text-sm text-gray-600 mt-1">Hybrid Engine (CV + Deterministic). On-Premise deploy ready for Banking.</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 0. TEAM instead of Video -->
+        <section class="py-24 bg-gray-50 border-y border-gray-100">
+            <div class="container max-w-6xl mx-auto px-6">
+                <div class="mb-16 md:text-center max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">The Founding Team</h2>
+                    <p class="text-xl text-gray-500 font-light">Deep expertise in enterprise product scale and high-load security.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <!-- Daria -->
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-32 h-32 md:w-48 md:h-48 flex-shrink-0 rounded-xl bg-gray-100 overflow-hidden border border-gray-200">
+                            <img src="Daria.JPG" alt="Daria Kamyshina" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex flex-wrap items-baseline gap-3 mb-2">
+                                <h3 class="text-3xl font-bold text-gray-900">Daria Kamyshina</h3>
+                                <span class="text-xs font-bold text-primary uppercase tracking-widest">Founder & CEO</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-[10px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded uppercase">Ex-Head of Product</span>
+                                <span class="text-[10px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded uppercase">7+ Years PM</span>
+                                <span class="text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded uppercase">$150K Avg. Deal</span>
+                            </div>
+                            <div class="space-y-4 text-sm text-gray-600 leading-relaxed">
+                                <p>Founder of AI & Dev studio delivering solutions to enterprise clients with 800+ team organizations. Background in Physics & Math.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Victor -->
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="w-32 h-32 md:w-48 md:h-48 flex-shrink-0 rounded-xl bg-gray-100 overflow-hidden border border-gray-200">
+                            <img src="Victor.jpeg" alt="Victor Kamyshin-Pisarevsky" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex flex-wrap items-baseline gap-3 mb-2">
+                                <h3 class="text-3xl font-bold text-gray-900">Victor Kamyshin-Pisarevsky</h3>
+                                <span class="text-xs font-bold text-primary uppercase tracking-widest">Co-Founder & CTO</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="text-[10px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded uppercase">Ex-Dev Lead (F500 Eq.)</span>
+                                <span class="text-[10px] font-bold bg-gray-100 text-gray-600 px-2 py-0.5 rounded uppercase">100M+ Users Scale</span>
+                                <span class="text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded uppercase">SOC2/On-Prem Expert</span>
+                            </div>
+                            <div class="space-y-4 text-sm text-gray-600 leading-relaxed">
+                                <p>Led development at a major financial institution. Deep expertise in high-load AI/Computer Vision integration and security architectures.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: Current State + Moat + Solution -->
+        <section class="py-24 bg-white">
+            <div class="container max-w-6xl mx-auto px-6">
+                <!-- Current State -->
+                <div class="mb-16 md:text-center max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">Current State of Design QA</h2>
+                    <p class="text-xl text-gray-500 font-light">The operational impact of manual verification on enterprise product teams.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
+                    <div class="relative group">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 group-hover:bg-primary transition-colors"></div>
+                        <div class="pl-6">
+                            <div class="flex items-center gap-2 mb-2 text-xs font-bold text-gray-400 uppercase tracking-widest">Speed</div>
+                            <div class="flex items-center gap-3 mb-4"><div class="text-5xl font-heading font-black text-primary leading-none">25%</div><div class="tooltip-container"><div class="w-5 h-5 rounded-full border border-gray-300 text-gray-400 flex items-center justify-center text-[10px] font-bold hover:border-primary hover:text-primary transition-colors">?</div><div class="tooltip-text"><strong class="text-gray-900 block mb-1">Source: World Quality Report.</strong> Testing & QA typically consumes ~22-25% of overall project time.</div></div></div>
+                            <div class="text-xl text-gray-400 font-medium mb-4 mt-[-10px]">Lost TTM</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">Design leads manually inspect hundreds of screens per sprint. This linear process limits release speed.</p>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 group-hover:bg-primary transition-colors"></div>
+                        <div class="pl-6">
+                            <div class="flex items-center gap-2 mb-2 text-xs font-bold text-gray-400 uppercase tracking-widest">Cost</div>
+                            <div class="flex items-center gap-3 mb-4"><div class="text-5xl font-heading font-black text-primary leading-none">30%</div><div class="tooltip-container"><div class="w-5 h-5 rounded-full border border-gray-300 text-gray-400 flex items-center justify-center text-[10px] font-bold hover:border-primary hover:text-primary transition-colors">?</div><div class="tooltip-text"><strong class="text-gray-900 block mb-1">Source: IBM Systems Sciences.</strong> "Rule of 1-10-100": Fixing a bug in production costs 100x more than in design.</div></div></div>
+                            <div class="text-xl text-gray-400 font-medium mb-4 mt-[-10px]">Budget Waste</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">Fixing UI bugs in code costs 10x more than in design. Late detection of logic issues triggers expensive rework.</p>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gray-200 group-hover:bg-primary transition-colors"></div>
+                        <div class="pl-6">
+                            <div class="flex items-center gap-2 mb-2 text-xs font-bold text-gray-400 uppercase tracking-widest">Risk</div>
+                            <div class="flex items-center gap-3 mb-4"><div class="text-5xl font-heading font-black text-primary leading-none">€250k</div><div class="tooltip-container tooltip-right-align"><div class="w-5 h-5 rounded-full border border-gray-300 text-gray-400 flex items-center justify-center text-[10px] font-bold hover:border-primary hover:text-primary transition-colors">?</div><div class="tooltip-text"><strong class="text-gray-900 block mb-1">Source: European Accessibility Act.</strong> Enforcement starts June 2025. Fines for non-compliance reach up to €250k.</div></div></div>
+                            <div class="text-xl text-gray-400 font-medium mb-4 mt-[-10px]">Fine / Violation</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">Accessibility violations in production create legal risks (ADA/EAA). Ignoring rules negates Design System investment.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technological Moat -->
+                <div class="relative max-w-5xl mx-auto pt-10 mb-24">
+                    <div class="hidden md:block">
+                        <div class="connector-line border-b top-[32%] left-[25%] right-[25%] h-8 opacity-50"></div>
+                        <div class="connector-line border-l border-r h-12 w-px bg-gray-200 left-1/2 -translate-x-1/2 top-[32%] opacity-50"></div>
+<div class="absolute top-[calc(32%+3rem)] left-1/2 -translate-x-1/2 text-gray-300 z-0">
+    <svg class="w-6 h-36" fill="none" stroke="currentColor" viewBox="0 0 24 144" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 136l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+</div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 relative z-10 mb-12">
+                        <div class="bg-gray-50 rounded-lg p-8 border border-gray-100 relative transition-all duration-300 hover:shadow-md hover:border-gray-200">
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Rules Engine</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">The Structural Ambiguity</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">Infinite ways to build the same UI make standard deterministic algorithms <strong>brittle and prone to false positives</strong>.</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-8 border border-gray-100 relative transition-all duration-300 hover:shadow-md hover:border-gray-200">
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">AI Models</div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">The Precision Gap</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">Pure AI models (LLMs/CV) are stochastic. They excel at semantics but <strong>fail at the pixel-perfect mathematical precision</strong> required.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solution -->
+                <div class="bg-gray-50 border border-gray-100 rounded-3xl p-8 md:p-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        <div>
+                            <div class="inline-flex items-center gap-2 bg-primary/10 text-primary text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-6">Core Hybrid Solution</div>
+                            <h3 class="text-4xl md:text-5xl font-heading font-black text-gray-900 mb-6">The Françoise Engine</h3>
+                            <p class="text-lg text-gray-600 mb-8 leading-relaxed">Our engine uses <strong>AI to understand intent</strong> and <strong>deterministic rules to enforce technical integrity</strong>.</p>
+
+                            <div class="flex items-center gap-6 mb-12">
+                                <div><div class="text-4xl font-heading font-black text-primary">99.2%</div><div class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">Accuracy</div></div>
+                                <div class="w-px h-10 bg-gray-200"></div>
+                                <div class="text-sm text-gray-600 leading-snug">Validated on accessibility checks <br><span class="text-primary font-bold">with near-zero false positives.</span></div>
+                            </div>
+
+                            <div class="space-y-8">
+                                <div class="relative pl-6">
+                                    <div class="absolute left-0 top-1 w-1.5 h-1.5 rounded-full bg-primary"></div>
+                                    <h4 class="text-sm font-bold text-gray-900 mb-1">Semantic & Logic Validation</h4>
+                                    <p class="text-xs text-gray-500 leading-relaxed">Françoise audits designs for complex logic: accessibility (WCAG 2.1 AA), component states, and Design System usage.</p>
+                                </div>
+                                <div class="relative pl-6">
+                                    <div class="absolute left-0 top-1 w-1.5 h-1.5 rounded-full bg-primary"></div>
+                                    <h4 class="text-sm font-bold text-gray-900 mb-1">Enterprise Security</h4>
+                                    <p class="text-xs text-gray-500 leading-relaxed">Full data isolation via Private Cloud or On-Premise. SOC 2 Type I in progress (Q2 2026).</p>
+                                </div>
+                                <div class="relative pl-6">
+                                    <div class="absolute left-0 top-1 w-1.5 h-1.5 rounded-full bg-primary"></div>
+                                    <h4 class="text-sm font-bold text-gray-900 mb-1">Seamless Workflow Integration</h4>
+                                    <p class="text-xs text-gray-500 leading-relaxed">Errors appear directly as native comments on the design canvas with actionable fixes.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Figma UI Animation -->
+                        <div class="relative">
+                            <div class="relative bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden aspect-[4/3] group">
+                                <div class="figma-ui-header flex justify-between"><div class="flex gap-4"><div class="w-4 h-4 bg-gray-500 rounded"></div><div class="w-4 h-4 bg-gray-500 rounded"></div></div><div class="text-gray-400 text-xs font-mono">File / Frame 1</div><div class="w-16 h-6 bg-gray-700 rounded text-[10px] text-white flex items-center justify-center font-bold">Share</div></div>
+                                <div class="bg-[#f0f0f0] w-full h-full relative p-8">
+                                    <div class="bg-white w-full h-full shadow-lg rounded-lg p-6 relative">
+                                        <div class="h-8 w-1/3 bg-gray-100 rounded mb-6"></div><div class="flex gap-4 mb-6"><div class="h-24 w-full bg-gray-50 rounded border border-gray-100"></div><div class="h-24 w-full bg-gray-50 rounded border border-gray-50"></div></div>
+                                        <div class="space-y-3"><div class="h-4 w-full bg-gray-50 rounded"></div><div class="h-4 w-5/6 bg-gray-50 rounded"></div></div>
+                                    </div>
+                                    <div class="ui-scanner-line"></div>
+                                    <div class="absolute comment-bubble comment-1">
+                                        <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-gray-900 flex items-center justify-center text-white text-[10px] font-bold">AI</div><div><div class="text-xs font-bold text-gray-900 mb-1">Françoise</div><p class="text-[10px] text-gray-600 leading-snug"><span class="text-primary font-bold">WCAG Fail:</span> Contrast is 2.1:1.</p></div></div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-4 right-4 bg-gray-900 text-white px-3 py-1.5 rounded-full text-[10px] font-mono shadow-lg flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span> Active</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: TAM + Drivers + Competitive Landscape -->
+        <section class="py-24 bg-gray-50 border-y border-gray-100">
+            <div class="container max-w-6xl mx-auto px-6">
+                <!-- TAM -->
+                <div class="flex flex-col md:flex-row gap-12 items-start mb-24">
+                    <div class="md:w-1/3 pt-4">
+                        <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Total Addressable Market</h2>
+                        <div class="text-6xl md:text-8xl font-heading font-black text-gray-900 leading-none mb-4">$2.9B<span class="text-primary text-4xl">+</span></div>
+                        <div class="space-y-2 text-sm text-gray-500 border-l-2 border-gray-100 pl-4"><p><strong class="text-gray-900">$2.0B</strong> Design Systems (15% CAGR)</p><p><strong class="text-gray-900">$900M</strong> Accessibility (8.4% CAGR)</p></div>
+                    </div>
+                    <div class="md:w-2/3 w-full">
+                        <div class="mb-10">
+                            <div class="flex justify-between text-xs font-bold uppercase tracking-wider text-gray-400 mb-2"><span class="text-primary">Design</span><span>Development</span><span>QA & Release</span></div>
+                            <div class="h-1 bg-gray-100 relative w-full mb-3"><div class="shift-arrow"></div></div>
+                            <div class="flex justify-between items-center"><div class="text-xs text-primary font-bold bg-gray-50 border border-gray-200 px-2 py-1 rounded">Shift-Left Prevention</div><div class="text-[10px] text-gray-400">Capturing upstream value</div></div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="bg-white p-6 rounded-lg border border-gray-100"><div class="text-2xl font-bold text-gray-900 mb-1">50,000</div><div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Serviceable Enterprises</div><p class="text-xs text-gray-500 mt-2 leading-relaxed">High-risk sectors (Fintech, Medtech) where error cost >$100k.</p></div>
+                            <div class="bg-white p-6 rounded-lg border border-gray-100"><div class="text-2xl font-bold text-gray-900 mb-1">3x</div><div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Cost Efficiency</div><p class="text-xs text-gray-500 mt-2 leading-relaxed">Auto-Governance ($45k) vs Manual QA ($120k). Immediate ROI.</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Drivers -->
+                <div class="mb-16 md:text-center max-w-3xl mx-auto"><h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">Market Drivers</h2></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm relative overflow-hidden group hover:border-gray-300 transition-all">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 font-heading font-black text-6xl text-gray-400 group-hover:text-primary transition-colors">01</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 pr-8">Regulatory Pressure: <br> EAA 2025 & ADA</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-6">With EAA fines reaching <strong>€250-500K</strong> and rising ADA litigation, accessibility is now a CFO-level liability.</p>
+                        <div class="mt-auto pt-4 border-t border-gray-100"><div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Digital Accessibility Market</div><div class="flex items-baseline gap-2"><span class="text-lg font-bold text-gray-900">$670M</span><span class="text-lg font-bold text-primary">$1.37B</span><span class="text-xs text-gray-400">(2032)</span></div></div>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm relative overflow-hidden group hover:border-gray-300 transition-all">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 font-heading font-black text-6xl text-gray-400 group-hover:text-primary transition-colors">02</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 pr-8">Critical Scale of <br> Design Teams</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-6">Enterprise design teams have grown <strong>4x since 2020</strong>. At this scale, manual "peer reviews" break down.</p>
+                        <div class="mt-auto pt-4 border-t border-gray-100"><div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Pain Point</div><div class="text-sm font-bold text-gray-900">Manual review fails at scale</div></div>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm relative overflow-hidden group hover:border-gray-300 transition-all">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 font-heading font-black text-6xl text-gray-400 group-hover:text-primary transition-colors">03</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 pr-8">Developers Shift to <br> Figma (Dev Mode)</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-6"><strong>10M+ developers</strong> now inspect code directly in Figma. Without validation, broken UI is copied to production.</p>
+                        <div class="mt-auto pt-4 border-t border-gray-100"><div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Risk</div><div class="text-sm font-bold text-gray-900">Broken UI copied to Prod</div></div>
+                    </div>
+                </div>
+
+                <!-- Competitive Landscape -->
+                <div class="mb-16 md:text-center max-w-4xl mx-auto"><h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">Competitive Landscape</h2><p class="text-xl text-gray-500 font-light leading-relaxed">Current tools rely on <span class="font-bold text-gray-800">Property Inspection</span>. Françoise introduces <span class="font-bold text-primary">Visual Perception</span>.</p></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex flex-col h-full rounded-xl border border-gray-200 overflow-hidden shadow-sm bg-white group hover:shadow-md transition-shadow">
+                        <div class="bg-gray-100 p-8 flex-grow border-b border-gray-200"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Category 01</div><h3 class="text-xl font-bold text-gray-900 mb-2">Linters</h3><div class="text-xs font-mono text-gray-500 mb-6 border-b border-gray-200 pb-4 inline-block">Stark, Design Lint</div><div class="text-sm text-gray-600 leading-relaxed"><strong class="text-gray-900 block mb-2 text-xs uppercase tracking-wide">The Limit</strong>They scan metadata. If a layer is named incorrectly, they fail.</div></div>
+                        <div class="p-8 bg-white relative"><div class="absolute top-0 left-0 w-full h-1 bg-primary/20 group-hover:bg-primary transition-colors"></div><div class="text-xs font-bold text-primary uppercase tracking-widest mb-2">Our Advantage</div><h4 class="text-lg font-bold text-gray-900 mb-3">Computer Vision & AI</h4><p class="text-sm text-gray-600 leading-relaxed">We analyze rendered pixels and semantic intent. We detect UI elements based on how they look to users.</p></div>
+                    </div>
+                    <div class="flex flex-col h-full rounded-xl border border-gray-200 overflow-hidden shadow-sm bg-white group hover:shadow-md transition-shadow">
+                        <div class="bg-gray-100 p-8 flex-grow border-b border-gray-200"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Category 02</div><h3 class="text-xl font-bold text-gray-900 mb-2">Passive Repositories</h3><div class="text-xs font-mono text-gray-500 mb-6 border-b border-gray-200 pb-4 inline-block">Zeroheight, Supernova</div><div class="text-sm text-gray-600 leading-relaxed"><strong class="text-gray-900 block mb-2 text-xs uppercase tracking-wide">The Limit</strong>They store rules but cannot enforce complex logic automatically.</div></div>
+                        <div class="p-8 bg-white relative"><div class="absolute top-0 left-0 w-full h-1 bg-primary/20 group-hover:bg-primary transition-colors"></div><div class="text-xs font-bold text-primary uppercase tracking-widest mb-2">Our Advantage</div><h4 class="text-lg font-bold text-gray-900 mb-3">Algorithmic Reasoning</h4><p class="text-sm text-gray-600 leading-relaxed">We catch logical conflicts and nuanced contextual errors that static rules miss.</p></div>
+                    </div>
+                    <div class="flex flex-col h-full rounded-xl border border-gray-200 overflow-hidden shadow-sm bg-white group hover:shadow-md transition-shadow">
+                        <div class="bg-gray-100 p-8 flex-grow border-b border-gray-200"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Category 03</div><h3 class="text-xl font-bold text-gray-900 mb-2">Manual Review</h3><div class="text-xs font-mono text-gray-500 mb-6 border-b border-gray-200 pb-4 inline-block">Humans (Design Leads / QA)</div><div class="text-sm text-gray-600 leading-relaxed"><strong class="text-gray-900 block mb-2 text-xs uppercase tracking-wide">The Limit</strong>Humans are inconsistent and slow when reviewing hundreds of repetitive screens.</div></div>
+                        <div class="p-8 bg-white relative"><div class="absolute top-0 left-0 w-full h-1 bg-primary/20 group-hover:bg-primary transition-colors"></div><div class="text-xs font-bold text-primary uppercase tracking-widest mb-2">Our Advantage</div><h4 class="text-lg font-bold text-gray-900 mb-3">Intelligence @ Speed</h4><p class="text-sm text-gray-600 leading-relaxed">We replicate senior designer heuristics but execute them instantly across 100+ screens.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Business Model + ROI Benchmarks + Unit Economics -->
+        <section class="py-24 bg-white">
+            <div class="container max-w-6xl mx-auto px-6">
+                <!-- Business Model -->
+                <div class="text-right mb-16"><h2 class="text-4xl font-bold mb-2">Business Model</h2><p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Enterprise B2B Subscription</p></div>
+                <div class="relative mb-24">
+                    <div class="hidden md:block absolute -top-12 left-0 w-1/2 px-2"><div class="border-t-2 border-l-2 border-r-2 border-gray-900 h-6 rounded-t-xl relative"><div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">Target ACV: $45,000</div></div></div>
+                    <div class="md:hidden bg-gray-900 text-white text-center py-2 rounded-t-lg mb-2 text-xs font-bold uppercase">Target ACV: $45,000</div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                        <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 relative group hover:border-gray-400 transition-colors"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Foundation</div><h3 class="text-lg font-bold text-gray-900 leading-tight mb-2">Core Platform</h3><div class="text-3xl font-heading font-black text-gray-900 mb-4">$25k<span class="text-sm font-normal text-gray-400">/yr</span></div><ul class="space-y-2 text-xs text-gray-600"><li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-900 mt-1.5"></div> <strong>Includes 1,000 screens/mo</strong></li><li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-900 mt-1.5"></div> Unlimited Seats</li><li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-900 mt-1.5"></div> SSO & Private Cloud</li></ul></div>
+                        <div class="bg-gray-50 rounded-xl p-6 border-2 border-primary/10 relative group hover:border-primary/30 transition-colors"><div class="text-xs font-bold text-primary uppercase tracking-widest mb-4">Volume</div><h3 class="text-lg font-bold text-gray-900 leading-tight mb-2">Enterprise Scale</h3><div class="text-3xl font-heading font-black text-gray-900 mb-4">+$20k<span class="text-sm font-normal text-gray-400">/yr</span></div><ul class="space-y-2 text-xs text-gray-600"><li class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5"></div> <strong>Up to 10,000 screens/mo</strong></li><li class="flex items-start gap-2"><span class="text-gray-400">•</span> Volume-based pricing</li></ul></div>
+                        <div class="bg-white rounded-xl p-6 border border-dashed border-gray-300 opacity-80 hover:opacity-100 transition-opacity"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Add-on</div><h3 class="text-lg font-bold text-gray-900 leading-tight mb-2">DevOps Integration</h3><div class="text-3xl font-heading font-black text-gray-900 mb-4">+$15k<span class="text-sm font-normal text-gray-400">/yr</span></div><ul class="space-y-2 text-xs text-gray-600"><li class="flex items-start gap-2"><span class="text-gray-400">•</span> CI/CD Pipeline checks</li><li class="flex items-start gap-2"><span class="text-gray-400">•</span> GitHub / GitLab integration</li></ul></div>
+                        <div class="bg-white rounded-xl p-6 border border-dashed border-gray-300 opacity-80 hover:opacity-100 transition-opacity"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Year 2</div><h3 class="text-lg font-bold text-gray-900 leading-tight mb-2">Auto-Fix Module</h3><div class="text-3xl font-heading font-black text-gray-900 mb-4">+$20k<span class="text-sm font-normal text-gray-400">/yr</span></div><ul class="space-y-2 text-xs text-gray-600"><li class="flex items-start gap-2"><span class="text-gray-400">•</span> Automated correction</li><li class="flex items-start gap-2"><span class="text-gray-400">•</span> Design System sync</li></ul></div>
+                    </div>
+                    <div class="hidden md:block absolute -bottom-12 left-0 w-full px-2"><div class="border-b-2 border-l-2 border-r-2 border-gray-200 h-6 rounded-b-xl relative"><div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white border border-gray-200 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-gray-500">Total Expansion Potential: $80,000+</div></div></div>
+                </div>
+
+                <!-- ROI & Market Benchmarks -->
+                <div class="mb-16 md:text-center max-w-3xl mx-auto"><h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">ROI & Market Benchmarks</h2></div>
+                <div class="flex flex-col gap-6 mb-24">
+                    <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row gap-8 items-center">
+                        <div class="md:w-3/5"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">01. The Human Alternative Anchor</div><h3 class="text-xl font-bold text-gray-900 mb-3">Manual Engineer vs Françoise</h3><p class="text-sm text-gray-600 leading-relaxed mb-4">A single QA Automation Engineer costs <strong>~$120,000/year</strong>. Françoise automates the governance workload for <strong>$45,000/year</strong>.</p><div class="bg-white text-gray-700 px-4 py-2 rounded-lg text-xs font-bold inline-block border border-gray-200">Value Proposition: 24/7 automated coverage for 30% of cost.</div></div>
+                        <div class="md:w-2/5 w-full"><div class="space-y-4"><div><div class="flex justify-between text-xs font-bold text-gray-500 mb-1"><span>Manual Hire</span><span>$120k</span></div><div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden"><div class="bg-gray-400 h-full" style="width: 100%"></div></div></div><div><div class="flex justify-between text-xs font-bold text-gray-900 mb-1"><span>Françoise</span><span class="text-primary">$45k</span></div><div class="w-full bg-primary/20 h-3 rounded-full overflow-hidden"><div class="bg-primary h-full" style="width: 37%"></div></div></div></div></div>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row gap-8 items-center">
+                        <div class="md:w-3/5"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">02. Market Comparables</div><h3 class="text-xl font-bold text-gray-900 mb-3">Consolidated Tooling</h3><ul class="space-y-3 text-sm text-gray-600"><li class="flex justify-between border-b border-dashed border-gray-200 pb-1"><span>Enterprise Accessibility Tools</span><span class="font-bold">~$30K-50K</span></li><li class="flex justify-between border-b border-dashed border-gray-200 pb-1"><span>Design System Documentation</span><span class="font-bold">~$20K-40K</span></li></ul></div>
+                        <div class="md:w-2/5 w-full flex items-center justify-center"><div class="text-center w-full bg-white border border-gray-200 rounded-lg p-6"><div class="text-xs font-bold text-gray-400 uppercase mb-2">Françoise Value</div><div class="text-sm font-medium text-gray-900 mb-1">Comprehensive Quality Gate</div><div class="text-xs text-gray-500">Combining both layers</div></div></div>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row gap-8 items-center">
+                        <div class="md:w-3/5"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">03. ROI Calculator</div><h3 class="text-xl font-bold text-gray-900 mb-3">Engineering Savings</h3><p class="text-sm text-gray-600 leading-relaxed">For a team of 20 developers, preventing just 15% of "UI rework" saves <strong>~$250,000 annually</strong> in engineering hours.</p></div>
+                        <div class="md:w-2/5 w-full flex items-center justify-center"><div class="text-center"><div class="text-4xl font-heading font-black text-primary mb-1">&lt; 3 Months</div><div class="text-xs font-bold text-primary uppercase tracking-widest">Payback Period</div></div></div>
+                    </div>
+                </div>
+
+                <!-- Unit Economics -->
+                <div class="mb-16 md:text-center max-w-3xl mx-auto"><h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">Unit Economics</h2></div>
+                <div class="flex flex-col md:flex-row gap-16 items-start">
+                    <div class="md:w-1/2 pt-2">
+                        <div class="space-y-8 pl-2">
+                            <div class="relative pl-8 border-l border-gray-200"><div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-gray-300 rounded-full"></div><h4 class="text-xs font-bold text-gray-900 uppercase tracking-widest mb-1">Entry Point</h4><div class="text-lg font-medium text-gray-900 mb-1">Calibration Pilot</div><div class="text-sm font-light text-gray-500">$5,000 fee • 3 months duration</div></div>
+                            <div class="relative pl-8 border-l border-gray-200"><div class="absolute -left-1.5 top-1.5 w-3 h-3 bg-primary rounded-full"></div><h4 class="text-xs font-bold text-gray-900 uppercase tracking-widest mb-1">Conversion</h4><div class="text-lg font-medium text-gray-900 mb-1">60-70% Target</div><div class="text-sm font-light text-gray-500">Pilot to Annual Contract conversion rate</div></div>
+                            <div class="relative pl-8 border-l-0"> <div class="absolute -left-1.5 top-1.5 w-3 h-3 border-2 border-gray-300 rounded-full bg-white"></div><h4 class="text-xs font-bold text-gray-900 uppercase tracking-widest mb-1">Result</h4><div class="text-lg font-medium text-gray-900 mb-1">Annual Recurring Revenue</div><div class="text-sm font-light text-gray-500">$45,000+ per enterprise client</div></div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 w-full bg-gray-50 rounded-lg p-8 border border-gray-100">
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-end border-b border-gray-200 pb-4"><div><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">CAC</div><div class="text-xs text-gray-500">Fully loaded</div></div><div class="text-3xl font-heading font-bold text-gray-900">~$15,000</div></div>
+                            <div class="flex justify-between items-end border-b border-gray-200 pb-4"><div><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">LTV</div><div class="text-xs text-gray-500">3-year retention</div></div><div class="text-3xl font-heading font-bold text-gray-900">$150,000+</div></div>
+                            <div class="pt-2"><div class="flex justify-between items-center"><div class="text-sm font-bold text-gray-900 uppercase tracking-widest">LTV:CAC Ratio</div><div class="text-5xl font-heading font-black text-primary">10x</div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Traction + Pipeline + Partners -->
+        <section class="py-24 bg-gray-50 border-y border-gray-100">
+            <div class="container max-w-6xl mx-auto px-6">
+                <!-- Traction & Validation -->
+                <div class="mb-16 md:text-center max-w-3xl mx-auto"><h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">Traction & Validation</h2><div class="inline-block bg-white border border-gray-200 px-3 py-1 rounded text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Product Validation (Pre-US Incorporation)</div><p class="text-xl text-gray-500 font-light leading-relaxed">Paid pilot engagement with one of the world's largest marketplace platforms.</p></div>
+                                <div class="bg-white rounded-xl p-6 mb-10 border border-gray-200">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center text-center md:text-left">
+                        <div class="border-r border-gray-200 last:border-0 pr-4"><div class="text-xs text-gray-400 uppercase tracking-widest mb-1">Volume</div><div class="text-2xl font-heading font-bold text-gray-900">4 Enterprises</div></div>
+                        <div class="border-r border-gray-200 last:border-0 pr-4"><div class="text-xs text-gray-400 uppercase tracking-widest mb-1">Potential ARR</div><div class="text-2xl font-heading font-bold text-primary">$90,000</div><div class="text-[10px] text-gray-400">@ 40-60% conversion</div></div>
+                        <div class="border-r border-gray-200 last:border-0 pr-4"><div class="text-xs text-gray-400 uppercase tracking-widest mb-1">Pilot Structure</div><div class="text-2xl font-heading font-bold text-gray-900">$5k <span class="text-sm font-normal text-gray-400">/ 3mo</span></div></div>
+                        <div><div class="text-xs text-gray-400 uppercase tracking-widest mb-1">Target Launch</div><div class="text-2xl font-heading font-bold text-gray-900">Q1 2026</div></div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                    <div><h3 class="text-xl font-bold text-gray-900 mb-8 pb-4 border-b border-gray-200 flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-gray-300"></span>Technical Validation</h3><ul class="space-y-8"><li class="flex gap-4"><div class="mt-1 flex-shrink-0 w-1 h-12 bg-gray-200 rounded-full"></div><div><h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-1">Computer Vision + AI Model</h4><p class="text-sm text-gray-600 leading-relaxed"><strong class="text-primary">99.2% accuracy</strong> on accessibility detection.</p></div></li><li class="flex gap-4"><div class="mt-1 flex-shrink-0 w-1 h-12 bg-gray-200 rounded-full"></div><div><h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-1">Calibration Process</h4><p class="text-sm text-gray-600 leading-relaxed">Fine-tune engine to enterprise Design System tokens within <strong>4 weeks</strong>.</p></div></li></ul></div>
+                    <div><h3 class="text-xl font-bold text-gray-900 mb-8 pb-4 border-b border-gray-100 flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-primary"></span>Commercial Validation</h3><ul class="space-y-8"><li class="flex gap-4"><div class="mt-1 flex-shrink-0 w-1 h-12 bg-primary/20 rounded-full"></div><div><h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-1">Willingness to Pay</h4><p class="text-sm text-gray-600 leading-relaxed"><strong>$5K pilot fee</strong> confirmed strong value perception.</p></div></li><li class="flex gap-4"><div class="mt-1 flex-shrink-0 w-1 h-12 bg-primary/20 rounded-full"></div><div><h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-1">Conversion Trigger</h4><p class="text-sm text-gray-600 leading-relaxed">Purchase driven by quantified time savings (<strong>15-25% reduction</strong>).</p></div></li></ul></div>
+                </div>
+                <div class="bg-white rounded-xl p-8 border border-gray-200 flex flex-col md:flex-row gap-8 items-start md:items-center justify-between mb-24">
+                    <div class="md:w-2/3"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Key Learning</div><p class="text-gray-900 font-medium leading-relaxed text-lg">Enterprise design leaders will adopt <span class="text-primary font-bold">IF we prove measurable productivity gains</span> in a controlled pilot.</p></div>
+                    <div class="md:w-1/3 border-t md:border-t-0 md:border-l border-gray-200 pt-6 md:pt-0 md:pl-8"><div class="text-xs text-gray-400 leading-relaxed"><strong class="text-gray-500 uppercase tracking-wide block mb-1">Regulatory Note</strong>Post-US incorporation, this engagement was discontinued. Learnings transferred to new pipeline.</div></div>
+                </div>
+
+                <!-- Partners -->
+                <div class="mb-12 md:text-center max-w-3xl mx-auto"><h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">Strategic Partnerships</h2><p class="text-xl text-gray-500 font-light leading-relaxed">Leveraging global infrastructure and enterprise-grade compliance to accelerate adoption.</p></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                    <div class="bg-white rounded-xl p-8 border border-gray-200 shadow-sm relative overflow-hidden group hover:border-gray-300 transition-all">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-8"><svg class="w-6 h-6 text-gray-800" viewBox="0 0 24 24" fill="currentColor"><path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zM24 11.4H12.6V0H24v11.4z"/></svg><h3 class="text-xl font-bold text-gray-900">Microsoft for Startups</h3><span class="bg-gray-100 text-gray-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide ml-auto">Active</span></div>
+                            <ul class="space-y-6">
+                                <li class="flex items-start gap-4"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mt-2 flex-shrink-0"></div><div><strong class="text-gray-900 text-sm block mb-0.5">Azure Marketplace Listing</strong><span class="text-sm text-gray-500 leading-snug">Confirmed for Q1 2026 launch.</span></div></li>
+                                <li class="flex items-start gap-4"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mt-2 flex-shrink-0"></div><div><strong class="text-gray-900 text-sm block mb-0.5">Co-selling Motion</strong><span class="text-sm text-gray-500 leading-snug">Joint GTM strategy with Microsoft enterprise account teams.</span></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-8 border border-gray-200 shadow-sm relative overflow-hidden group hover:border-gray-300 transition-all">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center gap-3 mb-8"><svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg><h3 class="text-xl font-bold text-gray-900">Security & Compliance</h3><span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide ml-auto">Roadmap</span></div>
+                            <ul class="space-y-6">
+                                <li class="flex items-start gap-4"><div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div><div><strong class="text-gray-900 text-sm block mb-0.5">SOC 2 Type I</strong><span class="text-sm text-gray-500 leading-snug">Audit launching Q1 2026.</span></div></li>
+                                <li class="flex items-start gap-4"><div class="w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 flex-shrink-0"></div><div><strong class="text-gray-900 text-sm block mb-0.5">ISO 27001 Readiness</strong><span class="text-sm text-gray-500 leading-snug">Preparation for Year 2 EU expansion requirements.</span></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-8 border border-gray-200 shadow-sm relative overflow-hidden group hover:border-gray-300 transition-all">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-bl-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
+
+    <div class="relative z-10">
+        <div class="flex items-center gap-3 mb-8">
+            <svg class="w-6 h-6 text-gray-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <rect x="9" y="9" width="6" height="6" />
+                <line x1="9" y1="1" x2="9" y2="4" />
+                <line x1="15" y1="1" x2="15" y2="4" />
+                <line x1="9" y1="20" x2="9" y2="23" />
+                <line x1="15" y1="20" x2="15" y2="23" />
+                <line x1="20" y1="9" x2="23" y2="9" />
+                <line x1="20" y1="15" x2="23" y2="15" />
+                <line x1="1" y1="9" x2="4" y2="9" />
+                <line x1="1" y1="15" x2="4" y2="15" />
+            </svg>
+            <h3 class="text-xl font-bold text-gray-900">NVIDIA Inception</h3>
+            <span class="bg-gray-100 text-gray-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide ml-auto">Member</span>
+        </div>
+
+        <ul class="space-y-6">
+            <li class="flex items-start gap-4">
+                <div class="w-1.5 h-1.5 rounded-full bg-gray-800 mt-2 flex-shrink-0"></div>
+                <div>
+                    <strong class="text-gray-900 text-sm block mb-0.5">GPU Ventures & Credits</strong>
+                    <span class="text-sm text-gray-500 leading-snug">Preferred access to NVIDIA hardware and cloud credits via partners.</span>
+                </div>
+            </li>
+            <li class="flex items-start gap-4">
+                <div class="w-1.5 h-1.5 rounded-full bg-gray-800 mt-2 flex-shrink-0"></div>
+                <div>
+                    <strong class="text-gray-900 text-sm block mb-0.5">Deep Learning Institute</strong>
+                    <span class="text-sm text-gray-500 leading-snug">Technical training and expert-led workshops for AI model optimization.</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Segments + Sales Motion -->
+        <section class="py-24 bg-white">
+            <div class="container max-w-6xl mx-auto px-6">
+                <!-- Segments -->
+                <div class="mb-16 md:text-center max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">Strategic Segments</h2>
+                    <p class="text-xl text-gray-500 font-light leading-relaxed">Targeting high-trust networks and autonomous R&D units.</p>
+                </div>
+                <div class="flex flex-col border-t border-gray-200 mb-24">
+                    <div class="group py-12 border-b border-gray-200 flex flex-col md:flex-row gap-12 items-start hover:bg-gray-50/50 transition-colors -mx-6 px-6">
+                        <div class="md:w-1/3">
+                            <div class="flex items-center gap-3 mb-4"><span class="text-4xl font-heading font-black text-gray-200 group-hover:text-primary transition-colors">01</span><h3 class="text-2xl font-bold text-gray-900">EE Diaspora Fintechs</h3></div>
+                            <p class="text-sm text-gray-600 leading-relaxed mb-6">Direct warm access to C-level decision-makers via shared professional background.</p>
+                            <div class="flex items-center gap-2 text-xs font-bold text-gray-500 bg-white border border-gray-200 px-3 py-1.5 rounded-full inline-flex shadow-sm"><div class="w-2 h-2 bg-primary rounded-full"></div>Transferable Sales Motion</div>
+                        </div>
+                        <div class="md:w-2/3 w-full">
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Priority Target Accounts</div>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-8">
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">Plata</span></div>
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">Revolut</span></div>
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-primary"></div><span class="text-gray-900 font-medium">inDrive</span></div>
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">Vivid Money</span></div>
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">TradingView</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group py-12 border-b border-gray-200 flex flex-col md:flex-row gap-12 items-start hover:bg-gray-50/50 transition-colors -mx-6 px-6">
+                        <div class="md:w-1/3">
+                            <div class="flex items-center gap-3 mb-4"><span class="text-4xl font-heading font-black text-gray-200 group-hover:text-primary transition-colors">02</span><h3 class="text-2xl font-bold text-gray-900">US Ent. via Tel Aviv</h3></div>
+                            <p class="text-sm text-gray-600 leading-relaxed mb-6">Leveraging physical presence in Tel Aviv to pilot with autonomous R&D units.</p>
+                            <div class="flex items-center gap-2 text-xs font-bold text-gray-500 bg-white border border-gray-200 px-3 py-1.5 rounded-full inline-flex shadow-sm"><div class="w-2 h-2 bg-gray-400 rounded-full"></div>Azure Procurement Bridge</div>
+                        </div>
+                        <div class="md:w-2/3 w-full">
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Target Innovation Labs</div>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-8">
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">Microsoft</span></div>
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">Google</span></div>
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">Citi</span></div>
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">Lemonade</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group py-12 flex flex-col md:flex-row gap-12 items-start hover:bg-gray-50/50 transition-colors -mx-6 px-6">
+                        <div class="md:w-1/3">
+                            <div class="flex items-center gap-3 mb-4"><span class="text-4xl font-heading font-black text-gray-200 group-hover:text-primary transition-colors">03</span><h3 class="text-2xl font-bold text-gray-900">MENA Expansion</h3></div>
+                            <p class="text-sm text-gray-600 leading-relaxed mb-6">Global companies entering UAE/KSA markets needing rapid alignment with local regulations.</p>
+                            <div class="flex items-center gap-2 text-xs font-bold text-gray-500 bg-white border border-gray-200 px-3 py-1.5 rounded-full inline-flex shadow-sm"><div class="w-2 h-2 bg-gray-400 rounded-full"></div>Regional Growth Driver</div>
+                        </div>
+                        <div class="md:w-2/3 w-full">
+                            <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Target Regional Giants</div>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-8">
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">Binance</span></div>
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">Careem</span></div>
+                                <div class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-gray-300"></div><span class="text-gray-900 font-medium">Talabat</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sales Motion -->
+                <div class="mb-16 md:text-center max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">Sales Motion</h2>
+                    <p class="text-xl text-gray-500 font-light leading-relaxed">A high-touch, data-driven entry strategy that proves value before procurement friction.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative mb-10">
+                    <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gray-200 z-0"></div>
+                    <div class="relative z-10 bg-gray-50 p-8 rounded-xl border border-gray-200 shadow-sm group hover:border-gray-300 transition-all flex flex-col h-full">
+                        <div class="w-12 h-12 bg-white border-2 border-gray-200 rounded-full flex items-center justify-center text-lg font-bold text-gray-400 mb-6 group-hover:border-primary group-hover:text-primary transition-colors">01</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Value-First Entry</h3>
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">The Hook</div>
+                        <p class="text-sm text-gray-600 leading-relaxed">We audit their live interface and public UI kit using Françoise to establish credibility instantly.</p>
+                    </div>
+                    <div class="relative z-10 bg-gray-50 p-8 rounded-xl border border-gray-200 shadow-sm group hover:border-gray-300 transition-all flex flex-col h-full">
+                        <div class="w-12 h-12 bg-white border-2 border-gray-200 rounded-full flex items-center justify-center text-lg font-bold text-gray-400 mb-6 group-hover:border-primary group-hover:text-primary transition-colors">02</div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-bold text-gray-900">Calibration Pilot</h3>
+                            <span class="bg-white border border-gray-200 text-gray-600 text-[10px] font-bold px-2 py-1 rounded">$5K / 3mo</span>
+                        </div>
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">The Proof</div>
+                        <div class="space-y-4 flex-grow text-xs text-gray-600">
+                            <p><strong>Month 1:</strong> Fine-tune model to client DNA.</p>
+                            <p><strong>Months 2-3:</strong> A/B Testing (Focus vs. Control group).</p>
+                        </div>
+                    </div>
+                    <div class="relative z-10 bg-gray-50 p-8 rounded-xl border border-gray-200 shadow-sm group hover:border-gray-300 transition-all flex flex-col h-full">
+                        <div class="w-12 h-12 bg-white border-2 border-gray-200 rounded-full flex items-center justify-center text-lg font-bold text-gray-400 mb-6 group-hover:border-primary group-hover:text-primary transition-colors">03</div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Conversion Trigger</h3>
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">The Result</div>
+                        <p class="text-sm text-gray-600 leading-relaxed">Presenting pilot data builds the business case for CFO, making adoption a data-driven decision.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: Ask + Use of Funds + Milestones + ROI -->
+        <section id="ask" class="py-24 bg-gray-50 border-t border-gray-200">
+            <div class="container max-w-6xl mx-auto px-6">
+                <!-- Ask -->
+                <div class="mb-16 md:text-center max-w-4xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">The Ask</h2>
+                    <p class="text-xl text-gray-500 font-light leading-relaxed">
+                        We prioritize a concentrated cap table with partners who can make <span class="text-gray-900 font-medium">significant commitments</span> and strategic impact.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-24">
+                    <div class="lg:col-span-4 w-full">
+                        <div class="bg-white rounded-xl shadow-xl border border-gray-200 overflow-hidden relative h-full">
+                            <div class="p-8">
+                                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Pre-Seed Round</div>
+                                <div class="text-6xl font-heading font-black text-primary leading-none mb-3">$325k</div>
+                                <div class="text-sm font-medium text-gray-500 mb-8 bg-gray-50 inline-block px-3 py-1 rounded">12 Months Runway</div>
+                                <div class="space-y-5">
+                                    <div class="flex justify-between items-center border-b border-gray-100 pb-4"><span class="text-sm text-gray-600">Instrument</span><span class="block font-bold text-gray-900">YC Post-Money SAFE</span></div>
+                                    <div class="flex justify-between items-center border-b border-gray-100 pb-4"><span class="text-sm text-gray-600">Valuation Cap</span><span class="font-bold text-gray-900">$7M</span></div>
+                                    <div class="flex justify-between items-center pb-2"><span class="text-sm text-gray-600">Discount</span><span class="font-bold text-gray-900">20%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-8 w-full flex flex-col gap-6">
+                        <div class="bg-white rounded-xl p-8 border border-gray-200 shadow-sm relative group hover:border-primary/50 transition-colors">
+                            <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary rounded-l-xl"></div>
+                            <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
+                                <div><h3 class="text-xl font-bold text-gray-900">Lead / Major Check</h3><p class="text-sm text-gray-500">1-2 Strategic Partners</p></div>
+                                <div class="text-3xl font-heading font-black text-gray-900 bg-gray-50 px-4 py-2 rounded border border-gray-100">$100k - 200k</div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="flex items-start gap-3"><div class="mt-1 w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[10px] font-bold">✓</div><div class="text-sm text-gray-600"><strong class="text-gray-900 block text-xs uppercase tracking-wide mb-1">Involvement</strong>Deep strategic sparring on Enterprise GTM.</div></div>
+                                <div class="flex items-start gap-3"><div class="mt-1 w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[10px] font-bold">✓</div><div class="text-sm text-gray-600"><strong class="text-gray-900 block text-xs uppercase tracking-wide mb-1">Network</strong>Direct intros to Fintech decision makers.</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                        <section id="ask-1" class="py-24 bg-gray-50 border-t border-gray-200">
+            <div class="container max-w-6xl mx-auto px-6">
+
+                <!-- Use of Funds (PIE CHART REPRESENTATION) -->
+                <div class="mb-16 md:text-center max-w-3xl mx-auto"><h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">Use of Funds</h2></div>
+                <div class="flex flex-col md:flex-row items-center gap-16 mb-24">
+                    <!-- SVG Donut Chart -->
+                    <div class="w-64 h-64 flex-shrink-0 relative">
+                        <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
+                            <!-- 50% Founders -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#cb0213" stroke-width="20" stroke-dasharray="125.6 125.6"></circle>
+                            <!-- 25% GTM -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#E5E7EB" stroke-width="20" stroke-dasharray="62.8 188.4" stroke-dashoffset="-125.6"></circle>
+                            <!-- 15% Sec -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#9CA3AF" stroke-width="20" stroke-dasharray="37.7 213.3" stroke-dashoffset="-188.4"></circle>
+                            <!-- 10% Ops -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#374151" stroke-width="20" stroke-dasharray="25.1 226.1" stroke-dashoffset="-226.1"></circle>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                            <span class="text-xs font-bold text-gray-400 uppercase">Total</span>
+                            <span class="text-xl font-heading font-black text-gray-900 leading-none">$325k</span>
+                        </div>
+                    </div>
+                    <!-- Legend -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 flex-grow">
+                        <div class="flex gap-4">
+                            <div class="w-3 h-3 rounded-full bg-primary mt-1"></div>
+                            <div><div class="flex items-center gap-2"><h5 class="font-bold text-[24px] text-gray-900">Payroll</h5>
+                                <span class="text-[16px] font-bold text-primary">50%</span></div>                        <ul class="text-[14px] text-gray-600 space-y-1"><li>• Salaries</li><li>• TLV/Alumni Sales ops</li><li>• Calibration Setup</li></ul></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-3 h-3 rounded-full bg-gray-200 mt-1"></div>
+                            <div><div class="flex items-center gap-2"><h5 class="font-bold text-[24px] text-gray-900">GTM & Delivery</h5><span class="text-[24px] font-bold text-gray-400">25%</span></div><ul class="text-[14px] text-gray-600 space-y-1"><li>• Strategic Travel</li><li>• Audit Reports (50+)</li><li>• Pilot Infra</li></ul></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-3 h-3 rounded-full bg-gray-400 mt-1"></div>
+                            <div><div class="flex items-center gap-2"><h5 class="font-bold text-[24px] text-gray-900">Security & Cert.</h5><span class="text-[24px] font-bold text-gray-400">15%</span></div><ul class="text-[14px] text-gray-600 space-y-1"><li>• SOC 2 Type I ($30K)</li><li>• Pentesting ($12K)</li><li>• ISO Readiness</li></ul></div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-3 h-3 rounded-full bg-gray-700 mt-1"></div>
+                            <div><div class="flex items-center gap-2"><h5 class="font-bold text-[24px] text-gray-900">Ops & Legal</h5><span class="text-[24px] font-bold text-gray-400">10%</span></div><ul class="text-[14px] text-gray-600 space-y-1"><li>• Delaware C-Corp</li><li>• Bookkeeping/Tax</li><li>• Admin Risk</li></ul></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROI -->
+                <div class="mb-16 md:text-center max-w-3xl mx-auto"><h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">Return on Investment</h2></div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <div class="mb-10"><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Investor Return Potential</div><div class="text-6xl md:text-7xl font-heading font-black text-primary leading-none mb-4">2.1x - 3.6x</div><p class="text-lg text-gray-900 font-medium">Paper return in 12-18 months</p></div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-gray-100 pt-8">
+                            <div><div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Expected Series A Val.</div><div class="text-2xl font-bold text-gray-900">$15M - 25M</div></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-8 border border-gray-200 relative">
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">De-Risking Timeline</div>
+                        <div class="space-y-8 relative">
+                            <div class="absolute top-2 left-[7px] bottom-2 w-px bg-gray-200"></div>
+                            <div class="relative pl-8 group"><div class="absolute left-0 top-1.5 w-3.5 h-3.5 bg-white border-2 border-gray-300 rounded-full group-hover:border-primary"></div><h4 class="text-lg font-bold text-gray-900">Month 3</h4><p class="text-sm text-gray-600">2-3 Paying Customers. Funnel validation.</p></div>
+                            <div class="relative pl-8 group"><div class="absolute left-0 top-1.5 w-3.5 h-3.5 bg-white border-2 border-gray-300 rounded-full group-hover:border-primary"></div><h4 class="text-lg font-bold text-gray-900">Month 6</h4><p class="text-sm text-gray-600">SOC 2 Complete. Unlocks Banking market.</p></div>
+                            <div class="relative pl-8 group"><div class="absolute left-0 top-1.5 w-3.5 h-3.5 bg-gray-900 border-2 border-gray-900 rounded-full"></div><h4 class="text-lg font-bold text-gray-900">Month 12</h4><p class="text-sm text-gray-600">Series A Ready. $1M qualified pipeline.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>
+
+                <!-- Milestones -->
+<div class="mb-16 md:text-center max-w-4xl mx-auto">
+    <h2 class="text-4xl md:text-5xl text-gray-900 mb-6 font-bold uppercase tracking-tight">
+        Milestones <span class="text-gray-400 font-light">/ 12 Months</span>
+    </h2>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-24 relative">
+
+    <div class="hidden lg:block absolute top-0 left-0 right-0 h-1 bg-gray-200 rounded-full"></div>
+
+    <div class="pt-0 lg:pt-6 relative group">
+        <div class="hidden lg:block absolute top-[-6px] left-0 w-4 h-4 rounded-full bg-white border-4 border-gray-200 group-hover:border-primary transition-colors"></div>
+        <div class="bg-white rounded-xl border border-gray-200 p-8 h-full flex flex-col hover:shadow-lg transition-shadow duration-300">
+            <h3 class="text-2xl font-bold text-gray-900">Q1 2026</h3>
+            <p class="text-xs font-medium text-gray-500 mb-4">Foundation</p>
+            <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                <li>Delaware C-Corp IP</li>
+                <li>Launch 5-8 Pilots</li>
+                <li class="font-bold text-gray-900">Close 1-2 Adopters</li>
+            </ul>
+            <div class="mt-auto border-t pt-4 text-xl font-heading font-black text-gray-900">$40-80K ARR</div>
+        </div>
+    </div>
+
+    <div class="pt-0 lg:pt-6 relative group">
+        <div class="hidden lg:block absolute top-[-6px] left-0 w-4 h-4 rounded-full bg-white border-4 border-gray-200 group-hover:border-primary transition-colors"></div>
+        <div class="bg-white rounded-xl border border-gray-200 p-8 h-full flex flex-col hover:shadow-lg transition-shadow duration-300">
+            <h3 class="text-2xl font-bold text-gray-900">Q2 2026</h3>
+            <p class="text-xs font-medium text-gray-500 mb-4">Compliance</p>
+            <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                <li>SOC 2 Type I Complete</li>
+                <li>5 Additional Pilots</li>
+                <li class="font-bold text-gray-900">Unlock Fin. Funnel</li>
+            </ul>
+            <div class="mt-auto border-t pt-4 text-xl font-heading font-black text-gray-900">$120-160K ARR</div>
+        </div>
+    </div>
+
+    <div class="pt-0 lg:pt-6 relative group">
+        <div class="hidden lg:block absolute top-[-6px] left-0 w-4 h-4 rounded-full bg-white border-4 border-gray-200 group-hover:border-primary transition-colors"></div>
+        <div class="bg-white rounded-xl border border-gray-200 p-8 h-full flex flex-col hover:shadow-lg transition-shadow duration-300">
+            <h3 class="text-2xl font-bold text-gray-900">Q3 2026</h3>
+            <p class="text-xs font-medium text-gray-500 mb-4">Expansion</p>
+            <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                <li>Money20/20 Presence</li>
+                <li>Convert 1-2 Contracts</li>
+                <li class="font-bold text-gray-900">Start Series A Talks</li>
+            </ul>
+            <div class="mt-auto border-t pt-4 text-xl font-heading font-black text-gray-900">$200-240K ARR</div>
+        </div>
+    </div>
+
+    <div class="pt-0 lg:pt-6 relative group">
+        <div class="hidden lg:block absolute top-[-6px] left-0 w-4 h-4 rounded-full bg-white border-4 border-gray-200 group-hover:border-primary transition-colors"></div>
+        <div class="bg-white rounded-xl border border-gray-200 p-8 h-full flex flex-col hover:shadow-lg transition-shadow duration-300 border-primary">
+            <h3 class="text-2xl font-bold text-gray-900">Q4 2026</h3>
+            <p class="text-xs font-medium text-primary mb-4">Readiness</p>
+            <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                <li>Close Final Contracts</li>
+                <li>$1M Qualified Pipeline</li>
+                <li class="font-bold text-primary">Series A Ready</li>
+            </ul>
+            <div class="mt-auto border-t pt-4 text-xl font-heading font-black text-primary">$250-320K ARR</div>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </section>
+
+        <!-- FINAL ACTION BLOCK -->
+        <section class="py-20 bg-gray-50 border-t border-gray-200">
+            <div class="container max-w-4xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Next Steps</h2>
+                    <p class="text-gray-500">Review the executive summary or schedule a discussion.</p>
+                </div>
+
+                <!-- One Pager Block -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-gray-100 text-gray-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <div class="text-left">
+                            <h3 class="text-lg font-bold text-gray-900">One Pager</h3>
+                            <p class="text-sm text-gray-500 max-w-sm">Executive Summary. Concise project snapshot.</p>
+                        </div>
+                    </div>
+                    <a href="one pager.pdf" download="One_Pager_Divo.pdf" class="btn border border-gray-300 hover:border-gray-900 hover:text-gray-900 text-gray-600 whitespace-nowrap transition-colors inline-flex items-center px-4 py-2 rounded-lg">
+                        Download PDF
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Primary Actions Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 text-center">
+                    <a href="https://calendar.app.google/zXJQAHoAFtcwB7147" target="_blank" class="flex items-center justify-center gap-3 p-5 rounded-lg bg-gray-900 text-white hover:bg-primary transition-all group shadow-md">
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span class="font-bold tracking-wide">Schedule a Call</span>
+                    </a>
+
+                    <a href="https://wa.me/79035176391" target="_blank" class="flex items-center justify-center gap-2 p-5 rounded-lg border border-gray-200 bg-white hover:border-[#25D366] hover:text-[#25D366] text-gray-900 transition-colors group shadow-sm">
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-[#25D366] transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        <span class="font-bold">WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Secondary Contacts Row -->
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10">
+                    <a href="mailto:dkamysina@gmail.com" class="text-sm font-bold text-gray-500 hover:text-primary transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        dkamysina@gmail.com
+                    </a>
+
+                    <a href="https://t.me/darikamouse" target="_blank" class="text-sm font-bold text-gray-500 hover:text-[#0088cc] transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                        Telegram
+                    </a>
+
+                    <a href="https://linkedin.com/in/daria-kamyshina" target="_blank" class="text-sm font-bold text-gray-500 hover:text-[#0077b5] transition-colors flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        LinkedIn
+                    </a>
+                </div>
+                <div class="mt-12 text-center text-gray-400 text-[10px] font-mono uppercase tracking-widest">
+                    &copy; 2026 Françoise Inc. (Delaware C-Corp in formation).
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
