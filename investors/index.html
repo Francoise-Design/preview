@@ -59,6 +59,46 @@
 }
     @keyframes shiftLeftSimple { 0% { right: 0; width: 10%; opacity: 0; } 20% { opacity: 1; } 80% { right: 85%; width: 15%; opacity: 1; } 100% { right: 100%; width: 5%; opacity: 0; } }
     .section-divider { border-top: 1px solid #f3f4f6; margin: 4rem 0; }
+.pitch-deck-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.5rem;
+  /* Используем фирменный красный цвет из вашего :root */
+  background-color: var(--color-primary);
+  color: #ffffff;
+  text-decoration: none;
+  /* Используем шрифт Inter, как во всем документе */
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.85rem;
+  /* Закругление 4px, как у остальных элементов сайта */
+  border-radius: 4px;
+  /* Текст в верхнем регистре с разрядкой, чтобы сочетаться с меткой Investor Relations */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+}
+
+.pitch-deck-btn:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.pitch-deck-btn:active {
+  transform: translateY(0);
+}
+
+/* Добавим иконку скачивания через SVG (опционально в HTML) */
+.pitch-deck-btn svg {
+  margin-left: 8px;
+  width: 14px;
+  height: 14px;
+}
 </style>
 </head>
 <body class="bg-white">
@@ -69,7 +109,12 @@
                 <span class="hidden sm:inline-block h-4 w-px bg-gray-300 mx-2"></span>
                 <span class="hidden sm:inline-block text-xs font-mono text-gray-400 uppercase tracking-widest">Investor Relations</span>
             </div>
-            <a href="#ask" class="btn btn-primary py-2 px-5 text-sm uppercase tracking-wide">Investment</a>
+<a href="Pitch Deck.pdf" download="Pitch Deck.pdf" class="pitch-deck-btn">
+    Pitch Deck
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+    </svg>
+</a>
         </div>
     </header>
 
