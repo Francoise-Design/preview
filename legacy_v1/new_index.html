@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Françoise | Shift-Left Quality Gate for Enterprise Design Systems</title>
+    <meta name="description" content="Automate compliance, accessibility (WCAG 2.2), and logic validation before handoff. Connect Design, Ops, and Engineering in one workflow.">
+    <meta name="author" content="Françoise Inc.">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Françoise | Enterprise Design Quality Gate">
+    <meta property="og:description" content="Prevent design drift and save $250k+ annually per 10 squads. Validated for Fintech & E-commerce.">
+    <meta property="og:url" content="https://francoise.ai">
+    <meta property="og:image" content="https://francoise.ai/og-image.jpg">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='rgb(203, 2, 19)'/%3E%3Ctext x='50' y='75' font-size='70' font-weight='800' fill='white' text-anchor='middle' font-family='sans-serif'%3EF%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-sans: 'Inter', sans-serif;
+            --font-heading: 'Alumni Sans', sans-serif;
+            --color-primary: rgb(203, 2, 19);
+            --color-primary-dark: rgb(160, 2, 15);
+        }
+        body { font-family: var(--font-sans); background-color: white; color: rgb(17, 24, 39); font-weight: 300; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1; text-transform: uppercase; }
+        h1 { font-weight: 800; letter-spacing: -0.02em; }
+        .text-primary { color: var(--color-primary); }
+        .bg-primary { background-color: var(--color-primary); }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 2rem; border-radius: 4px; font-weight: 600; transition: all 0.2s ease; cursor: pointer; font-size: 0.95rem; }
+        .btn-primary { background-color: var(--color-primary); color: white; border: 1px solid var(--color-primary); }
+        .btn-primary:hover { background-color: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(203, 2, 19, 0.3); }
+        .btn-outline { border: 1px solid #E5E7EB; color: rgb(17, 24, 39); }
+        .btn-outline:hover { border-color: var(--color-primary); color: var(--color-primary); }
+        .bg-grid-pattern { background-size: 40px 40px; background-image: linear-gradient(to right, #f3f4f6 1px, transparent 1px), linear-gradient(to bottom, #f3f4f6 1px, transparent 1px); mask-image: linear-gradient(to bottom, black 50%, transparent 100%); }
+        .figma-dots { background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23e5e7eb' /%3E%3C/svg%3E"); background-size: 24px 24px; }
+        .roadmap-step { position: relative; padding-left: 2rem; border-left: 2px solid #E5E7EB; transition: border-color 0.3s; }
+        .roadmap-step:hover { border-left-color: var(--color-primary); }
+        .step-number { position: absolute; left: -13px; top: 0; width: 24px; height: 24px; background: white; border: 2px solid #E5E7EB; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; transition: all 0.3s; }
+        .roadmap-step:hover .step-number { border-color: var(--color-primary); color: var(--color-primary); transform: scale(1.1); }
+        .pricing-card { border: 1px solid #f3f4f6; transition: all 0.3s; background: white; }
+        .pricing-card:hover { border-color: var(--color-primary); transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body>
+
+    <header class="fixed w-full top-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 z-50">
+        <div class="container max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <a href="/" class="text-3xl font-black font-heading tracking-tight text-gray-900">FRANÇOISE</a>
+                <span class="hidden sm:inline-block h-4 w-px bg-gray-300 mx-2"></span>
+                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest font-mono">Enterprise Quality Gate</span>
+            </div>
+            <nav class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-gray-500">
+                <a href="#workflow" class="hover:text-primary transition-colors">Workflow</a>
+                <a href="#validation" class="hover:text-primary transition-colors">Validation</a>
+                <a href="#roi" class="hover:text-primary transition-colors">ROI</a>
+                <a href="#security" class="hover:text-primary transition-colors">Security</a>
+            </nav>
+            <a href="#pilot" class="btn btn-primary py-2 px-5 text-sm uppercase tracking-wide">Book a Demo</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <section class="relative pt-24 pb-16 overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern -z-10"></div>
+            <div class="container max-w-6xl mx-auto px-6">
+                <div class="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-widest text-gray-400 mb-8 font-mono">
+                    <span class="flex items-center gap-2 text-gray-900"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>Verified Architecture</span>
+                    <span class="text-gray-200">/</span><span>Figma</span>
+                    <span class="text-gray-200">/</span><span>Jira</span>
+                    <span class="text-gray-200">/</span><span>CI/CD</span>
+                    <span class="text-gray-200">/</span><span>SOC2 Roadmap</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h1 class="text-6xl md:text-8xl text-gray-900 mb-6 leading-[0.9]">Shift-Left <span class="text-primary">Quality Gate</span><br><span class="text-gray-400">for Enterprise.</span></h1>
+                        <h2 class="text-xl md:text-2xl text-gray-600 font-light max-w-xl leading-relaxed mb-4">
+                            Automate compliance, accessibility (WCAG 2.2), and logic validation before the handoff.
+                        </h2>
+                        <p class="text-sm text-gray-400 font-bold uppercase tracking-widest mb-10">
+                            Connect Design, Ops, and Engineering in one workflow.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#pilot" class="btn btn-primary uppercase tracking-widest px-8">Book a Demo</a>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-gray-50 rounded-xl shadow-2xl overflow-hidden aspect-[726/800] border border-gray-200 group mx-auto lg:max-w-none w-full">
+                        <video id="bgVideo" class="absolute inset-0 w-full h-full object-cover z-0" autoplay loop muted playsinline>
+                            <source src="video.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div class="bg-white/90 backdrop-blur px-6 py-4 rounded-lg shadow-lg text-center border border-gray-200">
+                                <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Workflow Preview</div>
+                                <div class="font-heading font-black text-2xl text-gray-900">Logic Error Detected</div>
+                                <div class="h-px w-full bg-gray-200 my-2"></div>
+                                <div class="text-primary font-bold text-sm">Automated Fix Applied</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-20 pt-10 border-t border-gray-100 flex flex-wrap gap-12 items-center opacity-60 grayscale hover:grayscale-0 transition-all">
+                    <div class="flex flex-col gap-1">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Trusted Scale</span>
+                        <span class="text-lg font-black font-heading text-gray-900 tracking-tight leading-none uppercase">1M+ Frames Validated</span>
+                        <span class="text-[9px] font-bold text-gray-300 uppercase tracking-widest">Fintech & E-commerce</span>
+                    </div>
+                    <div class="h-10 w-px bg-gray-200 hidden md:block"></div>
+                     <div class="text-sm font-bold text-gray-900 uppercase tracking-widest">Verified for Enterprise Fintech</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="py-24 bg-gray-50 border-y border-gray-100">
+            <div class="container max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">The Unified Workflow</h2>
+                    <p class="text-xl text-gray-500 font-light leading-relaxed">
+                        Eliminate friction between Design, Ops, and Dev. One ecosystem for all roles.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-primary transition-colors">
+                        <div class="mb-6 h-40 bg-gray-50 rounded border border-gray-100 flex items-center justify-center relative overflow-hidden">
+                            <div class="text-xs font-mono text-gray-400 uppercase">Plugin UI: Active Errors</div>
+                             <div class="absolute bottom-4 bg-primary text-white text-[10px] px-2 py-1 rounded font-bold uppercase">Auto-Fix</div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 uppercase">For Designers</h3>
+                        <p class="text-sm text-gray-500">Fix errors instantly inside Figma. No context switching. Self-service QA keeps the flow uninterrupted.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-primary transition-colors">
+                        <div class="mb-6 h-40 bg-gray-50 rounded border border-gray-100 flex items-center justify-center relative overflow-hidden">
+                             <div class="text-center">
+                                 <div class="text-xs font-mono text-gray-400 uppercase mb-1">System Health</div>
+                                 <div class="text-3xl font-heading font-black text-gray-900">98%</div>
+                             </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 uppercase">For Design Leads</h3>
+                        <p class="text-sm text-gray-500">Monitor system health, design debt, and team velocity globally. Stop being the "Consistency Police".</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm hover:border-primary transition-colors">
+                        <div class="mb-6 h-40 bg-gray-50 rounded border border-gray-100 flex items-center justify-center relative overflow-hidden">
+                             <div class="flex items-center gap-2">
+                                <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">Check Passed</span>
+                             </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 uppercase">For Engineers (CI/CD)</h3>
+                        <p class="text-sm text-gray-500">Prevent drift. Automated checks in the pipeline with Jira sync. Zero accessibility blockers at code review.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="validation" class="py-24 bg-white overflow-hidden">
+            <div class="container max-w-6xl mx-auto px-6">
+                <div class="mb-16">
+                     <div class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-4">Technical Scope</div>
+                     <h2 class="text-4xl md:text-6xl font-bold">3 Levels of Validation</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <article>
+                        <div class="w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center font-bold mb-6">1</div>
+                        <h3 class="text-xl font-bold mb-4 uppercase tracking-wider">Advanced Accessibility<br>(WCAG 2.2)</h3>
+                        <p class="text-sm text-gray-500 mb-4">Automating checks that usually require manual testing.</p>
+                        <ul class="text-xs text-gray-500 space-y-2 border-t border-gray-100 pt-4">
+                            <li class="flex gap-2"><span class="text-primary">✓</span> <strong>Focus Not Obscured</strong> (WCAG 2.4.11)</li>
+                            <li class="flex gap-2"><span class="text-primary">✓</span> <strong>Target Size</strong> (44x44px for touch)</li>
+                            <li class="flex gap-2"><span class="text-primary">✓</span> <strong>Text Spacing</strong> (Layout adaptability)</li>
+                        </ul>
+                    </article>
+
+                    <article>
+                         <div class="w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center font-bold mb-6">2</div>
+                        <h3 class="text-xl font-bold mb-4 uppercase tracking-wider">Contextual Intelligence</h3>
+                        <p class="text-sm text-gray-500 mb-4">Validating behavior based on environment, not just static values.</p>
+                         <ul class="text-xs text-gray-500 space-y-2 border-t border-gray-100 pt-4">
+                            <li class="flex gap-2"><span class="text-primary">✓</span> <strong>Multi-Density:</strong> 4px (High) vs 16px (B2C)</li>
+                            <li class="flex gap-2"><span class="text-primary">✓</span> <strong>Theme Logic:</strong> Inverse text on Dark bg</li>
+                            <li class="flex gap-2"><span class="text-primary">✓</span> <strong>Slot Governance:</strong> Component restrictions</li>
+                        </ul>
+                    </article>
+
+                    <article>
+                         <div class="w-10 h-10 bg-gray-900 text-white rounded-full flex items-center justify-center font-bold mb-6">3</div>
+                        <h3 class="text-xl font-bold mb-4 uppercase tracking-wider">Strict Logic & UX Patterns</h3>
+                        <p class="text-sm text-gray-500 mb-4">The "Human" Review Layer Now Automated.</p>
+                         <ul class="text-xs text-gray-500 space-y-2 border-t border-gray-100 pt-4">
+                            <li class="flex gap-2"><span class="text-primary">✓</span> <strong>Rules:</strong> "One Primary Action per screen"</li>
+                            <li class="flex gap-2"><span class="text-primary">✓</span> <strong>Nesting:</strong> No interactive inside interactive</li>
+                            <li class="flex gap-2"><span class="text-primary">✓</span> <strong>Modal Logic:</strong> Force Dialog usage</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="roi" class="py-24 bg-gray-50 border-y border-gray-100">
+            <div class="container max-w-6xl mx-auto px-6">
+                <div class="max-w-3xl mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">The Financial Impact</h2>
+                    <p class="text-xl text-gray-500 font-light leading-relaxed">
+                        The 1-10-100 Rule: A logic error fixed in Figma costs $1. In Code it costs $10. In Production (Hotfix) it costs $100.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-10 rounded-xl border border-gray-200">
+                        <div class="text-primary font-heading font-black text-6xl mb-4">$250k+</div>
+                        <h3 class="text-xl font-bold mb-3 uppercase">Annual Savings</h3>
+                        <p class="text-sm text-gray-500">Per 10 squads. Calculated as 200 hours saved per squad x $125 blended hourly rate.</p>
+                    </div>
+                    <div class="bg-white p-10 rounded-xl border border-gray-200">
+                        <div class="text-primary font-heading font-black text-6xl mb-4">40%</div>
+                        <h3 class="text-xl font-bold mb-3 uppercase">QA Time Reduction</h3>
+                        <p class="text-sm text-gray-500">Designers don't wait for reviews. Reviews are now 100% focused on Business Logic and Flows.</p>
+                    </div>
+                    <div class="bg-white p-10 rounded-xl border border-gray-200">
+                        <div class="text-primary font-heading font-black text-6xl mb-4">Zero</div>
+                        <h3 class="text-xl font-bold mb-3 uppercase">Blockers</h3>
+                        <p class="text-sm text-gray-500">Zero accessibility blockers at code review. Prevent expensive regulatory risks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="security" class="py-24 bg-white text-gray-900 relative overflow-hidden">
+            <div class="absolute inset-0 figma-dots opacity-30"></div>
+            <div class="container max-w-6xl mx-auto px-6 relative z-10">
+                <div class="flex flex-col lg:flex-row gap-16 items-center">
+                    <div class="lg:w-1/3">
+                        <div class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-4">Integration & Security</div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6">Hybrid Architecture</h2>
+                        <p class="text-gray-500 font-light mb-8">
+                            Enterprise-grade security. Your design data never trains public models. We use a mix of strict algorithms and targeted AI.
+                        </p>
+                    </div>
+                    <div class="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors">
+                            <h3 class="text-xl font-bold mb-3 uppercase tracking-wider">Algorithmic Core</h3>
+                            <p class="text-sm text-gray-500">90% of validation (Token structure, Nesting, WCAG math) is deterministic. Fast, predictable, zero external processing.</p>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors">
+                            <h3 class="text-xl font-bold mb-3 uppercase tracking-wider">Targeted AI Nodes</h3>
+                            <p class="text-sm text-gray-500">LLMs/CV are triggered only for specific nodes (e.g. "Card vs Modal"). We feed isolated fragments, not full files.</p>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors">
+                            <h3 class="text-xl font-bold mb-3 uppercase tracking-wider">Pre-Trained Models</h3>
+                            <p class="text-sm text-gray-500">We do not need your data to train models, and we do not retrain on client inputs.</p>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors">
+                            <h3 class="text-xl font-bold mb-3 uppercase tracking-wider">Zero Retention</h3>
+                            <p class="text-sm text-gray-500">All data is ephemeral. Processed in memory and deleted immediately after the report.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-gray-50 border-t border-gray-100">
+            <div class="container max-w-6xl mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-20">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Pilot Roadmap</h2>
+                    <p class="text-lg text-gray-500 font-light">A transparent A/B Experiment to validate efficiency.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <section class="roadmap-step">
+                        <div class="step-number">1</div>
+                        <h3 class="text-2xl font-bold mb-4 uppercase">Calibration (Weeks 1-2)</h3>
+                        <p class="text-sm text-gray-600 mb-4">We collect feedback and fine-tune the engine to your specific "unwritten rules".</p>
+                        <ul class="text-[10px] font-bold text-gray-400 uppercase tracking-widest space-y-2">
+                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Eliminate false positives</li>
+                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Achieve perfect accuracy</li>
+                        </ul>
+                    </section>
+                    <section class="roadmap-step">
+                        <div class="step-number">2</div>
+                        <h3 class="text-2xl font-bold mb-4 uppercase">A/B Experiment (Weeks 3-8)</h3>
+                        <p class="text-sm text-gray-600 mb-4">Group A (Control) vs Group B (Pilot with Françoise). Direct comparison of velocity.</p>
+                        <ul class="text-[10px] font-bold text-gray-400 uppercase tracking-widest space-y-2">
+                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Real-time validation</li>
+                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Error rate analysis</li>
+                        </ul>
+                    </section>
+                    <section class="roadmap-step">
+                        <div class="step-number">3</div>
+                        <h3 class="text-2xl font-bold mb-4 uppercase">The Business Case</h3>
+                        <p class="text-sm text-gray-600 mb-4">You receive a comprehensive report containing hard metrics (ROI, hours saved) and qualitative feedback.</p>
+                        <ul class="text-[10px] font-bold text-gray-400 uppercase tracking-widest space-y-2">
+                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Secure Budget Approval</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-white">
+            <div class="container max-w-4xl mx-auto px-6 text-center">
+                <div class="mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Structure</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-900">
+                    <div class="pricing-card p-10 rounded-xl text-left flex flex-col h-full relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gray-200"></div>
+                        <div class="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">Starter</div>
+                        <h3 class="text-2xl font-bold mb-6 uppercase">Small Team</h3>
+                        <p class="text-sm text-gray-500 mb-6">For teams starting with Design Ops.</p>
+                        <ul class="space-y-4 mb-10 text-sm text-gray-600 flex-grow">
+                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> Up to 25k frames/year</li>
+                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> 1 Design System</li>
+                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> Standard Validation Rules</li>
+                        </ul>
+                         <a href="#pilot" class="btn btn-outline w-full uppercase text-xs tracking-widest">Join Waitlist</a>
+                    </div>
+
+                    <div class="pricing-card p-10 rounded-xl text-left flex flex-col h-full relative overflow-hidden ring-2 ring-primary ring-opacity-10">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+                        <div class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-4">Featured</div>
+                        <h3 class="text-2xl font-bold mb-6 uppercase">Scale / Enterprise</h3>
+                        <p class="text-sm text-gray-500 mb-6">For organizations scaling multiple products.</p>
+                        <ul class="space-y-4 mb-10 text-sm text-gray-600 flex-grow">
+                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> 100k+ frames/year</li>
+                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> Multi-system support</li>
+                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> Custom Logic Engine (Density, Slots)</li>
+                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> SLA & Dedicated Engineer</li>
+                             <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> Optional: CI/CD Module</li>
+                        </ul>
+                         <a href="#pilot" class="btn btn-primary w-full uppercase text-xs tracking-widest">Book a Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-gray-50 border-t border-gray-200">
+             <div class="container max-w-4xl mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-8 text-center uppercase">FAQ</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Can we customize rules for specific products?</h4>
+                        <p class="text-sm text-gray-500">Yes, via Density Tokens and Custom Contexts.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Does it work with multiple libraries?</h4>
+                        <p class="text-sm text-gray-500">Yes, Françoise supports complex multi-library architectures.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">How does the pilot work?</h4>
+                        <p class="text-sm text-gray-500">It's a controlled 90-day process: Calibration, A/B Test, and Results analysis.</p>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+        <section id="pilot" class="py-24 bg-white border-t border-gray-100">
+            <div class="container max-w-6xl mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-16 items-center">
+                    <div class="lg:w-1/2">
+                        <h2 class="text-5xl md:text-7xl font-bold mb-8 uppercase leading-[0.9]">Start the <span class="text-primary">Pilot.</span></h2>
+                        <p class="text-xl text-gray-500 font-light leading-relaxed mb-8">
+                            Validate the efficiency on your actual data before a subscription commitment.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xs">1</span>
+                                <span class="text-sm font-medium text-gray-700">Discovery Call</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xs">2</span>
+                                <span class="text-sm font-medium text-gray-700">Audit of structure</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xs">3</span>
+                                <span class="text-sm font-medium text-gray-700">ROI Calculation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 w-full bg-gray-50 p-10 rounded-2xl border border-gray-200 shadow-xl">
+                        <form id="client-data" class="space-y-6">
+                            <input type="hidden" name="type" value="francoise_pilot">
+                            <div>
+                                <label for="name" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Name</label>
+                                <input type="text" id="name" class="w-full bg-white border border-gray-200 rounded p-3 text-sm focus:border-primary outline-none transition-all" placeholder="Jane Doe">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Work Email</label>
+                                <input type="email" id="email" class="w-full bg-white border border-gray-200 rounded p-3 text-sm focus:border-primary outline-none transition-all" placeholder="jane@company.com">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Company / Role</label>
+                                <input type="text" id="message" class="w-full bg-white border border-gray-200 rounded p-3 text-sm focus:border-primary outline-none transition-all" placeholder="Design Lead at Fintech Co.">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-full py-4 uppercase tracking-[0.2em]">Book Pilot Program</button>
+                        </form>
+                        <div id="msg" class="text-center text-sm font-bold mt-4 min-h-[20px]"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-gray-50 text-gray-900 py-20 border-t border-gray-100">
+            <div class="container max-w-6xl mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <div class="col-span-1 md:col-span-2">
+                        <div class="text-3xl font-black font-heading tracking-tight mb-6">FRANÇOISE</div>
+                        <p class="text-gray-500 text-sm max-w-sm mb-8 leading-relaxed">
+                            Shift-Left Quality Gate for the modern Enterprise. Transforming quality control technology into a growth engine.
+                        </p>
+                    </div>
+                    <nav>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6">Product</h4>
+                        <ul class="space-y-4 text-sm text-gray-500">
+                            <li><a href="#workflow" class="hover:text-primary transition-colors">Workflow</a></li>
+                            <li><a href="#validation" class="hover:text-primary transition-colors">Scope</a></li>
+                            <li><a href="#security" class="hover:text-primary transition-colors">Security</a></li>
+                        </ul>
+                    </nav>
+                    <nav>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6">Company</h4>
+                        <ul class="space-y-4 text-sm text-gray-500">
+                            <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
+                            <li><a href="#" class="hover:text-primary transition-colors">Privacy</a></li>
+                             <li><a href="#" class="hover:text-primary transition-colors">Terms</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="pt-8 border-t border-gray-50 text-[10px] font-mono text-gray-400 uppercase tracking-widest flex justify-between flex-wrap gap-4">
+                    <span>© 2026 Françoise Inc.</span>
+                    <span>Secure Enterprise Design QA</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+<script>
+ const scriptURL = 'https://script.google.com/macros/s/AKfycbxxXgZqiiBn1bDvqbDxJxqv12lvi5yekglH6sI9wMkD2mjqxm91wVIPxGpLY5ZoJYKv8Q/exec';
+    const form = document.forms['client-data'];
+    const msg = document.getElementById("msg");
+
+    if (form) {
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            msg.innerHTML = "Processing...";
+            msg.className = "text-center text-sm font-bold mt-4 text-gray-500";
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    form.reset();
+                    msg.innerHTML = "Thank you! We will contact you shortly.";
+                    msg.className = "text-center text-sm font-bold mt-4 text-gray-800";
+                    setTimeout(() => { msg.innerHTML = ""; }, 5000);
+                })
+                .catch(error => {
+                    msg.innerHTML = "Error! Please try again.";
+                    msg.className = "text-center text-sm font-bold mt-4 text-red-700";
+                    console.error('Error!', error.message);
+                });
+        });
+    }
+</script>
+</body>
+</html>

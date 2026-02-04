@@ -1,481 +1,1004 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- PRIMARY SEO -->
-    <title>Françoise | AI Design Quality Gate for Enterprise Design Systems</title>
-    <meta name="description" content="Françoise is an AI-powered Shift-Left Quality Gate for Design Systems. Automate Design QA, WCAG compliance, and logic validation directly in Figma. Trusted by Enterprise Fintech and E-commerce.">
-    <meta name="keywords" content="Design QA, Automated Design Validation, Figma AI Plugin, Design System Governance, Shift-Left Design, WCAG Compliance Tool, Enterprise Design Software">
-    <meta name="author" content="Françoise Inc.">
-    <meta name="robots" content="index, follow">
-
-    <!-- OPEN GRAPH (Social Media & AI Chats) -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Françoise | AI Design Quality Gate">
-    <meta property="og:description" content="Automate Design QA and ensure 99.2% accuracy in your Design Systems before development starts.">
-    <meta property="og:url" content="https://francoise.ai">
-    <meta property="og:image" content="https://francoise.ai/og-image.jpg"> <!-- Replace with real URL -->
-
-    <!-- STRUCTURED DATA / JSON-LD (The "ID" for LLMs) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Françoise",
-      "operatingSystem": "Web, Figma",
-      "applicationCategory": "DesignApplication",
-      "description": "AI-powered Quality Gate for Design Systems that validates semantic integrity, logic, and accessibility.",
-      "offers": {
-        "@type": "Offer",
-        "price": "25000",
-        "priceCurrency": "USD"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "120"
-      }
-    }
-    </script>
-
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='rgb(203, 2, 19)'/%3E%3Ctext x='50' y='75' font-size='70' font-weight='800' fill='white' text-anchor='middle' font-family='sans-serif'%3EF%3C/text%3E%3C/svg%3E">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Françoise — Enterprise Design Quality Gate</title>
     <style>
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
+
+        /* Подключение Ballonest (TTF) */
+        @font-face {
+            font-family: 'Ballonest';
+            src: url('fonts/Ballonest.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Подключение Optima (TTC - коллекция TrueType) */
+        @font-face {
+            font-family: 'Optima';
+            src: url('fonts/Optima.ttc') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Подключение Switzer (OTF) */
+        /* Так как файл Medium, можно привязать его к весу 500 или 400 (normal),
+           в зависимости от того, как хотите использовать. Здесь привязал к normal */
+        @font-face {
+            font-family: 'Switzer';
+            src: url('fonts/Switzer-Medium.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         :root {
-            --font-sans: 'Inter', sans-serif;
-            --font-heading: 'Alumni Sans', sans-serif;
-            --color-primary: rgb(203, 2, 19);
-            --color-primary-dark: rgb(160, 2, 15);
+    --c-black: #0F0F0F;
+    --c-grey-dark: #222222;
+    --c-grey-mid: #555555;
+    --c-grey-light: #E0E0E0;
+    --c-grey-pale: #F5F5F5;
+    
+    /* --- НАСТРОЙКА КРАСНОГО ЦВЕТА --- */
+    /* 1. Задаем чистый цифровой код (RGB) для вашего цвета #D93025 */
+    --rgb-error: 217, 48, 37; 
+    /* 2. Основная переменная теперь собирается из этих цифр */
+    --c-error: rgb(var(--rgb-error)); 
+
+    --c-bg: #FFFFFF;
+    --c-surface: #FAFAFA;
+    
+    --font-hand: 'Ballonest', cursive;
+    --font-display: 'Optima', sans-serif;
+    --font-body: 'Switzer', 'Inter', sans-serif;
+
+    --pad-x: 80px;
+    --gap-grid: 60px;
+}
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        button { cursor: pointer; border: none; outline: none; background: none; }
+        
+        body {
+            background: var(--c-bg);
+            color: var(--c-black);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
-        body { font-family: var(--font-sans); background-color: white; color: rgb(17, 24, 39); font-weight: 300; line-height: 1.5; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3, h4 { font-family: var(--font-heading); line-height: 1; text-transform: uppercase; }
-        h1 { font-weight: 800; letter-spacing: -0.02em; }
-        .text-primary { color: var(--color-primary); }
-        .bg-primary { background-color: var(--color-primary); }
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.75rem 2rem; border-radius: 4px; font-weight: 600; transition: all 0.2s ease; cursor: pointer; font-size: 0.95rem; }
-        .btn-primary { background-color: var(--color-primary); color: white; border: 1px solid var(--color-primary); }
-        .btn-primary:hover { background-color: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(203, 2, 19, 0.3); }
-        .btn-outline { border: 1px solid #E5E7EB; color: rgb(17, 24, 39); }
-        .btn-outline:hover { border-color: var(--color-primary); color: var(--color-primary); }
-        .bg-grid-pattern { background-size: 40px 40px; background-image: linear-gradient(to right, #f3f4f6 1px, transparent 1px), linear-gradient(to bottom, #f3f4f6 1px, transparent 1px); mask-image: linear-gradient(to bottom, black 50%, transparent 100%); }
-        .figma-dots { background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%23e5e7eb' /%3E%3C/svg%3E"); background-size: 24px 24px; }
-        .roadmap-step { position: relative; padding-left: 2rem; border-left: 2px solid #E5E7EB; transition: border-color 0.3s; }
-        .roadmap-step:hover { border-left-color: var(--color-primary); }
-        .step-number { position: absolute; left: -13px; top: 0; width: 24px; height: 24px; background: white; border: 2px solid #E5E7EB; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; transition: all 0.3s; }
-        .roadmap-step:hover .step-number { border-color: var(--color-primary); color: var(--color-primary); transform: scale(1.1); }
-        .ui-scanner-line { pointer-events: none; position: absolute; left: 0; right: 0; height: 2px; background: rgba(203, 2, 19, 0.8); box-shadow: 0 1px 10px rgba(203, 2, 19, 0.5); z-index: 25; top: -10%; animation: uiScan 4s infinite linear; }
-        @keyframes uiScan { 0% { top: -10%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 110%; opacity: 0; } }
-        #playBtn {
-        isolation: isolate; /* Создает новый контекст наложения */
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        .page-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--pad-x);
+            position: relative;
         }
-        .pricing-card { border: 1px solid #f3f4f6; transition: all 0.3s; background: white; }
-        .pricing-card:hover { border-color: var(--color-primary); transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); }
+
+        /* --- ZONING --- */
+        .full-width-section {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            padding: 140px 0;
+        }
+
+        .bg-surface {
+            background-color: var(--c-surface);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Technical Zone: PALE Grid Paper */
+        .mode-technical {
+            background-color: #fff;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center top;
+            mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+            padding-bottom: 160px;
+        }
+
+        /* Chapter Labels (Vertical) */
+        .chapter-label {
+            position: absolute;
+            left: 24px; 
+            top: 140px;
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--c-black);
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+        .chapter-label::after {
+            content: ''; display: block; width: 1px; height: 40px; background: var(--c-error); margin-top: 16px; margin-right: 5px;
+        }
+
+        @media (max-width: 1400px) { .chapter-label { display: none; } }
+
+        /* --- 2. HEADER --- */
+        header {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+        .logo { font-family: var(--font-hand); font-size: 3rem; color: var(--c-black); line-height: 1; transform: rotate(-2deg); }
+        
+        .header-cta { 
+            font-size: 0.9rem; font-weight: 600; border: 1px solid var(--c-grey-light); padding: 10px 24px; border-radius: 4px; transition: all 0.2s;
+        }
+        .header-cta:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
+
+        /* --- 3. HERO SECTION --- */
+        .hero-section {
+            display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--gap-grid);
+            margin-bottom: 160px; align-items: center; position: relative;
+        }
+        .hero-content h1 { font-family: var(--font-display); font-size: 4.5rem; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; }
+        
+        .hero-eyebrow { 
+            font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase; 
+            letter-spacing: 0.1em; color: var(--c-grey-mid); margin-bottom: 32px; display: inline-block; 
+            background: var(--c-grey-pale); padding: 6px 12px; border-radius: 4px;
+        }
+        .hero-desc { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-dark); max-width: 500px; margin-bottom: 48px; }
+        
+        .btn-primary { 
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--c-black); color: #fff; padding: 18px 36px; 
+            text-decoration: none; font-weight: 500;
+            transition: all 0.2s; border-radius: 4px; 
+        }
+        .btn-primary:hover { 
+    background: var(--c-error); 
+    opacity: 1; /* ВАЖНО: запрещаем кнопке становиться полупрозрачной */
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 20px rgba(var(--rgb-error), 0.2); 
+}
+        
+.media-frame {
+    width: 100%;
+    aspect-ratio: 726 / 830; /* Явно задаем пропорции вашего видео */
+    background: var(--c-surface);
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+        .video-control-btn { position: absolute; bottom: 20px; right: 20px; width: 48px; height: 48px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .video-control-btn:hover { transform: scale(1.05); }
+        .icon-play, .icon-pause { width: 14px; height: 14px; fill: var(--c-black); }
+        .icon-play { display: none; margin-left: 3px; }
+        .video-paused .icon-pause { display: none; } .video-paused .icon-play { display: block; }
+
+        /* --- 4. PROBLEM SECTION (EQUAL HEIGHT FIX) --- */
+        .problem-section {
+            display: grid; grid-template-columns: 45% 1fr; gap: var(--gap-grid);
+            align-items: stretch; /* Forces equal height */
+            padding-bottom: 160px;
+        }
+        
+        .problem-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .problem-head { font-family: var(--font-display); font-size: 2.8rem; line-height: 1.1; margin-bottom: 48px; letter-spacing: -0.02em; }
+        
+        .risk-list { display: flex; flex-direction: column; gap: 40px; }
+        .risk-item h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--c-error); font-weight: 400; margin-bottom: 8px; }
+        .risk-item p { font-size: 1rem; line-height: 1.5; color: var(--c-grey-mid); max-width: 90%; }
+        
+        .chart-wrapper {
+            position: relative; width: 100%; height: 100%; /* Fill available space */
+            border-left: 2px solid var(--c-black); 
+            border-bottom: 2px solid var(--c-black);
+            min-height: 0; /* Important for grid item sizing */
+        }
+        
+        /* Chart Labels */
+        .chart-axis-label { position: absolute; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--c-grey-mid); }
+        .y-axis-top { top: 0; left: -40px; }
+        .x-axis-right { bottom: -25px; right: 0; }
+        
+        .chart-svg { width: 100%; height: 100%; overflow: visible; display: block; }
+        
+        .curve { 
+            fill: none; 
+            stroke: var(--c-black); 
+            stroke-width: 2px; 
+            stroke-dasharray: 6 6; 
+            vector-effect: non-scaling-stroke; 
+        }
+        
+        .red-zone { position: absolute; right: 0; top: 0; bottom: 0; width: 25%; background: rgba(var(--rgb-error), 0.05); border-left: 1px dashed var(--c-error); display: flex; align-items: center; justify-content: center; }
+        .zone-label { color: var(--c-error); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; transform: rotate(-90deg); letter-spacing: 1px; white-space: nowrap; }
+        .event-flag { position: absolute; top: -30px; left: -1px; background: var(--c-error); color: #fff; font-size: 0.7rem; padding: 4px 8px; font-weight: 600; border-radius: 2px; }
+
+        /* --- 5. ECOSYSTEM SECTION --- */
+.ecosystem-section { 
+    display: grid; 
+    grid-template-columns: 50% 40%; /* Изменено: широкая колонка слева, узкая справа */
+    gap: 10%; 
+    align-items: start; 
+    padding-bottom: 140px; 
+}
+        .eco-headline { font-family: var(--font-display); font-size: 3.5rem; margin-bottom: 40px; line-height: 1.1; letter-spacing: -0.02em; }
+        .feature-item { cursor: pointer; opacity: 0.4; transition: all 0.3s ease; border-left: 3px solid transparent; padding-left: 0; margin-bottom: 48px; }
+        .feature-item.active { opacity: 1; padding-left: 24px; border-left-color: var(--c-error); }
+        .feature-item:hover { opacity: 0.7; } .feature-item.active:hover { opacity: 1; }
+        
+        .feature-num { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--c-black); margin-bottom: 8px; display: block; font-weight: 600; }
+        .feature-title { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 12px; line-height: 1.2; }
+        .feature-desc { font-size: 1rem; line-height: 1.6; color: var(--c-grey-mid); }
+        
+        /* --- Изменение пропорций на ВЕРТИКАЛЬНЫЕ --- */
+.visual-stage { 
+    position: sticky; 
+    top: 100px; 
+    width: 100%; 
+    /* Ставим вертикальные пропорции (ширина / высота) */
+    /* 3/4 = 0.75 (высокий прямоугольник) */
+    /* Можно также попробовать 4/5 или 1/1 (квадрат), если 3/4 покажется слишком узким */
+    aspect-ratio: 3/4; 
+    background: #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+    overflow: hidden; 
+    border: 1px solid rgba(0,0,0,0.05); 
+}
+        .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; opacity: 0; transition: opacity 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .visual-stage:hover .nav-arrow { opacity: 1; }
+        .nav-prev { left: 16px; } .nav-next { right: 16px; } .nav-arrow svg { width: 12px; height: 12px; fill: #000; }
+        .visual-stage.no-controls .nav-arrow { display: none !important; }
+
+        .feature-gallery { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: opacity 0.5s ease; }
+        .feature-gallery.active { opacity: 1; visibility: visible; }
+        .inner-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s ease; object-fit: cover; }
+        .inner-slide.current { opacity: 1; z-index: 2; }
+        .terminal-box { width: 100%; height: 100%; background: #1E1E1E; padding: 30px; font-family: 'Courier New', monospace; color: #D4D4D4; font-size: 0.9rem; line-height: 1.6; }
+        .cmd-line { display: block; margin-bottom: 8px; }
+        .cmd-green { color: #27C93F; } .cmd-red { color: #FF5F56; font-weight: bold; } .cmd-blue { color: #569CD6; }
+@keyframes blink { 50% { opacity: 0; } }
+
+        /* --- 6. IMPORT SECTION --- */
+        .import-section { padding-bottom: 140px; display: grid; grid-template-columns: 40% 50%; gap: 10%; align-items: center; }
+        .import-headline { font-family: var(--font-display); font-size: 3rem; line-height: 1.1; margin-bottom: 24px; color: var(--c-black); }
+        .import-subhead { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); max-width: 90%; margin-bottom: 48px; }
+        .static-feature-list { display: flex; flex-direction: column; gap: 48px; }
+        .static-item { display: flex; flex-direction: column; gap: 8px; }
+        .static-num { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--c-error); font-weight: 600; margin-bottom: 4px; display: block; }
+        .static-title { font-family: var(--font-display); font-size: 1.5rem; color: var(--c-black); margin-bottom: 4px; }
+        .static-desc { font-size: 1rem; line-height: 1.5; color: var(--c-grey-mid); }
+        .visual-box { width: 100%; background: #fff; border: 1px solid rgba(0,0,0,0.05); padding: 20px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .import-image { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+        /* --- 7. BRAND VOICE SECTION --- */
+        .brand-section { padding-bottom: 140px; display: grid; grid-template-columns: 45% 45%; gap: 10%; align-items: start; }
+        .brand-content { display: flex; flex-direction: column; gap: 56px; order: 2; }
+        .brand-headline { font-family: var(--font-display); font-size: 3.5rem; line-height: 1.1; margin-bottom: 24px; color: var(--c-black); }
+        .brand-subhead { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); }
+        .logic-list { display: flex; flex-direction: column; gap: 48px; }
+        .logic-item { border-left: 2px solid var(--c-grey-light); padding-left: 24px; }
+        .logic-example { margin-top: 12px; padding: 16px; background: #fff; font-size: 0.9rem; color: var(--c-grey-dark); line-height: 1.5; font-family: 'Courier New', monospace; border: 1px solid #eee; border-radius: 4px; }
+        .ex-label { font-weight: 600; font-size: 0.75rem; text-transform: uppercase; color: var(--c-black); display: block; margin-bottom: 4px; }
+        .brand-visual-wrapper { order: 1; position: relative; width: 100%; height: 600px; background: #F5F5F5; border: 1px solid rgba(0,0,0,0.05); overflow: hidden; border-radius: 8px; }
+        .doc-scroll-image { width: 100%; height: auto; display: block; animation: scrollDoc 20s linear infinite alternate; }
+        @keyframes scrollDoc { 0% { transform: translateY(0); } 100% { transform: translateY(calc(-100% + 600px)); } }
+
+        /* --- 8. ACCESSIBILITY SECTION --- */
+        .a11y-section { padding-bottom: 0; } 
+        .a11y-header { max-width: 800px; margin-bottom: 60px; }
+        .a11y-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 60px; }
+        .col-title { font-family: var(--font-display); font-size: 1.75rem; color: var(--c-black); margin-bottom: 24px; }
+        .a11y-item { display: flex; flex-direction: column; gap: 4px; margin-bottom: 24px; }
+        .item-label { font-weight: 600; font-size: 0.95rem; color: var(--c-black); display: flex; align-items: center; gap: 8px; }
+        .item-label::before { content: ''; display: block; width: 4px; height: 4px; background: var(--c-error); border-radius: 50%; }
+        .item-desc { font-size: 0.9rem; line-height: 1.4; color: var(--c-grey-mid); padding-left: 12px; }
+
+        /* --- 9. IMPACT SECTION --- */
+        
+        .impact-section { padding-top: 160px; padding-bottom: 160px; display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: center; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding-right: 40px; border-right: 1px solid var(--c-grey-light); }
+        .impact-headline { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); margin-bottom: 60px; grid-column: 1/-1; }
+        
+        .metric-item { display: flex; flex-direction: column; }
+        .metric-val { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); line-height: 1; margin-bottom: 12px; }
+        .metric-role { font-weight: 700; font-size: 0.9rem; color: var(--c-black); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+        .metric-desc { font-size: 0.9rem; color: var(--c-grey-mid); line-height: 1.4; }
+        
+        .total-savings-block { display: flex; flex-direction: column; justify-content: center; text-align: right; }
+        .savings-val { 
+            font-family: var(--font-display); 
+            font-size: 5rem; 
+            color: var(--c-error); 
+            line-height: 1; 
+            margin-bottom: 16px; 
+            letter-spacing: -0.03em;
+        }
+        .savings-label { font-weight: 700; font-size: 1.25rem; color: var(--c-black); margin-bottom: 8px; }
+        .savings-sub { font-size: 1rem; color: var(--c-grey-mid); }
+
+        /* --- 10. SECURITY SECTION --- */
+        .tech-specs-section { padding-bottom: 0; background: transparent; color: var(--c-black); position: relative; }
+        .specs-header { margin-bottom: 80px; max-width: 800px; }
+        .specs-headline { font-family: var(--font-display); font-size: 3.5rem; line-height: 1.1; margin-bottom: 24px; }
+        .specs-sub { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); }
+        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10%; padding-top: 60px; }
+        
+        .spec-col-title { font-family: 'Courier New', monospace; font-size: 1.25rem; margin-bottom: 40px; border-bottom: 2px solid var(--c-black); display: inline-block; padding-bottom: 8px; }
+        .spec-list { display: flex; flex-direction: column; gap: 32px; }
+        .spec-item { display: flex; flex-direction: column; gap: 4px; }
+        .spec-label { font-weight: 700; font-size: 1rem; display: block; margin-bottom: 4px; color: var(--c-black); }
+        .spec-desc { font-size: 0.95rem; line-height: 1.5; color: var(--c-grey-mid); }
+        .compliance-badges { display: flex; gap: 24px; margin-top: 16px; opacity: 0.5; }
+        .badge-img { height: 28px; filter: grayscale(100%); }
+
+        /* --- PARTNER SECTION --- */
+        .partner-section { padding-top: 160px; padding-bottom: 160px; }
+        .offer-box { 
+            border: 1px solid var(--c-grey-light); 
+            padding: 60px; 
+            position: relative; 
+            background: #FFFFFF; 
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.05); /* Soft Shadow */
+            transition: all 0.3s ease;
+        }
+        .offer-box:hover { 
+            border-color: rgba(var(--rgb-error), 0.3);
+            box-shadow: 0 20px 60px rgba(var(--rgb-error), 0.08); /* Red tint on hover */
+            transform: translateY(-2px);
+        }
+
+        /* Tape Effect (RED) */
+        .tape-effect {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(1deg);
+            width: 140px;
+            height: 34px;
+            background: rgba(217, 48, 37, 0.5); /* RED SEMI-TRANSPARENT */
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            backdrop-filter: blur(2px);
+            z-index: 10;
+        }
+        
+        .offer-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 60px; padding-bottom: 40px; border-bottom: 1px solid var(--c-grey-light); }
+        .offer-headline { font-family: var(--font-display); font-size: 3rem; line-height: 1.1; color: var(--c-black); }
+        .offer-desc { font-size: 1.125rem; line-height: 1.5; color: var(--c-grey-dark); margin-bottom: 24px; }
+        
+        .status-row { display: flex; gap: 40px; margin-top: 20px; }
+        .status-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--c-error); font-weight: 700; display: block; margin-bottom: 4px; }
+        .status-val { font-size: 1.1rem; font-weight: 600; }
+        .slots-visual { display: flex; gap: 4px; margin-top: 6px; }
+        .slot { width: 10px; height: 10px; background: #eee; border-radius: 2px; }
+        .slot.taken { background: var(--c-black); }
+
+        .deal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+        .deal-col { padding-left: 24px; border-left: 2px solid var(--c-grey-light); }
+        .deal-col.accent { border-left-color: var(--c-error); }
+        .deal-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--c-grey-mid); margin-bottom: 8px; display: block; }
+        .deal-title { font-family: var(--font-display); font-size: 2.2rem; color: var(--c-black); margin-bottom: 8px; }
+        .deal-desc { font-size: 1rem; line-height: 1.5; color: var(--c-grey-mid); }
+
+        /* --- PHASES SECTION --- */
+        .phases-section { padding-bottom: 160px; overflow-x: hidden; }
+        .phases-headline { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); margin-bottom: 80px; }
+        .phases-flow-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        
+        .phase-card { background: #FFFFFF; border: 1px solid var(--c-grey-light); padding: 40px; display: flex; flex-direction: column; position: relative; transition: all 0.3s; border-radius: 4px; min-height: 480px; }
+        .phase-card:hover { border-color: var(--c-black); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        .phase-num { 
+            font-family: var(--font-hand); 
+            font-size: 5.5rem; 
+            color: var(--c-error); 
+            line-height: 0.8; 
+            margin-bottom: 24px; 
+            display: block; 
+            transform: rotate(-3deg);
+            transform-origin: left bottom;
+        }
+        
+        .phase-title { font-family: var(--font-display); font-size: 1.75rem; line-height: 1.2; margin-bottom: 24px; min-height: 60px; }
+        .phase-steps { list-style: none; margin-bottom: 40px; flex-grow: 1; }
+        .phase-step-item { margin-bottom: 12px; font-size: 0.95rem; color: var(--c-grey-mid); position: relative; padding-left: 20px; line-height: 1.5; }
+        .phase-step-item::before { content: '—'; position: absolute; left: 0; color: var(--c-black); }
+        
+        .phase-footer { margin-top: auto; padding-top: 20px; border-top: 1px dashed var(--c-grey-light); }
+        .price-val { font-family: var(--font-display); font-size: 2rem; color: var(--c-black); }
+        .price-val.accent { color: var(--c-error); }
+        .price-strike { text-decoration: line-through; color: #ccc; font-size: 1rem; margin-left: 10px; }
+
+        /* --- CTA SECTION (Button Right) --- */
+        .cta-section { 
+            padding-bottom: 100px; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 80px; 
+            border-bottom: 1px solid var(--c-grey-light); 
+            margin-bottom: 60px; 
+            align-items: flex-end; /* Align to bottom */
+        }
+        .cta-headline { font-family: var(--font-display); font-size: 4rem; line-height: 1.05; margin-bottom: 32px; }
+        
+        /* Flex column for Right side */
+        .cta-right-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .cta-desc { font-size: 1.25rem; line-height: 1.5; color: var(--c-grey-mid); margin-bottom: 48px; max-width: 480px; }
+        
+        /* --- SIMPLE FOOTER --- */
+        .simple-footer { padding-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--c-grey-mid); font-size: 0.9rem; }
+        /* Increased Footer Logo Size */
+        .footer-logo { font-family: var(--font-hand); font-size: 2.5rem; color: var(--c-black); display: block; margin-bottom: 12px; transform: rotate(-2deg); text-decoration: none; }
+        .footer-contacts a { color: var(--c-black); border-bottom: 1px solid rgba(0,0,0,0.2); margin-left: 20px; }
+        .footer-contacts a:hover { border-bottom-color: var(--c-black); }
+/* --- Адаптация для ноутбуков (Business Impact) --- */
+@media (max-width: 1360px) {
+    .impact-section {
+        grid-template-columns: 1fr; 
+        gap: 60px;
+    }
+    .metrics-grid {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--c-grey-light);
+        padding-bottom: 60px;
+    }
+    .total-savings-block {
+        /* ВАЖНО: justify-content: flex-start прижимает всё влево */
+        justify-content: flex-start; 
+        align-items: center; /* Центрируем элементы по вертикальной оси друг относительно друга */
+        text-align: left;
+        flex-direction: row;
+        gap: 40px;
+    }
+    .savings-val {
+        margin-bottom: 0;
+        font-size: 4rem;
+        /* Убираем лишние отступы, если они были */
+        line-height: 1;
+    }
+}
+        /* Mobile */
+        @media (max-width: 900px) {
+            :root { --pad-x: 24px; --gap-grid: 40px; }
+            .hero-section, .problem-section, .ecosystem-section, .import-section, .brand-section, .impact-section, .specs-grid, .cta-section, .deal-grid, .offer-header, .simple-footer { grid-template-columns: 1fr; gap: 40px; }
+            .metrics-grid { grid-template-columns: 1fr; border-right: none; }
+            .phases-flow-container { grid-template-columns: 1fr; }
+            .chart-wrapper { display: none; } 
+            .header-cta { display: none; }
+            .simple-footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .footer-contacts a { margin-left: 0; margin-right: 20px; }
+        }
     </style>
 </head>
 <body>
 
-    <header class="fixed w-full top-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 z-50">
-        <div class="container max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <a href="/" class="text-3xl font-black font-heading tracking-tight text-gray-900">FRANÇOISE</a>
-                <span class="hidden sm:inline-block h-4 w-px bg-gray-300 mx-2"></span>
-                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest font-mono">Design QA Engine</span>
-            </div>
-            <nav class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-gray-500">
-                <a href="#how-it-works" class="hover:text-primary transition-colors">Pilot</a>
-                <a href="#capabilities" class="hover:text-primary transition-colors">Capabilities</a>
-                <a href="#security" class="hover:text-primary transition-colors">Security</a>
-            </nav>
-            <a href="#pilot" class="btn btn-primary py-2 px-5 text-sm uppercase tracking-wide">Start Pilot</a>
-        </div>
+<div class="page-container">
+    
+    <header>
+        <a href="#" class="logo">Françoise</a>
+        <a href="https://meet.francoise.design/" class="header-cta">Book Demo</a>
     </header>
 
-    <main class="pt-20">
-        <!-- HERO -->
-        <section class="relative pt-24 pb-16 overflow-hidden">
-            <div class="absolute inset-0 bg-grid-pattern -z-10"></div>
-            <div class="container max-w-6xl mx-auto px-6">
-                <div class="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-widest text-gray-400 mb-8 font-mono">
-                    <span class="flex items-center gap-2 text-gray-900"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>V2.0 Core Active</span>
-                    <span class="text-gray-200">/</span><span>Enterprise Solution</span>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <h1 class="text-6xl md:text-8xl text-gray-900 mb-6 leading-[0.9]">Shift-Left <span class="text-primary">Quality Gate</span><br><span class="text-gray-400">for Design Systems.</span></h1>
-                        <p class="text-xl md:text-2xl text-gray-600 font-light max-w-xl leading-relaxed mb-10">
-                            Transform Figma into a production-ready interface engine. Validate logic, accessibility, and tokens before they reach development.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="#pilot" class="btn btn-primary uppercase tracking-widest px-8">Book Pilot Program</a>
-                            <a href="#how-it-works" class="btn btn-outline uppercase tracking-widest px-8">How it works?</a>
-                        </div>
-                    </div>
-<div class="relative bg-gray-50 rounded-xl shadow-2xl overflow-hidden aspect-[726/800] border border-gray-200 group mx-auto lg:max-w-none w-full">
-    <video
-        id="bgVideo"
-        class="absolute inset-0 w-full h-full object-cover z-0"
-        autoplay
-        loop
-        muted
-        playsinline
-    >
-        <source src="video.mp4" type="video/mp4">
-    </video>
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-eyebrow">Validated by Tier-1 Ecommerce</span>
+            <h1>Enterprise<br>Design Quality<br>Gate</h1>
+            <p class="hero-desc">Françoise automatically validates designs against complex System Logic and Regulatory Requirements (EAA, ADA). We block incorrect designs at the CI/CD level before they become technical debt.</p>
+            
+            <a href="https://meet.francoise.design/" class="btn-primary">Book Discovery Call</a>
+        </div>
+        
+        <div class="media-frame" id="heroVideoFrame">
+            <video id="heroVideo" autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
+                <source src="video.mp4" type="video/mp4">
+            </video>
+            <button class="video-control-btn" onclick="toggleHeroVideo()">
+                <svg class="icon-pause" viewBox="0 0 12 14"><rect width="4" height="14"/><rect x="8" width="4" height="14"/></svg>
+                <svg class="icon-play" viewBox="0 0 12 14"><path d="M0 0L12 7L0 14V0Z"/></svg>
+            </button>
+        </div>
+    </section>
 
-    <div class="absolute bottom-4 left-4 z-20">
-         <span class="bg-primary px-2 py-1 rounded text-[10px] font-bold text-white uppercase tracking-tighter">Live Demo</span>
+    <section class="problem-section">
+        <div class="problem-left">
+            <h2 class="problem-head">Design is the only unverified step in your SDLC</h2>
+            <div class="risk-list">
+                <div class="risk-item">
+                    <h3>Financial Risk</h3>
+                    <p>Since June 2025, EAA enforcement means fines up to €100,000 per violation. Manual audits miss 40% of WCAG 2.1 errors.</p>
+                </div>
+                <div class="risk-item">
+                    <h3>The 1-10-100 Rule</h3>
+                    <p>Developers spend 30% of their sprint fixing cheap design errors at expensive rates.</p>
+                </div>
+                <div class="risk-item">
+                    <h3>System Erosion</h3>
+                    <p>Without automated enforcement, your Design System is just documentation in Confluence that nobody reads.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-wrapper" style="height: 450px; align-self: center;">
+            <div class="chart-axis-label y-axis-top">Risk</div>
+            <div class="chart-axis-label x-axis-right">Volume</div>
+            
+            <div class="red-zone">
+                <div class="event-flag">June 2025 (EAA)</div>
+                <div class="zone-label">LIABILITY GAP</div>
+            </div>
+
+            <svg class="chart-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="curve" d="M0,100 C50,100 60,80 100,0" /></svg>
+        </div>
+    </section>
+
+</div> <section class="full-width-section bg-surface">
+    <div class="chapter-label">02. Platform</div>
+    <div class="page-container">
+
+        <section class="ecosystem-section">
+    <div class="visual-stage">
+        <button class="nav-arrow nav-prev" onclick="manualChangeSlide(-1)">
+            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        <button class="nav-arrow nav-next" onclick="manualChangeSlide(1)">
+            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+        
+        <div class="feature-gallery active">
+             <img class="inner-slide current" src="plagin1.png" alt="Plugin">
+             <img class="inner-slide" src="plagin2.png" alt="Plugin Error">
+             <img class="inner-slide" src="plagin3.png" alt="Plugin Error">
+        </div>
+        
+        <div class="feature-gallery">
+             <img class="inner-slide current" src="monitor1.jpg" alt="Dash">
+             <img class="inner-slide" src="monitor2.jpg" alt="Report">
+        </div>
+        
+        <div class="feature-gallery dark-mode">
+    <div class="inner-slide current terminal-box">
+        <span class="cmd-line">
+            <span class="cmd-blue">➜</span> <span class="cmd-green">admin@francoise</span>:~/project$ francoise audit --ticket=PROJ-824
+        </span>
+        <br>
+        
+        <span class="cmd-line" style="opacity:0.6">> Connecting to Figma API... <span class="cmd-green">OK</span></span>
+        <span class="cmd-line" style="opacity:0.6">> Fetching "Checkout_Flow_v2" (12 frames)... <span class="cmd-green">OK</span></span>
+        <span class="cmd-line" style="opacity:0.6">> Running WCAG 2.1 AA checks...</span>
+        <br>
+
+        <span class="cmd-line"><span class="cmd-red">[ERROR]</span> A11Y Violation found:</span>
+        <span class="cmd-line" style="padding-left: 24px; opacity: 0.8; font-size: 0.85em;">
+            Asset: "Button/Primary/Disabled"<br>
+            Property: Text Contrast<br>
+            Value: 2.1:1 (Required 3:1)
+        </span>
+        <br>
+
+        <span class="cmd-line"><span class="cmd-red">[ERROR]</span> System Logic Violation:</span>
+        <span class="cmd-line" style="padding-left: 24px; opacity: 0.8; font-size: 0.85em;">
+            Asset: "Modal_Window"<br>
+            Rule: Deprecated Component Usage<br>
+            Found: "Input_v1" (Use "Input_v2" instead)
+        </span>
+        <br>
+
+        <span class="cmd-line">---------------------------------------</span>
+        <span class="cmd-line">BUILD: <span class="cmd-red">FAILED</span> (2 critical errors)</span>
+        <span class="cmd-line">JIRA: Transition to "Ready for Dev" <span class="cmd-red">BLOCKED</span></span>
+        <span class="cmd-line"><span class="cmd-blue">➜</span> <span class="cmd-green">admin@francoise</span>:~/project$ <span style="animation: blink 1s infinite">_</span></span>
+    </div>
+</div>
     </div>
 
+    <div class="features-list">
+        <h2 class="eco-headline">The Ecosystem</h2>
+        <div class="feature-item active" onmouseover="setEcoSlide(0)">
+            <span class="feature-num">01. In-Context Validation</span>
+            <h3 class="feature-title">Figma Plugin</h3>
+            <p class="feature-desc">Errors appear as native comments directly on the canvas. No context switching—designers fix issues where they work.</p>
+        </div>
+        <div class="feature-item" onmouseover="setEcoSlide(1)">
+            <span class="feature-num">02. DesignOps Dashboard</span>
+            <h3 class="feature-title">Health Monitor</h3>
+            <p class="feature-desc">A command center for Leads. Monitor system health, manage global rules, and visualize technical debt reduction.</p>
+        </div>
+        <div class="feature-item" onmouseover="setEcoSlide(2)">
+            <span class="feature-num">03. Automated Quality Gate</span>
+            <h3 class="feature-title">Jira Integration</h3>
+            <p class="feature-desc">Handover tickets are automatically blocked until the design passes validation. We stop technical debt before it reaches Dev.</p>
+        </div>
     </div>
+</section>
+
+        <section class="import-section">
+            <div class="import-content">
+                <h2 class="import-headline">Importing your DS<br>from Figma</h2>
+                <p class="import-subhead">Our specialists map your existing Figma libraries without requiring a prior refactor.</p>
+                <div class="static-feature-list">
+                    <div class="static-item">
+                        <span class="static-num">01_SEMANTIC</span>
+                        <h3 class="static-title">Semantic Checks</h3>
+                        <p class="static-desc">We go beyond token binding. Françoise validates semantic appropriateness (e.g., ensuring Display fonts are never used for Legal text).</p>
+                    </div>
+                    <div class="static-item">
+                        <span class="static-num">02_HYBRID</span>
+                        <h3 class="static-title">Hybrid Support</h3>
+                        <p class="static-desc">We support Variables, Styles, and Legacy components simultaneously, adapting to your current maturity level.</p>
+                    </div>
                 </div>
+            </div>
+            <div class="visual-box">
+                <img class="import-image" src="ds.png" alt="Tokens">
+            </div>
+        </section>
 
-                <!-- TRUSTED BY / PARTNERSHIP -->
-                <div class="mt-20 pt-10 border-t border-gray-100 flex flex-wrap gap-12 items-center opacity-60 grayscale hover:grayscale-0 transition-all">
-                    <div class="flex flex-col gap-1">
-                        <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">Validated by</span>
-                        <span class="text-lg font-black font-heading text-gray-900 tracking-tight leading-none uppercase">Global E-commerce Leader</span>
-                        <span class="text-[9px] font-bold text-gray-300 uppercase tracking-widest">Confidential Marketplace</span>
+        <section class="brand-section">
+            <div class="brand-content">
+                <div class="brand-header">
+                    <h2 class="brand-headline">The Brand Voice</h2>
+                    <p class="brand-subhead">Françoise incorporates your written documentation to validate logic that cannot be defined by tokens alone.</p>
+                </div>
+                <div class="logic-list">
+                    <div class="logic-item">
+                        <span class="ex-label">01. Constraints</span>
+                        <h3 class="feature-title">Architectural Constraints</h3>
+                        <p class="feature-desc">Automated enforcement of architectural constraints described in your guidelines.</p>
+                        <div class="logic-example"><span class="ex-label">Example</span>Detecting multiple Primary buttons on a single screen to preserve visual hierarchy.</div>
                     </div>
-
-                    <div class="h-10 w-px bg-gray-200 hidden md:block"></div>
-
-                    <div class="flex items-center gap-2">
-                        <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="currentColor"><path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zM24 11.4H12.6V0H24v11.4z"/></svg>
-                        <div class="flex flex-col">
-                            <span class="text-[10px] font-black font-heading text-gray-900 leading-none">MICROSOFT</span>
-                            <span class="text-[8px] font-bold text-gray-400 uppercase tracking-tighter">for Startups Founders Hub</span>
-                        </div>
+                    <div class="logic-item">
+                        <span class="ex-label">02. Logic</span>
+                        <h3 class="feature-title">State-Dependent Rules</h3>
+                        <p class="feature-desc">Validation of state-dependent rules and component combinations.</p>
+                        <div class="logic-example"><span class="ex-label">Example</span>Ensuring that input fields in an Error state are always accompanied by a helper text message.</div>
                     </div>
+                </div>
+            </div>
+            <div class="brand-visual-wrapper">
+                <img class="doc-scroll-image" src="brand.png" alt="Docs">
+            </div>
+        </section>
 
-                    <div class="flex items-center gap-2">
-                        <svg class="w-6 h-6 text-gray-400" viewBox="0 0 100 100" fill="currentColor"><path d="M85.7,15.7c-9.1-8.5-21.8-13.2-35.7-13.2c-13.9,0-26.6,4.7-35.7,13.2c-7.9,7.4-12.3,17.4-12.3,28.3c0,10.9,4.4,20.9,12.3,28.3c7.7,7.2,18.3,11.5,30,12.7v-10.4c-9.1-1.1-16.9-4.3-22.3-9.3c-5.7-5.3-8.8-12.6-8.8-21.3c0-8.7,3.1-16,8.8-21.3c6.6-6.2,16.2-9.6,26.5-9.6c10.3,0,19.9,3.4,26.5,9.6c5.7,5.3,8.8,12.6,8.8,21.3c0,7.3-2.2,13.5-6.3,18.5l9.2,9.2c6.3-7.5,9.9-17.1,9.9-27.7C98,33.1,93.6,23.1,85.7,15.7z"/><path d="M50,33.8c-7,0-12.7,5.7-12.7,12.7c0,7,5.7,12.7,12.7,12.7c7,0,12.7-5.7,12.7-12.7C62.7,39.5,57,33.8,50,33.8z M50,54.2c-4.3,0-7.8-3.5-7.8-7.8c0-4.3,3.5-7.8,7.8-7.8c4.3,0,7.8,3.5,7.8,7.8C57.8,50.7,54.3,54.2,50,54.2z"/></svg>
-                        <div class="flex flex-col">
-                            <span class="text-[10px] font-black font-heading text-gray-900 leading-none">NVIDIA</span>
-                            <span class="text-[8px] font-bold text-gray-400 uppercase tracking-tighter">Inception Program</span>
-                        </div>
-                    </div>
+        <section class="a11y-section">
+            <div class="a11y-header">
+                <h2 class="import-headline">Accessibility Compliance</h2>
+                <p class="import-subhead">We validate designs against WCAG 2.1 AA standards to ensure EAA readiness.</p>
+            </div>
+            <div class="a11y-grid">
+                <div class="a11y-col">
+                    <h3 class="col-title">Visual & Layout</h3>
+                    <div class="a11y-item"><span class="item-label">Contrast Ratios</span><p class="item-desc">Text and non-text UI components.</p></div>
+                    <div class="a11y-item"><span class="item-label">Target Size</span><p class="item-desc">Ensuring minimum touch areas (e.g., 44x44px).</p></div>
+                    <div class="a11y-item"><span class="item-label">Responsive Reflow</span><p class="item-desc">Verification of layout adaptability for mobile viewports.</p></div>
+                </div>
+                <div class="a11y-col">
+                    <h3 class="col-title">Interaction & States</h3>
+                    <div class="a11y-item"><span class="item-label">Keyboard Access</span><p class="item-desc">Logic for sequential navigation.</p></div>
+                    <div class="a11y-item"><span class="item-label">Focus Indicators</span><p class="item-desc">Visibility of focus states for keyboard navigation.</p></div>
+                    <div class="a11y-item"><span class="item-label">Input Logic</span><p class="item-desc">Presence of labels, error identification, and instructions.</p></div>
+                </div>
+                <div class="a11y-col">
+                    <h3 class="col-title">Structure & Typography</h3>
+                    <div class="a11y-item"><span class="item-label">Heading Hierarchy</span><p class="item-desc">Correct nesting of H1-H6 tags.</p></div>
+                    <div class="a11y-item"><span class="item-label">Text Properties</span><p class="item-desc">Line height, spacing, and resize capabilities.</p></div>
+                    <div class="a11y-item"><span class="item-label">Link Purpose</span><p class="item-desc">Contextual clarity of navigation elements.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- THE PROBLEM -->
-        <section class="py-24 bg-gray-50 border-y border-gray-100">
-            <div class="container max-w-6xl mx-auto px-6">
-                <div class="max-w-3xl mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">The Cost of UI Errors</h2>
-                    <p class="text-xl text-gray-500 font-light leading-relaxed">
-                        Fixing bugs in code is 10x more expensive than in design. We move quality control to the very beginning of the process (Shift-Left).
-                    </p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white p-10 rounded-xl border border-gray-200">
-                        <div class="text-primary font-heading font-black text-6xl mb-4">25%</div>
-                        <h3 class="text-xl font-bold mb-3 uppercase">Lost TTM</h3>
-                        <p class="text-sm text-gray-500">A quarter of sprint time is wasted on manual QA to ensure designs match code and specs.</p>
-                    </div>
-                    <div class="bg-white p-10 rounded-xl border border-gray-200">
-                        <div class="text-primary font-heading font-black text-6xl mb-4">10X</div>
-                        <h3 class="text-xl font-bold mb-3 uppercase">Cost Increase</h3>
-                        <p class="text-sm text-gray-500">Developers spend up to 30% of their time on "UI fixes" that could have been prevented in Figma.</p>
-                    </div>
-                    <div class="bg-white p-10 rounded-xl border border-gray-200">
-                        <div class="text-primary font-heading font-black text-6xl mb-4">€250K</div>
-                        <h3 class="text-xl font-bold mb-3 uppercase">Regulatory Risks</h3>
-                        <p class="text-sm text-gray-500">Accessibility fines (WCAG/EAA 2025) are becoming a reality for Enterprise organizations.</p>
-                    </div>
-                </div>
+    </div>
+</section>
+<div class="page-container">
+    
+    <section class="impact-section">
+        <div class="metrics-grid">
+            <h2 class="impact-headline">The Business Impact</h2>
+            
+            <div class="metric-item">
+                <span class="metric-val">– 60%</span>
+                <span class="metric-role">Design Leadership</span>
+                <span class="metric-desc">reduction in mentoring overhead for leads.</span>
             </div>
-        </section>
 
-        <!-- CAPABILITIES -->
-        <section id="capabilities" class="py-24 bg-white overflow-hidden">
-            <div class="container max-w-6xl mx-auto px-6">
-                <div class="flex flex-col lg:flex-row gap-16 items-center mb-32">
-                    <div class="lg:w-1/2">
-                        <div class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-4">Hybrid Intelligence Engine</div>
-                        <h2 class="text-4xl md:text-6xl font-bold mb-8">AI that understands <br>intent</h2>
-<p class="text-lg text-gray-600 mb-8 leading-relaxed">
-    Unlike standard linters, Françoise analyzes <span class="font-bold text-gray-900">visual patterns</span> using Computer Vision. She recognizes a paywall and validates it against business rules, regardless of layer naming.
-</p>
-                        <div class="inline-flex items-center gap-6 bg-gray-50 px-8 py-4 rounded-lg border border-gray-100">
-                            <div class="text-4xl font-heading font-black">99.2%</div>
-                            <div class="text-xs font-bold text-gray-400 uppercase leading-tight">Detection Accuracy <br>with near-zero false positives</div>
-                        </div>
-                    </div>
-                    <div class="lg:w-1/2 relative">
-                        <div class="absolute -inset-4 bg-primary/5 rounded-full blur-3xl"></div>
-                        <img src="BadButton.jpg" alt="Design QA error detection example screenshot" class="relative rounded-xl shadow-2xl border border-gray-200">
-                        <div class="absolute -right-4 top-1/4 bg-white p-4 rounded-lg shadow-xl border border-gray-200 max-w-[240px] animate-bounce">
-                             <div class="flex items-center gap-2 mb-2">
-                                <span class="w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[10px] text-white font-bold">F</span>
-                                <span class="text-[10px] font-bold uppercase tracking-widest">Françoise AI</span>
-                             </div>
-<p class="text-xs text-gray-600">
-    <span class="font-bold text-gray-900">WCAG Fail:</span> Button contrast is 2.1:1. Minimum required is 4.5:1 for this product context.
-</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                    <article>
-                        <h3 class="text-lg font-bold mb-4 uppercase tracking-wider">Semantics & Logic</h3>
-                        <p class="text-sm text-gray-500">Validation of contextual token usage. Specific rules defined for different page types.</p>
-                    </article>
-                    <article>
-                        <h3 class="text-lg font-bold mb-4 uppercase tracking-wider">Actionable Feedback</h3>
-                        <p class="text-sm text-gray-500">Errors appear directly in Figma as comments with specific fixes provided.</p>
-                    </article>
-                    <article>
-                        <h3 class="text-lg font-bold mb-4 uppercase tracking-wider">Global Scale (RTL)</h3>
-                        <p class="text-sm text-gray-500">Automated layout mirroring checks for Arabic and Hebrew markets (MENA).</p>
-                    </article>
-                    <article>
-                        <h3 class="text-lg font-bold mb-4 uppercase tracking-wider">Accessibility</h3>
-                        <p class="text-sm text-gray-500">Deep real-time accessibility auditing based on WCAG 2.1 AA standards.</p>
-                    </article>
-                </div>
+            <div class="metric-item">
+                <span class="metric-val">– 80%</span>
+                <span class="metric-role">Frontend Engineering</span>
+                <span class="metric-desc">reduction in UI sprint blockers.</span>
             </div>
-        </section>
 
-        <!-- SECURITY -->
-        <section id="security" class="py-24 bg-white text-gray-900 relative overflow-hidden border-t border-gray-100">
-            <div class="absolute inset-0 figma-dots opacity-30"></div>
-            <div class="container max-w-6xl mx-auto px-6 relative z-10">
-                <div class="flex flex-col lg:flex-row gap-16 items-center">
-                    <div class="lg:w-1/3">
-                        <div class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-4">Enterprise Grade Security</div>
-                        <h2 class="text-4xl md:text-5xl font-bold mb-6">Securing your IP is our priority</h2>
-                        <p class="text-gray-500 font-light mb-8">
-                            We understand the requirements of Fintech and large corporations. Your data remains isolated and protected.
-                        </p>
-                        <a href="#pilot" class="btn btn-outline px-8 border-gray-300">Discuss Security</a>
-                    </div>
-                    <div class="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-8">
-                        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors">
-                            <h3 class="text-xl font-bold mb-3 uppercase tracking-wider">Private Cloud / On-Premise</h3>
-                            <p class="text-sm text-gray-500">Deployment within your secure perimeter. Data never leaves your company's network.</p>
-                        </div>
-                        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors">
-                            <h3 class="text-xl font-bold mb-3 uppercase tracking-wider">Data Isolation</h3>
-                            <p class="text-sm text-gray-500">Your designs are never used to train public models. Complete environment segregation.</p>
-                        </div>
-                        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors">
-                            <h3 class="text-xl font-bold mb-3 uppercase tracking-wider">SSO & IAM</h3>
-                            <p class="text-sm text-gray-500">Support for enterprise authentication protocols: SAML, Okta, Active Directory.</p>
-                        </div>
-                        <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover:border-primary transition-colors">
-                            <h3 class="text-xl font-bold mb-3 uppercase tracking-wider">SOC 2 Readiness</h3>
-                            <p class="text-sm text-gray-500">Processes built to meet Enterprise-level security standards and compliance audits.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="metric-item">
+                <span class="metric-val">90%</span>
+                <span class="metric-role">QA & Compliance</span>
+                <span class="metric-desc">automated a11y coverage.</span>
             </div>
-        </section>
+        </div>
 
-        <!-- PILOT ROADMAP -->
-        <section id="how-it-works" class="py-24 bg-white">
-            <div class="container max-w-6xl mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-20">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Pilot Roadmap: 90 Days to Impact</h2>
-                    <p class="text-lg text-gray-500 font-light">A transparent Proof of Concept (PoC) to validate efficiency on your actual data before a subscription commitment.</p>
-                </div>
+        <div class="total-savings-block">
+            <span class="savings-val">$60,000</span>
+            <h3 class="savings-label">Total Annual Savings</h3>
+            <p class="savings-sub">Recovers capital for a standard 10-person Agile Squad.</p>
+        </div>
+    </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    <section class="roadmap-step">
-                        <div class="step-number">1</div>
-                        <h3 class="text-2xl font-bold mb-4 uppercase">Month 1: Calibration</h3>
-                        <p class="text-sm text-gray-600 mb-4">Fine-tuning Françoise to your Design System and "unwritten rules." Design leads train the model by providing feedback on initial reports.</p>
-                        <ul class="text-[10px] font-bold text-gray-400 uppercase tracking-widest space-y-2">
-                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Token Mapping</li>
-                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Lead Interviews</li>
-                        </ul>
-                    </section>
-                    <section class="roadmap-step">
-                        <div class="step-number">2</div>
-                        <h3 class="text-2xl font-bold mb-4 uppercase">Month 2: A/B Testing</h3>
-                        <p class="text-sm text-gray-600 mb-4">A focus group uses the tool in real-time. The rest of the team receives Françoise reports *after* manual review to compare accuracy and speed.</p>
-                        <ul class="text-[10px] font-bold text-gray-400 uppercase tracking-widest space-y-2">
-                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Metric Tracking</li>
-                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Control Group Analysis</li>
-                        </ul>
-                    </section>
-                    <section class="roadmap-step">
-                        <div class="step-number">3</div>
-                        <h3 class="text-2xl font-bold mb-4 uppercase">Month 3: Results</h3>
-                        <p class="text-sm text-gray-600 mb-4">Analysis of UI bug reduction and review time savings. Presentation of the ROI report to leadership for the final decision on the annual contract.</p>
-                        <ul class="text-[10px] font-bold text-gray-400 uppercase tracking-widest space-y-2">
-                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Business Case Defense</li>
-                            <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary rounded-full"></span> Final Outcome Report</li>
-                        </ul>
-                    </section>
-                </div>
+</div>
+
+
+<section class="full-width-section mode-technical">
+    <div class="chapter-label">04. Specs</div>
+    <div class="page-container">
+
+        <section class="tech-specs-section">
+            <div class="specs-header">
+                <h2 class="specs-headline">Enterprise Security</h2>
+                <p class="specs-sub">Built for regulated industries. Your IP never leaves your control perimeter.</p>
             </div>
-        </section>
-
-        <!-- LICENSING -->
-        <section class="py-24 bg-gray-50 border-t border-gray-100">
-            <div class="container max-w-6xl mx-auto px-6 text-center">
-                <div class="mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Licensing After Pilot</h2>
-                    <p class="text-lg text-gray-500">A flexible model that scales alongside your product ecosystem.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-900">
-                    <div class="pricing-card p-10 rounded-xl text-left flex flex-col h-full relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-gray-200"></div>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">Foundation</div>
-                        <h3 class="text-2xl font-bold mb-6 uppercase">Core Platform</h3>
-                        <ul class="space-y-4 mb-10 text-sm text-gray-600 flex-grow">
-                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> Unlimited Seats (Design/Dev)</li>
-                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> SSO & IAM Integration</li>
-                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> Corporate SLA & Support</li>
-                        </ul>
-                        <div class="text-sm font-bold text-gray-400 border-t pt-4 italic">Billed annually</div>
-                    </div>
-
-                    <div class="pricing-card p-10 rounded-xl text-left flex flex-col h-full relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
-                        <div class="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-4">Volume Tiers</div>
-                        <h3 class="text-2xl font-bold mb-6 uppercase">Standard / Scale</h3>
-                        <p class="text-sm text-gray-500 mb-6 leading-relaxed">Choose a monthly screen validation limit that fits your team's output.</p>
-                        <ul class="space-y-4 mb-10 text-sm text-gray-600 flex-grow">
-                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> From 1,000 to 10,000 screens/mo</li>
-                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> Flexible scaling tiers</li>
-                        </ul>
-                    </div>
-
-                    <div class="pricing-card p-10 rounded-xl text-left flex flex-col h-full relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-gray-900"></div>
-                        <div class="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">Add-ons</div>
-                        <h3 class="text-2xl font-bold mb-6 uppercase">Strategic Modules</h3>
-                        <ul class="space-y-4 mb-10 text-sm text-gray-600 flex-grow">
-                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> DevOps (CI/CD) Validation</li>
-                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> On-Premise Installation</li>
-                            <li class="flex items-start gap-3"><span class="text-primary font-bold">✓</span> AI-driven Auto-Fix</li>
-                        </ul>
+            
+            <div class="specs-grid">
+                
+                <div class="spec-col">
+                    <h3 class="spec-col-title">Data Privacy & Sovereignty</h3>
+                    <div class="spec-list">
+                        <div class="spec-item">
+                            <span class="spec-label">Zero-Retention Processing</span>
+                            <p class="spec-desc">We process design files in ephemeral memory. Once the validation is complete, all data is immediately wiped. We store logs, not designs.</p>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">No AI Training</span>
+                            <p class="spec-desc">We guarantee contractually that your Intellectual Property is never used to train our models or shared with third parties.</p>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Regional Data Residency</span>
+                            <p class="spec-desc">Option to pin data processing to specific regions (EU Frankfurt / US Virginia) to comply with GDPR and local regulations.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- FINAL CTA -->
-        <section id="pilot" class="py-24 bg-white">
-            <div class="container max-w-6xl mx-auto px-6">
-                <div class="flex flex-col lg:flex-row gap-16 items-center">
-                    <div class="lg:w-1/2">
-                        <h2 class="text-5xl md:text-7xl font-bold mb-8 uppercase leading-[0.9]">Make flawless design <span class="text-primary">the standard.</span></h2>
-                        <p class="text-xl text-gray-500 font-light leading-relaxed mb-8">
-                            Françoise handles the routine checks, allowing your team to focus on meaningful solutions. Start a pilot and see metrics improve in 4 weeks.
-                        </p>
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-4">
-                                <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xs">1</span>
-                                <span class="text-sm font-medium text-gray-700">Discovery Call (15 min)</span>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xs">2</span>
-                                <span class="text-sm font-medium text-gray-700">Audit of your Figma structure</span>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <span class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xs">3</span>
-                                <span class="text-sm font-medium text-gray-700">Personalized ROI Calculation</span>
+                <div class="spec-col">
+                    <h3 class="spec-col-title">Infrastructure & Control</h3>
+                    <div class="spec-list">
+                        <div class="spec-item">
+                            <span class="spec-label">Private Cloud / On-Premises</span>
+                            <p class="spec-desc">Deploy Françoise within your own Virtual Private Cloud (VPC) or fully air-gapped environment. Complete network isolation available.</p>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">SSO & Governance</span>
+                            <p class="spec-desc">Integrate with Okta, Azure AD, or Google Workspace. Enforce MFA and manage team permissions via your existing Identity Provider.</p>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Compliance Roadmap</span>
+                            <p class="spec-desc">Aligned with industry standards (SOC 2 Type II & ISO 27001 In Progress).</p>
+                            <div class="compliance-badges">
+                                <img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=SOC2" alt="SOC2">
+                                <img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=GDPR" alt="GDPR">
+                                <img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=ISO27001" alt="ISO">
                             </div>
                         </div>
                     </div>
-                    <div class="lg:w-1/2 w-full bg-gray-50 p-10 rounded-2xl border border-gray-200 shadow-xl">
-                        <form id="client-data" class="space-y-6">
-                            <input type="hidden" name="type" value="francoise">
-                            <div>
-                                <label for="name" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Name</label>
-                                <input type="text" id="name" class="w-full bg-white border border-gray-200 rounded p-3 text-sm focus:border-primary outline-none transition-all" placeholder="John Doe">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Work Email</label>
-                                <input type="email" id="email" class="w-full bg-white border border-gray-200 rounded p-3 text-sm focus:border-primary outline-none transition-all" placeholder="john@company.com">
-                            </div>
-                            <div>
-                                <label for="message" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">DS / Website Link</label>
-                                <input type="text" id="message" class="w-full bg-white border border-gray-200 rounded p-3 text-sm focus:border-primary outline-none transition-all" placeholder="figma.com/file/...">
-                            </div>
-                            <button type="submit" class="btn btn-primary w-full py-4 uppercase tracking-[0.2em]">Book Calibration Call</button>
-                            <p class="text-[10px] text-center text-gray-400 uppercase mt-4">
-                                By clicking, you agree to our <a href="/privacy-policy" class="hover:text-primary transition-colors">privacy policy.</a></p>
-                        </form>
-                        <div id="msg" class="text-center text-sm font-bold mt-4 min-h-[20px]"></div>
-                    </div>
                 </div>
+
             </div>
         </section>
 
-        <footer class="bg-gray-50 text-gray-900 py-20 border-t border-gray-100">
-            <div class="container max-w-6xl mx-auto px-6">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                    <div class="col-span-1 md:col-span-2">
-                        <div class="text-3xl font-black font-heading tracking-tight mb-6">FRANÇOISE</div>
-                        <p class="text-gray-500 text-sm max-w-sm mb-8 leading-relaxed">
-                            Transforming quality control technology into a growth engine for your business. Shift-Left Quality Gate for the modern Enterprise.
-                        </p>
-                        <div class="flex gap-4">
-                            <a href="https://www.linkedin.com/in/daria-kamyshina/" class="text-xs font-bold text-gray-400 hover:text-primary transition-colors">LinkedIn</a>
-                            <a href="https://t.me/darikamouse" class="text-xs font-bold text-gray-400 hover:text-primary transition-colors">Telegram</a>
+    </div>
+</section>
+<div class="page-container">
+
+    <section class="partner-section">
+        <div class="offer-box">
+            <div class="tape-effect"></div>
+
+            <div class="offer-header">
+                <div class="offer-info">
+                    <h2 class="offer-headline">Founding Partner<br>Program</h2>
+                </div>
+                <div class="offer-status">
+                    <p class="offer-desc">Proven at scale with top CIS E-commerce. Now opening 5 spots for Global Expansion Partners.</p>
+                    <div class="status-row">
+                        <div class="status-group">
+                            <span class="status-label">Offer</span>
+                            <span class="status-val">50% Rate Lock</span>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-label">Availability</span>
+                            <span class="status-val">5 Partners Only</span>
+                            <div class="slots-visual">
+                                <div class="slot taken"></div>
+                                <div class="slot taken"></div>
+                                <div class="slot"></div>
+                                <div class="slot"></div>
+                                <div class="slot"></div>
+                            </div>
                         </div>
                     </div>
-                    <nav>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6">Product</h4>
-                        <ul class="space-y-4 text-sm text-gray-500">
-                            <li><a href="#capabilities" class="hover:text-primary transition-colors">Capabilities</a></li>
-                            <li><a href="#security" class="hover:text-primary transition-colors">Security</a></li>
-                            <li><a href="#how-it-works" class="hover:text-primary transition-colors">Pilot</a></li>
-                        </ul>
-                    </nav>
-                    <nav>
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6">Company</h4>
-                        <ul class="space-y-4 text-sm text-gray-500">
-                            <li><a href="/privacy-policy" class="hover:text-primary transition-colors">Privacy</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="pt-8 border-t border-gray-50 text-[10px] font-mono text-gray-400 uppercase tracking-widest flex justify-between flex-wrap gap-4">
-                    <span>© 2026 Françoise Inc.</span>
-                    <span>Secure Enterprise Design QA</span>
                 </div>
             </div>
-        </footer>
-    </main>
+
+            <div class="deal-grid">
+                <div class="deal-col">
+                    <span class="deal-label">We Get</span>
+                    <h3 class="deal-title">Your Logo</h3>
+                    <p class="deal-desc">Permission to feature your brand in our global case study and press release.</p>
+                </div>
+                <div class="deal-col accent">
+                    <span class="deal-label" style="color:var(--c-error)">You Get</span>
+                    <h3 class="deal-title">Lifetime Lock</h3>
+                    <p class="deal-desc">50% discount locked forever. Plus, direct access to engineering roadmap.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="phases-section">
+        <h2 class="phases-headline">Three Phases to Begin</h2>
+
+        <div class="phases-flow-container">
+            
+            <div class="phase-card">
+                <span class="phase-num">01</span>
+                <h3 class="phase-title">Free Proof<br>of Concept</h3>
+                <ul class="phase-steps">
+                    <li class="phase-step-item">Sign Letter of Intent</li>
+                    <li class="phase-step-item">We sign Your NDA</li>
+                    <li class="phase-step-item">You share Sprint Mockups</li>
+                </ul>
+                <div class="phase-footer">
+                    <span class="price-val">Free</span>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <span class="phase-num">02</span>
+                <h3 class="phase-title">Trial<br>Period</h3>
+                <ul class="phase-steps">
+                    <li class="phase-step-item">50% team onboarding</li>
+                    <li class="phase-step-item">Weekly sync & tuning</li>
+                    <li class="phase-step-item">Measure speed & errors</li>
+                </ul>
+                <div class="phase-footer">
+                    <span class="price-val accent">$2,500</span>
+                    <span class="price-strike">$5,000</span>
+                </div>
+            </div>
+
+            <div class="phase-card">
+                <span class="phase-num">03</span>
+                <h3 class="phase-title">Partnership<br>& Scale</h3>
+                <ul class="phase-steps">
+                    <li class="phase-step-item">Annual contract signed</li>
+                    <li class="phase-step-item">$2.5K pilot fee credited</li>
+                    <li class="phase-step-item">Founding rate locked</li>
+                </ul>
+                <div class="phase-footer">
+                    <span class="price-val">From $15K</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div>
+            <h2 class="cta-headline">Start Free<br>Proof of Concept</h2>
+        </div>
+        <div class="cta-right-col">
+            <p class="cta-desc">
+                Teams overestimate design system coverage by 30%. Let us prove the difference on your actual data with zero risk.
+            </p>
+            <a href="https://meet.francoise.design/" class="btn-primary">Book Discovery Call</a>
+        </div>
+    </section>
+
+    <footer class="simple-footer">
+        <div>
+            <a href="#" class="footer-logo">Françoise</a>
+            <span>© 2026 Françoise Design Inc. All rights reserved.</span>
+        </div>
+        <div class="footer-contacts">
+            <a href="mailto:ceo@francoise.design">ceo@francoise.design</a>
+            <a href="https://wa.me/79035176391">WhatsApp</a>
+        </div>
+    </footer>
+
+</div>
+
 <script>
- const scriptURL = 'https://script.google.com/macros/s/AKfycbxxXgZqiiBn1bDvqbDxJxqv12lvi5yekglH6sI9wMkD2mjqxm91wVIPxGpLY5ZoJYKv8Q/exec';
-    const form = document.forms['client-data'];
-    const msg = document.getElementById("msg");
-
-    if (form) {
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-
-
-            // 1. Статус "Отправка"
-            msg.innerHTML = "Processing...";
-            msg.className = "text-center text-sm font-bold mt-4 text-gray-500";
-
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    form.reset();
-                    // 2. УСПЕХ (Темно-серый)
-                    msg.innerHTML = "Thank you!";
-                    msg.className = "text-center text-sm font-bold mt-4 text-gray-800";
-                    setTimeout(() => { msg.innerHTML = ""; }, 5000);
-                })
-                .catch(error => {
-                    // 3. ОШИБКА (Красный)
-                    msg.innerHTML = "Error!";
-                    msg.className = "text-center text-sm font-bold mt-4 text-red-700";
-                    console.error('Error!', error.message);
-                });
-        });
+    /* Hero Video Logic */
+    function toggleHeroVideo() {
+        const v = document.getElementById('heroVideo'), c = document.getElementById('heroVideoFrame');
+        if (v.paused) { v.play(); c.classList.remove('video-paused'); } else { v.pause(); c.classList.add('video-paused'); }
     }
+
+    /* Ecosystem Gallery Logic */
+    let intervalId = null, currentGalleryIndex = 0, currentSlideIndices = [0, 0, 0];
+
+    function updateGalleryVisuals(idx) {
+        const gal = document.querySelectorAll('.feature-gallery')[idx];
+        const slides = gal.querySelectorAll('.inner-slide');
+        if (slides.length === 0) return;
+        
+        // Safety check if slide index is out of bounds
+        if (currentSlideIndices[idx] >= slides.length) currentSlideIndices[idx] = 0;
+
+        slides.forEach(s => s.classList.remove('current'));
+        slides[currentSlideIndices[idx]].classList.add('current');
+    }
+
+    function manualChangeSlide(dir) {
+        if (intervalId) clearInterval(intervalId);
+        const slides = document.querySelectorAll('.feature-gallery')[currentGalleryIndex].querySelectorAll('.inner-slide');
+        if(slides.length < 2) return;
+        
+        let n = currentSlideIndices[currentGalleryIndex] + dir;
+        if (n >= slides.length) n = 0; if (n < 0) n = slides.length - 1;
+        currentSlideIndices[currentGalleryIndex] = n;
+        updateGalleryVisuals(currentGalleryIndex);
+        startInternalSlideshow(currentGalleryIndex);
+    }
+
+    function startInternalSlideshow(idx) {
+        if (intervalId) clearInterval(intervalId);
+        const gal = document.querySelectorAll('.feature-gallery')[idx];
+        const slides = gal.querySelectorAll('.inner-slide');
+        const stage = document.querySelector('.visual-stage');
+        
+        // Hide controls if less than 2 slides
+        if (slides.length < 2) {
+            stage.classList.add('no-controls');
+            return; // Stop here, no interval needed
+        } else {
+            stage.classList.remove('no-controls');
+        }
+
+        intervalId = setInterval(() => {
+            currentSlideIndices[idx] = (currentSlideIndices[idx] + 1) % slides.length;
+            updateGalleryVisuals(idx);
+        }, 4000);
+    }
+
+    function setEcoSlide(idx) {
+        currentGalleryIndex = idx;
+        document.querySelectorAll('.feature-item').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.feature-item')[idx].classList.add('active');
+        document.querySelectorAll('.feature-gallery').forEach(el => el.classList.remove('active'));
+        
+        const tg = document.querySelectorAll('.feature-gallery')[idx];
+        if(tg) { 
+            tg.classList.add('active'); 
+            updateGalleryVisuals(idx); 
+            startInternalSlideshow(idx); 
+        }
+    }
+    
+    document.addEventListener("DOMContentLoaded", () => { setEcoSlide(0); });
 </script>
+
 </body>
 </html>

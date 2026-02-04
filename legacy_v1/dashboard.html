@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Francoise | High-Fidelity Performance Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-red: #D20A11;
+            --comparison-gray: #555555;
+            --bg-gray: #FDFDFD;
+            --border: #EAEAEA;
+        }
+
+        body { font-family: 'Inter', sans-serif; background: var(--bg-gray); margin: 0; padding: 40px; color: #1A1A1A; line-height: 1.4; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        
+        header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 50px; 
+            border-bottom: 1px solid #000; 
+            padding-bottom: 25px; 
+        }
+
+        .global-legend { 
+            display: flex; 
+            gap: 25px; 
+            font-size: 11px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .leg-item { display: flex; align-items: center; gap: 10px; }
+        .line-red { width: 30px; height: 1.5px; background: var(--brand-red); }
+        .line-gray { width: 30px; height: 1.5px; background: var(--comparison-gray); opacity: 0.5; }
+
+        .section-title { font-size: 16px; font-weight: 800; margin: 60px 0 30px; text-transform: uppercase; letter-spacing: 2px; color: #000; }
+        
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .card { background: #fff; border: 1px solid var(--border); padding: 35px; }
+        .card-h { font-size: 14px; font-weight: 700; margin-bottom: 35px; display: block; }
+
+        .chart-container { position: relative; height: 220px; width: 100%; margin-top: 10px; padding-left: 10px; }
+        .y-axis-label { position: absolute; left: -45px; top: 0; height: 100%; display: flex; flex-direction: column; justify-content: space-between; font-size: 11px; color: #AAA; text-align: right; width: 40px; }
+        .x-axis-label { margin-top: 15px; font-size: 11px; color: #AAA; display: flex; justify-content: space-between; padding-left: 10px; }
+        
+        .svg-chart { width: 100%; height: 100%; overflow: visible; border-left: 1px solid #DDD; border-bottom: 1px solid #DDD; }
+        
+        path { 
+            stroke-linecap: round; 
+            stroke-linejoin: round; 
+            fill: none; 
+            vector-effect: non-scaling-stroke;
+        }
+
+        .unit { font-weight: 400; color: #999; margin-left: 4px; font-size: 0.85em; }
+
+        .big-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
+        .stat-box { border-left: 2px solid var(--brand-red); padding: 5px 20px; }
+        .stat-num { font-size: 32px; font-weight: 800; letter-spacing: -1px; }
+        .stat-label { font-size: 11px; color: #555; text-transform: uppercase; margin-top: 8px; font-weight: 600; line-height: 1.3; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div style="font-size: 28px; font-weight: 900; letter-spacing: -1px;">FRANCOISE <span style="font-weight: 200; color: #999;">INSIGHTS</span></div>
+        
+        <div class="global-legend">
+            <div class="leg-item"><div class="line-red"></div> Francoise Teams</div>
+            <div class="leg-item"><div class="line-gray"></div> Control Group</div>
+        </div>
+    </header>
+
+    <div class="section-title">01. Time Reduction (Velocity)</div>
+    <div class="grid">
+        <div class="card">
+            <span class="card-h">1.1 Lead Time: From Idea to Development <span class="unit">(days)</span></span>
+            <div class="chart-container">
+                <div class="y-axis-label"><span>20</span><span>10</span><span>0</span></div>
+                <svg class="svg-chart" viewBox="0 0 400 100" preserveAspectRatio="none">
+                    <path d="M0 10 C 50 12, 150 12, 200 8 S 350 11, 400 9" stroke="var(--comparison-gray)" stroke-width="0.75"/>
+                    <path d="M0 10 C 100 10, 150 55, 200 65 S 250 63, 300 67 S 350 64, 400 66" stroke="var(--brand-red)" stroke-width="1"/>
+                </svg>
+                <div class="x-axis-label"><span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="card-h">1.2 Review Wait Time <span class="unit">(days)</span></span>
+            <div class="chart-container">
+                <div class="y-axis-label"><span>21</span><span>14</span><span>7</span><span>0</span></div>
+                <svg class="svg-chart" viewBox="0 0 400 100" preserveAspectRatio="none">
+                    <path d="M0 25 C 50 30, 150 20, 200 25 S 350 22, 400 24" stroke="var(--comparison-gray)" stroke-width="0.75"/>
+                    <path d="M0 25 C 100 25, 150 65, 200 76 S 250 78, 300 74 S 350 77, 400 75" stroke="var(--brand-red)" stroke-width="1"/>
+                </svg>
+                <div class="x-axis-label"><span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">02. Quality & Rework (Jira Sync)</div>
+    <div class="grid">
+        <div class="card">
+            <span class="card-h">2.1 UI/UX Bugs Found in QA <span class="unit">(units per sprint)</span></span>
+            <div class="chart-container">
+                <div class="y-axis-label"><span>40</span><span>20</span><span>0</span></div>
+                <svg class="svg-chart" viewBox="0 0 400 100" preserveAspectRatio="none">
+                    <path d="M0 45 C 50 42, 150 48, 200 45 S 350 47, 400 46" stroke="var(--comparison-gray)" stroke-width="0.75"/>
+                    <path d="M0 45 C 120 45, 180 85, 250 90 S 325 93, 400 95" stroke="var(--brand-red)" stroke-width="1"/>
+                </svg>
+                <div class="x-axis-label"><span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="card-h">2.2 Design-Dev Ping-Pong <span class="unit">(iteration cycles)</span></span>
+            <div class="chart-container">
+                <div class="y-axis-label"><span>6</span><span>3</span><span>0</span></div>
+                <svg class="svg-chart" viewBox="0 0 400 100" preserveAspectRatio="none">
+                    <path d="M0 35 C 50 38, 150 32, 200 35 S 350 36, 400 35" stroke="var(--comparison-gray)" stroke-width="0.75"/>
+                    <path d="M0 35 C 100 35, 180 75, 250 85 S 350 88, 400 89" stroke="var(--brand-red)" stroke-width="1"/>
+                </svg>
+                <div class="x-axis-label"><span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">03. Adoption & Quantitative Metrics</div>
+    <div class="grid">
+        <div class="card">
+            <span class="card-h">3.1 Usage Activity <span class="unit">(launches per month)</span></span>
+            <div class="chart-container">
+                <div class="y-axis-label"><span>1.5k</span><span>750</span><span>0</span></div>
+                <svg class="svg-chart" viewBox="0 0 400 100" preserveAspectRatio="none">
+                    <path d="M0 100 C 50 100, 100 10, 200 20 S 250 25, 300 22 S 350 28, 400 27" stroke="var(--brand-red)" stroke-width="1"/>
+                </svg>
+                <div class="x-axis-label"><span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="card-h">3.2 Errors at Final Design Review <span class="unit">(units)</span></span>
+            <div class="chart-container">
+                <div class="y-axis-label"><span>30</span><span>15</span><span>0</span></div>
+                <svg class="svg-chart" viewBox="0 0 400 100" preserveAspectRatio="none">
+                    <path d="M0 25 C 50 30, 150 20, 200 25 S 350 27, 400 26" stroke="var(--comparison-gray)" stroke-width="0.75"/>
+                    <path d="M0 25 C 100 25, 180 80, 250 90 S 325 94, 400 96" stroke="var(--brand-red)" stroke-width="1"/>
+                </svg>
+                <div class="x-axis-label"><span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="big-stats">
+        <div class="card">
+            <div class="stat-box">
+                <div class="stat-num" style="color: var(--brand-red);">4,281</div>
+                <div class="stat-label">3.3 Total issues resolved by designers<br>pre-review via Francoise Insights</div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="stat-box">
+                <div class="stat-num">88.4%</div>
+                <div class="stat-label">3.4 First-Time-Right (FTR) Rate:<br>Layouts passed on the first manual review</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
