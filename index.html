@@ -6,7 +6,6 @@
     <title>Françoise — Enterprise Design Quality Gate</title>
     <style>
         /* --- 1. GLOBAL VARIABLES & RESET --- */
-
         /* Подключение Ballonest (TTF) */
         @font-face {
             font-family: 'Ballonest';
@@ -37,30 +36,35 @@
         }
 
         :root {
-    --c-black: #0F0F0F;
-    --c-grey-dark: #222222;
-    --c-grey-mid: #555555;
-    --c-grey-light: #E0E0E0;
-    --c-grey-pale: #F5F5F5;
-    
-    /* --- НАСТРОЙКА КРАСНОГО ЦВЕТА --- */
-    /* 1. Задаем чистый цифровой код (RGB) для вашего цвета #D93025 */
-    --rgb-error: 217, 48, 37; 
-    /* 2. Основная переменная теперь собирается из этих цифр */
-    --c-error: rgb(var(--rgb-error)); 
+            --c-black: #0F0F0F;
+            --c-grey-dark: #222222;
+            --c-grey-mid: #555555;
+            --c-grey-light: #E0E0E0;
+            --c-grey-pale: #F5F5F5;
+            
+            --rgb-error: 217, 48, 37; 
+            --c-error: rgb(var(--rgb-error)); 
 
-    --c-bg: #FFFFFF;
-    --c-surface: #FAFAFA;
-    
-    --font-hand: 'Ballonest', cursive;
-    --font-display: 'Optima', sans-serif;
-    --font-body: 'Switzer', 'Inter', sans-serif;
+            --c-bg: #FFFFFF;
+            --c-surface: #FAFAFA;
+            
+            --font-hand: 'Ballonest', cursive;
+            --font-display: 'Optima', sans-serif;
+            --font-body: 'Switzer', 'Inter', sans-serif;
 
-    --pad-x: 80px;
-    --gap-grid: 60px;
-}
+            --pad-x: 80px;
+            --gap-grid: 60px;
+            
+            /* --- RHYTHM SYSTEM --- */
+            --spacing-section: 160px; 
+            --spacing-block: 80px;    
+            
+            /* Animation Physics */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         button { cursor: pointer; border: none; outline: none; background: none; }
         
         body {
@@ -81,6 +85,20 @@
             position: relative;
         }
 
+        /* --- ANIMATION UTILITIES --- */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+        }
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
         /* --- ZONING --- */
         .full-width-section {
             width: 100vw;
@@ -89,7 +107,7 @@
             right: 50%;
             margin-left: -50vw;
             margin-right: -50vw;
-            padding: 140px 0;
+            padding: var(--spacing-section) 0;
         }
 
         .bg-surface {
@@ -98,7 +116,6 @@
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* Technical Zone: PALE Grid Paper */
         .mode-technical {
             background-color: #fff;
             background-image: 
@@ -108,14 +125,14 @@
             background-position: center top;
             mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
             -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-            padding-bottom: 160px;
+            padding-bottom: var(--spacing-section);
         }
 
         /* Chapter Labels (Vertical) */
         .chapter-label {
             position: absolute;
             left: 24px; 
-            top: 140px;
+            top: var(--spacing-section);
             font-family: var(--font-display);
             font-size: 12px;
             font-weight: 600;
@@ -133,23 +150,35 @@
 
         /* --- 2. HEADER --- */
         header {
-            padding: 24px 0;
+            padding: 32px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 80px;
+            margin-bottom: 80px; 
         }
-        .logo { font-family: var(--font-hand); font-size: 3rem; color: var(--c-black); line-height: 1; transform: rotate(-2deg); }
+        
+        .logo { 
+            font-family: var(--font-hand); 
+            font-size: 4.5rem; 
+            color: var(--c-error); 
+            line-height: 0.8; 
+            transform: rotate(-3deg); 
+            transition: transform 0.3s var(--ease-out-expo);
+        }
+        .logo:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
         
         .header-cta { 
-            font-size: 0.9rem; font-weight: 600; border: 1px solid var(--c-grey-light); padding: 10px 24px; border-radius: 4px; transition: all 0.2s;
+            font-size: 0.9rem; font-weight: 600; border: 1px solid var(--c-grey-light); padding: 12px 28px; border-radius: 4px; transition: all 0.2s;
         }
         .header-cta:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
 
         /* --- 3. HERO SECTION --- */
         .hero-section {
             display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--gap-grid);
-            margin-bottom: 160px; align-items: center; position: relative;
+            padding-bottom: var(--spacing-section);
+            align-items: center; position: relative;
         }
         .hero-content h1 { font-family: var(--font-display); font-size: 4.5rem; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px; }
         
@@ -162,110 +191,77 @@
         
         .btn-primary { 
             display: inline-flex; align-items: center; justify-content: center;
-            background: var(--c-black); color: #fff; padding: 18px 36px; 
-            text-decoration: none; font-weight: 500;
-            transition: all 0.2s; border-radius: 4px; 
+            background: var(--c-black); color: #fff; padding: 20px 40px; 
+            text-decoration: none; font-weight: 500; font-size: 1.05rem;
+            transition: all 0.3s var(--ease-out-expo); border-radius: 4px; 
         }
         .btn-primary:hover { 
-    background: var(--c-error); 
-    opacity: 1; /* ВАЖНО: запрещаем кнопке становиться полупрозрачной */
-    transform: translateY(-2px); 
-    box-shadow: 0 10px 20px rgba(var(--rgb-error), 0.2); 
-}
+            background: var(--c-error); 
+            transform: translateY(-4px); 
+            box-shadow: 0 15px 30px rgba(var(--rgb-error), 0.25); 
+        }
         
-.media-frame {
-    width: 65%;
-    aspect-ratio: 726 / 830; /* Явно задаем пропорции вашего видео */
-    background: var(--c-surface);
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-    border: 1px solid rgba(0,0,0,0.05);
-}
-        .video-control-btn { position: absolute; bottom: 20px; right: 20px; width: 48px; height: 48px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .video-control-btn:hover { transform: scale(1.05); }
-        .icon-play, .icon-pause { width: 14px; height: 14px; fill: var(--c-black); }
-        .icon-play { display: none; margin-left: 3px; }
+        .media-frame {
+            width: 80%; aspect-ratio: 726 / 830; background: var(--c-surface);
+            position: relative; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.8s var(--ease-out-expo);
+        }
+        .media-frame:hover { transform: scale(1.01); }
+
+        .video-control-btn { position: absolute; bottom: 20px; right: 20px; width: 56px; height: 56px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; }
+        .video-control-btn:hover { transform: scale(1.1); }
+        .icon-play, .icon-pause { width: 16px; height: 16px; fill: var(--c-black); }
+        .icon-play { display: none; margin-left: 4px; }
         .video-paused .icon-pause { display: none; } .video-paused .icon-play { display: block; }
 
-        /* --- 4. PROBLEM SECTION (EQUAL HEIGHT FIX) --- */
-        .problem-section {
-            display: grid; grid-template-columns: 45% 1fr; gap: var(--gap-grid);
-            align-items: stretch; /* Forces equal height */
-            padding-bottom: 160px;
+        /* --- ECOSYSTEM SECTION --- */
+        .ecosystem-section { 
+            display: grid; 
+            grid-template-columns: 50% 40%; 
+            gap: 10%; 
+            align-items: start; 
+        }
+        .eco-headline { font-family: var(--font-display); font-size: 3.5rem; margin-bottom: var(--spacing-block); line-height: 1.1; letter-spacing: -0.02em; }
+        
+        .feature-item { 
+            cursor: pointer; 
+            opacity: 0.4; 
+            transition: all 0.4s ease; 
+            border-left: 3px solid transparent; 
+            padding-left: 0; 
+            margin-bottom: 48px; 
+            position: relative;
+        }
+        .feature-item::after {
+            content: ''; position: absolute; left: -3px; top: 0; bottom: 0; width: 3px; 
+            background: var(--c-error); transform: scaleY(0); transform-origin: top; transition: transform 0s;
+        }
+        .feature-item.active { opacity: 1; padding-left: 32px; border-left-color: rgba(0,0,0,0.1); }
+        
+        .ecosystem-section.animation-active .feature-item.active::after {
+            transform: scaleY(1);
+            transition: transform 4s linear; 
         }
         
-        .problem-left {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .problem-head { font-family: var(--font-display); font-size: 2.8rem; line-height: 1.1; margin-bottom: 48px; letter-spacing: -0.02em; }
-        
-        .risk-list { display: flex; flex-direction: column; gap: 40px; }
-        .risk-item h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--c-error); font-weight: 400; margin-bottom: 8px; }
-        .risk-item p { font-size: 1rem; line-height: 1.5; color: var(--c-grey-mid); max-width: 90%; }
-        
-        .chart-wrapper {
-            position: relative; width: 100%; height: 100%; /* Fill available space */
-            border-left: 2px solid var(--c-black); 
-            border-bottom: 2px solid var(--c-black);
-            min-height: 0; /* Important for grid item sizing */
-        }
-        
-        /* Chart Labels */
-        .chart-axis-label { position: absolute; font-family: 'Courier New', monospace; font-size: 0.75rem; color: var(--c-grey-mid); }
-        .y-axis-top { top: 0; left: -40px; }
-        .x-axis-right { bottom: -25px; right: 0; }
-        
-        .chart-svg { width: 100%; height: 100%; overflow: visible; display: block; }
-        
-        .curve { 
-            fill: none; 
-            stroke: var(--c-black); 
-            stroke-width: 2px; 
-            stroke-dasharray: 6 6; 
-            vector-effect: non-scaling-stroke; 
-        }
-        
-        .red-zone { position: absolute; right: 0; top: 0; bottom: 0; width: 25%; background: rgba(var(--rgb-error), 0.05); border-left: 1px dashed var(--c-error); display: flex; align-items: center; justify-content: center; }
-        .zone-label { color: var(--c-error); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; transform: rotate(-90deg); letter-spacing: 1px; white-space: nowrap; }
-        .event-flag { position: absolute; top: -30px; left: -1px; background: var(--c-error); color: #fff; font-size: 0.7rem; padding: 4px 8px; font-weight: 600; border-radius: 2px; }
-
-        /* --- 5. ECOSYSTEM SECTION --- */
-.ecosystem-section { 
-    display: grid; 
-    grid-template-columns: 50% 40%; /* Изменено: широкая колонка слева, узкая справа */
-    gap: 10%; 
-    align-items: start; 
-    padding-bottom: 140px; 
-}
-        .eco-headline { font-family: var(--font-display); font-size: 3.5rem; margin-bottom: 40px; line-height: 1.1; letter-spacing: -0.02em; }
-        .feature-item { cursor: pointer; opacity: 0.4; transition: all 0.3s ease; border-left: 3px solid transparent; padding-left: 0; margin-bottom: 48px; }
-        .feature-item.active { opacity: 1; padding-left: 24px; border-left-color: var(--c-error); }
         .feature-item:hover { opacity: 0.7; } .feature-item.active:hover { opacity: 1; }
         
         .feature-num { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--c-black); margin-bottom: 8px; display: block; font-weight: 600; }
         .feature-title { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 12px; line-height: 1.2; }
         .feature-desc { font-size: 1rem; line-height: 1.6; color: var(--c-grey-mid); }
         
-        /* --- Изменение пропорций на ВЕРТИКАЛЬНЫЕ --- */
-.visual-stage { 
-    position: sticky; 
-    top: 100px; 
-    width: 70%;
-    /* Ставим вертикальные пропорции (ширина / высота) */
-    /* 3/4 = 0.75 (высокий прямоугольник) */
-    /* Можно также попробовать 4/5 или 1/1 (квадрат), если 3/4 покажется слишком узким */
-    aspect-ratio: 3/4; 
-    background: #fff; 
-    border-radius: 8px; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-    overflow: hidden; 
-    border: 1px solid rgba(0,0,0,0.05); 
-}
+        .visual-stage { 
+            position: sticky; 
+            top: 100px; 
+            width: 100%; 
+            aspect-ratio: 3/4; 
+            background: #FAFAFA; 
+            border-radius: 8px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06); 
+            overflow: hidden; 
+            border: 1px solid rgba(0,0,0,0.05); 
+        }
         .nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; opacity: 0; transition: opacity 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .visual-stage:hover .nav-arrow { opacity: 1; }
         .nav-prev { left: 16px; } .nav-next { right: 16px; } .nav-arrow svg { width: 12px; height: 12px; fill: #000; }
@@ -273,51 +269,103 @@
 
         .feature-gallery { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: opacity 0.5s ease; }
         .feature-gallery.active { opacity: 1; visibility: visible; }
-        .inner-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s ease; object-fit: cover; }
+        
+        .inner-slide { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            opacity: 0; 
+            transition: opacity 0.6s ease; 
+            object-fit: contain;
+            padding: 40px;
+        }
         .inner-slide.current { opacity: 1; z-index: 2; }
+        
         .terminal-box { width: 100%; height: 100%; background: #1E1E1E; padding: 30px; font-family: 'Courier New', monospace; color: #D4D4D4; font-size: 0.9rem; line-height: 1.6; }
         .cmd-line { display: block; margin-bottom: 8px; }
         .cmd-green { color: #27C93F; } .cmd-red { color: #FF5F56; font-weight: bold; } .cmd-blue { color: #569CD6; }
-@keyframes blink { 50% { opacity: 0; } }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        /* --- 6. IMPORT SECTION --- */
-        .import-section { padding-bottom: 140px; display: grid; grid-template-columns: 40% 50%; gap: 10%; align-items: center; }
-        .import-headline { font-family: var(--font-display); font-size: 3rem; line-height: 1.1; margin-bottom: 24px; color: var(--c-black); }
-        .import-subhead { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); max-width: 90%; margin-bottom: 48px; }
-        .static-feature-list { display: flex; flex-direction: column; gap: 48px; }
-        .static-item { display: flex; flex-direction: column; gap: 8px; }
-        .static-num { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--c-error); font-weight: 600; margin-bottom: 4px; display: block; }
-        .static-title { font-family: var(--font-display); font-size: 1.5rem; color: var(--c-black); margin-bottom: 4px; }
-        .static-desc { font-size: 1rem; line-height: 1.5; color: var(--c-grey-mid); }
-        .visual-box { width: 100%; background: #fff; border: 1px solid rgba(0,0,0,0.05); padding: 20px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        .import-image { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        /* --- NEW MERGED SECTION (Validation Scope) --- */
+        .validation-scope-section {
+            padding-top: var(--spacing-section);
+            padding-bottom: var(--spacing-section);
+        }
+        .scope-header {
+            max-width: 800px;
+            margin-bottom: var(--spacing-block);
+        }
+        .scope-headline {
+            font-family: var(--font-display); 
+            font-size: 3.5rem; 
+            line-height: 1.1; 
+            margin-bottom: 24px; 
+            color: var(--c-black);
+        }
+        .scope-sub { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); }
 
-        /* --- 7. BRAND VOICE SECTION --- */
-        .brand-section { padding-bottom: 140px; display: grid; grid-template-columns: 45% 45%; gap: 10%; align-items: start; }
-        .brand-content { display: flex; flex-direction: column; gap: 56px; order: 2; }
-        .brand-headline { font-family: var(--font-display); font-size: 3.5rem; line-height: 1.1; margin-bottom: 24px; color: var(--c-black); }
-        .brand-subhead { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); }
-        .logic-list { display: flex; flex-direction: column; gap: 48px; }
-        .logic-item { border-left: 2px solid var(--c-grey-light); padding-left: 24px; }
-        .logic-example { margin-top: 12px; padding: 16px; background: #fff; font-size: 0.9rem; color: var(--c-grey-dark); line-height: 1.5; font-family: 'Courier New', monospace; border: 1px solid #eee; border-radius: 4px; }
-        .ex-label { font-weight: 600; font-size: 0.75rem; text-transform: uppercase; color: var(--c-black); display: block; margin-bottom: 4px; }
-        .brand-visual-wrapper { order: 1; position: relative; width: 100%; height: 600px; background: #F5F5F5; border: 1px solid rgba(0,0,0,0.05); overflow: hidden; border-radius: 8px; }
-        .doc-scroll-image { width: 100%; height: auto; display: block; animation: scrollDoc 20s linear infinite alternate; }
-        @keyframes scrollDoc { 0% { transform: translateY(0); } 100% { transform: translateY(calc(-100% + 600px)); } }
+        /* SCOPE GRID */
+        .scope-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .scope-grid .scope-col:hover { transform: translateY(-10px); }
 
-        /* --- 8. ACCESSIBILITY SECTION --- */
-        .a11y-section { padding-bottom: 0; } 
-        .a11y-header { max-width: 800px; margin-bottom: 60px; }
-        .a11y-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 60px; }
-        .col-title { font-family: var(--font-display); font-size: 1.75rem; color: var(--c-black); margin-bottom: 24px; }
-        .a11y-item { display: flex; flex-direction: column; gap: 4px; margin-bottom: 24px; }
-        .item-label { font-weight: 600; font-size: 0.95rem; color: var(--c-black); display: flex; align-items: center; gap: 8px; }
-        .item-label::before { content: ''; display: block; width: 4px; height: 4px; background: var(--c-error); border-radius: 50%; }
-        .item-desc { font-size: 0.9rem; line-height: 1.4; color: var(--c-grey-mid); padding-left: 12px; }
-
-        /* --- 9. IMPACT SECTION --- */
+        .scope-col {
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s var(--ease-out-expo);
+            cursor: default;
+        }
         
-        .impact-section { padding-top: 160px; padding-bottom: 160px; display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: center; }
+        .scope-img-box {
+            width: 100%;
+            height: 240px;
+            background: #F9F9F9;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 6px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+        .scope-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.8s var(--ease-out-expo);
+        }
+        .scope-col:hover .scope-img { transform: scale(1.08); }
+        
+        .scope-num {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--c-error);
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .scope-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .scope-list { display: flex; flex-direction: column; gap: 24px; }
+        .scope-item { padding-left: 16px; border-left: 2px solid var(--c-grey-light); }
+        .scope-item-title { font-weight: 600; font-size: 0.95rem; color: var(--c-black); margin-bottom: 6px; display: block; }
+        .scope-item-desc { font-size: 0.9rem; color: var(--c-grey-mid); line-height: 1.5; }
+
+
+        /* --- IMPACT SECTION --- */
+        .impact-section { 
+            display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: center; 
+        }
         .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding-right: 40px; border-right: 1px solid var(--c-grey-light); }
         .impact-headline { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); margin-bottom: 60px; grid-column: 1/-1; }
         
@@ -338,9 +386,9 @@
         .savings-label { font-weight: 700; font-size: 1.25rem; color: var(--c-black); margin-bottom: 8px; }
         .savings-sub { font-size: 1rem; color: var(--c-grey-mid); }
 
-        /* --- 10. SECURITY SECTION --- */
+        /* --- SECURITY SECTION --- */
         .tech-specs-section { padding-bottom: 0; background: transparent; color: var(--c-black); position: relative; }
-        .specs-header { margin-bottom: 80px; max-width: 800px; }
+        .specs-header { margin-bottom: var(--spacing-block); max-width: 800px; }
         .specs-headline { font-family: var(--font-display); font-size: 3.5rem; line-height: 1.1; margin-bottom: 24px; }
         .specs-sub { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); }
         .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10%; padding-top: 60px; }
@@ -353,62 +401,15 @@
         .compliance-badges { display: flex; gap: 24px; margin-top: 16px; opacity: 0.5; }
         .badge-img { height: 28px; filter: grayscale(100%); }
 
-        /* --- PARTNER SECTION --- */
-        .partner-section { padding-top: 160px; padding-bottom: 160px; }
-        .offer-box { 
-            border: 1px solid var(--c-grey-light); 
-            padding: 60px; 
-            position: relative; 
-            background: #FFFFFF; 
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.05); /* Soft Shadow */
-            transition: all 0.3s ease;
-        }
-        .offer-box:hover { 
-            border-color: rgba(var(--rgb-error), 0.3);
-            box-shadow: 0 20px 60px rgba(var(--rgb-error), 0.08); /* Red tint on hover */
-            transform: translateY(-2px);
-        }
-
-        /* Tape Effect (RED) */
-        .tape-effect {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%) rotate(1deg);
-            width: 140px;
-            height: 34px;
-            background: rgba(217, 48, 37, 0.5); /* RED SEMI-TRANSPARENT */
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            backdrop-filter: blur(2px);
-            z-index: 10;
-        }
-        
-        .offer-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 60px; padding-bottom: 40px; border-bottom: 1px solid var(--c-grey-light); }
-        .offer-headline { font-family: var(--font-display); font-size: 3rem; line-height: 1.1; color: var(--c-black); }
-        .offer-desc { font-size: 1.125rem; line-height: 1.5; color: var(--c-grey-dark); margin-bottom: 24px; }
-        
-        .status-row { display: flex; gap: 40px; margin-top: 20px; }
-        .status-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--c-error); font-weight: 700; display: block; margin-bottom: 4px; }
-        .status-val { font-size: 1.1rem; font-weight: 600; }
-        .slots-visual { display: flex; gap: 4px; margin-top: 6px; }
-        .slot { width: 10px; height: 10px; background: #eee; border-radius: 2px; }
-        .slot.taken { background: var(--c-black); }
-
-        .deal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-        .deal-col { padding-left: 24px; border-left: 2px solid var(--c-grey-light); }
-        .deal-col.accent { border-left-color: var(--c-error); }
-        .deal-label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--c-grey-mid); margin-bottom: 8px; display: block; }
-        .deal-title { font-family: var(--font-display); font-size: 2.2rem; color: var(--c-black); margin-bottom: 8px; }
-        .deal-desc { font-size: 1rem; line-height: 1.5; color: var(--c-grey-mid); }
-
         /* --- PHASES SECTION --- */
-        .phases-section { padding-bottom: 160px; overflow-x: hidden; }
-        .phases-headline { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); margin-bottom: 80px; }
+        .phases-section { 
+            overflow-x: hidden; 
+        }
+        .phases-headline { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); margin-bottom: var(--spacing-block); }
         .phases-flow-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
         
-        .phase-card { background: #FFFFFF; border: 1px solid var(--c-grey-light); padding: 40px; display: flex; flex-direction: column; position: relative; transition: all 0.3s; border-radius: 4px; min-height: 480px; }
-        .phase-card:hover { border-color: var(--c-black); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .phase-card { background: #FFFFFF; border: 1px solid var(--c-grey-light); padding: 40px; display: flex; flex-direction: column; position: relative; transition: all 0.4s var(--ease-out-expo); border-radius: 4px; min-height: 480px; }
+        .phase-card:hover { border-color: var(--c-black); transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
         
         .phase-num { 
             font-family: var(--font-hand); 
@@ -431,19 +432,19 @@
         .price-val.accent { color: var(--c-error); }
         .price-strike { text-decoration: line-through; color: #ccc; font-size: 1rem; margin-left: 10px; }
 
-        /* --- CTA SECTION (Button Right) --- */
+        /* --- CTA SECTION --- */
         .cta-section { 
-            padding-bottom: 100px; 
+            padding-top: var(--spacing-section); /* ADDED PADDING HERE */
+            padding-bottom: var(--spacing-section);
             display: grid; 
             grid-template-columns: 1fr 1fr; 
             gap: 80px; 
             border-bottom: 1px solid var(--c-grey-light); 
-            margin-bottom: 60px; 
-            align-items: flex-end; /* Align to bottom */
+            margin-bottom: 80px; 
+            align-items: flex-end;
         }
         .cta-headline { font-family: var(--font-display); font-size: 4rem; line-height: 1.05; margin-bottom: 32px; }
         
-        /* Flex column for Right side */
         .cta-right-col {
             display: flex;
             flex-direction: column;
@@ -453,45 +454,24 @@
         .cta-desc { font-size: 1.25rem; line-height: 1.5; color: var(--c-grey-mid); margin-bottom: 48px; max-width: 480px; }
         
         /* --- SIMPLE FOOTER --- */
-        .simple-footer { padding-bottom: 40px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--c-grey-mid); font-size: 0.9rem; }
-        /* Increased Footer Logo Size */
-        .footer-logo { font-family: var(--font-hand); font-size: 2.5rem; color: var(--c-black); display: block; margin-bottom: 12px; transform: rotate(-2deg); text-decoration: none; }
+        .simple-footer { padding-bottom: 60px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--c-grey-mid); font-size: 0.9rem; }
+        .footer-logo { font-family: var(--font-hand); font-size: 5rem; color: var(--c-error); display: block; margin-bottom: 12px; transform: rotate(-2deg); text-decoration: none; transition: transform 0.3s; }
+        .footer-logo:hover { transform: rotate(0deg) scale(1.02); }
         .footer-contacts a { color: var(--c-black); border-bottom: 1px solid rgba(0,0,0,0.2); margin-left: 20px; }
         .footer-contacts a:hover { border-bottom-color: var(--c-black); }
-/* --- Адаптация для ноутбуков (Business Impact) --- */
-@media (max-width: 1360px) {
-    .impact-section {
-        grid-template-columns: 1fr; 
-        gap: 60px;
-    }
-    .metrics-grid {
-        padding-right: 0;
-        border-right: none;
-        border-bottom: 1px solid var(--c-grey-light);
-        padding-bottom: 60px;
-    }
-    .total-savings-block {
-        /* ВАЖНО: justify-content: flex-start прижимает всё влево */
-        justify-content: flex-start; 
-        align-items: center; /* Центрируем элементы по вертикальной оси друг относительно друга */
-        text-align: left;
-        flex-direction: row;
-        gap: 40px;
-    }
-    .savings-val {
-        margin-bottom: 0;
-        font-size: 4rem;
-        /* Убираем лишние отступы, если они были */
-        line-height: 1;
-    }
-}
-        /* Mobile */
+
+        /* Media Queries */
+        @media (max-width: 1360px) {
+            .impact-section { grid-template-columns: 1fr; gap: 60px; }
+            .metrics-grid { padding-right: 0; border-right: none; border-bottom: 1px solid var(--c-grey-light); padding-bottom: 60px; }
+            .total-savings-block { justify-content: flex-start; align-items: center; text-align: left; flex-direction: row; gap: 40px; }
+            .savings-val { margin-bottom: 0; font-size: 4rem; line-height: 1; }
+        }
         @media (max-width: 900px) {
-            :root { --pad-x: 24px; --gap-grid: 40px; }
-            .hero-section, .problem-section, .ecosystem-section, .import-section, .brand-section, .impact-section, .specs-grid, .cta-section, .deal-grid, .offer-header, .simple-footer { grid-template-columns: 1fr; gap: 40px; }
+            :root { --pad-x: 24px; --gap-grid: 40px; --spacing-section: 100px; }
+            .hero-section, .ecosystem-section, .scope-grid, .specs-grid, .cta-section, .simple-footer { grid-template-columns: 1fr; gap: 40px; }
             .metrics-grid { grid-template-columns: 1fr; border-right: none; }
             .phases-flow-container { grid-template-columns: 1fr; }
-            .chart-wrapper { display: none; } 
             .header-cta { display: none; }
             .simple-footer { flex-direction: column; align-items: flex-start; gap: 20px; }
             .footer-contacts a { margin-left: 0; margin-right: 20px; }
@@ -502,18 +482,20 @@
 
 <div class="page-container">
     
-    <header>
+    <header class="reveal-up">
         <a href="#" class="logo">Françoise</a>
         <a href="https://meet.francoise.design/" class="header-cta">Book Demo</a>
     </header>
 
     <section class="hero-section">
         <div class="hero-content">
-            <span class="hero-eyebrow">Validated by Tier-1 Ecommerce</span>
-            <h1>Enterprise<br>Design Quality<br>Gate</h1>
-            <p class="hero-desc">Françoise automatically validates designs against complex System Logic and Regulatory Requirements (EAA, ADA). We block incorrect designs at the CI/CD level before they become technical debt.</p>
+            <span class="hero-eyebrow reveal-up">Validated by Tier-1 Ecommerce</span>
+            <h1 class="reveal-up delay-100">Enterprise<br>Design Quality<br>Gate</h1>
+            <p class="hero-desc reveal-up delay-200">Françoise automatically validates designs against complex System Logic and Regulatory Requirements (EAA, ADA). We block incorrect designs at the CI/CD level before they become technical debt.</p>
             
-            <a href="https://meet.francoise.design/" class="btn-primary">Book Discovery Call</a>
+            <div class="reveal-up delay-300">
+                <a href="https://meet.francoise.design/" class="btn-primary">Book Discovery Call</a>
+            </div>
         </div>
         
         <div class="media-frame" id="heroVideoFrame">
@@ -527,235 +509,199 @@
         </div>
     </section>
 
-    <section class="problem-section">
-        <div class="problem-left">
-            <h2 class="problem-head">Design is the only unverified step in your SDLC</h2>
-            <div class="risk-list">
-                <div class="risk-item">
-                    <h3>Financial Risk</h3>
-                    <p>Since June 2025, EAA enforcement means fines up to €100,000 per violation. Manual audits miss 40% of WCAG 2.1 errors.</p>
-                </div>
-                <div class="risk-item">
-                    <h3>The 1-10-100 Rule</h3>
-                    <p>Developers spend 30% of their sprint fixing cheap design errors at expensive rates.</p>
-                </div>
-                <div class="risk-item">
-                    <h3>System Erosion</h3>
-                    <p>Without automated enforcement, your Design System is just documentation in Confluence that nobody reads.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="chart-wrapper" style="height: 450px; align-self: center;">
-            <div class="chart-axis-label y-axis-top">Risk</div>
-            <div class="chart-axis-label x-axis-right">Volume</div>
-            
-            <div class="red-zone">
-                <div class="event-flag">June 2025 (EAA)</div>
-                <div class="zone-label">LIABILITY GAP</div>
-            </div>
+</div> 
 
-            <svg class="chart-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path class="curve" d="M0,100 C50,100 60,80 100,0" /></svg>
-        </div>
-    </section>
-
-</div> <section class="full-width-section bg-surface">
-    <div class="chapter-label">02. Platform</div>
+<section class="full-width-section bg-surface">
+    <div class="chapter-label">01. Platform</div>
     <div class="page-container">
 
-        <section class="ecosystem-section">
-    <div class="visual-stage">
-        <button class="nav-arrow nav-prev" onclick="manualChangeSlide(-1)">
-            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-        </button>
-        <button class="nav-arrow nav-next" onclick="manualChangeSlide(1)">
-            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-        </button>
-        
-        <div class="feature-gallery active">
-             <img class="inner-slide current" src="plagin1.png" alt="Plugin">
-             <img class="inner-slide" src="plagin2.png" alt="Plugin Error">
-             <img class="inner-slide" src="plagin3.png" alt="Plugin Error">
-        </div>
-        
-        <div class="feature-gallery">
-             <img class="inner-slide current" src="monitor1.jpg" alt="Dash">
-             <img class="inner-slide" src="monitor2.jpg" alt="Report">
-        </div>
-        
-        <div class="feature-gallery dark-mode">
-    <div class="inner-slide current terminal-box">
-        <span class="cmd-line">
-            <span class="cmd-blue">➜</span> <span class="cmd-green">admin@francoise</span>:~/project$ francoise audit --ticket=PROJ-824
-        </span>
-        <br>
-        
-        <span class="cmd-line" style="opacity:0.6">> Connecting to Figma API... <span class="cmd-green">OK</span></span>
-        <span class="cmd-line" style="opacity:0.6">> Fetching "Checkout_Flow_v2" (12 frames)... <span class="cmd-green">OK</span></span>
-        <span class="cmd-line" style="opacity:0.6">> Running WCAG 2.1 AA checks...</span>
-        <br>
+        <section class="ecosystem-section reveal-up" id="ecosystemSection" onmouseenter="pauseAutoPlay()" onmouseleave="startAutoPlay()">
+            <div class="visual-stage">
+                <button class="nav-arrow nav-prev" onclick="manualChangeSlide(-1)">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </button>
+                <button class="nav-arrow nav-next" onclick="manualChangeSlide(1)">
+                    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                </button>
+                
+                <div class="feature-gallery active">
+                     <img class="inner-slide current" src="plagin1.jpg" alt="Plugin Interface">
+                     <img class="inner-slide" src="plagin2.jpg" alt="Plugin Notification">
+                </div>
+                
+                <div class="feature-gallery">
+                     <img class="inner-slide current" src="monitor1.jpg" alt="Workflow Velocity">
+                     <img class="inner-slide" src="monitor2.jpg" alt="Quality Velocity">
+                </div>
+                
+                <div class="feature-gallery dark-mode">
+                    <div class="inner-slide current terminal-box" style="padding:30px;">
+                        <span class="cmd-line">
+                            <span class="cmd-blue">➜</span> <span class="cmd-green">admin@francoise</span>:~/project$ francoise audit --ticket=PROJ-824
+                        </span>
+                        <br>
+                        
+                        <span class="cmd-line" style="opacity:0.6">> Connecting to Figma API... <span class="cmd-green">OK</span></span>
+                        <span class="cmd-line" style="opacity:0.6">> Fetching "Checkout_Flow_v2" (12 frames)... <span class="cmd-green">OK</span></span>
+                        <span class="cmd-line" style="opacity:0.6">> Running WCAG 2.1 AA checks...</span>
+                        <br>
 
-        <span class="cmd-line"><span class="cmd-red">[ERROR]</span> A11Y Violation found:</span>
-        <span class="cmd-line" style="padding-left: 24px; opacity: 0.8; font-size: 0.85em;">
-            Asset: "Button/Primary/Disabled"<br>
-            Property: Text Contrast<br>
-            Value: 2.1:1 (Required 3:1)
-        </span>
-        <br>
+                        <span class="cmd-line"><span class="cmd-red">[ERROR]</span> A11Y Violation found:</span>
+                        <span class="cmd-line" style="padding-left: 24px; opacity: 0.8; font-size: 0.85em;">
+                            Asset: "Button/Primary/Disabled"<br>
+                            Property: Text Contrast<br>
+                            Value: 2.1:1 (Required 3:1)
+                        </span>
+                        <br>
 
-        <span class="cmd-line"><span class="cmd-red">[ERROR]</span> System Logic Violation:</span>
-        <span class="cmd-line" style="padding-left: 24px; opacity: 0.8; font-size: 0.85em;">
-            Asset: "Modal_Window"<br>
-            Rule: Deprecated Component Usage<br>
-            Found: "Input_v1" (Use "Input_v2" instead)
-        </span>
-        <br>
+                        <span class="cmd-line"><span class="cmd-red">[ERROR]</span> System Logic Violation:</span>
+                        <span class="cmd-line" style="padding-left: 24px; opacity: 0.8; font-size: 0.85em;">
+                            Asset: "Modal_Window"<br>
+                            Rule: Deprecated Component Usage<br>
+                            Found: "Input_v1" (Use "Input_v2" instead)
+                        </span>
+                        <br>
 
-        <span class="cmd-line">---------------------------------------</span>
-        <span class="cmd-line">BUILD: <span class="cmd-red">FAILED</span> (2 critical errors)</span>
-        <span class="cmd-line">JIRA: Transition to "Ready for Dev" <span class="cmd-red">BLOCKED</span></span>
-        <span class="cmd-line"><span class="cmd-blue">➜</span> <span class="cmd-green">admin@francoise</span>:~/project$ <span style="animation: blink 1s infinite">_</span></span>
-    </div>
-</div>
-    </div>
-
-    <div class="features-list">
-        <h2 class="eco-headline">The Ecosystem</h2>
-        <div class="feature-item active" onmouseover="setEcoSlide(0)">
-            <span class="feature-num">01. In-Context Validation</span>
-            <h3 class="feature-title">Figma Plugin</h3>
-            <p class="feature-desc">Errors appear as native comments directly on the canvas. No context switching—designers fix issues where they work.</p>
-        </div>
-        <div class="feature-item" onmouseover="setEcoSlide(1)">
-            <span class="feature-num">02. DesignOps Dashboard</span>
-            <h3 class="feature-title">Health Monitor</h3>
-            <p class="feature-desc">A command center for Leads. Monitor system health, manage global rules, and visualize technical debt reduction.</p>
-        </div>
-        <div class="feature-item" onmouseover="setEcoSlide(2)">
-            <span class="feature-num">03. Automated Quality Gate</span>
-            <h3 class="feature-title">Jira Integration</h3>
-            <p class="feature-desc">Handover tickets are automatically blocked until the design passes validation. We stop technical debt before it reaches Dev.</p>
-        </div>
-    </div>
-</section>
-
-        <section class="import-section">
-            <div class="import-content">
-                <h2 class="import-headline">Importing your DS<br>from Figma</h2>
-                <p class="import-subhead">Our specialists map your existing Figma libraries without requiring a prior refactor.</p>
-                <div class="static-feature-list">
-                    <div class="static-item">
-                        <span class="static-num">01_SEMANTIC</span>
-                        <h3 class="static-title">Semantic Checks</h3>
-                        <p class="static-desc">We go beyond token binding. Françoise validates semantic appropriateness (e.g., ensuring Display fonts are never used for Legal text).</p>
-                    </div>
-                    <div class="static-item">
-                        <span class="static-num">02_HYBRID</span>
-                        <h3 class="static-title">Hybrid Support</h3>
-                        <p class="static-desc">We support Variables, Styles, and Legacy components simultaneously, adapting to your current maturity level.</p>
+                        <span class="cmd-line">---------------------------------------</span>
+                        <span class="cmd-line">BUILD: <span class="cmd-red">FAILED</span> (2 critical errors)</span>
+                        <span class="cmd-line">JIRA: Transition to "Ready for Dev" <span class="cmd-red">BLOCKED</span></span>
+                        <span class="cmd-line"><span class="cmd-blue">➜</span> <span class="cmd-green">admin@francoise</span>:~/project$ <span style="animation: blink 1s infinite">_</span></span>
                     </div>
                 </div>
             </div>
-            <div class="visual-box">
-                <img class="import-image" src="ds.png" alt="Tokens">
-            </div>
-        </section>
 
-        <section class="brand-section">
-            <div class="brand-content">
-                <div class="brand-header">
-                    <h2 class="brand-headline">The Brand Voice</h2>
-                    <p class="brand-subhead">Françoise incorporates your written documentation to validate logic that cannot be defined by tokens alone.</p>
+            <div class="features-list">
+                <h2 class="eco-headline">The Ecosystem</h2>
+                <div class="feature-item active" onmouseover="setEcoSlide(0)">
+                    <span class="feature-num">01. In-Context Validation</span>
+                    <h3 class="feature-title">Figma Plugin</h3>
+                    <p class="feature-desc">Errors appear as native comments directly on the canvas. No context switching—designers fix issues where they work.</p>
                 </div>
-                <div class="logic-list">
-                    <div class="logic-item">
-                        <span class="ex-label">01. Constraints</span>
-                        <h3 class="feature-title">Architectural Constraints</h3>
-                        <p class="feature-desc">Automated enforcement of architectural constraints described in your guidelines.</p>
-                        <div class="logic-example"><span class="ex-label">Example</span>Detecting multiple Primary buttons on a single screen to preserve visual hierarchy.</div>
-                    </div>
-                    <div class="logic-item">
-                        <span class="ex-label">02. Logic</span>
-                        <h3 class="feature-title">State-Dependent Rules</h3>
-                        <p class="feature-desc">Validation of state-dependent rules and component combinations.</p>
-                        <div class="logic-example"><span class="ex-label">Example</span>Ensuring that input fields in an Error state are always accompanied by a helper text message.</div>
-                    </div>
+                <div class="feature-item" onmouseover="setEcoSlide(1)">
+                    <span class="feature-num">02. DesignOps Dashboard</span>
+                    <h3 class="feature-title">Health Monitor</h3>
+                    <p class="feature-desc">A command center for Leads. Monitor system health, manage global rules, and visualize technical debt reduction.</p>
                 </div>
-            </div>
-            <div class="brand-visual-wrapper">
-                <img class="doc-scroll-image" src="brand.png" alt="Docs">
-            </div>
-        </section>
-
-        <section class="a11y-section">
-            <div class="a11y-header">
-                <h2 class="import-headline">Accessibility Compliance</h2>
-                <p class="import-subhead">We validate designs against WCAG 2.1 AA standards to ensure EAA readiness.</p>
-            </div>
-            <div class="a11y-grid">
-                <div class="a11y-col">
-                    <h3 class="col-title">Visual & Layout</h3>
-                    <div class="a11y-item"><span class="item-label">Contrast Ratios</span><p class="item-desc">Text and non-text UI components.</p></div>
-                    <div class="a11y-item"><span class="item-label">Target Size</span><p class="item-desc">Ensuring minimum touch areas (e.g., 44x44px).</p></div>
-                    <div class="a11y-item"><span class="item-label">Responsive Reflow</span><p class="item-desc">Verification of layout adaptability for mobile viewports.</p></div>
-                </div>
-                <div class="a11y-col">
-                    <h3 class="col-title">Interaction & States</h3>
-                    <div class="a11y-item"><span class="item-label">Keyboard Access</span><p class="item-desc">Logic for sequential navigation.</p></div>
-                    <div class="a11y-item"><span class="item-label">Focus Indicators</span><p class="item-desc">Visibility of focus states for keyboard navigation.</p></div>
-                    <div class="a11y-item"><span class="item-label">Input Logic</span><p class="item-desc">Presence of labels, error identification, and instructions.</p></div>
-                </div>
-                <div class="a11y-col">
-                    <h3 class="col-title">Structure & Typography</h3>
-                    <div class="a11y-item"><span class="item-label">Heading Hierarchy</span><p class="item-desc">Correct nesting of H1-H6 tags.</p></div>
-                    <div class="a11y-item"><span class="item-label">Text Properties</span><p class="item-desc">Line height, spacing, and resize capabilities.</p></div>
-                    <div class="a11y-item"><span class="item-label">Link Purpose</span><p class="item-desc">Contextual clarity of navigation elements.</p></div>
+                <div class="feature-item" onmouseover="setEcoSlide(2)">
+                    <span class="feature-num">03. Automated Quality Gate</span>
+                    <h3 class="feature-title">Jira Integration</h3>
+                    <p class="feature-desc">Handover tickets are automatically blocked until the design passes validation. We stop technical debt before it reaches Dev.</p>
                 </div>
             </div>
         </section>
 
     </div>
 </section>
+
 <div class="page-container">
     
-    <section class="impact-section">
-        <div class="metrics-grid">
-            <h2 class="impact-headline">The Business Impact</h2>
-            
-            <div class="metric-item">
-                <span class="metric-val">– 60%</span>
-                <span class="metric-role">Design Leadership</span>
-                <span class="metric-desc">reduction in mentoring overhead for leads.</span>
-            </div>
-
-            <div class="metric-item">
-                <span class="metric-val">– 80%</span>
-                <span class="metric-role">Frontend Engineering</span>
-                <span class="metric-desc">reduction in UI sprint blockers.</span>
-            </div>
-
-            <div class="metric-item">
-                <span class="metric-val">90%</span>
-                <span class="metric-role">QA & Compliance</span>
-                <span class="metric-desc">automated a11y coverage.</span>
-            </div>
+    <section class="validation-scope-section">
+        <div class="scope-header reveal-up">
+            <h2 class="scope-headline">Three Layers of Validation</h2>
+            <p class="scope-sub">Françoise unifies technical correctness, business logic, and legal compliance into a single quality gate.</p>
         </div>
 
-        <div class="total-savings-block">
-            <span class="savings-val">$60,000</span>
-            <h3 class="savings-label">Total Annual Savings</h3>
-            <p class="savings-sub">Recovers capital for a standard 10-person Agile Squad.</p>
+        <div class="scope-grid reveal-up delay-100">
+            
+            <div class="scope-col">
+                <div class="scope-img-box">
+                    <img src="ds.jpg" class="scope-img" alt="Design Tokens">
+                </div>
+                <span class="scope-num">01_FOUNDATION</span>
+                <h3 class="scope-title">System<br>Semantics</h3>
+                <div class="scope-list">
+                    <div class="scope-item">
+                        <span class="scope-item-title">Hybrid Support</span>
+                        <p class="scope-item-desc">Works with Variables, Styles, and Legacy components simultaneously. No prior refactoring needed.</p>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-item-title">Semantic Checks</span>
+                        <p class="scope-item-desc">Validates token usage appropriateness (e.g. ensuring Display fonts are never used for Legal text).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scope-col">
+                <div class="scope-img-box">
+                    <img src="brand.jpg" class="scope-img" alt="Brand Rules">
+                </div>
+                <span class="scope-num">02_LOGIC</span>
+                <h3 class="scope-title">Brand<br>Constraints</h3>
+                <div class="scope-list">
+                    <div class="scope-item">
+                        <span class="scope-item-title">State-Dependent Rules</span>
+                        <p class="scope-item-desc">Ensures complex UI states are valid (e.g. "Error inputs must have helper text").</p>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-item-title">Architectural Limits</span>
+                        <p class="scope-item-desc">Enforces hierarchy rules, such as limiting the number of Primary buttons per screen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scope-col">
+                <div class="scope-img-box">
+                    <img src="plagin3.jpg" class="scope-img" alt="A11y Error Example">
+                </div>
+                <span class="scope-num">03_LEGAL</span>
+                <h3 class="scope-title">Accessibility<br>Gate</h3>
+                <div class="scope-list">
+                    <div class="scope-item">
+                        <span class="scope-item-title">WCAG 2.1 AA</span>
+                        <p class="scope-item-desc">Automated checks for contrast ratios, touch target sizes (44px+), and heading hierarchy.</p>
+                    </div>
+                    <div class="scope-item">
+                        <span class="scope-item-title">EAA Readiness</span>
+                        <p class="scope-item-desc">Protects against fines by validating Focus indicators and Input logic before dev handover.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
 </div>
+
+<section class="full-width-section bg-surface">
+    <div class="page-container">
+        <section class="impact-section reveal-up">
+            <div class="metrics-grid">
+                <h2 class="impact-headline">The Business Impact</h2>
+                
+                <div class="metric-item">
+                    <span class="metric-val">– 60%</span>
+                    <span class="metric-role">Design Leadership</span>
+                    <span class="metric-desc">reduction in mentoring overhead for leads.</span>
+                </div>
+
+                <div class="metric-item">
+                    <span class="metric-val">– 80%</span>
+                    <span class="metric-role">Frontend Engineering</span>
+                    <span class="metric-desc">reduction in UI sprint blockers.</span>
+                </div>
+
+                <div class="metric-item">
+                    <span class="metric-val">90%</span>
+                    <span class="metric-role">QA & Compliance</span>
+                    <span class="metric-desc">automated a11y coverage.</span>
+                </div>
+            </div>
+
+            <div class="total-savings-block">
+                <span class="savings-val">$60,000</span>
+                <h3 class="savings-label">Total Annual Savings</h3>
+                <p class="savings-sub">Recovers capital for a standard 10-person Agile Squad.</p>
+            </div>
+        </section>
+    </div>
+</section>
 
 
 <section class="full-width-section mode-technical">
-    <div class="chapter-label">04. Specs</div>
+    <div class="chapter-label">02. Specs</div>
     <div class="page-container">
 
-        <section class="tech-specs-section">
+        <section class="tech-specs-section reveal-up">
             <div class="specs-header">
                 <h2 class="specs-headline">Enterprise Security</h2>
                 <p class="specs-sub">Built for regulated industries. Your IP never leaves your control perimeter.</p>
@@ -768,15 +714,15 @@
                     <div class="spec-list">
                         <div class="spec-item">
                             <span class="spec-label">Zero-Retention Processing</span>
-                            <p class="spec-desc">We process design files in ephemeral memory. Once the validation is complete, all data is immediately wiped. We store logs, not designs.</p>
+                            <p class="spec-desc">We process design files in ephemeral memory. Once the validation is complete, all data is immediately wiped.</p>
                         </div>
                         <div class="spec-item">
                             <span class="spec-label">No AI Training</span>
-                            <p class="spec-desc">We guarantee contractually that your Intellectual Property is never used to train our models or shared with third parties.</p>
+                            <p class="spec-desc">We guarantee contractually that your Intellectual Property is never used to train our models.</p>
                         </div>
                         <div class="spec-item">
                             <span class="spec-label">Regional Data Residency</span>
-                            <p class="spec-desc">Option to pin data processing to specific regions (EU Frankfurt / US Virginia) to comply with GDPR and local regulations.</p>
+                            <p class="spec-desc">Option to pin data processing to specific regions (EU Frankfurt / US Virginia).</p>
                         </div>
                     </div>
                 </div>
@@ -786,11 +732,11 @@
                     <div class="spec-list">
                         <div class="spec-item">
                             <span class="spec-label">Private Cloud / On-Premises</span>
-                            <p class="spec-desc">Deploy Françoise within your own Virtual Private Cloud (VPC) or fully air-gapped environment. Complete network isolation available.</p>
+                            <p class="spec-desc">Deploy Françoise within your own Virtual Private Cloud (VPC) or fully air-gapped environment.</p>
                         </div>
                         <div class="spec-item">
                             <span class="spec-label">SSO & Governance</span>
-                            <p class="spec-desc">Integrate with Okta, Azure AD, or Google Workspace. Enforce MFA and manage team permissions via your existing Identity Provider.</p>
+                            <p class="spec-desc">Integrate with Okta, Azure AD, or Google Workspace. Enforce MFA via your Identity Provider.</p>
                         </div>
                         <div class="spec-item">
                             <span class="spec-label">Compliance Roadmap</span>
@@ -809,102 +755,61 @@
 
     </div>
 </section>
-<div class="page-container">
 
-    <section class="partner-section">
-        <div class="offer-box">
-            <div class="tape-effect"></div>
+<section class="full-width-section bg-surface">
+    <div class="page-container">
+        <section class="phases-section reveal-up">
+            <h2 class="phases-headline">Three Phases to Begin</h2>
 
-            <div class="offer-header">
-                <div class="offer-info">
-                    <h2 class="offer-headline">Founding Partner<br>Program</h2>
-                </div>
-                <div class="offer-status">
-                    <p class="offer-desc">Proven at scale with top CIS E-commerce. Now opening 5 spots for Global Expansion Partners.</p>
-                    <div class="status-row">
-                        <div class="status-group">
-                            <span class="status-label">Offer</span>
-                            <span class="status-val">50% Rate Lock</span>
-                        </div>
-                        <div class="status-group">
-                            <span class="status-label">Availability</span>
-                            <span class="status-val">5 Partners Only</span>
-                            <div class="slots-visual">
-                                <div class="slot taken"></div>
-                                <div class="slot taken"></div>
-                                <div class="slot"></div>
-                                <div class="slot"></div>
-                                <div class="slot"></div>
-                            </div>
-                        </div>
+            <div class="phases-flow-container">
+                
+                <div class="phase-card">
+                    <span class="phase-num">01</span>
+                    <h3 class="phase-title">Free Proof<br>of Concept</h3>
+                    <ul class="phase-steps">
+                        <li class="phase-step-item">Sign Letter of Intent</li>
+                        <li class="phase-step-item">We sign Your NDA</li>
+                        <li class="phase-step-item">You share Sprint Mockups</li>
+                    </ul>
+                    <div class="phase-footer">
+                        <span class="price-val">Free</span>
                     </div>
                 </div>
-            </div>
 
-            <div class="deal-grid">
-                <div class="deal-col">
-                    <span class="deal-label">We Get</span>
-                    <h3 class="deal-title">Your Logo</h3>
-                    <p class="deal-desc">Permission to feature your brand in our global case study and press release.</p>
+                <div class="phase-card delay-100">
+                    <span class="phase-num">02</span>
+                    <h3 class="phase-title">Trial<br>Period</h3>
+                    <ul class="phase-steps">
+                        <li class="phase-step-item">50% team onboarding</li>
+                        <li class="phase-step-item">Weekly sync & tuning</li>
+                        <li class="phase-step-item">Measure speed & errors</li>
+                    </ul>
+                    <div class="phase-footer">
+                        <span class="price-val accent">$2,500</span>
+                        <span class="price-strike">$5,000</span>
+                    </div>
                 </div>
-                <div class="deal-col accent">
-                    <span class="deal-label" style="color:var(--c-error)">You Get</span>
-                    <h3 class="deal-title">Lifetime Lock</h3>
-                    <p class="deal-desc">50% discount locked forever. Plus, direct access to engineering roadmap.</p>
+
+                <div class="phase-card delay-200">
+                    <span class="phase-num">03</span>
+                    <h3 class="phase-title">Partnership<br>& Scale</h3>
+                    <ul class="phase-steps">
+                        <li class="phase-step-item">Annual contract signed</li>
+                        <li class="phase-step-item">$2.5K pilot fee credited</li>
+                        <li class="phase-step-item">Founding rate locked</li>
+                    </ul>
+                    <div class="phase-footer">
+                        <span class="price-val">From $15K</span>
+                    </div>
                 </div>
+
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+</section>
 
-    <section class="phases-section">
-        <h2 class="phases-headline">Three Phases to Begin</h2>
-
-        <div class="phases-flow-container">
-            
-            <div class="phase-card">
-                <span class="phase-num">01</span>
-                <h3 class="phase-title">Free Proof<br>of Concept</h3>
-                <ul class="phase-steps">
-                    <li class="phase-step-item">Sign Letter of Intent</li>
-                    <li class="phase-step-item">We sign Your NDA</li>
-                    <li class="phase-step-item">You share Sprint Mockups</li>
-                </ul>
-                <div class="phase-footer">
-                    <span class="price-val">Free</span>
-                </div>
-            </div>
-
-            <div class="phase-card">
-                <span class="phase-num">02</span>
-                <h3 class="phase-title">Trial<br>Period</h3>
-                <ul class="phase-steps">
-                    <li class="phase-step-item">50% team onboarding</li>
-                    <li class="phase-step-item">Weekly sync & tuning</li>
-                    <li class="phase-step-item">Measure speed & errors</li>
-                </ul>
-                <div class="phase-footer">
-                    <span class="price-val accent">$2,500</span>
-                    <span class="price-strike">$5,000</span>
-                </div>
-            </div>
-
-            <div class="phase-card">
-                <span class="phase-num">03</span>
-                <h3 class="phase-title">Partnership<br>& Scale</h3>
-                <ul class="phase-steps">
-                    <li class="phase-step-item">Annual contract signed</li>
-                    <li class="phase-step-item">$2.5K pilot fee credited</li>
-                    <li class="phase-step-item">Founding rate locked</li>
-                </ul>
-                <div class="phase-footer">
-                    <span class="price-val">From $15K</span>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="cta-section">
+<div class="page-container">
+    <section class="cta-section reveal-up">
         <div>
             <h2 class="cta-headline">Start Free<br>Proof of Concept</h2>
         </div>
@@ -916,7 +821,7 @@
         </div>
     </section>
 
-    <footer class="simple-footer">
+    <footer class="simple-footer reveal-up">
         <div>
             <a href="#" class="footer-logo">Françoise</a>
             <span>© 2026 Françoise Design Inc. All rights reserved.</span>
@@ -926,7 +831,6 @@
             <a href="https://wa.me/79035176391">WhatsApp</a>
         </div>
     </footer>
-
 </div>
 
 <script>
@@ -937,14 +841,17 @@
     }
 
     /* Ecosystem Gallery Logic */
-    let intervalId = null, currentGalleryIndex = 0, currentSlideIndices = [0, 0, 0];
+    let intervalId = null;        
+    let globalTabInterval = null; 
+    let currentGalleryIndex = 0; 
+    let currentSlideIndices = [0, 0, 0];
+    let isAutoPlaying = false;
 
     function updateGalleryVisuals(idx) {
         const gal = document.querySelectorAll('.feature-gallery')[idx];
         const slides = gal.querySelectorAll('.inner-slide');
         if (slides.length === 0) return;
         
-        // Safety check if slide index is out of bounds
         if (currentSlideIndices[idx] >= slides.length) currentSlideIndices[idx] = 0;
 
         slides.forEach(s => s.classList.remove('current'));
@@ -969,10 +876,9 @@
         const slides = gal.querySelectorAll('.inner-slide');
         const stage = document.querySelector('.visual-stage');
         
-        // Hide controls if less than 2 slides
         if (slides.length < 2) {
             stage.classList.add('no-controls');
-            return; // Stop here, no interval needed
+            return; 
         } else {
             stage.classList.remove('no-controls');
         }
@@ -980,13 +886,15 @@
         intervalId = setInterval(() => {
             currentSlideIndices[idx] = (currentSlideIndices[idx] + 1) % slides.length;
             updateGalleryVisuals(idx);
-        }, 4000);
+        }, 4000); 
     }
 
     function setEcoSlide(idx) {
         currentGalleryIndex = idx;
+        
         document.querySelectorAll('.feature-item').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.feature-item')[idx].classList.add('active');
+        
         document.querySelectorAll('.feature-gallery').forEach(el => el.classList.remove('active'));
         
         const tg = document.querySelectorAll('.feature-gallery')[idx];
@@ -997,7 +905,47 @@
         }
     }
     
-    document.addEventListener("DOMContentLoaded", () => { setEcoSlide(0); });
+    function startAutoPlay() {
+        if (!isAutoPlaying) return; // Only run if the section is visible
+        if(globalTabInterval) clearInterval(globalTabInterval);
+        globalTabInterval = setInterval(() => {
+            let nextIndex = (currentGalleryIndex + 1) % 3; 
+            setEcoSlide(nextIndex);
+        }, 4000); 
+    }
+
+    function pauseAutoPlay() {
+        if(globalTabInterval) clearInterval(globalTabInterval);
+    }
+
+    /* SCROLL REVEAL & LOGIC */
+    document.addEventListener("DOMContentLoaded", () => { 
+        setEcoSlide(0); 
+        // Do NOT start auto play here. Wait for observer.
+
+        const observerOptions = {
+            threshold: 0.1 
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    
+                    // Special check for Ecosystem section to start timer
+                    if(entry.target.id === 'ecosystemSection') {
+                        entry.target.classList.add('animation-active'); // Triggers CSS transition
+                        isAutoPlaying = true;
+                        startAutoPlay();
+                    }
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+    });
 </script>
 
 </body>

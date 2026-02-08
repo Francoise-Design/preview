@@ -1,164 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='rgb(203, 2, 19)'/%3E%3Ctext x='50' y='75' font-size='70' font-weight='800' fill='white' text-anchor='middle' font-family='sans-serif'%3EF%3C/text%3E%3C/svg%3E">
-<title>Françoise | Investor Relations</title>
-<meta name="description" content="Shift-Left Quality Gate for Design Systems & Accessibility.">
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --font-sans: 'Inter', sans-serif;
-        --font-heading: 'Alumni Sans', sans-serif;
-        --color-primary: rgb(203, 2, 19);
-        --color-primary-dark: rgb(160, 2, 15);
-        --color-text-main: rgb(17, 24, 39);
-    }
-    body { font-family: var(--font-sans); background-color: white; color: var(--color-text-main); font-weight: 300; line-height: 1.5; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; min-height: 100vh; }
-    h1, h2, h3, h4, h5 { font-family: var(--font-heading); line-height: 1; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francoise</title>
+    
+    <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.cdnfonts.com/css/ballonest" rel="stylesheet">
 
-    /* Стили для слайда */
-    .slide-container {
+    <style>
+    :root {
+        --brand-red: #CE0016;
+        --brand-red-hover: #b00013; /* Цвет при наведении */
+        --text-grey: #666666;       /* Чуть темнее для читаемости */
+        --footer-grey: #8a8a8a;
+        --legal-grey: #cfcfcf;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Switzer', sans-serif;
+        background-color: #ffffff;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        text-align: center;
-        flex-grow: 1;
-        padding: 40px 20px;
-        min-height: 60vh;
+        justify-content: center;
+        position: relative;
+        overflow-x: hidden;
+        
+        /* NEW: Делает шрифты более тонкими и четкими на MacOS/iOS */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
 
-    .main-logo {
-        max-width: 900px;
-        width: 95%;
-        height: auto;
-        display: block;
-        margin-bottom: 0;
+    /* --- LOGO --- */
+    .logo {
+        font-family: 'Ballonest', sans-serif;
+        color: var(--brand-red);
+        /* Чуть уменьшил для баланса на десктопе, было 320 */
+        font-size: 300px; 
+        line-height: 1;
+        font-weight: normal;
+        -webkit-text-stroke: 0;
+        margin-top: -60px;
+        margin-bottom: -20px;
+        transform: rotate(-2deg); 
+        text-align: center;
         position: relative;
         z-index: 1;
-        pointer-events: none;
+        
+        /* NEW: Легкая анимация появления */
+        animation: fadeInDown 0.8s ease-out;
     }
 
-    .tagline {
-        font-size: 1.25rem;
-        color: #666;
-        font-weight: 300;
-        margin-bottom: 4rem;
-        letter-spacing: 0.02em;
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         position: relative;
-        z-index: 10;
-        margin-top: -1.5vw;
-        margin-left: 4rem;
+        z-index: 2;
+        width: 100%;
+        
+        /* NEW: Анимация появления с задержкой */
+        animation: fadeInUp 0.8s ease-out 0.2s backwards;
     }
 
-    @media (max-width: 640px) {
-        .tagline {
-            margin-top: -1.5rem;
-            font-size: 1rem;
-        }
+    .subtitle {
+        font-family: 'Switzer', sans-serif;
+        font-weight: 300; /* Light */
+        color: var(--text-grey);
+        font-size: 18px;
+        /* NEW: Чуть больше воздуха между буквами для премиальности */
+        letter-spacing: 0.02em; 
+        margin-bottom: 64px; /* Системный отступ (кратный 8) */
+        text-align: center;
+        max-width: 620px;
+        line-height: 1.5; /* Улучшает читаемость */
     }
 
-    .buttons-wrapper {
+    /* --- BUTTONS --- */
+    .buttons-container {
+        display: flex;
+        justify-content: center;
+        gap: 32px; 
+        margin-bottom: 120px;
+    }
+
+    .btn {
+        background-color: var(--brand-red);
+        color: white;
+        border: none;
+        padding: 16px 48px; /* Чуть шире */
+        font-family: 'Switzer', sans-serif;
+        font-weight: 500; /* Medium смотрится чище, чем Bold */
+        font-size: 14px;
+        letter-spacing: 0.05em; /* Разрядка для капса */
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        
+        /* NEW: Плавные переходы для всего */
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        
+        /* NEW: Более мягкая, рассеянная тень в покое */
+        box-shadow: 0 4px 12px rgba(206, 0, 22, 0.2);
+    }
+
+    /* NEW: Эффект нажатия и наведения */
+    .btn:hover {
+        background-color: var(--brand-red-hover);
+        transform: translateY(-2px); /* Кнопка слегка "взлетает" */
+        box-shadow: 0 8px 20px rgba(206, 0, 22, 0.3); /* Тень растет */
+    }
+    
+    .btn:active {
+        transform: translateY(0); /* При клике вдавливается */
+        box-shadow: 0 2px 8px rgba(206, 0, 22, 0.2);
+    }
+
+    .btn svg {
+        width: 14px;
+        height: 14px;
+        fill: white;
+        transition: transform 0.3s ease;
+    }
+    
+    /* NEW: При наведении стрелка чуть едет вниз */
+    .btn:hover svg {
+        transform: translateY(2px);
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+        position: absolute;
+        bottom: 40px;
+        width: 100%;
+        padding: 0 60px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        
+        /* NEW: Анимация появления */
+        animation: fadeIn 1s ease-out 0.5s backwards;
+    }
+
+    .social-links {
         display: flex;
         gap: 40px;
-        flex-direction: column;
-        width: 100%;
-        justify-content: center;
         align-items: center;
     }
 
-    @media (min-width: 640px) {
-        .buttons-wrapper {
-            flex-direction: row;
-            gap: 120px;
-        }
-    }
-
-    /* Кнопки */
-    .slide-btn {
-        display: inline-flex;
+    .social-link {
+        display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 16px 40px;
-        background-color: var(--color-primary);
-        color: #ffffff;
+        gap: 10px;
         text-decoration: none;
+        color: var(--footer-grey);
+        font-weight: 500;
+        font-size: 14px;
+        transition: color 0.2s ease;
+    }
+    
+    .social-link:hover {
+        color: var(--brand-red); /* Подсветка контактов брендовым цветом */
+    }
+
+    .social-link svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor; /* Иконка красится вместе с текстом */
+        transition: fill 0.2s ease;
+    }
+
+    .copyright {
+        font-size: 11px; /* Чуть крупнее для читаемости */
+        color: var(--legal-grey);
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        font-family: var(--font-sans);
-        font-size: 0.95rem;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        border-radius: 4px;
-        border: 1px solid var(--color-primary);
-        transition: all 0.2s ease;
-        min-width: 240px;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        text-align: right;
+        font-weight: 400;
     }
 
-    .slide-btn:hover {
-        background-color: var(--color-primary-dark);
-        border-color: var(--color-primary-dark);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* --- АНИМАЦИИ --- */
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-20px) rotate(-2deg); }
+        to { opacity: 1; transform: translateY(0) rotate(-2deg); }
+    }
+    
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
-    .slide-btn:active {
-        transform: translateY(0);
-    }
+    /* --- АДАПТИВ --- */
+    @media (max-width: 768px) {
+        .logo { 
+            font-size: 280px; 
+            margin-top: 0;
+            margin-bottom: 0px;
+        }
+        
+        .subtitle {
+             padding: 0 20px;
+             font-size: 16px;
+        }
 
-    .slide-btn svg {
-        margin-left: 10px;
-        width: 16px;
-        height: 16px;
+        .buttons-container { 
+            flex-direction: column; 
+            gap: 16px; 
+            width: 80%;
+            padding: 0 24px;
+            margin-bottom: 60px;
+        }
+        .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 18px; /* Удобнее пальцем */
+        }
+
+        .footer {
+            position: relative; /* На мобилках футер не прибит, а идет потоком */
+            bottom: auto;
+            flex-direction: column-reverse; /* Копирайт в самом низу */
+            gap: 40px;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .social-links { 
+            flex-direction: column; 
+            gap: 20px; 
+        }
+        .copyright {
+            text-align: center;
+            line-height: 1.6;
+        }
     }
 </style>
 </head>
-<body class="bg-white">
+<body>
 
-    <main class="flex-grow flex flex-col justify-center">
-        <div class="slide-container">
-            <img src="Combined_logo.png" alt="Francoise Logo" class="main-logo">
+    <h1 class="logo">Francoise</h1>
 
-            <div class="buttons-wrapper">
-                <a href="one pager.pdf" class="slide-btn" download>
-                    One-Pager
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>
-                </a>
-                <a href="Pitch Deck.pdf" class="slide-btn" download>
-                    Pitch-Deck
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>
-                </a>
-            </div>
+    <div class="content-wrapper">
+        <p class="subtitle">automated design system compliance & accessibility layer</p>
+
+        <div class="buttons-container">
+            <a href="one pager.pdf" class="btn">
+                ONE-PAGER
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                </svg>
+            </a>
+            <a href="Pitch Deck.pdf" class="btn">
+                PITCH-DECK
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="social-links">
+            <a href="mailto:ceo@francoise.design" class="social-link">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                ceo@francoise.design
+            </a>
+
+            <a href="#" class="social-link">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+                </svg>
+                Telegram
+            </a>
+
+            <a href="#" class="social-link">
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-1.41 0-2.45.81-2.87 1.57v-1.36h-3.2v8.35h3.2v-4.17c0-1.1.9-2 2-2 1.1 0 2 .9 2 2v4.17h3.13M6.5 7.5c-1.03 0-1.88.85-1.88 1.88S5.47 11.25 6.5 11.25s1.88-.85 1.88-1.87S7.53 7.5 6.5 7.5m1.6 11V10H4.9v8.5h3.2z"/>
+                </svg>
+                LinkedIn
+            </a>
         </div>
 
-        <section class="py-12 bg-white mt-auto">
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10">
-                <a href="mailto:ceo@francoise.design" class="text-sm font-bold text-gray-500 hover:text-primary transition-colors flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    ceo@francoise.design
-                </a>
+        <div class="copyright">
+            © 2026 FRANCOISE INC. (DELAWARE C-CORP IN FORMATION).
+        </div>
+    </footer>
 
-                <a href="https://t.me/darikamouse" target="_blank" class="text-sm font-bold text-gray-500 hover:text-[#0088cc] transition-colors flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                    Telegram
-                </a>
-
-                <a href="https://linkedin.com/in/daria-kamyshina" target="_blank" class="text-sm font-bold text-gray-500 hover:text-[#0077b5] transition-colors flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    LinkedIn
-                </a>
-            </div>
-            <div class="mt-8 text-center text-gray-400 text-[10px] font-mono uppercase tracking-widest">
-                &copy; 2026 Françoise Inc. (Delaware C-Corp in formation).
-            </div>
-        </section>
-    </main>
 </body>
 </html>
