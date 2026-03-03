@@ -1,38 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Françoise — Enterprise Design Quality Gate</title>
+    <title>Françoise — Automated Design Quality Gate</title>
     <style>
         /* --- 1. GLOBAL VARIABLES & RESET --- */
-        /* Подключение Ballonest (TTF) */
         @font-face {
             font-family: 'Ballonest';
-            src: url('fonts/Ballonest.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        /* Подключение Optima (TTC - коллекция TrueType) */
-        @font-face {
-            font-family: 'Optima';
-            src: url('fonts/Optima.ttc') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        /* Подключение Switzer (OTF) */
-        /* Так как файл Medium, можно привязать его к весу 500 или 400 (normal),
-           в зависимости от того, как хотите использовать. Здесь привязал к normal */
-        @font-face {
-            font-family: 'Switzer';
-            src: url('fonts/Switzer-Medium.otf') format('opentype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
+            src: local('Ballonest'), url('https://fonts.cdnfonts.com/css/ballonest') format('woff2'); 
         }
 
         :root {
@@ -52,7 +28,7 @@
             --font-display: 'Optima', sans-serif;
             --font-body: 'Switzer', 'Inter', sans-serif;
 
-            --pad-x: 80px;
+            --pad-x: 120px;
             --gap-grid: 60px;
             
             /* --- RHYTHM SYSTEM --- */
@@ -101,12 +77,8 @@
 
         /* --- ZONING --- */
         .full-width-section {
-            width: 100vw;
+            width: 100%; 
             position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
             padding: var(--spacing-section) 0;
         }
 
@@ -114,18 +86,6 @@
             background-color: var(--c-surface);
             border-top: 1px solid rgba(0,0,0,0.05);
             border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .mode-technical {
-            background-color: #fff;
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-            background-position: center top;
-            mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
-            padding-bottom: var(--spacing-section);
         }
 
         /* Chapter Labels (Vertical) */
@@ -165,12 +125,9 @@
             transform: rotate(-3deg); 
             transition: transform 0.3s var(--ease-out-expo);
         }
-        .logo:hover {
-            transform: rotate(0deg) scale(1.05);
-        }
         
         .header-cta { 
-            font-size: 0.9rem; font-weight: 600; border: 1px solid var(--c-grey-light); padding: 12px 28px; border-radius: 4px; transition: all 0.2s;
+            font-size: 0.9rem; font-weight: 600; border: 1px solid var(--c-grey-light); padding: 12px 28px; border-radius: 4px; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center;
         }
         .header-cta:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
 
@@ -189,6 +146,8 @@
         }
         .hero-desc { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-dark); max-width: 500px; margin-bottom: 48px; }
         
+        .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+
         .btn-primary { 
             display: inline-flex; align-items: center; justify-content: center;
             background: var(--c-black); color: #fff; padding: 20px 40px; 
@@ -200,9 +159,32 @@
             transform: translateY(-4px); 
             box-shadow: 0 15px 30px rgba(var(--rgb-error), 0.25); 
         }
+
+        /* --- SECONDARY BUTTON --- */
+        .btn-secondary {
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            background: transparent; 
+            color: var(--c-black); 
+            padding: 20px 40px; 
+            text-decoration: none; 
+            font-weight: 500; 
+            font-size: 1.05rem; 
+            border: 1px solid var(--c-grey-light);
+            transition: all 0.3s var(--ease-out-expo); 
+            border-radius: 4px; 
+        }
+.btn-secondary:hover {
+            background: var(--c-black); 
+            color: #ffffff;
+            border-color: var(--c-black);
+            transform: translateY(-4px); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
         
         .media-frame {
-            width: 80%; aspect-ratio: 726 / 830; background: var(--c-surface);
+            width: 100%; aspect-ratio: 9/10; background: var(--c-surface);
             position: relative; border-radius: 8px; overflow: hidden;
             box-shadow: 0 30px 60px rgba(0,0,0,0.08);
             border: 1px solid rgba(0,0,0,0.05);
@@ -288,7 +270,7 @@
         .cmd-green { color: #27C93F; } .cmd-red { color: #FF5F56; font-weight: bold; } .cmd-blue { color: #569CD6; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* --- NEW MERGED SECTION (Validation Scope) --- */
+        /* --- VALIDATION SCOPE SECTION --- */
         .validation-scope-section {
             padding-top: var(--spacing-section);
             padding-bottom: var(--spacing-section);
@@ -306,7 +288,6 @@
         }
         .scope-sub { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); }
 
-        /* SCOPE GRID */
         .scope-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -361,13 +342,95 @@
         .scope-item-title { font-weight: 600; font-size: 0.95rem; color: var(--c-black); margin-bottom: 6px; display: block; }
         .scope-item-desc { font-size: 0.9rem; color: var(--c-grey-mid); line-height: 1.5; }
 
-
         /* --- IMPACT SECTION --- */
         .impact-section { 
+            width: 100%;
+        }
+
+        .impact-layout {
+            display: grid;
+            grid-template-columns: 50% 40%; 
+            gap: 10%;
+            align-items: start;
+        }
+
+        .impact-left {
+            position: sticky;
+            top: 140px; 
+        }
+
+        .impact-headline { 
+            font-family: var(--font-display); 
+            font-size: 3.5rem; 
+            color: var(--c-black); 
+            margin-bottom: var(--spacing-block); 
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .break-even-text {
+            font-size: 1.125rem; 
+            line-height: 1.6;
+            color: var(--c-grey-dark);
+            margin: 0;
+            padding-left: 24px;
+            border-left: 2px solid var(--c-error); 
+        }
+
+        .impact-item { 
+            display: flex; 
+            flex-direction: column; 
+            margin-bottom: 48px; 
+        }
+
+        .impact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .impact-val { 
+            font-family: var(--font-display); 
+            font-size: 4rem; 
+            color: var(--c-black); 
+            line-height: 1; 
+            margin-bottom: 16px; 
+        }
+
+        .impact-role { 
+            font-family: var(--font-display); 
+            font-weight: bold; 
+            font-size: 1.75rem; 
+            color: var(--c-black); 
+            line-height: 1.2;
+            margin-bottom: 12px; 
+        }
+
+        .impact-desc { 
+            font-size: 1rem; 
+            color: var(--c-grey-mid); 
+            line-height: 1.6; 
+        }
+        
+                /* --- SECURITY SECTION --- */
+        .tech-specs-section { padding-bottom: 0; background: transparent; color: var(--c-black); position: relative; }
+        .specs-header { margin-bottom: var(--spacing-block); max-width: 800px; }
+        .specs-headline { font-family: var(--font-display); font-size: 3.5rem; line-height: 1.1; margin-bottom: 24px; }
+        .specs-sub { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); }
+        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10%; padding-top: 60px; }
+        
+        .spec-col-title { font-family: 'Courier New', monospace; font-size: 1.25rem; margin-bottom: 40px; border-bottom: 2px solid var(--c-black); display: inline-block; padding-bottom: 8px; }
+        .spec-list { display: flex; flex-direction: column; gap: 32px; }
+        .spec-item { display: flex; flex-direction: column; gap: 4px; }
+        .spec-label { font-weight: 700; font-size: 1rem; display: block; margin-bottom: 4px; color: var(--c-black); }
+        .spec-desc { font-size: 0.95rem; line-height: 1.5; color: var(--c-grey-mid); }
+        .compliance-badges { display: flex; gap: 24px; margin-top: 16px; opacity: 0.5; }
+        .badge-img { height: 28px; filter: grayscale(100%); }
+        
+        /* --- BUSINESS IMPACT SECTION --- */
+        .bs-impact-section { 
             display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: center; 
         }
         .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding-right: 40px; border-right: 1px solid var(--c-grey-light); }
-        .impact-headline { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); margin-bottom: 60px; grid-column: 1/-1; }
+        .bs-impact-headline { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); margin-bottom: 60px; grid-column: 1/-1; }
         
         .metric-item { display: flex; flex-direction: column; }
         .metric-val { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); line-height: 1; margin-bottom: 12px; }
@@ -386,95 +449,225 @@
         .savings-label { font-weight: 700; font-size: 1.25rem; color: var(--c-black); margin-bottom: 8px; }
         .savings-sub { font-size: 1rem; color: var(--c-grey-mid); }
 
-        /* --- SECURITY SECTION --- */
-        .tech-specs-section { padding-bottom: 0; background: transparent; color: var(--c-black); position: relative; }
+
+        /* --- PRICING SECTION --- */
         .specs-header { margin-bottom: var(--spacing-block); max-width: 800px; }
         .specs-headline { font-family: var(--font-display); font-size: 3.5rem; line-height: 1.1; margin-bottom: 24px; }
         .specs-sub { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); }
-        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10%; padding-top: 60px; }
-        
-        .spec-col-title { font-family: 'Courier New', monospace; font-size: 1.25rem; margin-bottom: 40px; border-bottom: 2px solid var(--c-black); display: inline-block; padding-bottom: 8px; }
-        .spec-list { display: flex; flex-direction: column; gap: 32px; }
-        .spec-item { display: flex; flex-direction: column; gap: 4px; }
-        .spec-label { font-weight: 700; font-size: 1rem; display: block; margin-bottom: 4px; color: var(--c-black); }
-        .spec-desc { font-size: 0.95rem; line-height: 1.5; color: var(--c-grey-mid); }
-        .compliance-badges { display: flex; gap: 24px; margin-top: 16px; opacity: 0.5; }
-        .badge-img { height: 28px; filter: grayscale(100%); }
 
-        /* --- PHASES SECTION --- */
-        .phases-section { 
-            overflow-x: hidden; 
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
         }
-        .phases-headline { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); margin-bottom: var(--spacing-block); }
-        .phases-flow-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-        
-        .phase-card { background: #FFFFFF; border: 1px solid var(--c-grey-light); padding: 40px; display: flex; flex-direction: column; position: relative; transition: all 0.4s var(--ease-out-expo); border-radius: 4px; min-height: 480px; }
-        .phase-card:hover { border-color: var(--c-black); transform: translateY(-12px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-        
-        .phase-num { 
-            font-family: var(--font-hand); 
-            font-size: 5.5rem; 
-            color: var(--c-error); 
-            line-height: 0.8; 
-            margin-bottom: 24px; 
-            display: block; 
-            transform: rotate(-3deg);
-            transform-origin: left bottom;
-        }
-        
-        .phase-title { font-family: var(--font-display); font-size: 1.75rem; line-height: 1.2; margin-bottom: 24px; min-height: 60px; }
-        .phase-steps { list-style: none; margin-bottom: 40px; flex-grow: 1; }
-        .phase-step-item { margin-bottom: 12px; font-size: 0.95rem; color: var(--c-grey-mid); position: relative; padding-left: 20px; line-height: 1.5; }
-        .phase-step-item::before { content: '—'; position: absolute; left: 0; color: var(--c-black); }
-        
-        .phase-footer { margin-top: auto; padding-top: 20px; border-top: 1px dashed var(--c-grey-light); }
-        .price-val { font-family: var(--font-display); font-size: 2rem; color: var(--c-black); }
-        .price-val.accent { color: var(--c-error); }
-        .price-strike { text-decoration: line-through; color: #ccc; font-size: 1rem; margin-left: 10px; }
 
-        /* --- CTA SECTION --- */
-        .cta-section { 
-            padding-top: var(--spacing-section); /* ADDED PADDING HERE */
-            padding-bottom: var(--spacing-section);
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 80px; 
-            border-bottom: 1px solid var(--c-grey-light); 
-            margin-bottom: 80px; 
-            align-items: flex-end;
-        }
-        .cta-headline { font-family: var(--font-display); font-size: 4rem; line-height: 1.05; margin-bottom: 32px; }
-        
-        .cta-right-col {
+        .pricing-card {
+            background: #FFFFFF;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 8px;
+            padding: 56px 48px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
+            position: relative;
+            transition: all 0.4s var(--ease-out-expo);
         }
-        .cta-desc { font-size: 1.25rem; line-height: 1.5; color: var(--c-grey-mid); margin-bottom: 48px; max-width: 480px; }
+
+        .pricing-card:hover {
+            border-color: rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        }
+
+        .pricing-card.is-popular {
+            border: 1px solid var(--c-grey-light);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 32px;
+            right: 32px;
+            left: auto;
+            background: var(--c-grey-pale);
+            color: var(--c-black);
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        .pricing-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .pricing-desc {
+            color: var(--c-grey-mid);
+            font-size: 1rem;
+            line-height: 1.5;
+            min-height: 48px;
+            margin-bottom: 32px;
+        }
+
+        .pricing-price-block {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px dashed var(--c-grey-light);
+            min-height: 100px;
+        }
+
+        .pricing-val {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            line-height: 1;
+            color: var(--c-black);
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .pricing-val.accent {
+            color: var(--c-error);
+        }
+
+        .pricing-period {
+            font-family: var(--font-body);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--c-black);
+        }
+
+        .pricing-subtext {
+            font-size: 0.9rem;
+            color: var(--c-grey-mid);
+            margin-top: 8px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .pricing-feature-item {
+            font-size: 0.95rem;
+            color: var(--c-grey-dark);
+            position: relative;
+            padding-left: 24px;
+            line-height: 1.5;
+        }
+
+        .pricing-feature-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--c-error);
+            font-weight: bold;
+        }
+
+        .pricing-feature-item.is-bold {
+            font-weight: 600;
+            color: var(--c-black);
+            padding-left: 0;
+        }
+        .pricing-feature-item.is-bold::before {
+            display: none;
+        }
+
+        /* --- COMPACT PRICING OVERRIDES --- */
+        #pricing {
+            padding-top: 80px; 
+            padding-bottom: 40px; 
+        }
+
+        #pricing .specs-header {
+            margin-bottom: 40px; 
+        }
+
+        .pricing-card {
+            padding: 40px 36px; 
+        }
+
+        .pricing-desc {
+            margin-bottom: 24px; 
+            min-height: auto; 
+        }
+
+        .pricing-price-block {
+            margin-bottom: 24px; 
+            padding-bottom: 24px; 
+            min-height: auto; 
+        }
+
+        .pricing-features {
+            margin-bottom: 32px; 
+            gap: 12px; 
+        }
+
+        .pricing-val {
+            font-size: 3.5rem; 
+        }
         
         /* --- SIMPLE FOOTER --- */
-        .simple-footer { padding-bottom: 60px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--c-grey-mid); font-size: 0.9rem; }
+        .simple-footer { padding-top: 80px; padding-bottom: 60px; border-top: 1px solid var(--c-grey-light); margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--c-grey-mid); font-size: 0.9rem; }
         .footer-logo { font-family: var(--font-hand); font-size: 5rem; color: var(--c-error); display: block; margin-bottom: 12px; transform: rotate(-2deg); text-decoration: none; transition: transform 0.3s; }
-        .footer-logo:hover { transform: rotate(0deg) scale(1.02); }
         .footer-contacts a { color: var(--c-black); border-bottom: 1px solid rgba(0,0,0,0.2); margin-left: 20px; }
         .footer-contacts a:hover { border-bottom-color: var(--c-black); }
 
-        /* Media Queries */
-        @media (max-width: 1360px) {
-            .impact-section { grid-template-columns: 1fr; gap: 60px; }
-            .metrics-grid { padding-right: 0; border-right: none; border-bottom: 1px solid var(--c-grey-light); padding-bottom: 60px; }
-            .total-savings-block { justify-content: flex-start; align-items: center; text-align: left; flex-direction: row; gap: 40px; }
-            .savings-val { margin-bottom: 0; font-size: 4rem; line-height: 1; }
+/* --- ИСПРАВЛЕННЫЕ СТИЛИ МОДАЛКИ --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 15, 15, 0.95); z-index: 2000;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(8px);
+            
+            /* Новое: плавная анимация */
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity 0.3s var(--ease-out-expo), visibility 0.3s;
         }
+        .modal-overlay.is-active {
+            opacity: 1; visibility: visible; pointer-events: auto;
+        }
+        .modal-content {
+            background: var(--c-bg); width: 100%; max-width: 600px; padding: 48px;
+            border-radius: 8px; position: relative; max-height: 90vh; overflow-y: auto;
+            
+            /* Новое: выезд снизу */
+            transform: translateY(20px) scale(0.98); 
+            transition: transform 0.4s var(--ease-out-expo);
+        }
+        .modal-overlay.is-active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+        .close-modal {
+            position: absolute; top: 24px; right: 24px; font-size: 32px; 
+            color: var(--c-grey-mid); cursor: pointer; transition: color 0.2s;
+        }
+        .close-modal:hover { color: var(--c-black); }
+        .modal-title { font-family: var(--font-display); font-size: 2rem; margin-bottom: 8px; }
+        .modal-sub { color: var(--c-grey-mid); margin-bottom: 32px; font-size: 0.95rem; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+        .form-input, .form-select { width: 100%; padding: 14px; border: 1px solid var(--c-grey-light); border-radius: 4px; font-family: var(--font-body); }
+        .calendar-wrapper { width: 100%; height: 500px; margin-top: 20px; }
+        #calendarIframe { width: 100%; height: 100%; border: none; border-radius: 4px; }
+
         @media (max-width: 900px) {
             :root { --pad-x: 24px; --gap-grid: 40px; --spacing-section: 100px; }
-            .hero-section, .ecosystem-section, .scope-grid, .specs-grid, .cta-section, .simple-footer { grid-template-columns: 1fr; gap: 40px; }
-            .metrics-grid { grid-template-columns: 1fr; border-right: none; }
-            .phases-flow-container { grid-template-columns: 1fr; }
+            .hero-section, .ecosystem-section, .scope-grid, .impact-layout, .pricing-grid, .simple-footer { grid-template-columns: 1fr; gap: 40px; }
+            .impact-left { position: relative; top: 0; }
             .header-cta { display: none; }
-            .simple-footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .simple-footer { flex-direction: column; align-items: flex-start; gap: 20px; border-top: none; }
             .footer-contacts a { margin-left: 0; margin-right: 20px; }
+            .modal-content { padding: 32px 24px; border-radius: 0; height: 100%; max-height: 100%; }
         }
     </style>
 </head>
@@ -484,21 +677,21 @@
     
     <header class="reveal-up">
         <a href="#" class="logo">Françoise</a>
-        <a href="https://meet.francoise.design/" class="header-cta">Book Demo</a>
+        <a href="#pricing" class="header-cta js-scroll-to">Get Started</a>
     </header>
 
     <section class="hero-section">
         <div class="hero-content">
-            <span class="hero-eyebrow reveal-up">Validated by Tier-1 Ecommerce</span>
-            <h1 class="reveal-up delay-100">Enterprise<br>Design Quality<br>Gate</h1>
-            <p class="hero-desc reveal-up delay-200">Françoise automatically validates designs against complex System Logic and Regulatory Requirements (EAA, ADA). We block incorrect designs at the CI/CD level before they become technical debt.</p>
+            <span class="hero-eyebrow reveal-up">Trusted by Top Product Teams</span>
+            <h1 class="reveal-up delay-100">Automated<br>Design Quality<br>Gate</h1>
+            <p class="hero-desc reveal-up delay-200">Françoise validates designs against complex System Logic and Regulatory Requirements (EAA, ADA) directly in Figma. Catch errors before they become technical debt.</p>
             
-            <div class="reveal-up delay-300">
-                <a href="https://meet.francoise.design/" class="btn-primary">Book Discovery Call</a>
+            <div class="hero-actions reveal-up delay-300">
+                <a href="#pricing" class="btn-primary js-scroll-to">Get Started</a>
             </div>
         </div>
         
-        <div class="media-frame" id="heroVideoFrame">
+        <div class="media-frame reveal-up delay-200" id="heroVideoFrame">
             <video id="heroVideo" autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
                 <source src="video.mp4" type="video/mp4">
             </video>
@@ -571,21 +764,21 @@
             </div>
 
             <div class="features-list">
-                <h2 class="eco-headline">The Ecosystem</h2>
+                <h2 class="eco-headline">Seamless Workflow</h2>
                 <div class="feature-item active" onmouseover="setEcoSlide(0)">
                     <span class="feature-num">01. In-Context Validation</span>
                     <h3 class="feature-title">Figma Plugin</h3>
-                    <p class="feature-desc">Errors appear as native comments directly on the canvas. No context switching—designers fix issues where they work.</p>
+                    <p class="feature-desc">Errors appear as native comments directly on the canvas. No context switching—designers fix issues exactly where they work.</p>
                 </div>
                 <div class="feature-item" onmouseover="setEcoSlide(1)">
                     <span class="feature-num">02. DesignOps Dashboard</span>
                     <h3 class="feature-title">Health Monitor</h3>
-                    <p class="feature-desc">A command center for Leads. Monitor system health, manage global rules, and visualize technical debt reduction.</p>
+                    <p class="feature-desc">A command center for Leads. Monitor system health, manage global rules, and track your team's velocity and debt reduction.</p>
                 </div>
                 <div class="feature-item" onmouseover="setEcoSlide(2)">
                     <span class="feature-num">03. Automated Quality Gate</span>
                     <h3 class="feature-title">Jira Integration</h3>
-                    <p class="feature-desc">Handover tickets are automatically blocked until the design passes validation. We stop technical debt before it reaches Dev.</p>
+                    <p class="feature-desc">Handover tickets are automatically blocked until the design passes validation. Stop technical debt before it reaches Dev.</p>
                 </div>
             </div>
         </section>
@@ -598,7 +791,7 @@
     <section class="validation-scope-section">
         <div class="scope-header reveal-up">
             <h2 class="scope-headline">Three Layers of Validation</h2>
-            <p class="scope-sub">Françoise unifies technical correctness, business logic, and legal compliance into a single quality gate.</p>
+            <p class="scope-sub">Françoise unifies technical correctness, business logic, and legal compliance into a single, automated quality gate.</p>
         </div>
 
         <div class="scope-grid reveal-up delay-100">
@@ -616,7 +809,7 @@
                     </div>
                     <div class="scope-item">
                         <span class="scope-item-title">Semantic Checks</span>
-                        <p class="scope-item-desc">Validates token usage appropriateness (e.g. ensuring Display fonts are never used for Legal text).</p>
+                        <p class="scope-item-desc">Validates token usage appropriateness (e.g., ensuring Display fonts are never used for Legal text).</p>
                     </div>
                 </div>
             </div>
@@ -630,7 +823,7 @@
                 <div class="scope-list">
                     <div class="scope-item">
                         <span class="scope-item-title">State-Dependent Rules</span>
-                        <p class="scope-item-desc">Ensures complex UI states are valid (e.g. "Error inputs must have helper text").</p>
+                        <p class="scope-item-desc">Ensures complex UI states are valid (e.g., "Error inputs must have helper text").</p>
                     </div>
                     <div class="scope-item">
                         <span class="scope-item-title">Architectural Limits</span>
@@ -665,175 +858,346 @@
 <section class="full-width-section bg-surface">
     <div class="page-container">
         <section class="impact-section reveal-up">
-            <div class="metrics-grid">
-                <h2 class="impact-headline">The Business Impact</h2>
+            <div class="impact-layout">
                 
-                <div class="metric-item">
-                    <span class="metric-val">– 60%</span>
-                    <span class="metric-role">Design Leadership</span>
-                    <span class="metric-desc">reduction in mentoring overhead for leads.</span>
+                <div class="impact-left">
+                    <h2 class="impact-headline">The Impact on Your Workflow</h2>
+                    <p class="break-even-text">
+                        At standard professional rates, recovering just <strong>3 hours</strong> of cross-functional review time covers your entire monthly Professional subscription. The rest is pure velocity.
+                    </p>
                 </div>
 
-                <div class="metric-item">
-                    <span class="metric-val">– 80%</span>
-                    <span class="metric-role">Frontend Engineering</span>
-                    <span class="metric-desc">reduction in UI sprint blockers.</span>
+                <div class="impact-right">
+                    <div class="impact-item">
+                        <span class="impact-val">10<span style="font-size: 1.5rem; vertical-align: super;">+</span></span>
+                        <span class="impact-role">Hours Saved Monthly</span>
+                        <p class="impact-desc">Eliminate tedious manual checks for paddings, contrast ratios, and correct token usage.</p>
+                    </div>
+
+                    <div class="impact-item">
+                        <span class="impact-val">0</span>
+                        <span class="impact-role">Handoff Friction</span>
+                        <p class="impact-desc">Deliver pixel-perfect, dev-ready frames that pass Jira quality gates on the first try.</p>
+                    </div>
+
+                    <div class="impact-item">
+                        <span class="impact-val">100%</span>
+                        <span class="impact-role">EAA Compliance</span>
+                        <p class="impact-desc">Design with confidence. Françoise ensures every component meets strict legal standards.</p>
+                    </div>
                 </div>
 
-                <div class="metric-item">
-                    <span class="metric-val">90%</span>
-                    <span class="metric-role">QA & Compliance</span>
-                    <span class="metric-desc">automated a11y coverage.</span>
-                </div>
-            </div>
-
-            <div class="total-savings-block">
-                <span class="savings-val">$60,000</span>
-                <h3 class="savings-label">Total Annual Savings</h3>
-                <p class="savings-sub">Recovers capital for a standard 10-person Agile Squad.</p>
             </div>
         </section>
     </div>
 </section>
-
 
 <section class="full-width-section mode-technical">
-    <div class="chapter-label">02. Specs</div>
-    <div class="page-container">
 
-        <section class="tech-specs-section reveal-up">
-            <div class="specs-header">
-                <h2 class="specs-headline">Enterprise Security</h2>
-                <p class="specs-sub">Built for regulated industries. Your IP never leaves your control perimeter.</p>
-            </div>
-            
-            <div class="specs-grid">
-                
-                <div class="spec-col">
-                    <h3 class="spec-col-title">Data Privacy & Sovereignty</h3>
-                    <div class="spec-list">
-                        <div class="spec-item">
-                            <span class="spec-label">Zero-Retention Processing</span>
-                            <p class="spec-desc">We process design files in ephemeral memory. Once the validation is complete, all data is immediately wiped.</p>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">No AI Training</span>
-                            <p class="spec-desc">We guarantee contractually that your Intellectual Property is never used to train our models.</p>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Regional Data Residency</span>
-                            <p class="spec-desc">Option to pin data processing to specific regions (EU Frankfurt / US Virginia).</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="spec-col">
-                    <h3 class="spec-col-title">Infrastructure & Control</h3>
-                    <div class="spec-list">
-                        <div class="spec-item">
-                            <span class="spec-label">Private Cloud / On-Premises</span>
-                            <p class="spec-desc">Deploy Françoise within your own Virtual Private Cloud (VPC) or fully air-gapped environment.</p>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">SSO & Governance</span>
-                            <p class="spec-desc">Integrate with Okta, Azure AD, or Google Workspace. Enforce MFA via your Identity Provider.</p>
-                        </div>
-                        <div class="spec-item">
-                            <span class="spec-label">Compliance Roadmap</span>
-                            <p class="spec-desc">Aligned with industry standards (SOC 2 Type II & ISO 27001 In Progress).</p>
-                            <div class="compliance-badges">
-                                <img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=SOC2" alt="SOC2">
-                                <img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=GDPR" alt="GDPR">
-                                <img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=ISO27001" alt="ISO">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-    </div>
-</section>
-
-<section class="full-width-section bg-surface">
-    <div class="page-container">
-        <section class="phases-section reveal-up">
-            <h2 class="phases-headline">Three Phases to Begin</h2>
-
-            <div class="phases-flow-container">
-                
-                <div class="phase-card">
-                    <span class="phase-num">01</span>
-                    <h3 class="phase-title">Free Proof<br>of Concept</h3>
-                    <ul class="phase-steps">
-                        <li class="phase-step-item">Sign Letter of Intent</li>
-                        <li class="phase-step-item">We sign Your NDA</li>
-                        <li class="phase-step-item">You share Sprint Mockups</li>
-                    </ul>
-                    <div class="phase-footer">
-                        <span class="price-val">Free</span>
-                    </div>
-                </div>
-
-                <div class="phase-card delay-100">
-                    <span class="phase-num">02</span>
-                    <h3 class="phase-title">Trial<br>Period</h3>
-                    <ul class="phase-steps">
-                        <li class="phase-step-item">50% team onboarding</li>
-                        <li class="phase-step-item">Weekly sync & tuning</li>
-                        <li class="phase-step-item">Measure speed & errors</li>
-                    </ul>
-                    <div class="phase-footer">
-                        <span class="price-val accent">$2,500</span>
-                        <span class="price-strike">$5,000</span>
-                    </div>
-                </div>
-
-                <div class="phase-card delay-200">
-                    <span class="phase-num">03</span>
-                    <h3 class="phase-title">Partnership<br>& Scale</h3>
-                    <ul class="phase-steps">
-                        <li class="phase-step-item">Annual contract signed</li>
-                        <li class="phase-step-item">$2.5K pilot fee credited</li>
-                        <li class="phase-step-item">Founding rate locked</li>
-                    </ul>
-                    <div class="phase-footer">
-                        <span class="price-val">From $15K</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    </div>
-</section>
+<div class="chapter-label">02. Specs</div>
 
 <div class="page-container">
-    <section class="cta-section reveal-up">
-        <div>
-            <h2 class="cta-headline">Start Free<br>Proof of Concept</h2>
-        </div>
-        <div class="cta-right-col">
-            <p class="cta-desc">
-                Teams overestimate design system coverage by 30%. Let us prove the difference on your actual data with zero risk.
-            </p>
-            <a href="https://meet.francoise.design/" class="btn-primary">Book Discovery Call</a>
-        </div>
-    </section>
 
-    <footer class="simple-footer reveal-up">
-        <div>
-            <a href="#" class="footer-logo">Françoise</a>
-            <span>© 2026 Françoise Design Inc. All rights reserved.</span>
+
+
+<section class="tech-specs-section reveal-up">
+
+<div class="specs-header">
+
+<h2 class="specs-headline">Enterprise Security</h2>
+
+<p class="specs-sub">Built for regulated industries. Your IP never leaves your control perimeter.</p>
+
+</div>
+
+
+<div class="specs-grid">
+
+
+<div class="spec-col">
+
+<h3 class="spec-col-title">Data Privacy & Sovereignty</h3>
+
+<div class="spec-list">
+
+<div class="spec-item">
+
+<span class="spec-label">Zero-Retention Processing</span>
+
+<p class="spec-desc">We process design files in ephemeral memory. Once the validation is complete, all data is immediately wiped.</p>
+
+</div>
+
+<div class="spec-item">
+
+<span class="spec-label">No AI Training</span>
+
+<p class="spec-desc">We guarantee contractually that your Intellectual Property is never used to train our models.</p>
+
+</div>
+
+<div class="spec-item">
+
+<span class="spec-label">Regional Data Residency</span>
+
+<p class="spec-desc">Option to pin data processing to specific regions (EU Frankfurt / US Virginia).</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="spec-col">
+
+<h3 class="spec-col-title">Infrastructure & Control</h3>
+
+<div class="spec-list">
+
+<div class="spec-item">
+
+<span class="spec-label">Private Cloud / On-Premises</span>
+
+<p class="spec-desc">Deploy Françoise within your own Virtual Private Cloud (VPC) or fully air-gapped environment.</p>
+
+</div>
+
+<div class="spec-item">
+
+<span class="spec-label">SSO & Governance</span>
+
+<p class="spec-desc">Integrate with Okta, Azure AD, or Google Workspace. Enforce MFA via your Identity Provider.</p>
+
+</div>
+
+<div class="spec-item">
+
+<span class="spec-label">Compliance Roadmap</span>
+
+<p class="spec-desc">Aligned with industry standards (SOC 2 Type II & ISO 27001 In Progress).</p>
+
+<div class="compliance-badges">
+
+<img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=SOC2" alt="SOC2">
+
+<img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=GDPR" alt="GDPR">
+
+<img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=ISO27001" alt="ISO">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+</section>
+
+
+
+</div>
+
+</section>
+
+
+
+<section class="full-width-section bg-surface">
+
+<div class="page-container">
+
+<section class="bs-impact-section reveal-up">
+
+<div class="metrics-grid">
+
+<h2 class="bs-impact-headline">The Business Impact</h2>
+
+
+<div class="metric-item">
+
+<span class="metric-val">– 60%</span>
+
+<span class="metric-role">Design Leadership</span>
+
+<span class="metric-desc">reduction in mentoring overhead for leads.</span>
+
+</div>
+
+
+
+<div class="metric-item">
+
+<span class="metric-val">– 80%</span>
+
+<span class="metric-role">Frontend Engineering</span>
+
+<span class="metric-desc">reduction in UI sprint blockers.</span>
+
+</div>
+
+
+
+<div class="metric-item">
+
+<span class="metric-val">90%</span>
+
+<span class="metric-role">QA & Compliance</span>
+
+<span class="metric-desc">automated a11y coverage.</span>
+
+</div>
+
+</div>
+
+
+
+<div class="total-savings-block">
+
+<span class="savings-val">$60,000</span>
+
+<h3 class="savings-label">Total Annual Savings</h3>
+
+<p class="savings-sub">Recovers capital for a standard 10-person Agile Squad.</p>
+
+</div>
+
+</section>
+
+</div>
+
+</section>
+
+<section class="full-width-section" id="pricing">
+    <div class="chapter-label">02. Pricing</div>
+    <div class="page-container">
+        <section class="phases-section reveal-up">
+            <div class="specs-header">
+                <h2 class="specs-headline">Built for Designers.<br>Scaled for Enterprise.</h2>
+                <p class="specs-sub">Select the Professional plan for immediate impact, or scale globally with Enterprise controls. Every plan includes expert, manual mapping of your Design System to ensure absolute accuracy from day one.</p>
+            </div>
+
+            <div class="pricing-grid">
+                
+                <div class="pricing-card is-popular delay-100">
+
+                    
+                    <h3 class="pricing-title">Professional</h3>
+                    <p class="pricing-desc">For product designers and agile squads ready to automate their quality assurance.</p>
+
+                    <div class="pricing-price-block">
+                        <div class="pricing-val accent">
+                            $199 <span class="pricing-period">/ mo</span>
+                        </div>
+                        <div class="pricing-subtext">billed annually or $249 month-to-month</div>
+                    </div>
+
+                    <ul class="pricing-features">
+                        <li class="pricing-feature-item is-bold">Core Capabilities:</li>
+                        <li class="pricing-feature-item">Expert Design System Mapping included</li>
+                        <li class="pricing-feature-item">1 Figma Editor License</li>
+                        <li class="pricing-feature-item">Unlimited Canvas Validations</li>
+                        <li class="pricing-feature-item">WCAG 2.1 & EAA Accessibility Gate</li>
+                    </ul>
+
+                    <button id="profBtnOnboarding" class="btn-primary" style="align-self: flex-start;">Start onboarding</button>
+                </div>
+
+                <div class="pricing-card delay-200" style="background: var(--c-surface);">
+                    
+                    <h3 class="pricing-title">Enterprise</h3>
+                    <p class="pricing-desc">For global teams requiring absolute code consistency and advanced security.</p>
+
+                    <div class="pricing-price-block" style="display: flex; align-items: center;">
+                        <div class="pricing-val" style="font-size: 2.5rem;">Custom</div>
+                    </div>
+
+                    <ul class="pricing-features">
+                        <li class="pricing-feature-item is-bold">Everything in Professional, plus:</li>
+                        <li class="pricing-feature-item">Unlimited Figma Seats</li>
+                        <li class="pricing-feature-item">Native CI/CD Pipeline Blocking</li>
+                        <li class="pricing-feature-item">On-Premise / VPC Deployment</li>
+                        <li class="pricing-feature-item">SSO / SAML & Advanced Security</li>
+                    </ul>
+
+<button id="entBtn" class="btn-secondary" style="align-self: flex-start;">Book Demo</button>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="simple-footer reveal-up">
+            <div>
+                <a href="#" class="footer-logo">Françoise</a>
+                <span>© 2026 Françoise Design Inc. All rights reserved.</span>
+            </div>
+            <div class="footer-contacts">
+                <a href="mailto:ceo@francoise.design">ceo@francoise.design</a>
+                <a href="https://wa.me/79035176391">WhatsApp</a>
+            </div>
+        </footer>
+
+    </div>
+</section>
+
+<div id="onboardingModal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeModal()">×</button>
+        <div id="stepForm">
+            <h2 class="modal-title">Start Onboarding</h2>
+            <p class="modal-sub">Quick details before booking a slot.</p>
+            <form id="onboardingForm" onsubmit="handleFormSubmit(event)">
+                <input type="hidden" id="leadSource" value="Professional">
+                
+                <div class="form-group"><label>Work Email</label><input type="email" id="userEmail" class="form-input" required placeholder="name@company.com"></div>
+                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="form-group"><label>Role</label><input type="text" id="userRole" class="form-input" required></div>
+                    <div class="form-group"><label>Company</label><input type="text" id="userCompany" class="form-input" required></div>
+                </div>
+                <div class="form-group">
+                    <label>Team Size</label>
+                    <select id="userTeamSize" class="form-select">
+                        <option value="1-5">1-5 designers</option>
+                        <option value="5-20">5-20 designers</option>
+                        <option value="20-50">20-50 designers</option>
+                        <option value="50+">50+ designers</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Design System Type</label>
+                    <select id="dsType" class="form-select">
+                        <option value="In-house">In-house / Custom</option>
+                        <option value="Open Source">Open Source Based</option>
+                    </select>
+                </div>
+                
+<div class="form-group" style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 24px;">
+    <input type="checkbox" id="privacyConsent" required style="margin-top: 4px; cursor: pointer;">
+    <label for="privacyConsent" style="text-transform: none; font-weight: normal; font-size: 0.85rem; color: var(--c-grey-mid); line-height: 1.4;">
+        I agree to the <a href="privacy-policy.html" target="_blank" style="text-decoration: underline; color: var(--c-black);">Privacy Policy</a> and consent to data processing.
+    </label>
+</div>
+
+                <div id="formError" style="color: var(--c-error); font-size: 0.85rem; margin-bottom: 12px; display: none;">Something went wrong. Please try again.</div>
+
+                <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%;">Continue</button>
+            </form>
         </div>
-        <div class="footer-contacts">
-            <a href="mailto:ceo@francoise.design">ceo@francoise.design</a>
-            <a href="https://wa.me/79035176391">WhatsApp</a>
+        <div id="stepSuccess" style="display: none; text-align: center;">
+            <h2 class="modal-title">Success!</h2>
+            <p class="modal-sub">Now please choose your slot in the calendar.</p>
+            <a href="https://meet.francoise.design" id="finalBookingLink" target="_blank" class="btn-primary" style="width: 100%; display: inline-flex; justify-content: center; margin-top: 20px;">Open Booking Calendar</a>
         </div>
-    </footer>
+    </div>
 </div>
 
 <script>
+
     /* Hero Video Logic */
     function toggleHeroVideo() {
         const v = document.getElementById('heroVideo'), c = document.getElementById('heroVideoFrame');
@@ -841,17 +1205,17 @@
     }
 
     /* Ecosystem Gallery Logic */
-    let intervalId = null;        
-    let globalTabInterval = null; 
-    let currentGalleryIndex = 0; 
+    let intervalId = null;
+    let globalTabInterval = null;
+    let currentGalleryIndex = 0;
     let currentSlideIndices = [0, 0, 0];
     let isAutoPlaying = false;
 
     function updateGalleryVisuals(idx) {
         const gal = document.querySelectorAll('.feature-gallery')[idx];
         const slides = gal.querySelectorAll('.inner-slide');
-        if (slides.length === 0) return;
-        
+        if (!slides || slides.length === 0) return;
+
         if (currentSlideIndices[idx] >= slides.length) currentSlideIndices[idx] = 0;
 
         slides.forEach(s => s.classList.remove('current'));
@@ -860,9 +1224,10 @@
 
     function manualChangeSlide(dir) {
         if (intervalId) clearInterval(intervalId);
-        const slides = document.querySelectorAll('.feature-gallery')[currentGalleryIndex].querySelectorAll('.inner-slide');
+        const galContainer = document.querySelectorAll('.feature-gallery')[currentGalleryIndex];
+        const slides = galContainer.querySelectorAll('.inner-slide');
         if(slides.length < 2) return;
-        
+
         let n = currentSlideIndices[currentGalleryIndex] + dir;
         if (n >= slides.length) n = 0; if (n < 0) n = slides.length - 1;
         currentSlideIndices[currentGalleryIndex] = n;
@@ -875,10 +1240,10 @@
         const gal = document.querySelectorAll('.feature-gallery')[idx];
         const slides = gal.querySelectorAll('.inner-slide');
         const stage = document.querySelector('.visual-stage');
-        
-        if (slides.length < 2) {
+
+        if (!slides || slides.length < 2) {
             stage.classList.add('no-controls');
-            return; 
+            return;
         } else {
             stage.classList.remove('no-controls');
         }
@@ -886,65 +1251,152 @@
         intervalId = setInterval(() => {
             currentSlideIndices[idx] = (currentSlideIndices[idx] + 1) % slides.length;
             updateGalleryVisuals(idx);
-        }, 4000); 
+        }, 4000);
     }
 
     function setEcoSlide(idx) {
         currentGalleryIndex = idx;
-        
+
         document.querySelectorAll('.feature-item').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.feature-item')[idx].classList.add('active');
-        
+
         document.querySelectorAll('.feature-gallery').forEach(el => el.classList.remove('active'));
-        
+
         const tg = document.querySelectorAll('.feature-gallery')[idx];
-        if(tg) { 
-            tg.classList.add('active'); 
-            updateGalleryVisuals(idx); 
-            startInternalSlideshow(idx); 
+        if(tg) {
+            tg.classList.add('active');
+            updateGalleryVisuals(idx);
+            startInternalSlideshow(idx);
         }
     }
-    
+
     function startAutoPlay() {
-        if (!isAutoPlaying) return; // Only run if the section is visible
+        if (!isAutoPlaying) return;
         if(globalTabInterval) clearInterval(globalTabInterval);
         globalTabInterval = setInterval(() => {
-            let nextIndex = (currentGalleryIndex + 1) % 3; 
+            let nextIndex = (currentGalleryIndex + 1) % 3;
             setEcoSlide(nextIndex);
-        }, 4000); 
+        }, 4000);
     }
 
     function pauseAutoPlay() {
         if(globalTabInterval) clearInterval(globalTabInterval);
     }
 
-    /* SCROLL REVEAL & LOGIC */
-    document.addEventListener("DOMContentLoaded", () => { 
-        setEcoSlide(0); 
-        // Do NOT start auto play here. Wait for observer.
+    /* --- ИСПРАВЛЕННАЯ ЛОГИКА МОДАЛКИ И ТЕЛЕГРАМ --- */
+    const modalOverlay = document.getElementById('onboardingModal');
 
-        const observerOptions = {
-            threshold: 0.1 
+    function openOnboarding(source) {
+        document.getElementById('leadSource').value = source;
+        document.querySelector('.modal-title').innerText = (source === 'Enterprise') ? 'Book Enterprise Demo' : 'Start Onboarding';
+
+        // Плавное открытие
+        modalOverlay.classList.add('is-active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modalOverlay.classList.remove('is-active');
+        document.body.style.overflow = 'auto';
+
+        // Сброс формы при закрытии
+        setTimeout(() => {
+            document.getElementById('stepForm').style.display = 'block';
+            document.getElementById('stepSuccess').style.display = 'none';
+            document.getElementById('formError').style.display = 'none';
+            document.getElementById('submitBtn').innerText = 'Continue';
+            document.getElementById('submitBtn').disabled = false;
+        }, 300); // Ждем окончания анимации
+    }
+
+    // Закрытие по клику на темный фон
+    modalOverlay.addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        const errorMsg = document.getElementById('formError');
+
+        btn.innerText = 'Sending...';
+        btn.disabled = true;
+        errorMsg.style.display = 'none';
+
+        const source = document.getElementById('leadSource').value;
+        const data = {
+            email: document.getElementById('userEmail').value,
+            role: document.getElementById('userRole').value,
+            company: document.getElementById('userCompany').value,
+            team: document.getElementById('userTeamSize').value,
+            ds: document.getElementById('dsType').value
         };
+
+        const text = `🚀 **NEW LEAD FROM ${source.toUpperCase()}**\n\n` +
+                     `📧 Email: ${data.email}\n` +
+                     `👤 Role: ${data.role}\n` +
+                     `🏢 Company: ${data.company}\n` +
+                     `👥 Team: ${data.team}\n` +
+                     `🎨 DS: ${data.ds}`;
+
+        try {
+            const response = await fetch(`https://francoise-api-v1.azurewebsites.net/api/submit-lead`, {
+                method: 'POST',
+                // headers: { 'Content-Type': 'application/json' }, // НЕ НУЖЕН для FormData
+                body: formData // Отправляем как Form Data
+            });
+
+            if (!response.ok) throw new Error("Network response was not ok");
+
+            document.getElementById('finalBookingLink').href = `https://meet.francoise.design/?email=${encodeURIComponent(data.email)}`;
+            document.getElementById('stepForm').style.display = 'none';
+            document.getElementById('stepSuccess').style.display = 'block';
+        } catch (e) {
+            errorMsg.style.display = 'block';
+            btn.disabled = false;
+            btn.innerText = 'Continue';
+        }
+    }
+
+    /* SCROLL REVEAL & INIT */
+    document.addEventListener("DOMContentLoaded", () => {
+        setEcoSlide(0);
+
+        const observerOptions = { threshold: 0.1 };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    
-                    // Special check for Ecosystem section to start timer
+
                     if(entry.target.id === 'ecosystemSection') {
-                        entry.target.classList.add('animation-active'); // Triggers CSS transition
+                        entry.target.classList.add('animation-active');
                         isAutoPlaying = true;
                         startAutoPlay();
                     }
-                    
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
         document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+        document.querySelectorAll('.js-scroll-to').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ИСПРАВЛЕННАЯ ПРИВЯЗКА КНОПОК
+        const profBtn = document.getElementById('profBtnOnboarding');
+        if(profBtn) profBtn.onclick = (e) => { e.preventDefault(); openOnboarding('Professional'); };
+
+        const entBtn = document.getElementById('entBtn');
+        if(entBtn) entBtn.onclick = (e) => { e.preventDefault(); openOnboarding('Enterprise'); };
     });
 </script>
 
