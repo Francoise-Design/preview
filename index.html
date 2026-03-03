@@ -1342,7 +1342,7 @@
 
             if (!response.ok) throw new Error("Network response was not ok");
 
-            document.getElementById('finalBookingLink').href = `https://meet.francoise.design/?email=${encodeURIComponent(data.email)}`;
+            document.getElementById('finalBookingLink').href = `https://meet.francoise.design/?email=${encodeURIComponent(formData.get('email'))}`;
             document.getElementById('stepForm').style.display = 'none';
             document.getElementById('stepSuccess').style.display = 'block';
         } catch (e) {
