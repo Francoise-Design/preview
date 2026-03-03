@@ -1343,7 +1343,7 @@
             const response = await fetch(`https://francoise-api-v1.azurewebsites.net/api/submit-lead`, {
                 method: 'POST',
                 // headers: { 'Content-Type': 'application/json' }, // НЕ НУЖЕН для FormData
-                body: formData // Отправляем как Form Data
+                body: data // Отправляем как Form Data
             });
 
             if (!response.ok) throw new Error("Network response was not ok");
