@@ -665,11 +665,25 @@
         @media (max-width: 900px) {
             :root { --pad-x: 24px; --gap-grid: 40px; --spacing-section: 100px; }
             .hero-section, .ecosystem-section, .scope-grid, .impact-layout, .pricing-grid, .simple-footer { grid-template-columns: 1fr; gap: 40px; }
+
+            /* Снимаем sticky с impact-left */
             .impact-left { position: relative; top: 0; }
+
+            /* Снимаем sticky с visual-stage (ДОБАВИТЬ ЭТО) */
+            .visual-stage { position: relative; top: 0; }
+
             .header-cta { display: none; }
             .simple-footer { flex-direction: column; align-items: flex-start; gap: 20px; border-top: none; }
             .footer-contacts a { margin-left: 0; margin-right: 20px; }
             .modal-content { padding: 32px 24px; border-radius: 0; height: 100%; max-height: 100%; }
+        }
+
+        @media (max-width: 900px) {
+            .ecosystem-section {
+                display: flex;
+                flex-direction: column-reverse;
+                gap: 40px;
+            }
         }
     </style>
 </head>
