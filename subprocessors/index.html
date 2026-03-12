@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subprocessors — Françoise</title>
+    <style>
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
+        @font-face {
+            font-family: 'Ballonest';
+            src: local('Ballonest'), url('/fonts/Ballonest.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --c-black: #0F0F0F;
+            --c-grey-dark: #222222;
+            --c-grey-mid: #555555;
+            --c-grey-light: #E0E0E0;
+            --c-grey-pale: #F5F5F5;
+
+            --rgb-error: 217, 48, 37;
+            --c-error: rgb(var(--rgb-error));
+
+            --c-bg: #FFFFFF;
+            --c-surface: #FAFAFA;
+
+            --font-hand: 'Ballonest', cursive;
+            --font-display: 'Optima', sans-serif;
+            --font-body: 'Switzer', 'Inter', sans-serif;
+
+            --pad-x: 120px;
+
+            /* Animation Physics */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--c-bg);
+            color: var(--c-black);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        .page-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--pad-x);
+            position: relative;
+        }
+
+        /* --- 2. HEADER --- */
+        header {
+            padding: 32px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-hand);
+            font-size: 8.5rem;
+            color: var(--c-error);
+            line-height: 0.8;
+            transform: rotate(-3deg);
+            transition: transform 0.3s var(--ease-out-expo);
+        }
+
+        .header-cta {
+            font-size: 0.9rem; font-weight: 600; border: 1px solid var(--c-grey-light); padding: 12px 28px; border-radius: 4px; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center;
+        }
+        .header-cta:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
+
+/* --- UNIFIED SITE FOOTER --- */
+        .site-footer {
+            padding-top: 80px;
+            padding-bottom: 60px;
+            border-top: 1px solid var(--c-grey-light);
+            margin-top: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            color: var(--c-grey-mid);
+            font-size: 0.95rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            font-family: var(--font-hand);
+            font-size: 5rem;
+            color: var(--c-error);
+            display: block;
+            margin-bottom: 12px;
+            transform: rotate(-2deg);
+            text-decoration: none;
+            transition: transform 0.3s;
+            line-height: 1;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 80px;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: var(--c-black);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+        }
+
+        .footer-col a {
+            color: var(--c-grey-dark);
+            transition: color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .footer-col a:hover {
+            color: var(--c-error);
+        }
+
+        @media (max-width: 900px) {
+            .site-footer {
+                flex-direction: column;
+                gap: 48px;
+                border-top: none;
+                padding-top: 40px;
+            }
+            .footer-nav {
+                flex-direction: column;
+                gap: 40px;
+                width: 100%;
+            }
+        }
+
+        /* --- LEGAL CONTENT STYLES --- */
+        .legal-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 0;
+        }
+
+        .legal-title {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: var(--c-black);
+            letter-spacing: -0.02em;
+        }
+
+        .legal-date {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--c-grey-mid);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 64px;
+            display: inline-block;
+            background: var(--c-grey-pale);
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .legal-content {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--c-grey-dark);
+        }
+
+        .legal-content h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--c-black);
+            margin-top: 56px;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .legal-content h3 {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--c-black);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        .legal-content p {
+            margin-bottom: 24px;
+        }
+
+        .legal-content ul {
+            margin-bottom: 24px;
+            padding-left: 24px;
+            list-style-type: disc;
+        }
+
+        .legal-content li {
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+
+        .legal-content a {
+            color: var(--c-black);
+            text-decoration: underline;
+        }
+
+        .legal-content a:hover {
+            color: var(--c-error);
+        }
+
+        /* --- TABLE STYLES --- */
+        .legal-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 24px;
+            margin-bottom: 40px;
+        }
+
+        .legal-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 600px;
+        }
+
+        .legal-table th {
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: var(--c-black);
+            padding: 16px;
+            border-bottom: 2px solid var(--c-black);
+            font-size: 0.95rem;
+            background: var(--c-bg);
+        }
+
+        .legal-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--c-grey-light);
+            color: var(--c-grey-dark);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            vertical-align: top;
+        }
+
+        @media (max-width: 900px) {
+            :root { --pad-x: 24px; }
+            .header-cta { display: none; }
+            .simple-footer { flex-direction: column; align-items: flex-start; gap: 20px; border-top: none; }
+            .footer-contacts a { margin-left: 0; margin-right: 20px; }
+            .legal-wrapper { padding: 40px 0; }
+            .legal-title { font-size: 2.5rem; }
+            .legal-content { font-size: 1rem; }
+            .legal-table th, .legal-table td { padding: 12px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+    <header>
+        <a href="index.html" class="logo">Françoise</a>
+        <a href="index.html#pricing" class="header-cta">Get Started</a>
+    </header>
+
+    <main class="legal-wrapper">
+        <h1 class="legal-title">Subprocessors</h1>
+        <div class="legal-date">Last updated: March 2026</div>
+
+        <div class="legal-content">
+            <p>To deliver the Françoise service, we may engage certain third-party service providers as subprocessors. These subprocessors process data on our behalf and are contractually bound to:</p>
+            <ul>
+                <li>process data only on our documented instructions,</li>
+                <li>apply appropriate technical and organizational security measures, and</li>
+                <li>not use the data for their own purposes.</li>
+            </ul>
+            <p>This page lists our current subprocessors. We will update this list when we add or replace subprocessors.</p>
+
+            <h2>1. Infrastructure & AI Processing</h2>
+
+            <div class="legal-table-wrapper">
+                <table class="legal-table">
+                    <thead>
+                        <tr>
+                            <th>Subprocessor</th>
+                            <th>Country</th>
+                            <th>Service type</th>
+                            <th>Data processed</th>
+                            <th>When used</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Microsoft Azure</strong></td>
+                            <td>United States</td>
+                            <td>Cloud infrastructure (compute, storage, networking, databases)</td>
+                            <td>Account data, design system data, application logs, anonymized analytics; ephemeral processing of mockup content during checks</td>
+                            <td>Continuous operation of the service</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Google (Gemini APIs)</strong></td>
+                            <td>United States</td>
+                            <td>AI processing (LLM API)</td>
+                            <td>Mockup images and layout fragments used for analysis during validation flows</td>
+                            <td>Technical Validation and Business Proof phases only</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>2. Categories of data processed</h2>
+            <p>Depending on how you use the service, subprocessors may handle the following categories of data:</p>
+            <ul>
+                <li><strong>Account data:</strong> email addresses and basic workspace information needed to provide access.</li>
+                <li><strong>Design system data:</strong> tokens, component definitions, rules and configuration used to run checks.</li>
+                <li><strong>Mockup and layout data:</strong> rendered images of mockups and limited layout fragments, processed ephemerally as part of a check.</li>
+                <li><strong>Operational data:</strong> logs and anonymized analytics related to performance, reliability, and usage.</li>
+            </ul>
+            <p>We do not instruct subprocessors to use your data to train, fine-tune, or otherwise improve their models.</p>
+
+            <h2>3. How we evaluate subprocessors</h2>
+            <p>Before engaging a new subprocessor, we:</p>
+            <ul>
+                <li>Assess their security and privacy practices based on publicly available documentation and, where appropriate, additional due diligence.</li>
+                <li>Ensure a written agreement is in place that requires the subprocessor to protect data consistent with our contractual commitments to customers.</li>
+                <li>Limit the scope of data and operations to what is necessary for the specific service they provide.</li>
+            </ul>
+
+            <h2>4. Changes to this list</h2>
+            <p>We may add or replace subprocessors as our service evolves. When we do so, we will update this page and, where required by contract or law, notify affected customers in advance, giving them an opportunity to raise questions or objections.</p>
+
+            <h2>5. Contact</h2>
+            <p>If you have any questions about our subprocessors or how they handle data on our behalf, please contact us at <a href="mailto:info@francoise.design">info@francoise.design</a></p>
+        </div>
+    </main>
+
+<footer class="site-footer reveal-up">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">Françoise</a>
+                <span class="footer-copyright">© 2026 Françoise Design Inc. All rights reserved.</span>
+            </div>
+
+            <div class="footer-nav">
+                <div class="footer-col">
+                    <span class="footer-col-title">Legal & Security</span>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/security">Security Overview</a>
+                    <a href="/subprocessors">Subprocessors</a>
+                </div>
+                <div class="footer-col">
+                    <span class="footer-col-title">Contact</span>
+                    <a href="mailto:ceo@francoise.design">ceo@francoise.design</a>
+                    <a href="https://wa.me/79035176391">WhatsApp</a>
+                </div>
+            </div>
+        </footer>
+</div>
+
+</body>
+</html>

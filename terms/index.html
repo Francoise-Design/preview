@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service — Françoise</title>
+    <style>
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
+        @font-face {
+            font-family: 'Ballonest';
+            src: local('Ballonest'), url('/static/Ballonest.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --c-black: #0F0F0F;
+            --c-grey-dark: #222222;
+            --c-grey-mid: #555555;
+            --c-grey-light: #E0E0E0;
+            --c-grey-pale: #F5F5F5;
+
+            --rgb-error: 217, 48, 37;
+            --c-error: rgb(var(--rgb-error));
+
+            --c-bg: #FFFFFF;
+            --c-surface: #FAFAFA;
+
+            --font-hand: 'Ballonest', cursive;
+            --font-display: 'Optima', sans-serif;
+            --font-body: 'Switzer', 'Inter', sans-serif;
+
+            --pad-x: 120px;
+
+            /* Animation Physics */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--c-bg);
+            color: var(--c-black);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        .page-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--pad-x);
+            position: relative;
+        }
+
+        /* --- 2. HEADER --- */
+        header {
+            padding: 32px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-hand);
+            font-size: 4.5rem;
+            color: var(--c-error);
+            line-height: 0.8;
+            transform: rotate(-3deg);
+            transition: transform 0.3s var(--ease-out-expo);
+        }
+
+        .header-cta {
+            font-size: 0.9rem; font-weight: 600; border: 1px solid var(--c-grey-light); padding: 12px 28px; border-radius: 4px; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center;
+        }
+        .header-cta:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
+
+/* --- UNIFIED SITE FOOTER --- */
+        .site-footer {
+            padding-top: 80px;
+            padding-bottom: 60px;
+            border-top: 1px solid var(--c-grey-light);
+            margin-top: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            color: var(--c-grey-mid);
+            font-size: 0.95rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            font-family: var(--font-hand);
+            font-size: 5rem;
+            color: var(--c-error);
+            display: block;
+            margin-bottom: 12px;
+            transform: rotate(-2deg);
+            text-decoration: none;
+            transition: transform 0.3s;
+            line-height: 1;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 80px;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: var(--c-black);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+        }
+
+        .footer-col a {
+            color: var(--c-grey-dark);
+            transition: color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .footer-col a:hover {
+            color: var(--c-error);
+        }
+
+        @media (max-width: 900px) {
+            .site-footer {
+                flex-direction: column;
+                gap: 48px;
+                border-top: none;
+                padding-top: 40px;
+            }
+            .footer-nav {
+                flex-direction: column;
+                gap: 40px;
+                width: 100%;
+            }
+        }
+
+        /* --- LEGAL CONTENT STYLES --- */
+        .legal-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 0;
+        }
+
+        .legal-title {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: var(--c-black);
+            letter-spacing: -0.02em;
+        }
+
+        .legal-date {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--c-grey-mid);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 64px;
+            display: inline-block;
+            background: var(--c-grey-pale);
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .legal-content {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--c-grey-dark);
+        }
+
+        .legal-content h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--c-black);
+            margin-top: 56px;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .legal-content h3 {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--c-black);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        .legal-content p {
+            margin-bottom: 24px;
+        }
+
+        .legal-content ul {
+            margin-bottom: 24px;
+            padding-left: 24px;
+            list-style-type: disc;
+        }
+
+        .legal-content li {
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+
+        .legal-content a {
+            color: var(--c-black);
+            text-decoration: underline;
+        }
+
+        .legal-content a:hover {
+            color: var(--c-error);
+        }
+
+        @media (max-width: 900px) {
+            :root { --pad-x: 24px; }
+            .header-cta { display: none; }
+            .simple-footer { flex-direction: column; align-items: flex-start; gap: 20px; border-top: none; }
+            .footer-contacts a { margin-left: 0; margin-right: 20px; }
+            .legal-wrapper { padding: 40px 0; }
+            .legal-title { font-size: 2.5rem; }
+            .legal-content { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+    <header>
+        <a href="index.html" class="logo">Françoise</a>
+        <a href="index.html#pricing" class="header-cta">Get Started</a>
+    </header>
+
+    <main class="legal-wrapper">
+        <h1 class="legal-title">Terms of Service</h1>
+        <div class="legal-date">Last updated: March 2026</div>
+
+        <div class="legal-content">
+            <p>These Terms of Service (“Terms”) govern your access to and use of the Françoise products, websites, and services (collectively, the “Service”) provided by Françoise (“we”, “us”, “our”). By accessing or using the Service, you agree to be bound by these Terms.</p>
+            <p>If you use the Service on behalf of an organization, you represent that you are authorized to accept these Terms on its behalf.</p>
+
+            <h2>1. Use of the Service</h2>
+
+            <h3>1.1. Eligibility</h3>
+            <p>You may use the Service only if you:</p>
+            <ul>
+                <li>are at least 18 years old, and</li>
+                <li>have the legal capacity to enter into a binding contract.</li>
+            </ul>
+            <p>If you are using the Service on behalf of an organization, you must have the authority to bind that organization to these Terms.</p>
+
+            <h3>1.2. Account registration</h3>
+            <p>You are responsible for:</p>
+            <ul>
+                <li>Providing accurate account information and keeping it up to date</li>
+                <li>Maintaining the confidentiality of your login credentials</li>
+                <li>All activities that occur under your account</li>
+            </ul>
+            <p>You must notify us promptly if you become aware of any unauthorized access to your account.</p>
+
+            <h2>2. License and Acceptable Use</h2>
+
+            <h3>2.1. License to use the Service</h3>
+            <p>Subject to your compliance with these Terms and any applicable order or subscription agreement, we grant you a limited, non‑exclusive, non‑transferable, revocable license to access and use the Service for your internal business purposes.</p>
+
+            <h3>2.2. Restrictions</h3>
+            <p>You agree not to:</p>
+            <ul>
+                <li>Reverse engineer, decompile, or attempt to derive the source code of the Service</li>
+                <li>Bypass or attempt to bypass any security or access controls</li>
+                <li>Use the Service to create a competing product or service</li>
+                <li>Use the Service for any unlawful, harmful, or abusive purpose</li>
+                <li>Upload or submit content that violates applicable laws or third‑party rights</li>
+            </ul>
+
+            <h3>2.3. Automated usage</h3>
+            <p>The Service is designed primarily for human‑driven workflows. Automated bulk runs via scripts or APIs that go beyond a reasonable operational threshold may impact service stability and are subject to prior written approval. We reserve the right to throttle or suspend excessive automated usage that jeopardizes the performance or security of the Service.</p>
+
+            <h2>3. Customer Content and Design Systems</h2>
+
+            <h3>3.1. Your ownership</h3>
+            <p>You retain all rights, title, and interest in and to:</p>
+            <ul>
+                <li>Your design systems and related materials</li>
+                <li>Your mockups and any content contained within them</li>
+                <li>Any other data or content you provide to the Service (collectively, “Customer Content”)</li>
+            </ul>
+            <p>Nothing in these Terms transfers ownership of Customer Content to us.</p>
+
+            <h3>3.2. License to Customer Content</h3>
+            <p>You grant us a limited, non‑exclusive, worldwide, royalty‑free license to process Customer Content solely for the purpose of:</p>
+            <ul>
+                <li>Providing and operating the Service</li>
+                <li>Configuring the Service to your design system</li>
+                <li>Running checks, generating results, and providing related analytics</li>
+            </ul>
+            <p>We do not use Customer Content to train, fine‑tune, or otherwise improve our machine learning models.</p>
+
+            <h3>3.3. Design system storage</h3>
+            <p>We store a representation of your design system (tokens, components, rules, configuration) solely to run checks and keep your configuration consistent over time. Upon your written request or within a reasonable period after contract termination, we will delete stored design system data, subject to any legal retention obligations.</p>
+
+            <h3>3.4. Mockup and layout processing</h3>
+            <p>Mockup images and layout fragments are processed ephemerally for the duration required to perform a check and return results. They are not retained as long‑term customer content.</p>
+
+            <h2>4. Third‑Party Services</h2>
+            <p>The Service may rely on or integrate with certain third‑party services, including:</p>
+            <ul>
+                <li>Microsoft Azure (United States) for cloud infrastructure (compute, storage, databases)</li>
+                <li>Google Gemini APIs (United States) for certain AI‑assisted analysis during Technical Validation and Business Proof phases</li>
+            </ul>
+            <p>These third parties act as our subprocessors and process data on our behalf in accordance with our Privacy Policy and data protection commitments. Your use of the Service does not create a direct contractual relationship between you and these third‑party providers.</p>
+
+            <h2>5. Privacy and Security</h2>
+            <p>Your use of the Service is also governed by our Privacy Policy and Security Overview, which describe how we collect, use, and protect information.</p>
+            <ul>
+                <li>Privacy Policy: explains what data we collect and how we handle it</li>
+                <li>Security Overview: describes our technical and organizational security measures</li>
+            </ul>
+            <p>By using the Service, you acknowledge that you have read and understood these documents.</p>
+
+            <h2>6. Fees and Payment</h2>
+            <p>Where the Service is provided on a paid basis under an order form, quote, or subscription agreement (collectively, an “Order”), the applicable fees, billing periods, and payment terms are defined in that Order.</p>
+            <ul>
+                <li>Fees are generally non‑refundable unless expressly stated otherwise in the Order.</li>
+                <li>If you fail to pay fees when due, we may suspend or limit your access to the Service after providing reasonable notice.</li>
+            </ul>
+            <p>For enterprise customers with a separate Master Service Agreement or similar contract, the pricing and payment terms in that contract will prevail over this Section in the event of conflict.</p>
+
+            <h2>7. Service Availability and Support</h2>
+            <p>We aim to provide a reliable, high‑quality service, but we do not guarantee uninterrupted availability.</p>
+
+            <h3>7.1. Standard support</h3>
+            <p>We provide standard support during business hours (9:00 AM – 6:00 PM in your primary operating timezone, Monday–Friday, excluding local public holidays). Support is available via a dedicated channel (for example, email or Slack) and covers:</p>
+            <ul>
+                <li>Application‑level issues</li>
+                <li>Model behavior and rule configuration questions</li>
+                <li>Bug reports and reproducible errors</li>
+            </ul>
+
+            <h3>7.2. SLA targets</h3>
+            <p>Unless otherwise agreed in a separate Order or enterprise contract, our target response times are:</p>
+            <ul>
+                <li>P1 — Critical (Service down or fully non‑functional): response within 2 business hours</li>
+                <li>P2 — Major (core feature unavailable, significant impact): response within 24 business hours</li>
+                <li>P3 — Minor (non‑blocking issues): response within 3 business days</li>
+            </ul>
+            <p>These are targets, not hard guarantees, and do not constitute a financial service level agreement unless explicitly stated in an Order.</p>
+
+            <h2>8. Intellectual Property</h2>
+            <p>Except for Customer Content, all rights, title, and interest in and to the Service (including software, models, algorithms, documentation, and branding) are owned by us or our licensors.</p>
+            <p>You receive no rights in the Service other than those expressly granted in these Terms.</p>
+
+            <h2>9. Confidentiality</h2>
+            <p>Each party may receive non‑public, confidential information from the other party in connection with the Service. Each party agrees to:</p>
+            <ul>
+                <li>Use such information only for the purpose of performing its obligations under these Terms or an applicable Order</li>
+                <li>Protect such information with at least the same level of care it uses to protect its own confidential information, and in any case no less than reasonable care</li>
+                <li>Not disclose it to any third party except to its employees and subprocessors who need to know it and are bound by appropriate confidentiality obligations</li>
+            </ul>
+            <p>Confidentiality obligations do not apply to information that is or becomes public through no fault of the receiving party, was lawfully known to the receiving party before disclosure, or is independently developed without use of the disclosing party’s information.</p>
+            <p>For enterprise customers, additional confidentiality terms may be set out in a separate NDA or master agreement.</p>
+
+            <h2>10. Disclaimers</h2>
+            <p>The Service is provided on an “as is” and “as available” basis.</p>
+            <p>To the maximum extent permitted by law, we disclaim all warranties, express or implied, including:</p>
+            <ul>
+                <li>Implied warranties of merchantability, fitness for a particular purpose, and non‑infringement</li>
+                <li>Any warranties that the Service will be uninterrupted or error‑free, or that it will meet your specific requirements or expectations</li>
+            </ul>
+            <p>You are responsible for how you use the results produced by the Service (for example, decisions made based on design check outputs).</p>
+
+            <h2>11. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law:</p>
+            <ul>
+                <li>We will not be liable for any indirect, incidental, consequential, special, punitive, or exemplary damages (including loss of profits, revenue, data, or goodwill), even if we have been advised of the possibility of such damages.</li>
+                <li>Our total aggregate liability arising out of or related to the Service and these Terms will not exceed the amounts paid by you for the Service during the twelve (12) months immediately preceding the event giving rise to the claim.</li>
+            </ul>
+            <p>Some jurisdictions do not allow limitations of liability in certain cases; in such cases, the above limitations will apply to the fullest extent permitted by applicable law.</p>
+
+            <h2>12. Term and Termination</h2>
+            <p>These Terms apply from the moment you first access or use the Service and continue until:</p>
+            <ul>
+                <li>Your account is closed, or</li>
+                <li>Any applicable subscription or Order is terminated</li>
+            </ul>
+            <p>We may suspend or terminate your access to the Service if:</p>
+            <ul>
+                <li>You materially breach these Terms and fail to cure the breach after notice, or</li>
+                <li>We are required to do so by law or by a court/authority decision</li>
+            </ul>
+            <p>Upon termination:</p>
+            <ul>
+                <li>Your right to access and use the Service ends</li>
+                <li>We will handle your data in accordance with our Privacy Policy (including deletion of design system data upon request)</li>
+            </ul>
+            <p>Sections that by their nature should survive termination (for example, payment obligations, confidentiality, disclaimers, limitations of liability, and governing law) will continue to apply.</p>
+
+            <h2>13. Governing Law and Dispute Resolution</h2>
+            <p>Unless otherwise specified in an Order or local mandatory law:</p>
+            <ul>
+                <li>These Terms are governed by the laws of Delaware, USA, excluding its conflict of law rules.</li>
+                <li>Any disputes arising out of or in connection with these Terms will be resolved by the competent courts located in Delaware, USA.</li>
+            </ul>
+
+            <h2>14. Changes to the Service and Terms</h2>
+            <p>We may update or modify the Service from time to time, for example to add features, improve performance, or address security issues.</p>
+            <p>We may also update these Terms. When we do, we will update the “Last updated” date at the top of this page. If changes are material, we will make reasonable efforts to notify you (for example, via email or in‑app notice).</p>
+            <p>Your continued use of the Service after the effective date of updated Terms constitutes your acceptance of the changes.</p>
+
+            <h2>15. Contact</h2>
+            <p>If you have any questions about these Terms, please contact us at <a href="mailto:info@francoise.design">info@francoise.design</a></p>
+        </div>
+    </main>
+
+<footer class="site-footer reveal-up">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">Françoise</a>
+                <span class="footer-copyright">© 2026 Françoise Design Inc. All rights reserved.</span>
+            </div>
+
+            <div class="footer-nav">
+                <div class="footer-col">
+                    <span class="footer-col-title">Legal & Security</span>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/security">Security Overview</a>
+                    <a href="/subprocessors">Subprocessors</a>
+                </div>
+                <div class="footer-col">
+                    <span class="footer-col-title">Contact</span>
+                    <a href="mailto:ceo@francoise.design">ceo@francoise.design</a>
+                    <a href="https://wa.me/79035176391">WhatsApp</a>
+                </div>
+            </div>
+        </footer>
+</div>
+
+</body>
+</html>

@@ -618,11 +618,85 @@
             font-size: 3.5rem; 
         }
         
-        /* --- SIMPLE FOOTER --- */
-        .simple-footer { padding-top: 80px; padding-bottom: 60px; border-top: 1px solid var(--c-grey-light); margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--c-grey-mid); font-size: 0.9rem; }
-        .footer-logo { font-family: var(--font-hand); font-size: 5rem; color: var(--c-error); display: block; margin-bottom: 12px; transform: rotate(-2deg); text-decoration: none; transition: transform 0.3s; }
-        .footer-contacts a { color: var(--c-black); border-bottom: 1px solid rgba(0,0,0,0.2); margin-left: 20px; }
-        .footer-contacts a:hover { border-bottom-color: var(--c-black); }
+/* --- UNIFIED SITE FOOTER --- */
+        .site-footer {
+            padding-top: 80px;
+            padding-bottom: 60px;
+            border-top: 1px solid var(--c-grey-light);
+            margin-top: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            color: var(--c-grey-mid);
+            font-size: 0.95rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            font-family: var(--font-hand);
+            font-size: 5rem;
+            color: var(--c-error);
+            display: block;
+            margin-bottom: 12px;
+            transform: rotate(-2deg);
+            text-decoration: none;
+            transition: transform 0.3s;
+            line-height: 1;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 80px;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: var(--c-black);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+        }
+
+        .footer-col a {
+            color: var(--c-grey-dark);
+            transition: color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .footer-col a:hover {
+            color: var(--c-error);
+        }
+
+        @media (max-width: 900px) {
+            .site-footer {
+                flex-direction: column;
+                gap: 48px;
+                border-top: none;
+                padding-top: 40px;
+            }
+            .footer-nav {
+                flex-direction: column;
+                gap: 40px;
+                width: 100%;
+            }
+        }
 
 /* --- ИСПРАВЛЕННЫЕ СТИЛИ МОДАЛКИ --- */
         .modal-overlay {

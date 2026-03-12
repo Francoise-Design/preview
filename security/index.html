@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Overview — Françoise</title>
+    <style>
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
+        @font-face {
+            font-family: 'Ballonest';
+            src: local('Ballonest'), url('/fonts/Ballonest.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --c-black: #0F0F0F;
+            --c-grey-dark: #222222;
+            --c-grey-mid: #555555;
+            --c-grey-light: #E0E0E0;
+            --c-grey-pale: #F5F5F5;
+
+            --rgb-error: 217, 48, 37;
+            --c-error: rgb(var(--rgb-error));
+
+            --c-bg: #FFFFFF;
+            --c-surface: #FAFAFA;
+
+            --font-hand: 'Ballonest', cursive;
+            --font-display: 'Optima', sans-serif;
+            --font-body: 'Switzer', 'Inter', sans-serif;
+
+            --pad-x: 120px;
+
+            /* Animation Physics */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--c-bg);
+            color: var(--c-black);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.7; }
+
+        .page-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 var(--pad-x);
+            position: relative;
+        }
+
+        /* --- 2. HEADER --- */
+        header {
+            padding: 32px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-hand);
+            font-size: 8.5rem;
+            color: var(--c-error);
+            line-height: 0.8;
+            transform: rotate(-3deg);
+            transition: transform 0.3s var(--ease-out-expo);
+        }
+
+        .header-cta {
+            font-size: 0.9rem; font-weight: 600; border: 1px solid var(--c-grey-light); padding: 12px 28px; border-radius: 4px; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center;
+        }
+        .header-cta:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
+
+/* --- UNIFIED SITE FOOTER --- */
+        .site-footer {
+            padding-top: 80px;
+            padding-bottom: 60px;
+            border-top: 1px solid var(--c-grey-light);
+            margin-top: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            color: var(--c-grey-mid);
+            font-size: 0.95rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            font-family: var(--font-hand);
+            font-size: 5rem;
+            color: var(--c-error);
+            display: block;
+            margin-bottom: 12px;
+            transform: rotate(-2deg);
+            text-decoration: none;
+            transition: transform 0.3s;
+            line-height: 1;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 80px;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: var(--c-black);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+        }
+
+        .footer-col a {
+            color: var(--c-grey-dark);
+            transition: color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .footer-col a:hover {
+            color: var(--c-error);
+        }
+
+        @media (max-width: 900px) {
+            .site-footer {
+                flex-direction: column;
+                gap: 48px;
+                border-top: none;
+                padding-top: 40px;
+            }
+            .footer-nav {
+                flex-direction: column;
+                gap: 40px;
+                width: 100%;
+            }
+        }
+        /* --- LEGAL CONTENT STYLES --- */
+        .legal-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 0;
+        }
+
+        .legal-title {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: var(--c-black);
+            letter-spacing: -0.02em;
+        }
+
+        .legal-date {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--c-grey-mid);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 64px;
+            display: inline-block;
+            background: var(--c-grey-pale);
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .legal-content {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--c-grey-dark);
+        }
+
+        .legal-content h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--c-black);
+            margin-top: 56px;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .legal-content h3 {
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--c-black);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        .legal-content p {
+            margin-bottom: 24px;
+        }
+
+        .legal-content ul {
+            margin-bottom: 24px;
+            padding-left: 24px;
+            list-style-type: disc;
+        }
+
+        .legal-content li {
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+
+        .legal-content a {
+            color: var(--c-black);
+            text-decoration: underline;
+        }
+
+        .legal-content a:hover {
+            color: var(--c-error);
+        }
+
+        @media (max-width: 900px) {
+            :root { --pad-x: 24px; }
+            .header-cta { display: none; }
+            .simple-footer { flex-direction: column; align-items: flex-start; gap: 20px; border-top: none; }
+            .footer-contacts a { margin-left: 0; margin-right: 20px; }
+            .legal-wrapper { padding: 40px 0; }
+            .legal-title { font-size: 2.5rem; }
+            .legal-content { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-container">
+    <header>
+        <a href="index.html" class="logo">Françoise</a>
+        <a href="index.html#pricing" class="header-cta">Get Started</a>
+    </header>
+
+    <main class="legal-wrapper">
+        <h1 class="legal-title">Security Overview</h1>
+        <div class="legal-date">Last updated: March 2026</div>
+
+        <div class="legal-content">
+            <p>This document describes how Françoise (“we”, “us”, “our”) protects your data when you use our Service.</p>
+
+            <h2>1. Architecture & Infrastructure</h2>
+            <p><strong>Cloud hosting (Azure)</strong><br>
+            Our backend runs on Microsoft Azure data centers located in the United States. Azure provides physical security, network isolation, and industry-standard certifications such as ISO 27001 and SOC reports for its infrastructure services.</p>
+            <p><strong>Application architecture</strong></p>
+            <ul>
+                <li>Backend services and databases are deployed in a hardened Azure environment.</li>
+                <li>Access to production systems is restricted to a small number of authorized employees on a need-to-know basis.</li>
+                <li>Customer workspaces are logically separated at the application level.</li>
+            </ul>
+            <p>We do not operate a single-tenant infrastructure: data isolation between customers is enforced through our application architecture and access controls rather than separate physical environments.</p>
+
+            <h2>2. Data Handling</h2>
+
+            <h3>2.1. Design systems</h3>
+            <p>To run checks, Françoise stores a representation of your design system:</p>
+            <ul>
+                <li>Tokens</li>
+                <li>Component definitions</li>
+                <li>Rule configurations and related metadata</li>
+            </ul>
+            <p>This data is used solely to validate your mockups against your design system. It is:</p>
+            <ul>
+                <li>Not shared with third parties, except with infrastructure providers that host our systems (e.g., Microsoft Azure)</li>
+                <li>Deleted upon your written request or within a reasonable period after contract termination, subject to legal retention requirements</li>
+            </ul>
+
+            <h3>2.2. Mockups and layout fragments</h3>
+            <p>Mockup images and layout fragments are processed ephemerally:</p>
+            <ul>
+                <li>Used only for the duration required to perform a specific check and return results</li>
+                <li>Not written to long-term persistent storage as customer content</li>
+            </ul>
+            <p>During Technical Validation and Business Proof phases, certain checks may use third-party AI services (such as Google Gemini) to assist with analysis. In such cases:</p>
+            <ul>
+                <li>Mockup content and layout fragments are transmitted over encrypted channels</li>
+                <li>Data is processed strictly to fulfill the requested check in line with the provider’s enterprise data protection commitments</li>
+            </ul>
+
+            <h3>2.3. Analytics data</h3>
+            <p>We retain anonymized, aggregated operational statistics, for example:</p>
+            <ul>
+                <li>Number of checks performed</li>
+                <li>Distribution of error types</li>
+                <li>Tool accuracy and performance metrics</li>
+                <li>High-level feature usage patterns</li>
+            </ul>
+            <p>These datasets do not identify individuals or specific customer organizations and are used only for internal analytics and product decisions.</p>
+
+            <h3>2.4. Model training</h3>
+            <p>We do not use your design system, mockups, layout fragments, or any customer content to train, fine-tune, or otherwise improve our machine learning models.</p>
+
+            <h2>3. Access Control & Authentication</h2>
+            <ul>
+                <li>Access to production infrastructure is limited to authorized personnel using individual accounts with strong authentication.</li>
+                <li>Access is granted based on least privilege and reviewed periodically.</li>
+                <li>Administrative operations are logged and monitored.</li>
+            </ul>
+            <p>On the product side, customers can manage user access to their workspace (for example, adding/removing team members and configuring their roles).</p>
+
+            <h2>4. Encryption & Network Security</h2>
+            <ul>
+                <li>Data in transit between your client and our backend, as well as between our backend and third-party processors (Azure, Google Gemini), is protected using industry-standard encryption (e.g., HTTPS/TLS).</li>
+                <li>Within Azure, we rely on secure networking configurations (virtual networks, access controls) to limit exposure of internal services.</li>
+            </ul>
+            <p>We do not intentionally store sensitive customer content (such as mockup images or layout fragments) in long-term storage; design system representations and configuration data are stored in managed Azure services protected by Azure’s underlying security controls.</p>
+
+            <h2>5. Application Security</h2>
+            <ul>
+                <li>We follow secure development practices and code review processes to reduce the risk of introducing vulnerabilities.</li>
+                <li>Identified security issues are triaged and remediated based on severity.</li>
+                <li>We use logging and monitoring to detect anomalous behavior and operational issues in the application.</li>
+            </ul>
+
+            <h2>6. Third-Party Providers & Subprocessors</h2>
+            <p>We rely on a small set of third-party providers to operate the Service:</p>
+            <ul>
+                <li>Microsoft Azure (United States) — infrastructure services (compute, storage, databases, networking)</li>
+                <li>Google (United States) — Google Gemini APIs used for certain AI processing tasks during Technical Validation and Business Proof phases</li>
+            </ul>
+            <p>These providers act as our subprocessors and are contractually bound to process data only on our instructions and to implement appropriate security measures. We maintain an up-to-date subprocessor list on our website and update it when we add or replace providers.</p>
+
+            <h2>7. Incident Response</h2>
+            <p>We maintain internal procedures designed to:</p>
+            <ul>
+                <li>Detect and investigate suspected security incidents</li>
+                <li>Mitigate and remediate confirmed incidents</li>
+                <li>Notify affected customers without undue delay when required by law or by our contractual commitments</li>
+            </ul>
+            <p>If you believe your data may have been compromised, please contact us immediately at <a href="mailto:info@francoise.design">info@francoise.design</a>.</p>
+
+            <h2>8. Customer Responsibilities</h2>
+            <p>Security is a shared responsibility. We expect customers to:</p>
+            <ul>
+                <li>Control access to their Françoise workspaces (for example, managing who has access from their organization)</li>
+                <li>Avoid uploading unnecessary personal or sensitive data into mockups and design system artifacts</li>
+                <li>Notify us promptly if they suspect unauthorized access to their accounts</li>
+            </ul>
+
+            <h2>9. On-Premise Deployment</h2>
+            <p>For customers with strict data residency or regulatory requirements, Françoise can be deployed as an on-premise solution inside the customer’s own infrastructure:</p>
+            <ul>
+                <li>All processing occurs within the customer’s environment (e.g., their own Azure subscription or data center)</li>
+                <li>Customer controls infrastructure-level security (network, OS, Kubernetes, etc.)</li>
+                <li>Françoise provides application-level configuration, update packages, and support</li>
+            </ul>
+            <p>In the on-premise model, Françoise does not have direct access to the customer’s production data; security controls and compliance posture are primarily determined by the customer’s environment and configurations.</p>
+
+            <h2>10. Contact</h2>
+            <p>If you have questions about this Security Overview or require additional details for vendor security assessments, please contact:<br>
+            Email: <a href="mailto:info@francoise.design">info@francoise.design</a></p>
+        </div>
+    </main>
+
+<footer class="site-footer reveal-up">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">Françoise</a>
+                <span class="footer-copyright">© 2026 Françoise Design Inc. All rights reserved.</span>
+            </div>
+
+            <div class="footer-nav">
+                <div class="footer-col">
+                    <span class="footer-col-title">Legal & Security</span>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/security">Security Overview</a>
+                    <a href="/subprocessors">Subprocessors</a>
+                </div>
+                <div class="footer-col">
+                    <span class="footer-col-title">Contact</span>
+                    <a href="mailto:ceo@francoise.design">ceo@francoise.design</a>
+                    <a href="https://wa.me/79035176391">WhatsApp</a>
+                </div>
+            </div>
+        </footer>
+</div>
+
+</body>
+</html>

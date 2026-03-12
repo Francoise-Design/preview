@@ -79,11 +79,85 @@
         }
         .header-cta:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
 
-        /* --- SIMPLE FOOTER --- */
-        .simple-footer { padding-top: 80px; padding-bottom: 60px; border-top: 1px solid var(--c-grey-light); margin-top: 80px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--c-grey-mid); font-size: 0.9rem; }
-        .footer-logo { font-family: var(--font-hand); font-size: 5rem; color: var(--c-error); display: block; margin-bottom: 12px; transform: rotate(-2deg); text-decoration: none; transition: transform 0.3s; }
-        .footer-contacts a { color: var(--c-black); border-bottom: 1px solid rgba(0,0,0,0.2); margin-left: 20px; }
-        .footer-contacts a:hover { border-bottom-color: var(--c-black); }
+/* --- UNIFIED SITE FOOTER --- */
+        .site-footer {
+            padding-top: 80px;
+            padding-bottom: 60px;
+            border-top: 1px solid var(--c-grey-light);
+            margin-top: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            color: var(--c-grey-mid);
+            font-size: 0.95rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            font-family: var(--font-hand);
+            font-size: 5rem;
+            color: var(--c-error);
+            display: block;
+            margin-bottom: 12px;
+            transform: rotate(-2deg);
+            text-decoration: none;
+            transition: transform 0.3s;
+            line-height: 1;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 80px;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-col-title {
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: var(--c-black);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+        }
+
+        .footer-col a {
+            color: var(--c-grey-dark);
+            transition: color 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .footer-col a:hover {
+            color: var(--c-error);
+        }
+
+        @media (max-width: 900px) {
+            .site-footer {
+                flex-direction: column;
+                gap: 48px;
+                border-top: none;
+                padding-top: 40px;
+            }
+            .footer-nav {
+                flex-direction: column;
+                gap: 40px;
+                width: 100%;
+            }
+        }
 
         /* --- LEGAL CONTENT STYLES --- */
         .legal-wrapper {
@@ -349,16 +423,27 @@
         </div>
     </main>
 
-    <footer class="simple-footer">
-        <div>
-            <a href="index.html" class="footer-logo">Françoise</a>
-            <span>© 2026 Françoise Design Inc. All rights reserved.</span>
-        </div>
-        <div class="footer-contacts">
-            <a href="mailto:ceo@francoise.design">ceo@francoise.design</a>
-            <a href="https://wa.me/79035176391">WhatsApp</a>
-        </div>
-    </footer>
+<footer class="site-footer reveal-up">
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">Françoise</a>
+                <span class="footer-copyright">© 2026 Françoise Design Inc. All rights reserved.</span>
+            </div>
+
+            <div class="footer-nav">
+                <div class="footer-col">
+                    <span class="footer-col-title">Legal & Security</span>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/security">Security Overview</a>
+                    <a href="/subprocessors">Subprocessors</a>
+                </div>
+                <div class="footer-col">
+                    <span class="footer-col-title">Contact</span>
+                    <a href="mailto:ceo@francoise.design">ceo@francoise.design</a>
+                    <a href="https://wa.me/79035176391">WhatsApp</a>
+                </div>
+            </div>
+        </footer>
 </div>
 
 </body>
