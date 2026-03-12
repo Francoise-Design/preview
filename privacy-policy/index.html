@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy — Françoise</title>
     <style>
-        /* --- GLOBAL VARIABLES & RESET (Из основного файла) --- */
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
         @font-face {
             font-family: 'Ballonest';
-            src: local('Ballonest'), url('https://fonts.cdnfonts.com/css/ballonest') format('woff2'); 
+            src: local('Ballonest'), url('/fonts/Ballonest.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
 
         :root {
@@ -17,28 +19,32 @@
             --c-grey-mid: #555555;
             --c-grey-light: #E0E0E0;
             --c-grey-pale: #F5F5F5;
-            --rgb-error: 217, 48, 37; 
-            --c-error: rgb(var(--rgb-error)); 
+
+            --rgb-error: 217, 48, 37;
+            --c-error: rgb(var(--rgb-error));
+
             --c-bg: #FFFFFF;
-            
+            --c-surface: #FAFAFA;
+
             --font-hand: 'Ballonest', cursive;
             --font-display: 'Optima', sans-serif;
             --font-body: 'Switzer', 'Inter', sans-serif;
 
             --pad-x: 120px;
+
+            /* Animation Physics */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        html { scroll-behavior: smooth; }
+
         body {
             background: var(--c-bg);
             color: var(--c-black);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
         a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
@@ -49,41 +55,50 @@
             margin: 0 auto;
             padding: 0 var(--pad-x);
             position: relative;
-            width: 100%;
         }
 
-        /* --- HEADER & FOOTER --- */
+        /* --- 2. HEADER --- */
         header {
             padding: 32px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .logo { 
-            font-family: var(--font-hand); 
-            font-size: 4.5rem; 
-            color: var(--c-error); 
-            line-height: 0.8; 
-            transform: rotate(-3deg); 
-            display: inline-block;
+
+        .logo {
+            font-family: var(--font-hand);
+            font-size: 8.5rem;
+            color: var(--c-error);
+            line-height: 0.8;
+            transform: rotate(-3deg);
+            transition: transform 0.3s var(--ease-out-expo);
         }
 
-        .header-cta { 
+        .header-cta {
             font-size: 0.9rem; font-weight: 600; border: 1px solid var(--c-grey-light); padding: 12px 28px; border-radius: 4px; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center;
         }
         .header-cta:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
 
-        .simple-footer { padding-top: 80px; padding-bottom: 60px; border-top: 1px solid var(--c-grey-light); margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; color: var(--c-grey-mid); font-size: 0.9rem; }
-        .footer-logo { font-family: var(--font-hand); font-size: 5rem; color: var(--c-error); display: block; margin-bottom: 12px; transform: rotate(-2deg); text-decoration: none; }
+        /* --- SIMPLE FOOTER --- */
+        .simple-footer { padding-top: 80px; padding-bottom: 60px; border-top: 1px solid var(--c-grey-light); margin-top: 80px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--c-grey-mid); font-size: 0.9rem; }
+        .footer-logo { font-family: var(--font-hand); font-size: 5rem; color: var(--c-error); display: block; margin-bottom: 12px; transform: rotate(-2deg); text-decoration: none; transition: transform 0.3s; }
         .footer-contacts a { color: var(--c-black); border-bottom: 1px solid rgba(0,0,0,0.2); margin-left: 20px; }
         .footer-contacts a:hover { border-bottom-color: var(--c-black); }
 
-        /* --- LEGAL CONTENT TYPOGRAPHY --- */
+        /* --- LEGAL CONTENT STYLES --- */
         .legal-wrapper {
-            padding: 80px 0 120px;
             max-width: 800px;
             margin: 0 auto;
+            padding: 80px 0;
+        }
+
+        .legal-title {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            color: var(--c-black);
+            letter-spacing: -0.02em;
         }
 
         .legal-date {
@@ -91,72 +106,70 @@
             font-size: 0.85rem;
             color: var(--c-grey-mid);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 24px;
-            display: block;
+            letter-spacing: 0.1em;
+            margin-bottom: 64px;
+            display: inline-block;
+            background: var(--c-grey-pale);
+            padding: 6px 12px;
+            border-radius: 4px;
         }
 
-        .legal-wrapper h1 {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 48px;
-            letter-spacing: -0.02em;
+        .legal-content {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--c-grey-dark);
         }
 
-        .legal-wrapper h2 {
+        .legal-content h2 {
             font-family: var(--font-display);
             font-size: 2rem;
-            line-height: 1.2;
-            margin-top: 48px;
-            margin-bottom: 24px;
             color: var(--c-black);
+            margin-top: 56px;
+            margin-bottom: 24px;
+            line-height: 1.2;
         }
 
-        .legal-wrapper h3 {
+        .legal-content h3 {
+            font-family: var(--font-body);
             font-size: 1.25rem;
-            margin-top: 32px;
+            font-weight: 700;
+            color: var(--c-black);
+            margin-top: 40px;
             margin-bottom: 16px;
         }
 
-        .legal-wrapper p {
-            font-size: 1.125rem;
-            line-height: 1.7;
-            color: var(--c-grey-dark);
+        .legal-content p {
             margin-bottom: 24px;
         }
 
-        .legal-wrapper ul {
-            margin-bottom: 32px;
+        .legal-content ul {
+            margin-bottom: 24px;
             padding-left: 24px;
+            list-style-type: disc;
         }
 
-        .legal-wrapper li {
-            font-size: 1.125rem;
-            line-height: 1.7;
-            color: var(--c-grey-dark);
-            margin-bottom: 12px;
+        .legal-content li {
+            margin-bottom: 8px;
+            padding-left: 8px;
         }
 
-        .legal-wrapper li strong {
+        .legal-content a {
             color: var(--c-black);
+            text-decoration: underline;
         }
 
-        .legal-wrapper a {
+        .legal-content a:hover {
             color: var(--c-error);
-            text-decoration: underline;
-            text-underline-offset: 4px;
         }
 
         @media (max-width: 900px) {
             :root { --pad-x: 24px; }
-            .legal-wrapper { padding: 40px 0 80px; }
-            .legal-wrapper h1 { font-size: 2.5rem; }
-            .legal-wrapper h2 { font-size: 1.75rem; }
-            .legal-wrapper p, .legal-wrapper li { font-size: 1rem; }
             .header-cta { display: none; }
             .simple-footer { flex-direction: column; align-items: flex-start; gap: 20px; border-top: none; }
             .footer-contacts a { margin-left: 0; margin-right: 20px; }
+            .legal-wrapper { padding: 40px 0; }
+            .legal-title { font-size: 2.5rem; }
+            .legal-content { font-size: 1rem; }
         }
     </style>
 </head>
@@ -169,55 +182,171 @@
     </header>
 
     <main class="legal-wrapper">
-        <span class="legal-date">Last Updated: March 2026</span>
-        <h1>Privacy Policy</h1>
-        
-        <p>Welcome to <strong>Françoise</strong> ("we," "our," or "us"). We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website (francoise.design) and use our automated design quality gate services.</p>
+        <h1 class="legal-title">Privacy Policy</h1>
+        <div class="legal-date">Last updated: March 2026</div>
 
-        <h2>1. Information We Collect</h2>
-        <p>We only collect information that is strictly necessary to provide our services and communicate with you.</p>
-        <ul>
-            <li><strong>Information You Provide to Us:</strong> When you fill out our onboarding or demo request forms, we collect your Work Email, Role, Company Name, Team Size, and Design System Type.</li>
-            <li><strong>Automatically Collected Information:</strong> We may collect standard basic log data (such as IP address, browser type, and timestamps) essential for maintaining website security and performance.</li>
-        </ul>
+        <div class="legal-content">
+            <p>This Privacy Policy explains how Françoise (“we”, “us”, “our”) collects, uses, and protects information when you use our products, websites, and services (collectively, the “Service”).</p>
+            <p>By using the Service, you agree to the practices described in this Privacy Policy.</p>
 
-        <h2>2. How We Handle Your Design Data</h2>
-        <p>Security and IP protection are the core of our platform. When you use the Françoise Figma plugin:</p>
-        <ul>
-            <li><strong>Zero-Retention Processing:</strong> We process your design files and tokens in ephemeral memory. Once the validation process is complete, all analyzed design data is immediately and permanently wiped from our servers.</li>
-            <li><strong>No AI Training:</strong> We guarantee that your Intellectual Property (IP), design systems, and usage patterns are <strong>never</strong> used to train our models or any third-party AI.</li>
-        </ul>
+            <h2>1. Who we are</h2>
+            <p>Françoise is a design quality assurance tool that analyzes Figma-based design systems and mockups to detect visual and system-level inconsistencies.</p>
+            <p>If you have any questions about this Policy or our data practices, you can contact us at:<br>
+            Email: <a href="mailto:info@francoise.design">info@francoise.design</a></p>
 
-        <h2>3. How We Use Your Information</h2>
-        <p>We use the contact information collected via our website forms exclusively to:</p>
-        <ul>
-            <li>Schedule onboarding sessions or Enterprise demos.</li>
-            <li>Respond to your direct inquiries.</li>
-            <li>Send you critical technical or account updates regarding our service.</li>
-        </ul>
-        <p>We do not sell, rent, or trade your personal information to third parties for marketing purposes.</p>
+            <h2>2. Information we collect</h2>
+            <p>We collect the following categories of information when you use the Service:</p>
 
-        <h2>4. Data Sharing and Third-Party Services</h2>
-        <p>We use trusted third-party services to facilitate our operations (e.g., routing demo requests via secure messaging protocols, or cloud hosting providers). These third parties are bound by strict confidentiality agreements and are permitted to use your data only to perform specific tasks on our behalf.</p>
+            <h3>2.1. Account information</h3>
+            <ul>
+                <li>Name (if you choose to provide it)</li>
+                <li>Email address</li>
+                <li>Role and organization name (if provided)</li>
+            </ul>
+            <p>We use this information to create and manage your account, communicate with you, and provide access to the Service.</p>
 
-        <h2>5. Your Rights (GDPR & CCPA)</h2>
-        <p>Depending on your location, you have the right to:</p>
-        <ul>
-            <li>Request access to the personal data we hold about you.</li>
-            <li>Request correction of inaccurate data.</li>
-            <li>Request deletion of your data ("Right to be Forgotten").</li>
-            <li>Withdraw your consent for data processing at any time.</li>
-        </ul>
-        <p>To exercise any of these rights, please contact us directly.</p>
+            <h3>2.2. Workspace and usage information</h3>
+            <ul>
+                <li>Workspace metadata (e.g., team or project names/IDs)</li>
+                <li>Log data about how you interact with the Service (features used, timestamps, error logs)</li>
+                <li>Aggregated statistics about checks (number of checks, types and frequency of violations, model accuracy metrics)</li>
+            </ul>
+            <p>This information helps us operate, secure, and improve the Service.</p>
 
-        <h2>6. Security</h2>
-        <p>We implement robust, enterprise-grade technical and organizational measures to protect your data against unauthorized access, loss, or alteration. While we strive to use commercially acceptable means to protect your personal information, no method of transmission over the Internet is 100% secure.</p>
+            <h3>2.3. Design system and mockup information</h3>
+            <p>To provide the core functionality of Françoise, we process:</p>
+            <ul>
+                <li><strong>Design system data:</strong> tokens, component definitions, rules, configuration and related metadata required to run checks against your design system.</li>
+                <li><strong>Mockup content:</strong> rendered images of mockups and limited fragments of layout code that are needed to perform a specific check.</li>
+            </ul>
+            <p>We do not intentionally require or collect your own customers’ personal data as part of design checks. If such data appears inside mockups (for example, names or email addresses in UI screenshots), it is processed only as part of the visual content necessary to perform the requested analysis.</p>
 
-        <h2>7. Contact Us</h2>
-        <p>If you have any questions or concerns about this Privacy Policy or our data practices, please reach out to our leadership team:</p>
-        <ul>
-            <li><strong>Email:</strong> <a href="mailto:ceo@francoise.design">ceo@francoise.design</a></li>
-        </ul>
+            <h2>3. How we use information</h2>
+            <p>We use the information we collect to:</p>
+            <ul>
+                <li>Provide, operate, and maintain the Service</li>
+                <li>Configure the tool to your design system and run design checks</li>
+                <li>Maintain and improve product performance, reliability, and user experience</li>
+                <li>Communicate with you about the Service, including updates and support</li>
+                <li>Monitor, prevent, and address security issues, fraud, and abuse</li>
+                <li>Generate anonymized, aggregated analytics about product usage</li>
+            </ul>
+            <p>We do not use your design system, mockups, layout fragments, or any customer content to train, fine-tune, or otherwise improve our machine learning models.</p>
+            <p><strong>Use of third-party AI services (Technical Validation & Business Proof)</strong><br>
+            As part of Technical Validation and Business Proof phases, we may use third-party AI services (such as Google Gemini) to process mockup images and layout fragments strictly for the purpose of running design checks. These services act as our processors and are contractually restricted from using your data for their own model training, in line with their enterprise data protection commitments.</p>
+
+            <h2>4. Data handling: design systems, mockups, and analytics</h2>
+
+            <h3>4.1. Design system data</h3>
+            <p>Your design system (tokens, components, rules, configuration) is stored solely for the purpose of running checks against it and keeping your configuration consistent over time.</p>
+            <ul>
+                <li>We do not share your design system with third parties, except with infrastructure providers that host our systems as described in Section 5.</li>
+                <li>We will permanently delete your design system data upon your written request or within a reasonable period after contract termination, subject to any legal retention requirements.</li>
+            </ul>
+
+            <h3>4.2. Mockups and layout fragments</h3>
+            <p>Mockup images and layout fragments are processed ephemerally for each check:</p>
+            <ul>
+                <li>They are used only to perform the analysis and deliver results back to you.</li>
+                <li>They are not retained beyond the duration that is technically required to process the check.</li>
+            </ul>
+            <p>Where third-party AI APIs (such as Google Gemini) are used to assist with analysis during Technical Validation and Business Proof, mockup content is transmitted over encrypted channels and processed only to fulfill the requested check, in line with those providers’ enterprise privacy commitments.</p>
+
+            <h3>4.3. Anonymized analytics</h3>
+            <p>We retain anonymized, aggregated operational statistics, such as:</p>
+            <ul>
+                <li>Total number of checks</li>
+                <li>Distribution of error types</li>
+                <li>Tool accuracy and performance metrics</li>
+                <li>High-level usage patterns (for example, how often certain features are used)</li>
+            </ul>
+            <p>These statistics do not identify you or your end users and are used only to understand how the product performs and to guide product decisions.</p>
+
+            <h2>5. How we share information</h2>
+            <p>We do not sell your personal data. We share information only in the following limited circumstances:</p>
+
+            <h3>5.1. Service providers (subprocessors)</h3>
+            <p>We use third-party vendors to help us operate and secure the Service. These providers act as our processors and are contractually bound to:</p>
+            <ul>
+                <li>Process data only on our documented instructions</li>
+                <li>Apply appropriate technical and organizational security measures</li>
+                <li>Not use the data for their own purposes</li>
+            </ul>
+            <p>Examples of such providers include:</p>
+            <ul>
+                <li><strong>Microsoft Azure (United States):</strong> cloud hosting, databases, and related infrastructure services for our backend.</li>
+                <li><strong>Google (United States):</strong> Google Gemini APIs used for certain AI processing tasks during Technical Validation and Business Proof phases.</li>
+            </ul>
+            <p>We maintain an up-to-date list of subprocessors on a dedicated page on our website.</p>
+
+            <h3>5.2. Legal requirements and safety</h3>
+            <p>We may disclose information if we reasonably believe it is necessary to:</p>
+            <ul>
+                <li>Comply with applicable laws, regulations, legal processes, or governmental requests</li>
+                <li>Enforce our agreements, including investigation of potential violations</li>
+                <li>Detect, prevent, or otherwise address fraud, security, or technical issues</li>
+                <li>Protect the rights, property, or safety of our users, the public, or Françoise</li>
+            </ul>
+
+            <h3>5.3. Business transfers</h3>
+            <p>If we are involved in a merger, acquisition, financing, or sale of assets, your information may be transferred as part of that transaction, subject to confidentiality obligations and this Privacy Policy (or an equivalent, updated policy that will be communicated to you).</p>
+
+            <h2>6. Legal basis for processing (EEA/UK users)</h2>
+            <p>Where applicable (for example, under the GDPR or UK GDPR), we process personal data on the following legal bases:</p>
+            <ul>
+                <li><strong>Performance of a contract:</strong> to provide and operate the Service you or your organization have requested.</li>
+                <li><strong>Legitimate interests:</strong> to secure and improve the Service, prevent abuse, and generate high-level product analytics, provided these interests are not overridden by your rights.</li>
+                <li><strong>Compliance with legal obligations:</strong> to comply with applicable laws and regulations.</li>
+            </ul>
+            <p>If we ever rely on your consent for specific processing, we will clearly request it and explain how you can withdraw it at any time.</p>
+
+            <h2>7. Data retention</h2>
+            <p>We retain information only for as long as necessary for the purposes described in this Policy or as required by law.</p>
+            <ul>
+                <li><strong>Account data:</strong> retained for as long as your account is active, and for a limited period thereafter if needed for billing, legal, or legitimate business purposes.</li>
+                <li><strong>Design system data:</strong> retained for the duration of the contract and deleted upon your written request or within a reasonable period after contract termination, subject to legal retention requirements.</li>
+                <li><strong>Mockups and layout fragments:</strong> processed per check and not retained beyond what is technically required to perform and deliver that check.</li>
+                <li><strong>Anonymized analytics:</strong> retained as long as necessary for internal reporting and product improvement; these datasets do not identify individuals or specific customer organizations.</li>
+            </ul>
+
+            <h2>8. Your rights</h2>
+            <p>Depending on your location and applicable law, you may have the following rights regarding your personal data:</p>
+            <ul>
+                <li><strong>Access:</strong> to obtain confirmation whether we process your personal data and receive a copy.</li>
+                <li><strong>Rectification:</strong> to correct inaccurate or incomplete personal data.</li>
+                <li><strong>Erasure:</strong> to request deletion of your personal data in certain circumstances.</li>
+                <li><strong>Restriction:</strong> to request restriction of processing in certain circumstances.</li>
+                <li><strong>Objection:</strong> to object to certain types of processing (for example, direct marketing or processing based on legitimate interests).</li>
+                <li><strong>Portability:</strong> to receive your personal data in a structured, commonly used, machine-readable format and transmit it to another controller where technically feasible.</li>
+            </ul>
+            <p>To exercise these rights, contact us at <a href="mailto:info@francoise.design">info@francoise.design</a>. We may need to verify your identity before responding. Some rights may be limited where we have an overriding legitimate interest or legal obligation.</p>
+            <p>If you believe your rights have been violated, you may also lodge a complaint with your local data protection authority.</p>
+
+            <h2>9. Security</h2>
+            <p>We use technical and organizational measures designed to protect your information against unauthorized access, loss, misuse, or alteration, including:</p>
+            <ul>
+                <li>Access controls and least-privilege principles for production systems</li>
+                <li>Encryption in transit where applicable</li>
+                <li>Logical separation of customer environments at the application level</li>
+                <li>Monitoring and logging for security-relevant events</li>
+            </ul>
+            <p>Our backend runs on Microsoft Azure data centers located in the United States, which implement industry-standard physical and infrastructure security controls. A separate Security Overview document provides more details on our security practices.</p>
+
+            <h2>10. International data transfers</h2>
+            <p>Because we rely on Microsoft Azure and Google Gemini services hosted in the United States, your information may be transferred to and processed in the United States and other countries outside your country of residence.</p>
+            <p>Where required by applicable law, we implement appropriate safeguards for such transfers, such as standard contractual clauses or equivalent mechanisms, to ensure a level of protection essentially equivalent to that in the EEA/UK.</p>
+
+            <h2>11. Children’s privacy</h2>
+            <p>The Service is not directed to children under the age of 16, and we do not knowingly collect personal data from children. If we become aware that we have collected personal information from a child, we will take steps to delete it. If you believe a child has provided us with personal data, please contact us at <a href="mailto:info@francoise.design">info@francoise.design</a>.</p>
+
+            <h2>12. Changes to this Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. When we do, we will revise the “Last updated” date at the top of this page. If we make material changes, we will notify you through the Service or by email where appropriate.</p>
+            <p>Your continued use of the Service after the effective date of any changes constitutes your acceptance of the revised Privacy Policy.</p>
+
+            <p><strong>Contact</strong><br>
+            For any questions or requests related to this Privacy Policy or your personal data, please contact: <a href="mailto:info@francoise.design">info@francoise.design</a></p>
+
+        </div>
     </main>
 
     <footer class="simple-footer">
