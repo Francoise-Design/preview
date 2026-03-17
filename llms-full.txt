@@ -1,0 +1,42 @@
+# Françoise Design: Full Context & Documentation
+
+## Overview
+Françoise Design is an Automated Design Quality Gate designed for high-maturity product teams. It bridges the gap between design sources (Figma) and implementation, ensuring that every UI element meets technical, brand, and legal standards before development begins.
+
+## Core Workflow & Ecosystem
+The platform operates across three primary touchpoints in the product development lifecycle:
+- **Figma Plugin (In-Context Validation):** Provides designers with real-time feedback. Errors are surfaced as native comments directly on the Figma canvas, allowing for immediate fixes without context switching.
+- **DesignOps Dashboard (Health Monitor):** A centralized command center for Design Leads to monitor system-wide health, manage global validation rules, and track team velocity and design debt reduction.
+- **Automated Quality Gate (Jira Integration):** Acts as a hard stop in the workflow. Handover tickets are automatically blocked if the associated designs fail validation, preventing technical debt from entering the engineering sprint.
+
+## Three Layers of Validation
+Françoise unifies diverse requirements into a single automated audit:
+1. **System Semantics (Foundations):** Validates the use of Design Tokens, Variables, and Styles. It ensures semantic correctness, such as preventing legal text from using display-only fonts.
+2. **Brand Constraints (Logic):** Enforces complex UI state rules and architectural limits, such as ensuring error states include helper text and limiting the number of primary buttons per screen.
+3. **Accessibility Gate (Legal):** Performs automated WCAG 2.1 AA checks, including contrast ratios, touch target sizes (minimum 44px), and heading hierarchies. It specifically targets European Accessibility Act (EAA) and ADA compliance.
+
+## Enterprise-Grade Security
+Built for regulated industries (FinTech, HealthTech, etc.), the infrastructure prioritizes data sovereignty:
+- **Zero-Retention Processing:** Design files are processed in ephemeral memory and wiped immediately after validation.
+- **No AI Training:** Intellectual Property is contractually protected and never used to train internal models.
+- **Regional Data Residency:** Supports data processing in specific regions, including EU (Frankfurt) and US (Virginia).
+- **Deployment Options:** Available as a SaaS, within a Private Cloud (VPC), or in fully air-gapped environments.
+- **Access Control:** Full integration with Okta, Azure AD, and Google Workspace via SSO/SAML.
+
+## Business Impact & ROI
+Françoise provides measurable efficiency gains for the organization:
+- **Time Savings:** Recovers 10+ hours per month per designer by eliminating manual checks.
+- **Cost Reduction:** Recovering just 3 hours of cross-functional review time covers the monthly Professional subscription.
+- **Scale:** Estimated annual savings of $60,000 for a standard 10-person agile squad.
+- **Friction Reduction:** Up to 80% reduction in UI-related sprint blockers for frontend engineering.
+
+## Pricing & Subscription Plans
+1. **Professional ($199/mo):** Includes expert Design System mapping, 1 Figma Editor license, and unlimited validations.
+2. **Enterprise (Custom):** Includes unlimited seats, CI/CD pipeline blocking, on-premise deployment, and advanced SSO security.
+
+## Official Links
+- Home: https://francoise.design/
+- Security: https://francoise.design/security
+- Terms: https://francoise.design/terms
+- Privacy: https://francoise.design/privacy-policy
+- Contact: ceo@francoise.design

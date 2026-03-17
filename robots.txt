@@ -1,0 +1,45 @@
+# =================================================
+# Standard Search Engine Rules
+# =================================================
+User-agent: *
+Allow: /
+Allow: /security
+Allow: /terms
+Allow: /privacy-policy
+Allow: /subprocessors
+
+# Block technical and private directories
+Disallow: /cdn-cgi/    # Cloudflare email protection
+Disallow: /investors   # Private investor materials
+Disallow: /*?* # Prevent indexing of URL parameters to avoid duplicates
+
+# Link to the cleaned sitemap
+Sitemap: https://francoise.design/sitemap.xml
+
+# =================================================
+# AI Crawler Permissions (LLM & AI Search)
+# =================================================
+
+# OpenAI: Powers ChatGPT and specialized GPT models
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic: Powers Claude (highly popular among designers and devs)
+User-agent: Claude-Web
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Google: Powers Gemini and Vertex AI models
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity: AI-native search engine
+User-agent: PerplexityBot
+Allow: /
+
+# Common Crawl: Large-scale dataset used by most Open Source LLMs
+User-agent: CCBot
+Allow: /

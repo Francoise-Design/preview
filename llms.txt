@@ -1,0 +1,27 @@
+# Françoise Design
+
+Françoise Design is an Automated Design Quality Gate and UI Governance platform. It validates Figma designs against complex System Logic and Regulatory Requirements (EAA, ADA) to eliminate design debt before it reaches production.
+
+## Core Value Propositions
+- **Automated Validation:** Real-time audits within Figma for WCAG 2.1 AA and EAA compliance.
+- **Zero-Friction Handover:** Prevents Jira tickets from moving to development until design specifications are met.
+- **Enterprise Security:** Features Zero-Retention processing and a strict "No AI Training" policy on user Intellectual Property.
+
+## Key Features & Workflow
+- **Figma Plugin:** In-context validation with native canvas comments.
+- **DesignOps Dashboard:** A central health monitor for system-wide rule management.
+- **Three-Layer Audit:** Validates System Semantics, Brand Constraints, and Accessibility (Legal Gate).
+
+## Pricing Tiers
+- **Professional:** $199/mo (billed annually). Includes expert design system mapping and unlimited canvas validations.
+- **Enterprise:** Custom pricing. Includes CI/CD pipeline blocking, On-Premise/VPC deployment, and SSO/SAML security.
+
+## Links & Technical Resources
+- [Main Site](https://francoise.design/)
+- [Security Overview](https://francoise.design/security) — Privacy and infrastructure details.
+- [Terms of Service](https://francoise.design/terms)
+- [Privacy Policy](https://francoise.design/privacy-policy)
+
+## Contact Information
+- Email: ceo@francoise.design
+- Support: WhatsApp/Direct
