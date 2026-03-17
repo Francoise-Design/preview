@@ -6,14 +6,13 @@
     <title>Francoise</title>
     
     <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500&display=swap" rel="stylesheet">
-    
     <link href="https://fonts.cdnfonts.com/css/ballonest" rel="stylesheet">
 
     <style>
     :root {
         --brand-red: #CE0016;
-        --brand-red-hover: #b00013; /* Цвет при наведении */
-        --text-grey: #666666;       /* Чуть темнее для читаемости */
+        --brand-red-hover: #b00013;
+        --text-grey: #666666;
         --footer-grey: #8a8a8a;
         --legal-grey: #cfcfcf;
     }
@@ -34,31 +33,47 @@
         justify-content: center;
         position: relative;
         overflow-x: hidden;
-        
-        /* NEW: Делает шрифты более тонкими и четкими на MacOS/iOS */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
     /* --- LOGO --- */
-    .logo {
-        font-family: 'Ballonest', sans-serif;
-        color: var(--brand-red);
-        /* Чуть уменьшил для баланса на десктопе, было 320 */
-        font-size: 300px; 
-        line-height: 1;
-        font-weight: normal;
-        -webkit-text-stroke: 0;
-        margin-top: -60px;
-        margin-bottom: -20px;
-        transform: rotate(-2deg); 
-        text-align: center;
-        position: relative;
-        z-index: 1;
-        
-        /* NEW: Легкая анимация появления */
-        animation: fadeInDown 0.8s ease-out;
-    }
+/* --- TEXT LOGO --- */
+.logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Выравнивает подзаголовки по правому краю */
+    margin-top: 40px;
+    margin-bottom: 80px;
+    z-index: 1;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.logo-main {
+    font-family: 'Ballonest', cursive;
+    font-size: 360px;
+    color: var(--brand-red);
+    font-weight: 400;
+    line-height: 0.8;
+    margin-bottom: 12px;
+}
+
+.logo-sub-title {
+    font-family: 'Switzer', sans-serif;
+    font-size: 24px;
+    font-weight: 800; /* Жирное начертание как на макете */
+    color: #000000;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+}
+
+.logo-sub-desc {
+    font-family: 'Switzer', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: #000000;
+}
 
     .content-wrapper {
         display: flex;
@@ -67,64 +82,45 @@
         position: relative;
         z-index: 2;
         width: 100%;
-        
-        /* NEW: Анимация появления с задержкой */
-        animation: fadeInUp 0.8s ease-out 0.2s backwards;
-    }
-
-    .subtitle {
-        font-family: 'Switzer', sans-serif;
-        font-weight: 300; /* Light */
-        color: var(--text-grey);
-        font-size: 18px;
-        /* NEW: Чуть больше воздуха между буквами для премиальности */
-        letter-spacing: 0.02em; 
-        margin-bottom: 64px; /* Системный отступ (кратный 8) */
-        text-align: center;
-        max-width: 620px;
-        line-height: 1.5; /* Улучшает читаемость */
     }
 
     /* --- BUTTONS --- */
-    .buttons-container {
-        display: flex;
-        justify-content: center;
-        gap: 32px; 
-        margin-bottom: 120px;
-    }
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 120px;
+    z-index: 6;
+}
 
     .btn {
         background-color: var(--brand-red);
         color: white;
         border: none;
-        padding: 16px 48px; /* Чуть шире */
+        padding: 16px 48px;
         font-family: 'Switzer', sans-serif;
-        font-weight: 500; /* Medium смотрится чище, чем Bold */
+        font-weight: 500;
         font-size: 14px;
-        letter-spacing: 0.05em; /* Разрядка для капса */
+        letter-spacing: 0.05em;
         border-radius: 6px;
         cursor: pointer;
         display: flex;
         align-items: center;
         gap: 12px;
         text-decoration: none;
-        
-        /* NEW: Плавные переходы для всего */
         transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        
-        /* NEW: Более мягкая, рассеянная тень в покое */
         box-shadow: 0 4px 12px rgba(206, 0, 22, 0.2);
+            z-index: 6;
     }
 
-    /* NEW: Эффект нажатия и наведения */
     .btn:hover {
         background-color: var(--brand-red-hover);
-        transform: translateY(-2px); /* Кнопка слегка "взлетает" */
-        box-shadow: 0 8px 20px rgba(206, 0, 22, 0.3); /* Тень растет */
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(206, 0, 22, 0.3);
     }
-    
+
     .btn:active {
-        transform: translateY(0); /* При клике вдавливается */
+        transform: translateY(0);
         box-shadow: 0 2px 8px rgba(206, 0, 22, 0.2);
     }
 
@@ -134,8 +130,7 @@
         fill: white;
         transition: transform 0.3s ease;
     }
-    
-    /* NEW: При наведении стрелка чуть едет вниз */
+
     .btn:hover svg {
         transform: translateY(2px);
     }
@@ -150,8 +145,6 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        
-        /* NEW: Анимация появления */
         animation: fadeIn 1s ease-out 0.5s backwards;
     }
 
@@ -171,20 +164,20 @@
         font-size: 14px;
         transition: color 0.2s ease;
     }
-    
+
     .social-link:hover {
-        color: var(--brand-red); /* Подсветка контактов брендовым цветом */
+        color: var(--brand-red);
     }
 
     .social-link svg {
         width: 18px;
         height: 18px;
-        fill: currentColor; /* Иконка красится вместе с текстом */
+        fill: currentColor;
         transition: fill 0.2s ease;
     }
 
     .copyright {
-        font-size: 11px; /* Чуть крупнее для читаемости */
+        font-size: 11px;
         color: var(--legal-grey);
         letter-spacing: 0.1em;
         text-transform: uppercase;
@@ -194,15 +187,15 @@
 
     /* --- АНИМАЦИИ --- */
     @keyframes fadeInDown {
-        from { opacity: 0; transform: translateY(-20px) rotate(-2deg); }
-        to { opacity: 1; transform: translateY(0) rotate(-2deg); }
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
-    
+
     @keyframes fadeInUp {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
     }
-    
+
     @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
@@ -210,20 +203,28 @@
 
     /* --- АДАПТИВ --- */
     @media (max-width: 768px) {
-        .logo { 
-            font-size: 280px; 
-            margin-top: 0;
-            margin-bottom: 0px;
-        }
-        
-        .subtitle {
-             padding: 0 20px;
-             font-size: 16px;
-        }
+.logo-wrapper {
+        align-items: center; /* Центрируем на мобильных */
+        margin-top: 20px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
 
-        .buttons-container { 
-            flex-direction: column; 
-            gap: 16px; 
+    .logo-main {
+        font-size: 80px;
+    }
+
+    .logo-sub-title {
+        font-size: 18px;
+    }
+
+    .logo-sub-desc {
+        font-size: 14px;
+    }
+
+        .buttons-container {
+            flex-direction: column;
+            gap: 16px;
             width: 80%;
             padding: 0 24px;
             margin-bottom: 60px;
@@ -231,42 +232,38 @@
         .btn {
             width: 100%;
             justify-content: center;
-            padding: 18px; /* Удобнее пальцем */
+            padding: 18px;
         }
 
         .footer {
-            position: relative; /* На мобилках футер не прибит, а идет потоком */
+            position: relative;
             bottom: auto;
-            flex-direction: column-reverse; /* Копирайт в самом низу */
+            flex-direction: column-reverse;
             gap: 40px;
             padding: 40px 20px;
             text-align: center;
         }
-        .social-links { 
-            flex-direction: column; 
-            gap: 20px; 
+        .social-links {
+            flex-direction: column;
+            gap: 20px;
         }
         .copyright {
             text-align: center;
             line-height: 1.6;
         }
     }
-</style>
+    </style>
 </head>
 <body>
 
-    <h1 class="logo">Francoise</h1>
-
     <div class="content-wrapper">
-        <p class="subtitle">automated design system compliance & accessibility layer</p>
+<div class="logo-wrapper">
+    <h1 class="logo-main">Francoise</h1>
+    <div class="logo-sub-title">The Last Mile solution</div>
+    <div class="logo-sub-desc">Turning AI generated chaos into production-ready code</div>
+</div>
 
         <div class="buttons-container">
-            <a href="one pager.pdf" class="btn">
-                ONE-PAGER
-                <svg viewBox="0 0 24 24">
-                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                </svg>
-            </a>
             <a href="Pitch Deck.pdf" class="btn">
                 PITCH-DECK
                 <svg viewBox="0 0 24 24">
