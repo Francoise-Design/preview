@@ -280,6 +280,22 @@
         .cmd-green { color: #27C93F; } .cmd-red { color: #FF5F56; font-weight: bold; } .cmd-blue { color: #569CD6; }
         @keyframes blink { 50% { opacity: 0; } }
 
+        /* --- AI NATIVE WORKFLOW SECTION --- */
+        .ai-workflow-section { padding-top: var(--spacing-section); }
+        .ai-step { display: flex; flex-direction: column; margin-bottom: 48px; }
+        .ai-step:last-child { margin-bottom: 0; }
+
+        .ai-step-num { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--c-black); font-weight: 600; margin-bottom: 8px; display: block; }
+        .ai-step-title { font-family: var(--font-display); font-size: 1.75rem; color: var(--c-black); line-height: 1.2; margin-bottom: 12px; }
+        .ai-step-desc { font-size: 1rem; line-height: 1.6; color: var(--c-grey-mid); }
+
+        .ai-closing { font-family: var(--font-display); font-size: 2rem; color: var(--c-black); line-height: 1.2; margin-top: 48px;  }
+
+        .ai-tools-label { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--c-grey-mid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 16px; margin-top: 40px; }
+        .ai-tools-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .ai-tool-tag { font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; background: var(--c-surface); border: 1px solid var(--c-grey-light); padding: 6px 16px; border-radius: 4px; color: var(--c-black); transition: all 0.2s; }
+        .ai-tool-tag:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
+
         /* --- VALIDATION SCOPE SECTION --- */
         .validation-scope-section {
             padding-top: var(--spacing-section);
@@ -981,6 +997,57 @@
 
         </div>
     </section>
+
+    <div class="page-container">
+    <section class="ai-workflow-section reveal-up">
+        <div class="impact-layout">
+
+            <div class="impact-left">
+                <h2 class="impact-headline" style="margin-bottom: 24px;">AI-Native<br>Workflow</h2>
+                <p class="hero-desc" style="margin-bottom: 32px; max-width: 100%;">Figma's MCP infrastructure now lets AI agents push rendered UI directly to the canvas. Françoise runs its Quality Gate on every frame, regardless of origin.</p>
+
+                <div class="ai-closing">
+                    The same gate. Every frame.<br><span style="color: var(--c-error);">Human or agent.</span>
+                </div>
+
+                <div>
+                    <span class="ai-tools-label">Compatible via Figma MCP:</span>
+                    <div class="ai-tools-list">
+                        <span class="ai-tool-tag">Claude Code</span>
+                        <span class="ai-tool-tag">Cursor</span>
+                        <span class="ai-tool-tag">GitHub Copilot</span>
+                        <span class="ai-tool-tag">Codex</span>
+                        <span class="ai-tool-tag">Factory</span>
+                        <span class="ai-tool-tag">Augment</span>
+                        <span class="ai-tool-tag">Warp</span>
+                        <span class="ai-tool-tag">Firebender</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impact-right">
+                <div class="ai-step">
+                    <span class="ai-step-num">01. GENERATION</span>
+                    <h3 class="ai-step-title">Agent generates UI</h3>
+                    <p class="ai-step-desc">Any AI dev tool writes code and pushes rendered frames to Figma via MCP. Claude Code renders live UI from production code using Figma's native <code style="background: var(--c-surface); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.9em; border: 1px solid var(--c-grey-light);">generate_figma_design</code> tool — producing fully editable frames with auto-layout, components, and variables.</p>
+                </div>
+
+                <div class="ai-step">
+                    <span class="ai-step-num">02. VALIDATION</span>
+                    <h3 class="ai-step-title">Françoise validates instantly</h3>
+                    <p class="ai-step-desc">The same three-layer check runs automatically — System Semantics, Brand Constraints, Accessibility Gate — before any human reviews the frame.</p>
+                </div>
+
+                <div class="ai-step">
+                    <span class="ai-step-num">03. APPROVAL</span>
+                    <h3 class="ai-step-title">Only clean frames proceed</h3>
+                    <p class="ai-step-desc">Non-compliant frames are flagged with exact fix instructions on the canvas. Jira handover remains blocked until validation passes.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
 
     <div class="page-container">
 
