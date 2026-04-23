@@ -3,309 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Francoise | Investor Portal</title>
-    <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500&display=swap" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/ballonest" rel="stylesheet">
-
+    <title>Françoise - Pitch Deck</title>
     <style>
-        :root {
-            --brand-red: #CE0016;
-            --brand-red-hover: #b00013;
-            --text-grey: #666666;
-            --footer-grey: #8a8a8a;
-            --legal-grey: #cfcfcf;
+        /* --- Подключение кастомного шрифта --- */
+        @font-face {
+            font-family: 'Jomhuria';
+            src: url('fonts/Jomhuria-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
 
-        * {
-            box-sizing: border-box;
+        /* Основные стили страницы */
+        body {
             margin: 0;
             padding: 0;
-        }
-
-        body {
-            font-family: 'Switzer', sans-serif;
-            background-color: #ffffff;
+            background-color: #d6e0e9; /* Светло-серо-голубой фон */
+            font-family: system-ui, -apple-system, sans-serif;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            position: relative;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* --- LOGO --- */
-        .logo {
-            font-family: 'Ballonest', sans-serif;
-            color: var(--brand-red);
-            font-size: clamp(120px, 15vw, 240px); /* Адаптивный размер от мобилки до десктопа */
-            line-height: 1;
-            font-weight: normal;
-            margin-top: 40px;
-            margin-bottom: 10px;
-            transform: rotate(-2deg);
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        /* --- CONTENT --- */
-        .content-wrapper {
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px 40px;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* Заголовок Françoise */
+        header {
+            text-align: center;
             position: relative;
             z-index: 2;
-            width: 100%;
-            max-width: 900px;
-            padding: 0 20px;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
 
-        .subtitle {
-            font-weight: 300; /* Light */
-            color: var(--text-grey);
-            font-size: 20px;
-            letter-spacing: 0.02em;
-            margin-bottom: 40px;
-            text-align: center;
-            line-height: 1.5;
+        .logo {
+            font-family: 'Jomhuria', 'Georgia', serif; /* Применили новый шрифт */
+            font-size: clamp(5rem, 18vw, 15rem);
+            font-weight: normal; /* Для кастомных шрифтов часто лучше сбрасывать жирность */
+            color: #e3001b; /* Ярко-красный */
+            margin: 0;
+            line-height: 0.8;
+            letter-spacing: -0.04em;
         }
 
-        .subtitle strong {
-            color: #000;
-            font-weight: 500;
-        }
-
-        /* --- VIDEO BLOCK --- */
-        .video-container {
-            width: 100%;
-            max-width: 800px;
-            background-color: #000;
+        /* --- Контейнер для видео --- */
+        .media-frame-wide {
+            width: 80%;
+            max-width: 880px;
             aspect-ratio: 16 / 9;
-            border-radius: 8px; /* Немного скруглим углы для элегантности */
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-bottom: 50px;
+            background: #ffffff;
             position: relative;
+            z-index: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.8s ease-out;
+            margin: -3% auto 80px auto;
         }
 
-        .video-container video,
-        .video-container iframe {
+        /* --- Стили для кнопки управления видео --- */
+        .video-control-btn {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.4);
             border: none;
-        }
-
-        /* --- BUTTONS --- */
-        .buttons-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 120px;
-        }
-
-        .btn {
-            background-color: var(--brand-red);
-            color: white;
-            border: none;
-            padding: 16px 40px;
-            font-family: 'Switzer', sans-serif;
-            font-weight: 500;
-            font-size: 14px;
-            letter-spacing: 0.05em;
-            border-radius: 4px; /* Более острые углы в стиле старого макета */
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .video-control-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+
+        .video-control-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #ffffff;
+        }
+
+        .icon-play {
+            margin-left: 2px;
+            display: none;
+        }
+
+        .icon-pause {
+            display: block;
+        }
+
+        .video-paused .icon-play {
+            display: block;
+        }
+
+        .video-paused .icon-pause {
+            display: none;
+        }
+
+        /* Секция с информацией под видео */
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* --- Кнопка скачивания Pitch Deck --- */
+        .pitch-link {
             display: inline-flex;
             align-items: center;
             gap: 12px;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 700;
+            color: #ffffff;
+            background-color: #000000;
+            padding: 16px 32px;
+            border-radius: 50px;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 4px 12px rgba(206, 0, 22, 0.2);
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .btn:hover {
-            background-color: var(--brand-red-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(206, 0, 22, 0.3);
-        }
-
-        .btn svg {
-            width: 14px;
-            height: 14px;
-            fill: white;
+        .pitch-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
             transition: transform 0.3s ease;
         }
 
-        .btn:hover svg {
+        .pitch-link:hover {
+            background-color: #e3001b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(227, 0, 27, 0.3);
+        }
+
+        .pitch-link:hover svg {
             transform: translateY(2px);
         }
 
-        /* --- FOOTER --- */
-        .footer {
-            position: absolute;
-            bottom: 40px;
-            width: 100%;
-            padding: 0 60px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            animation: fadeIn 1s ease-out 0.5s backwards;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--footer-grey);
-            font-weight: 500;
-            font-size: 14px;
-            transition: color 0.2s ease;
-        }
-
-        .social-link:hover {
-            color: var(--brand-red);
-        }
-
-        .social-link svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-            transition: fill 0.2s ease;
-        }
-
-        .copyright {
-            font-size: 11px;
-            color: var(--legal-grey);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+        /* Правый текстовый блок */
+        .description-block {
             text-align: right;
+            max-width: 600px;
+        }
+
+        .red-heading {
+            font-family: 'Jomhuria', 'Arial Black', sans-serif; /* Применили новый шрифт */
+            font-weight: normal; /* Сброс жирности для Jomhuria */
+            color: #e3001b;
+            font-size: clamp(2rem, 5vw, 3.5rem); /* Немного увеличил размер, так как Jomhuria обычно выглядит мельче стандартных шрифтов */
+            margin: 0 0 5px 0;
+            line-height: 0.9;
+            letter-spacing: 0;
+        }
+
+        .black-subheading {
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #1a1a1a;
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
             font-weight: 400;
+            margin: 0;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px) rotate(-2deg); }
-            to { opacity: 1; transform: translateY(0) rotate(-2deg); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* Подвал со ссылками */
+        footer {
+            margin-top: auto;
+            padding-bottom: 40px;
         }
 
-        /* --- MOBILE ADAPTATION --- */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+        }
+
+        .contact-links a {
+            color: #000000;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .contact-links a:hover {
+            opacity: 0.7;
+        }
+
+        .divider {
+            color: #000000;
+        }
+
+        /* Адаптивность */
         @media (max-width: 768px) {
-            body {
-                padding-top: 40px;
-                justify-content: flex-start;
+            .media-frame-wide {
+                width: 95%;
+                margin-top: 20px;
             }
-
-            .subtitle {
-                font-size: 16px;
-                margin-bottom: 30px;
-            }
-
-            .buttons-container {
+            .info-section {
                 flex-direction: column;
-                width: 100%;
-                gap: 16px;
-                margin-bottom: 60px;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .footer {
-                position: relative;
-                bottom: auto;
-                flex-direction: column-reverse;
-                gap: 30px;
-                padding: 40px 20px 20px;
+                align-items: center;
                 text-align: center;
             }
-
-            .social-links {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .copyright {
+            .description-block {
                 text-align: center;
-                line-height: 1.6;
+            }
+            .container {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
 
-    <h1 class="logo">Francoise</h1>
+<div class="container">
+    <header>
+        <h1 class="logo">Françoise</h1>
+    </header>
 
-    <div class="content-wrapper">
-        <p class="subtitle">
-            We win, no matter who wins the AI generation race.<br>
-            <strong>The deterministic governance layer for enterprise UI.</strong>
-        </p>
-
-        <div class="video-container">
-            <video controls playsinline poster="poster-image.jpg">
+    <main>
+        <div class="media-frame-wide reveal-up delay-200" id="heroVideoFrame">
+            <video id="heroVideo" autoplay muted loop playsinline
+                   style="width:100%; height:100%; object-fit:cover;">
                 <source src="video.mp4" type="video/mp4">
-                Ваш браузер не поддерживает тег video.
             </video>
+            <button class="video-control-btn" onclick="toggleHeroVideo()">
+                <svg class="icon-pause" viewBox="0 0 12 14">
+                    <rect width="4" height="14"/>
+                    <rect x="8" width="4" height="14"/>
+                </svg>
+                <svg class="icon-play" viewBox="0 0 12 14">
+                    <path d="M0 0L12 7L0 14V0Z"/>
+                </svg>
+            </button>
         </div>
+    </main>
 
-        <div class="buttons-container">
-            <a href="Pitch Deck.pdf" class="btn" download>
-                PITCH DECK (PDF)
-                <svg viewBox="0 0 24 24">
+    <section class="info-section">
+        <div class="left-col">
+            <a href="Pitch Deck.pdf" class="pitch-link" download>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
                 </svg>
-            </a>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="social-links">
-            <a href="mailto:daria@francoise.design" class="social-link">
-                <svg viewBox="0 0 24 24">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-                daria@francoise.design
-            </a>
-
-            <a href="https://www.linkedin.com/in/daria-kamyshina" target="_blank" rel="noopener noreferrer" class="social-link">
-                <svg viewBox="0 0 24 24">
-                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-1.41 0-2.45.81-2.87 1.57v-1.36h-3.2v8.35h3.2v-4.17c0-1.1.9-2 2-2 1.1 0 2 .9 2 2v4.17h3.13M6.5 7.5c-1.03 0-1.88.85-1.88 1.88S5.47 11.25 6.5 11.25s1.88-.85 1.88-1.87S7.53 7.5 6.5 7.5m1.6 11V10H4.9v8.5h3.2z"/>
-                </svg>
-                LinkedIn
+                Download Pitch Deck
             </a>
         </div>
 
-        <div class="copyright">
-            © 2026 FRANCOISE INC. DELAWARE C-CORP.<br>R&D: TEL AVIV, IL.
+        <div class="description-block">
+            <h2 class="red-heading">Neuro-symbolic verifier for<br>deterministic AI outputs</h2>
+            <p class="black-subheading">Smart as an LLM. Precise as math. Cost effective.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="contact-links">
+            <a href="mailto:daria@francoise.design">daria@francoise.design</a>
+            <span class="divider">|</span>
+            <a href="https://meet.francoise.design" target="_blank" rel="noopener">meet.francoise.design</a>
+            <span class="divider">|</span>
+            <a href="https://francoise.design" target="_blank" rel="noopener">francoise.design</a>
         </div>
     </footer>
+</div>
 
+<script>
+    function toggleHeroVideo() {
+        const v = document.getElementById('heroVideo'), c = document.getElementById('heroVideoFrame');
+        if (v.paused) {
+            v.play();
+            c.classList.remove('video-paused');
+        } else {
+            v.pause();
+            c.classList.add('video-paused');
+        }
+    }
+
+    function pauseAutoPlay() {
+        if(typeof globalTabInterval !== 'undefined' && globalTabInterval) {
+            clearInterval(globalTabInterval);
+        }
+    }
+</script>
 </body>
 </html>
