@@ -27,7 +27,6 @@
         .container {
             max-width: 1200px;
             width: 100%;
-            padding: 20px 40px;
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
@@ -41,13 +40,13 @@
         }
 
         .logo {
-            font-family: 'Jomhuria', 'Georgia', serif; /* Применили новый шрифт */
-            font-size: clamp(5rem, 18vw, 15rem);
-            font-weight: normal; /* Для кастомных шрифтов часто лучше сбрасывать жирность */
-            color: #e3001b; /* Ярко-красный */
+            font-family: 'Jomhuria', 'Georgia', serif;
+            font-size: clamp(6.5rem, 23vw, 19.5rem); /* Увеличили базовые и максимальные значения на ~30% */
+            font-weight: normal;
+            color: #e3001b;
             margin: 0;
             line-height: 0.8;
-            letter-spacing: -0.04em;
+            letter-spacing: 0.02em; /* Убрали минус, добавили небольшое расстояние между буквами */
         }
 
         /* --- Контейнер для видео --- */
@@ -63,7 +62,7 @@
             box-shadow: 0 40px 80px rgba(0,0,0,0.1);
             border: 1px solid rgba(0,0,0,0.05);
             transition: transform 0.8s ease-out;
-            margin: -3% auto 80px auto;
+            margin: -3% auto 20px auto;
         }
 
         /* --- Стили для кнопки управления видео --- */
