@@ -1,304 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Françoise - Pitch Deck</title>
-    <style>
-        /* --- Подключение кастомного шрифта --- */
-        @font-face {
-            font-family: 'Jomhuria';
-            src: url('fonts/Jomhuria-Regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Françoise — The IR Layer between Design and Code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Serif+Text:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #005F6B;
+    --teal-darker: #002F36;
+    --yellow: #F1A900;
+    --cyan: #00B9D1;
+    --paper: #FAF9F6;
+    --ink: #1A1310;
+  }
 
-        /* Основные стили страницы */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #d6e0e9; /* Светло-серо-голубой фон */
-            font-family: system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-        }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-        }
+  html, body {
+    background: var(--teal);
+    color: var(--paper);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-        /* Заголовок Françoise */
-        header {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
+  @media (max-width: 1024px) {
+    html, body { height: auto; overflow: auto; }
+  }
 
-        .logo {
-            font-family: 'Jomhuria', 'Georgia', serif;
-            font-size: clamp(6.5rem, 23vw, 19.5rem); /* Увеличили базовые и максимальные значения на ~30% */
-            font-weight: normal;
-            color: #e3001b;
-            margin: 0;
-            line-height: 0.8;
-            letter-spacing: 0.02em; /* Убрали минус, добавили небольшое расстояние между буквами */
-        }
+  /* Layout Frame */
+  .screen {
+    width: 100%;
+    height: 100%;
+    padding: 48px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
 
-        /* --- Контейнер для видео --- */
-        .media-frame-wide {
-            width: 80%;
-            max-width: 880px;
-            aspect-ratio: 16 / 9;
-            background: #ffffff;
-            position: relative;
-            z-index: 1;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: transform 0.8s ease-out;
-            margin: -3% auto 20px auto;
-        }
+  @media (max-width: 768px) {
+    .screen { padding: 32px 24px; min-height: 100vh; }
+  }
 
-        /* --- Стили для кнопки управления видео --- */
-        .video-control-btn {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
+  /* Header Layout */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-        .video-control-btn:hover {
-            background: rgba(0, 0, 0, 0.7);
-            transform: scale(1.05);
-        }
+  .header-left {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+  }
 
-        .video-control-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: #ffffff;
-        }
+  header .logo {
+    font-family: 'DM Serif Text', serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 18px;
+  }
 
-        .icon-play {
-            margin-left: 2px;
-            display: none;
-        }
+  .header-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
 
-        .icon-pause {
-            display: block;
-        }
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
 
-        .video-paused .icon-play {
-            display: block;
-        }
+  .link-book {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(250, 249, 246, 0.3);
+    padding-bottom: 2px;
+    transition: all 0.2s ease;
+  }
+  .link-book:hover {
+    color: var(--yellow);
+    border-bottom-color: var(--yellow);
+  }
 
-        .video-paused .icon-pause {
-            display: none;
-        }
+  /* Main Section */
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: end; /* Изменено с center на end: теперь левая и правая колонки идеально выровнены по нижней границе */
+    margin: auto 0;
+  }
 
-        /* Секция с информацией под видео */
-        .info-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 60px;
-        }
+  @media (max-width: 1024px) {
+    main { grid-template-columns: 1fr; gap: 48px; margin: 48px 0; align-items: stretch; }
+  }
 
-        /* --- Кнопка скачивания Pitch Deck --- */
-        .pitch-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            font-family: system-ui, -apple-system, sans-serif;
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            font-weight: 700;
-            color: #ffffff;
-            background-color: #000000;
-            padding: 16px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+  /* Left Column */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
 
-        .pitch-link svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            transition: transform 0.3s ease;
-        }
+  .tagline {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(38px, 4.5vw, 54px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
 
-        .pitch-link:hover {
-            background-color: #e3001b;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(227, 0, 27, 0.3);
-        }
+  .tagline .highlight-yellow { color: var(--yellow); }
+  .tagline .highlight-cyan { color: var(--cyan); }
 
-        .pitch-link:hover svg {
-            transform: translateY(2px);
-        }
+  .btn-deck {
+    background: var(--yellow);
+    color: var(--ink);
+    padding: 16px 36px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease;
+    align-self: flex-start;
+  }
+  .btn-deck:hover {
+    background: var(--paper);
+  }
 
-        /* Правый текстовый блок */
-        .description-block {
-            text-align: right;
-            max-width: 600px;
-        }
+  /* Right Column (Video 16:9) */
+  .demo-container {
+    width: 100%;
+    aspect-ratio: 2090 / 1080;
+    background: var(--teal-darker);
+    border: 1px solid rgba(250,249,246,0.1);
+    position: relative;
+    box-shadow: 0 32px 64px rgba(0,0,0,0.25);
+    overflow: hidden;
+  }
 
-        .red-heading {
-            font-family: 'Jomhuria', 'Arial Black', sans-serif; /* Применили новый шрифт */
-            font-weight: normal; /* Сброс жирности для Jomhuria */
-            color: #e3001b;
-            font-size: clamp(2rem, 5vw, 3.5rem); /* Немного увеличил размер, так как Jomhuria обычно выглядит мельче стандартных шрифтов */
-            margin: 0 0 5px 0;
-            line-height: 0.9;
-            letter-spacing: 0;
-        }
+  .demo-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-        .black-subheading {
-            font-family: system-ui, -apple-system, sans-serif;
-            color: #1a1a1a;
-            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-            font-weight: 400;
-            margin: 0;
-        }
+  /* Footer Layout */
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(250,249,246,0.12);
+    padding-top: 24px;
+  }
 
-        /* Подвал со ссылками */
-        footer {
-            margin-top: auto;
-            padding-bottom: 40px;
-        }
+  @media (max-width: 768px) {
+    footer { flex-direction: column; gap: 24px; align-items: flex-start; }
+  }
 
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1rem;
-        }
+  .copyright {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    opacity: 0.5;
+    line-height: 1.5;
+  }
 
-        .contact-links a {
-            color: #000000;
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
+  .contacts-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+  }
 
-        .contact-links a:hover {
-            opacity: 0.7;
-        }
+  @media (max-width: 768px) {
+    .contacts-block { align-items: flex-start; }
+  }
 
-        .divider {
-            color: #000000;
-        }
+  .contacts-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 2px;
+  }
 
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .media-frame-wide {
-                width: 95%;
-                margin-top: 20px;
-            }
-            .info-section {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .description-block {
-                text-align: center;
-            }
-            .container {
-                padding: 20px;
-            }
-        }
-    </style>
+  .contact-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    color: var(--paper);
+    opacity: 0.7;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-bottom: 1px dashed rgba(250,249,246,0.15);
+  }
+  .contact-link:hover {
+    opacity: 1;
+    color: var(--yellow);
+    border-bottom-color: var(--yellow);
+  }
+</style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1 class="logo">Françoise</h1>
-    </header>
+<div class="screen">
 
-    <main>
-        <div class="media-frame-wide reveal-up delay-200" id="heroVideoFrame">
-            <video id="heroVideo" autoplay muted loop playsinline
-                   style="width:100%; height:100%; object-fit:cover;">
-                <source src="video.mp4" type="video/mp4">
-            </video>
-            <button class="video-control-btn" onclick="toggleHeroVideo()">
-                <svg class="icon-pause" viewBox="0 0 12 14">
-                    <rect width="4" height="14"/>
-                    <rect x="8" width="4" height="14"/>
-                </svg>
-                <svg class="icon-play" viewBox="0 0 12 14">
-                    <path d="M0 0L12 7L0 14V0Z"/>
-                </svg>
-            </button>
-        </div>
-    </main>
+  <header>
+    <div class="header-left">
+      <span class="logo">Françoise</span>
+      <span class="header-meta">Pre-seed · 2026</span>
+    </div>
+    <div class="header-right">
+      <a href="#" class="link-book">Book a meeting</a>
+    </div>
+  </header>
 
-    <section class="info-section">
-        <div class="left-col">
-            <a href="Pitch Deck.pdf" class="pitch-link" download>
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                </svg>
-                Download Pitch Deck
-            </a>
-        </div>
+  <main>
+    <div class="hero-content">
+      <h1 class="tagline">
+        The <span class="highlight-yellow">intermediate representation</span> layer
+        between <span class="highlight-cyan">design</span> and code
+      </h1>
 
-        <div class="description-block">
-            <h2 class="red-heading">Neuro-symbolic verifier for<br>deterministic AI outputs</h2>
-            <p class="black-subheading">Smart as an LLM. Precise as math. Cost effective.</p>
-        </div>
-    </section>
+      <a href="#" class="btn-deck">Download a deck</a>
+    </div>
 
-    <footer>
-        <div class="contact-links">
-            <a href="mailto:daria@francoise.design">daria@francoise.design</a>
-            <span class="divider">|</span>
-            <a href="https://meet.francoise.design" target="_blank" rel="noopener">meet.francoise.design</a>
-            <span class="divider">|</span>
-            <a href="https://francoise.design" target="_blank" rel="noopener">francoise.design</a>
-        </div>
-    </footer>
+    <div class="demo-container">
+      <video class="demo-video" autoplay loop muted playsinline controls poster="poster.jpg">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </main>
+
+  <footer>
+    <div class="copyright">
+      <div>© Françoise Design Inc.</div>
+      <div style="opacity: 0.6;">US incorporated</div>
+    </div>
+
+    <div class="contacts-block">
+      <div class="contacts-label">Connect</div>
+      <a href="mailto:daria@francoise.design" class="contact-link">daria@francoise.design</a>
+      <a href="https://www.linkedin.com/in/daria-kamyshina" target="_blank" rel="noopener" class="contact-link">linkedin.com/in/daria-kamyshina</a>
+    </div>
+  </footer>
+
 </div>
 
-<script>
-    function toggleHeroVideo() {
-        const v = document.getElementById('heroVideo'), c = document.getElementById('heroVideoFrame');
-        if (v.paused) {
-            v.play();
-            c.classList.remove('video-paused');
-        } else {
-            v.pause();
-            c.classList.add('video-paused');
-        }
-    }
-
-    function pauseAutoPlay() {
-        if(typeof globalTabInterval !== 'undefined' && globalTabInterval) {
-            clearInterval(globalTabInterval);
-        }
-    }
-</script>
 </body>
 </html>
