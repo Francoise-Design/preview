@@ -1,1160 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-          content="Françoise automates design QA directly in Figma — validates design tokens, brand rules and WCAG 2.1 AA accessibility before dev handover. Built for enterprise design systems."/>
-    <meta property="og:title" content="AI Design Quality Gate for Enterprise Teams | Françoise"/>
-    <meta property="og:description"
-          content="Automate Figma QA: design tokens, brand rules, WCAG 2.1 AA — validated before dev handover. Zero technical debt from design."/>
-    <meta property="og:image" content="https://francoise.design/og-image.png"/>
-    <meta property="og:url" content="https://francoise.design/"/>
-    <meta property="og:type" content="website"/>
-    <meta name="twitter:card" content="summary_large_image"/>
-    <title>AI Design QA for Figma | Automated WCAG & Design System Validation | Françoise</title>
-    <style>
-        /* --- 1. GLOBAL VARIABLES & RESET --- */
-        @font-face {
-            font-family: 'Ballonest';
-            src: local('Ballonest'), url('/fonts/Ballonest.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Françoise — Landing Wireframe (structure only)</title>
+<style>
+  :root{ --ink:#111; --mut:#888; --line:#ccc; --bg:#fff; --note:#aaa; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.4;padding:0 0 80px;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+  section{padding:80px 0;}
+  .h1{font-size:56px;line-height:1.04;font-weight:normal;letter-spacing:-.02em;}
+  .h2{font-size:40px;line-height:1.08;font-weight:normal;letter-spacing:-.01em;}
+  .sub{font-size:21px;line-height:1.45;color:#333;margin-top:20px;max-width:680px;}
+  .body{font-size:21px;line-height:1.5;color:#333;margin-top:18px;max-width:680px;}
+  .accent{font-size:27px;line-height:1.3;margin:0;max-width:640px;border-left:3px solid var(--ink);padding-left:20px;}
+  .proof{font-size:15px;color:var(--mut);margin-bottom:40px;}
+  .cta{display:inline-block;border:1.5px solid var(--ink);padding:14px 26px;font-family:ui-monospace,Menlo,monospace;font-size:15px;}
+  .cta.secondary{border:none;border-bottom:1px solid var(--mut);padding:14px 0;margin-left:28px;color:var(--mut);font-size:14px;}
+  .cta-row{margin-top:32px;}
+  .ph{border:1px dashed var(--line);text-align:center;color:var(--mut);font-family:ui-monospace,Menlo,monospace;font-size:12px;line-height:1.7;display:flex;flex-direction:column;justify-content:center;align-items:center;}
+  .ph .lbl{font-size:11px;letter-spacing:.06em;color:var(--note);text-transform:uppercase;}
+  .ph .desc{margin-top:8px;color:#555;font-size:12px;max-width:90%;}
+  .hero-media{min-height:300px;margin-top:40px;padding:30px;}
+  .hero-media .frames{margin-top:16px;font-size:11px;color:var(--note);text-align:left;max-width:580px;}
+  .hero-media .frames div{padding:4px 0;border-top:1px dotted var(--line);}
+  .minis{display:flex;gap:18px;margin-top:36px;}
+  .minis .ph{flex:1;min-height:150px;}
+  .cards{margin-top:44px;display:flex;flex-direction:column;gap:8px;}
+  .card{display:flex;gap:28px;align-items:center;padding:28px 0;}
+  .card .txt{flex:1 1 50%;}
+  .card .ct{font-size:22px;font-weight:bold;letter-spacing:-.01em;}
+  .card .cd{font-size:16px;color:#444;margin-top:8px;line-height:1.45;max-width:420px;}
+  .card .ph{flex:1 1 50%;min-height:150px;}
+  .card:nth-child(even){flex-direction:row-reverse;}
+  .block-illu{min-height:200px;margin-top:36px;}
+  .accent-row{display:flex;gap:32px;align-items:center;margin-top:36px;}
+  .accent-row .ph{flex:1;min-height:180px;}
+  .accent-row .accent{flex:1;}
+  .promo-tag{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:11px;text-transform:uppercase;letter-spacing:.05em;border:1px solid var(--ink);padding:4px 8px;margin-bottom:16px;}
+  @media(max-width:760px){
+    .h1{font-size:38px;} .h2{font-size:28px;} .sub,.body{font-size:18px;}
+    .minis{flex-direction:column;}
+    .card,.card:nth-child(even){flex-direction:column;align-items:stretch;gap:16px;}
+    .accent-row{flex-direction:column;}
+  }
 
-        :root {
-            --c-black: #0F0F0F;
-            --c-grey-dark: #222222;
-            --c-grey-mid: #555555;
-            --c-grey-light: #E0E0E0;
-            --c-grey-pale: #F5F5F5;
-
-            --rgb-error: 217, 48, 37;
-            --c-error: rgb(var(--rgb-error));
-
-            --c-bg: #FFFFFF;
-            --c-surface: #FAFAFA;
-
-            --font-hand: 'Ballonest', cursive;
-            --font-display: 'Optima', sans-serif;
-            --font-body: 'Switzer', 'Inter', sans-serif;
-
-            --pad-x: 120px;
-            --gap-grid: 60px;
-
-            /* --- RHYTHM SYSTEM --- */
-            --spacing-section: 160px;
-            --spacing-block: 80px;
-
-            /* Animation Physics */
-            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        button { cursor: pointer; border: none; outline: none; background: none; }
-
-        body {
-            background: var(--c-bg);
-            color: var(--c-black);
-            font-family: var(--font-body);
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
-        a:hover { opacity: 0.7; }
-
-        .page-container {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 var(--pad-x);
-            position: relative;
-        }
-
-        /* --- ANIMATION UTILITIES --- */
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
-        }
-        .reveal-up.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .delay-100 { transition-delay: 0.1s; }
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-300 { transition-delay: 0.3s; }
-
-        /* --- ZONING --- */
-        .full-width-section {
-            width: 100%;
-            position: relative;
-            padding: var(--spacing-section) 0;
-        }
-
-        .bg-surface {
-            background-color: var(--c-surface);
-            border-top: 1px solid rgba(0,0,0,0.05);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        /* Chapter Labels (Vertical) */
-        .chapter-label {
-            position: absolute;
-            left: 24px;
-            top: var(--spacing-section);
-            font-family: var(--font-display);
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--c-black);
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
-        }
-        .chapter-label::after {
-            content: ''; display: block; width: 1px; height: 40px; background: var(--c-error); margin-top: 16px; margin-right: 5px;
-        }
-
-        @media (max-width: 1400px) { .chapter-label { display: none; } }
-
-        /* --- 2. HEADER --- */
-        header {
-            padding: 32px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 80px;
-        }
-
-        .logo {
-            font-family: var(--font-hand);
-            font-size: 4.5rem;
-            color: var(--c-error);
-            line-height: 0.8;
-            transform: rotate(-3deg);
-            transition: transform 0.3s var(--ease-out-expo);
-        }
-
-        .header-cta {
-            font-size: 0.9rem; font-weight: 600; border: 1px solid var(--c-grey-light); padding: 12px 28px; border-radius: 4px; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center;
-        }
-        .header-cta:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
-
-        /* --- 3. CENTERED HERO SECTION --- */
-        .hero-section.centered {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding-bottom: var(--spacing-section);
-        }
-        .hero-content.centered {
-            max-width: 800px;
-            margin-bottom: 60px;
-        }
-        .hero-content.centered h1 {
-            font-family: var(--font-display);
-            font-size: 5rem;
-            line-height: 1.05;
-            letter-spacing: -0.02em;
-            margin-bottom: 24px;
-        }
-        .hero-eyebrow {
-            font-family: 'Courier New', monospace; font-size: 0.85rem; text-transform: uppercase;
-            letter-spacing: 0.1em; color: var(--c-grey-mid); margin-bottom: 32px; display: inline-block;
-            background: var(--c-grey-pale); padding: 6px 12px; border-radius: 4px;
-        }
-        .hero-desc.centered {
-            font-size: 1.125rem;
-            line-height: 1.6;
-            color: var(--c-grey-dark);
-            max-width: 600px;
-            margin: 0 auto 48px;
-        }
-        .hero-actions.centered {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            display: inline-flex; align-items: center; justify-content: center;
-            background: var(--c-black); color: #fff; padding: 20px 40px;
-            text-decoration: none; font-weight: 500; font-size: 1.05rem;
-            transition: all 0.3s var(--ease-out-expo); border-radius: 4px;
-        }
-        .btn-primary:hover {
-            background: var(--c-error);
-            transform: translateY(-4px);
-            box-shadow: 0 15px 30px rgba(var(--rgb-error), 0.25);
-        }
-
-        .btn-secondary {
-            display: inline-flex; align-items: center; justify-content: center;
-            background: transparent; color: var(--c-black); padding: 20px 40px;
-            text-decoration: none; font-weight: 500; font-size: 1.05rem;
-            border: 1px solid var(--c-grey-light); transition: all 0.3s var(--ease-out-expo); border-radius: 4px;
-        }
-        .btn-secondary:hover {
-            background: var(--c-black); color: #ffffff; border-color: var(--c-black);
-            transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .media-frame-wide {
-            width: 100%;
-            max-width: 1100px;
-            aspect-ratio: 16 / 9;
-            background: var(--c-surface);
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: transform 0.8s var(--ease-out-expo);
-        }
-        .media-frame-wide:hover { transform: scale(1.01); }
-
-        .video-control-btn { position: absolute; bottom: 20px; right: 20px; width: 56px; height: 56px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; }
-        .video-control-btn:hover { transform: scale(1.1); }
-        .icon-play, .icon-pause { width: 16px; height: 16px; fill: var(--c-black); }
-        .icon-play { display: none; margin-left: 4px; }
-        .video-paused .icon-pause { display: none; } .video-paused .icon-play { display: block; }
-
-        /* --- VALIDATION SCOPE SECTION --- */
-        .validation-scope-section { padding-top: var(--spacing-section); padding-bottom: var(--spacing-section); }
-        .scope-header { max-width: 800px; margin-bottom: var(--spacing-block); }
-        .scope-headline { font-family: var(--font-display); font-size: 3.5rem; line-height: 1.1; margin-bottom: 24px; color: var(--c-black); }
-        .scope-sub { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); }
-        .scope-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-        .scope-grid .scope-col:hover { transform: translateY(-10px); }
-
-        .scope-col { display: flex; flex-direction: column; transition: all 0.4s var(--ease-out-expo); cursor: default; }
-        .scope-img-box { width: 100%; height: 240px; background: #F9F9F9; border: 1px solid rgba(0,0,0,0.05); border-radius: 6px; margin-bottom: 24px; overflow: hidden; position: relative; }
-        .scope-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.8s var(--ease-out-expo); }
-        .scope-col:hover .scope-img { transform: scale(1.08); }
-
-        .scope-num { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--c-error); font-weight: 700; margin-bottom: 12px; display: block; }
-        .scope-title { font-family: var(--font-display); font-size: 2rem; margin-bottom: 24px; line-height: 1.1; }
-        .scope-list { display: flex; flex-direction: column; gap: 24px; }
-        .scope-item { padding-left: 16px; border-left: 2px solid var(--c-grey-light); }
-        .scope-item-title { font-weight: 600; font-size: 0.95rem; color: var(--c-black); margin-bottom: 6px; display: block; }
-        .scope-item-desc { font-size: 0.9rem; color: var(--c-grey-mid); line-height: 1.5; }
-
-        /* --- THE ENGINE SECTION (FIX VS FIND) --- */
-        .engine-section { padding-top: 80px; padding-bottom: var(--spacing-section); }
-        .engine-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 120px; }
-        .engine-grid.reverse { direction: rtl; }
-        .engine-grid.reverse .engine-text { direction: ltr; }
-
-        .engine-visual {
-            background: var(--c-surface);
-            border-radius: 8px;
-            border: 1px solid var(--c-grey-light);
-            overflow: hidden;
-            position: relative;
-            aspect-ratio: 4/3;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-        }
-
-        .annotation-note {
-            font-family: var(--font-hand);
-            color: var(--c-error);
-            font-size: 1.5rem;
-            position: absolute;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .check-list { list-style: none; margin-top: 32px; }
-        .check-item {
-            padding-left: 32px;
-            position: relative;
-            margin-bottom: 16px;
-            font-weight: 500;
-            font-size: 1.1rem;
-            color: var(--c-grey-dark);
-        }
-        .check-item::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--c-error);
-        }
-
-        /* --- AI NATIVE WORKFLOW SECTION --- */
-        .ai-workflow-section { padding-top: var(--spacing-section); padding-bottom: var(--spacing-section); }
-        .ai-step { display: flex; flex-direction: column; margin-bottom: 48px; }
-        .ai-step:last-child { margin-bottom: 0; }
-        .ai-step-num { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--c-black); font-weight: 600; margin-bottom: 8px; display: block; }
-        .ai-step-title { font-family: var(--font-display); font-size: 1.75rem; color: var(--c-black); line-height: 1.2; margin-bottom: 12px; }
-        .ai-step-desc { font-size: 1rem; line-height: 1.6; color: var(--c-grey-mid); }
-        .ai-closing { font-family: var(--font-display); font-size: 2rem; color: var(--c-black); line-height: 1.2; margin-top: 48px;  }
-        .ai-tools-label { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--c-grey-mid); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 16px; margin-top: 40px; }
-        .ai-tools-list { display: flex; flex-wrap: wrap; gap: 8px; }
-        .ai-tool-tag { font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; background: var(--c-surface); border: 1px solid var(--c-grey-light); padding: 6px 16px; border-radius: 4px; color: var(--c-black); transition: all 0.2s; }
-        .ai-tool-tag:hover { border-color: var(--c-black); background: var(--c-black); color: #fff; }
-
-        /* --- IMPACT SECTION --- */
-        .impact-layout { display: grid; grid-template-columns: 50% 40%; gap: 10%; align-items: start; }
-        .impact-left { position: sticky; top: 140px; }
-        .impact-headline { font-family: var(--font-display); font-size: 3.5rem; color: var(--c-black); margin-bottom: var(--spacing-block); line-height: 1.1; letter-spacing: -0.02em; }
-        .break-even-text { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-dark); margin: 0; padding-left: 24px; border-left: 2px solid var(--c-error); }
-        .impact-item { display: flex; flex-direction: column; margin-bottom: 48px; }
-        .impact-item:last-child { margin-bottom: 0; }
-        .impact-val { font-family: var(--font-display); font-size: 4rem; color: var(--c-black); line-height: 1; margin-bottom: 16px; }
-        .impact-role { font-family: var(--font-display); font-weight: bold; font-size: 1.75rem; color: var(--c-black); line-height: 1.2; margin-bottom: 12px; }
-        .impact-desc { font-size: 1rem; color: var(--c-grey-mid); line-height: 1.6; }
-
-        /* --- SECURITY SECTION --- */
-        .tech-specs-section { padding-bottom: 0; background: transparent; color: var(--c-black); position: relative; }
-        .specs-header { margin-bottom: var(--spacing-block); max-width: 800px; }
-        .specs-headline { font-family: var(--font-display); font-size: 3.5rem; line-height: 1.1; margin-bottom: 24px; }
-        .specs-sub { font-size: 1.125rem; line-height: 1.6; color: var(--c-grey-mid); }
-        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10%; padding-top: 60px; }
-        .spec-col-title { font-family: 'Courier New', monospace; font-size: 1.25rem; margin-bottom: 40px; border-bottom: 2px solid var(--c-black); display: inline-block; padding-bottom: 8px; }
-        .spec-list { display: flex; flex-direction: column; gap: 32px; }
-        .spec-item { display: flex; flex-direction: column; gap: 4px; }
-        .spec-label { font-weight: 700; font-size: 1rem; display: block; margin-bottom: 4px; color: var(--c-black); }
-        .spec-desc { font-size: 0.95rem; line-height: 1.5; color: var(--c-grey-mid); }
-        .compliance-badges { display: flex; gap: 24px; margin-top: 16px; opacity: 0.5; }
-        .badge-img { height: 28px; filter: grayscale(100%); }
-
-        /* --- PRICING SECTION --- */
-        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .pricing-card { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.05); border-radius: 8px; padding: 56px 48px; display: flex; flex-direction: column; position: relative; transition: all 0.4s var(--ease-out-expo); }
-        .pricing-card:hover { border-color: rgba(0,0,0,0.1); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
-        .pricing-card.is-popular { border: 1px solid var(--c-grey-light); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        .pricing-title { font-family: var(--font-display); font-size: 2.5rem; line-height: 1.1; margin-bottom: 16px; }
-        .pricing-desc { color: var(--c-grey-mid); font-size: 1rem; line-height: 1.5; min-height: 48px; margin-bottom: 32px; }
-        .pricing-price-block { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px dashed var(--c-grey-light); min-height: 100px; }
-        .pricing-val { font-family: var(--font-display); font-size: 4rem; line-height: 1; color: var(--c-black); display: flex; align-items: baseline; gap: 8px; }
-        .pricing-val.accent { color: var(--c-error); }
-        .pricing-period { font-family: var(--font-body); font-size: 1.125rem; font-weight: 600; color: var(--c-black); }
-        .pricing-subtext { font-size: 0.9rem; color: var(--c-grey-mid); margin-top: 8px; }
-        .pricing-features { list-style: none; flex-grow: 1; display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px; }
-        .pricing-feature-item { font-size: 0.95rem; color: var(--c-grey-dark); position: relative; padding-left: 24px; line-height: 1.5; }
-        .pricing-feature-item::before { content: '✓'; position: absolute; left: 0; color: var(--c-error); font-weight: bold; }
-        .pricing-feature-item.is-bold { font-weight: 600; color: var(--c-black); padding-left: 0; }
-        .pricing-feature-item.is-bold::before { display: none; }
-        #pricing { padding-top: 80px; padding-bottom: 40px; }
-        #pricing .specs-header { margin-bottom: 40px; }
-        .pricing-card { padding: 40px 36px; }
-        .pricing-desc { margin-bottom: 24px; min-height: auto; }
-        .pricing-price-block { margin-bottom: 24px; padding-bottom: 24px; min-height: auto; }
-        .pricing-features { margin-bottom: 32px; gap: 12px; }
-        .pricing-val { font-size: 3.5rem; }
-
-        /* --- FAQ SECTION --- */
-        .faq-section { padding-top: var(--spacing-section); padding-bottom: 80px; }
-        .faq-header { text-align: center; margin-bottom: var(--spacing-block); }
-        .faq-headline { font-family: var(--font-display); font-size: 3.5rem; margin-bottom: 24px; color: var(--c-black); }
-        .faq-list { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
-        .faq-item { background: var(--c-bg); border: 1px solid var(--c-grey-light); border-radius: 8px; overflow: hidden; transition: all 0.3s ease; }
-        .faq-item:hover { border-color: rgba(0,0,0,0.2); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-        .faq-summary { padding: 24px 32px; font-weight: 600; font-size: 1.125rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; color: var(--c-black); }
-        .faq-summary::-webkit-details-marker { display: none; }
-        .faq-summary::after { content: '+'; font-size: 1.5rem; font-weight: 300; color: var(--c-grey-mid); transition: transform 0.3s var(--ease-out-expo); }
-        details[open] .faq-summary::after { transform: rotate(45deg); color: var(--c-error); }
-        .faq-content { padding: 0 32px 32px 32px; font-size: 1rem; color: var(--c-grey-mid); line-height: 1.6; animation: fadeIn 0.4s var(--ease-out-expo); }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- SIMPLE FOOTER --- */
-        .simple-footer { padding-top: 80px; padding-bottom: 60px; border-top: 1px solid var(--c-grey-light); margin-top: 40px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--c-grey-mid); font-size: 0.9rem; }
-        .footer-logo { font-family: var(--font-hand); font-size: 5rem; color: var(--c-error); display: block; margin-bottom: 12px; transform: rotate(-2deg); text-decoration: none; transition: transform 0.3s; }
-        .footer-contacts a { color: var(--c-black); border-bottom: 1px solid rgba(0,0,0,0.2); margin-left: 20px; }
-        .footer-contacts a:hover { border-bottom-color: var(--c-black); }
-
-        /* --- MODAL --- */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 15, 15, 0.95); z-index: 2000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.3s var(--ease-out-expo), visibility 0.3s; }
-        .modal-overlay.is-active { opacity: 1; visibility: visible; pointer-events: auto; }
-        .modal-content { background: var(--c-bg); width: 100%; max-width: 600px; padding: 48px; border-radius: 8px; position: relative; max-height: 90vh; overflow-y: auto; transform: translateY(20px) scale(0.98); transition: transform 0.4s var(--ease-out-expo); }
-        .modal-overlay.is-active .modal-content { transform: translateY(0) scale(1); }
-        .close-modal { position: absolute; top: 24px; right: 24px; font-size: 32px; color: var(--c-grey-mid); cursor: pointer; transition: color 0.2s; }
-        .close-modal:hover { color: var(--c-black); }
-        .modal-title { font-family: var(--font-display); font-size: 2rem; margin-bottom: 8px; }
-        .modal-sub { color: var(--c-grey-mid); margin-bottom: 32px; font-size: 0.95rem; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
-        .form-input, .form-select { width: 100%; padding: 14px; border: 1px solid var(--c-grey-light); border-radius: 4px; font-family: var(--font-body); }
-
-        @media (max-width: 900px) {
-            :root { --pad-x: 24px; --gap-grid: 40px; --spacing-section: 100px; }
-            .hero-section.centered, .engine-grid, .scope-grid, .impact-layout, .pricing-grid, .simple-footer { grid-template-columns: 1fr; gap: 40px; }
-            .impact-left { position: relative; top: 0; }
-            .header-cta { display: none; }
-            .simple-footer { flex-direction: column; align-items: flex-start; gap: 20px; border-top: none; }
-            .footer-contacts a { margin-left: 0; margin-right: 20px; }
-            .modal-content { padding: 32px 24px; border-radius: 0; height: 100%; max-height: 100%; }
-            .faq-summary { padding: 20px; font-size: 1rem; }
-            .faq-content { padding: 0 20px 20px 20px; }
-            .faq-headline { font-size: 2.5rem; }
-        }
-    </style>
+  /* --- MODAL STYLES FOR WIREFRAME --- */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s; }
+.modal-overlay.is-active { opacity: 1; visibility: visible; }
+.modal-content { background: var(--bg); width: 100%; max-width: 500px; padding: 40px; border: 1px solid var(--ink); position: relative; max-height: 90vh; overflow-y: auto; transform: translateY(20px); transition: transform 0.3s; }
+.modal-overlay.is-active .modal-content { transform: translateY(0); }
+.close-modal { position: absolute; top: 16px; right: 24px; font-size: 32px; color: var(--mut); cursor: pointer; background: none; border: none; font-family: sans-serif; }
+.close-modal:hover { color: var(--ink); }
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; font-family: ui-monospace, Menlo, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; color: var(--ink); }
+.form-input, .form-select { width: 100%; padding: 12px; border: 1px solid var(--line); font-family: inherit; font-size: 16px; background: transparent; color: var(--ink); }
+.form-input:focus, .form-select:focus { outline: none; border-color: var(--ink); }
+</style>
 </head>
 <body>
-<main>
-    <div class="page-container">
 
-        <header class="reveal-up">
-            <a href="#" class="logo">Françoise</a>
-            <a href="#pricing" class="header-cta js-scroll-to">Get Started</a>
-        </header>
+<section>
+  <div class="wrap">
+    <div class="h1">Messy file in.<br>Production-ready out.</div>
+    <div class="sub">Françoise reads your design system, finds everything that drifted from it, and fixes it — so every file is clean, maintainable, and ready for code.</div>
+    <div class="cta-row">
+      <a href="/register" style="text-decoration: none; color: inherit;" class="cta">Start for Free</a>
+      <a href="#pricing" style="text-decoration: none;" class="cta secondary">View pricing & plans ↓</a>
+    </div>
+    <div class="ph hero-media">
+      <span class="lbl">Hero video · отъезд камеры · ~12–15с</span>
+      <div class="frames">
+        <div>1 · крупный план макета → вспыхивают скрытые проблемы</div>
+        <div>2 · клик → метки схлопываются, значения встают на токены</div>
+        <div>3 · второй клик → рядом разворачивается чистый код</div>
+        <div>4 · камера ОТЪЕЗЖАЕТ → один макет = карточка среди сотен</div>
+        <div>5 · меняют токен в системе → волна обновления по всем макетам</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <section class="hero-section centered">
-        <div class="hero-content centered">
-            <span class="hero-eyebrow reveal-up">Trusted by Top Product Teams</span>
-            <h1 class="reveal-up delay-100">Automated Design Quality Gate</h1>
-            <p class="hero-desc centered reveal-up delay-200">Françoise validates designs against complex System Logic and Regulatory Requirements (EAA, ADA) directly in Figma. Catch errors before they become technical debt.</p>
+<section>
+  <div class="wrap">
+    <div class="h2">We do the easy part completely —<br>and then keep going.</div>
+    <div class="body">The basics of design-system compliance are finally getting tools. Françoise does all of it on messy, detached files.</div>
+    <div class="minis">
+      <div class="ph"><span class="lbl">demo</span><div class="desc">hard-coded value → snaps to token</div></div>
+      <div class="ph"><span class="lbl">demo</span><div class="desc">contrast over gradient → worst-case fail caught</div></div>
+      <div class="ph"><span class="lbl">demo</span><div class="desc">detached → "replace with Button/primary?"</div></div>
+    </div>
+  </div>
+</section>
 
-            <div class="hero-actions centered reveal-up delay-300">
-                <a href="#pricing" class="btn-primary js-scroll-to">Get Started</a>
-            </div>
+<section>
+  <div class="wrap">
+    <div class="h2">Checked in every state it ships in.</div>
+    <div class="sub">Françoise checks every layout across all the states a screen actually ships in, against the rules your design system already describes.</div>
+    <div class="cards">
+      <div class="card">
+        <div class="txt"><div class="ct">Your system's rules, applied.</div><div class="cd">The usage rules written in your design system — when to use what, how things combine — checked automatically.</div></div>
+        <div class="ph"><span class="lbl">illustration</span><div class="desc">prose rule из гайдлайна → подсветка нарушения (внешн./внутр., серые блоки, кнопка в распор)</div></div>
+      </div>
+      <div class="card">
+        <div class="txt"><div class="ct">Every state.</div><div class="cd">Disabled, active, error, empty — checked separately. A button that passes contrast when inactive can fail when active.</div></div>
+        <div class="ph"><span class="lbl">illustration</span><div class="desc">одна кнопка в 4 состояниях; active помечена fail</div></div>
+      </div>
+      <div class="card">
+        <div class="txt"><div class="ct">Localized and resized.</div><div class="cd">Other languages, other breakpoints — laid out and re-checked automatically.</div></div>
+        <div class="ph"><span class="lbl">illustration</span><div class="desc">экран EN / DE / AR + узкий/широкий брейкпоинт, копиями</div></div>
+      </div>
+      <div class="card">
+        <div class="txt"><div class="ct">Accessibility.</div><div class="cd">Contrast measured against the worst-case edge, even over gradients and images.</div></div>
+        <div class="ph"><span class="lbl">illustration</span><div class="desc">текст на фото/градиенте → замер на worst-case участке</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h2">A library you can actually change.</div>
+    <div class="sub">Once your files are structured, they stop being static pictures. Update the design system and every file updates with it. Migrate to a new system, and the whole archive moves at once.</div>
+    <div class="ph block-illu"><span class="lbl">block illustration</span><div class="desc">вид сверху на сотни макетов; правка токена в центре → волна по всем (тот же образ, что финал hero-видео, статикой)</div></div>
+    <div class="cards">
+      <div class="card">
+        <div class="txt"><div class="ct">Update once, everywhere.</div><div class="cd">Change a token or component in the system — every file that uses it updates.</div></div>
+        <div class="ph"><span class="lbl">illustration</span><div class="desc">токен меняется → N макетов подхватывают</div></div>
+      </div>
+      <div class="card">
+        <div class="txt"><div class="ct">Migrate a whole system.</div><div class="cd">Move thousands of legacy files from one design system to another — automatically.</div></div>
+        <div class="ph"><span class="lbl">illustration</span><div class="desc">DS-A → DS-B, стопка файлов перетекает</div></div>
+      </div>
+      <div class="card">
+        <div class="txt"><div class="ct">Clear the legacy debt.</div><div class="cd">Every detached, drifted, hand-built file in your archive — surfaced and fixed at scale.</div></div>
+        <div class="ph"><span class="lbl">illustration</span><div class="desc">архив: грязные файлы подсвечены → массово вычищены</div></div>
+      </div>
+      <div class="card">
+        <div class="txt"><div class="ct">Ready for code.</div><div class="cd">Clean structure is what every design-to-code tool has been waiting for. Files convert cleanly instead.</div></div>
+        <div class="ph"><span class="lbl">illustration</span><div class="desc">чистый макет → аккуратный код-блок</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h2">Prototype without waiting for design.</div>
+    <div class="sub">Generate a UI anywhere, bring it into Figma, and Françoise maps it to your design system — tokens, components, structure. What it can't fix automatically, it leaves as plain notes you can handle yourself or send straight back to the generator.</div>
+    <div class="accent-row">
+      <div class="ph"><span class="lbl">illustration</span><div class="desc">prompt → сгенерённый экран → через MCP в Figma → привязка к DS + текстовые заметки → промпт обратно</div></div>
+      <div class="accent">A generated screen won't make it to production. A generated screen checked by Françoise will.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h2">Give design review back to design.</div>
+    <div class="sub">When the technical cleanup is automatic, design review stops being about detached components and drifted tokens. Your team gets the meeting back for whether the solution actually works.</div>
+    <div class="cta-row"><span class="cta secondary" style="margin-left:0;">See how it works for teams →</span></div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="h2">Simple, predictable pricing</div>
+    <div class="sub">Free layout hygiene for individuals, automated scaling for professionals.</div>
+
+    <div style="display: flex; gap: 20px; margin-top: 44px; flex-wrap: wrap;">
+
+      <!-- Free Plan -->
+      <div style="flex: 1; min-width: 280px; padding: 28px; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="promo-tag" style="background: #eee; border-color: #ccc;">July 4–5: +20 fixes</div>
+          <div class="ct" style="font-size: 28px; margin-bottom: 4px;">Free</div>
+          <div style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">$0</div>
+          <div class="cd" style="font-size: 15px; line-height: 1.6; color: #444;">
+            • Full layout checks<br>
+            • 5 automated fixes / mo<br>
+            • Standard compliance report
+          </div>
         </div>
-
-        <div class="media-frame-wide reveal-up delay-200" id="heroVideoFrame">
-            <video id="heroVideo" autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover;">
-                <source src="video.mp4" type="video/mp4">
-            </video>
-            <button class="video-control-btn" onclick="toggleHeroVideo()">
-                <svg class="icon-pause" viewBox="0 0 12 14"><rect width="4" height="14"/><rect x="8" width="4" height="14"/></svg>
-                <svg class="icon-play" viewBox="0 0 12 14"><path d="M0 0L12 7L0 14V0Z"/></svg>
-            </button>
+        <div class="cta-row" style="margin-top: 32px;">
+          <a href="/register" style="text-decoration: none; color: inherit; display: block; text-align: center;" class="cta">Start for Free</a>
         </div>
-    </section>
+      </div>
+
+      <!-- Pro Monthly Plan -->
+      <div style="flex: 1; min-width: 280px; padding: 28px; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="promo-tag" style="background: #111; color: #fff;">$15/mo for first 3 mos</div>
+          <div class="ct" style="font-size: 28px; margin-bottom: 4px;">Pro Monthly</div>
+          <div style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">$29 <span style="font-size: 14px; font-weight: normal; color: var(--mut);">/ month</span></div>
+          <div class="cd" style="font-size: 15px; line-height: 1.6; color: #444;">
+            • Full layout checks<br>
+            • Unlimited automated fixes<br>
+            • Design system token mapping<br>
+            • Priority support
+          </div>
+        </div>
+        <div class="cta-row" style="margin-top: 32px;">
+          <a href="/register" style="text-decoration: none; color: inherit; display: block; text-align: center;" class="cta">Get Monthly</a>
+        </div>
+      </div>
+
+      <!-- Pro Annual Plan -->
+      <div style="flex: 1; min-width: 280px; padding: 28px; border: 2px solid var(--ink); display: flex; flex-direction: column; justify-content: space-between; position: relative;">
+        <div>
+          <div class="promo-tag" style="background: #111; color: #fff;">$15/mo for first year</div>
+          <div class="ct" style="font-size: 28px; margin-bottom: 4px;">Pro Annual</div>
+          <div style="font-size: 20px; font-weight: bold; margin-bottom: 20px;">$25 <span style="font-size: 14px; font-weight: normal; color: var(--mut);">/ month</span></div>
+          <div class="cd" style="font-size: 15px; line-height: 1.6; color: #444;">
+            • Everything in Pro Monthly<br>
+            • Billed annually ($300)<br>
+            • Permanent price lock protection
+          </div>
+        </div>
+        <div class="cta-row" style="margin-top: 32px;">
+          <a href="/register" style="text-decoration: none; background: var(--ink); color: var(--bg); display: block; text-align: center;" class="cta">Get Annual</a>
+        </div>
+      </div>
 
     </div>
-
-<div class="page-container">
-
-    <section class="validation-scope-section">
-        <div class="scope-header reveal-up">
-            <h2 class="scope-headline">Three Layers of Validation</h2>
-            <p class="scope-sub">Françoise unifies technical correctness, business logic, and legal compliance into a single, automated quality gate.</p>
-        </div>
-
-        <div class="scope-grid reveal-up delay-100">
-
-            <div class="scope-col">
-                <div class="scope-img-box">
-                    <img src="ds.jpg" class="scope-img" alt="Design Tokens">
-                </div>
-                <span class="scope-num">01_FOUNDATION</span>
-                <h3 class="scope-title">System<br>Semantics</h3>
-                <div class="scope-list">
-                    <div class="scope-item">
-                        <span class="scope-item-title">Hybrid Support</span>
-                        <p class="scope-item-desc">Works with Variables, Styles, and Legacy components simultaneously. No prior refactoring needed.</p>
-                    </div>
-                    <div class="scope-item">
-                        <span class="scope-item-title">Semantic Checks</span>
-                        <p class="scope-item-desc">Validates token usage appropriateness (e.g., ensuring Display fonts are never used for Legal text).</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="scope-col">
-                <div class="scope-img-box">
-                    <img src="brand.jpg" class="scope-img" alt="Brand Rules">
-                </div>
-                <span class="scope-num">02_LOGIC</span>
-                <h3 class="scope-title">Brand<br>Constraints</h3>
-                <div class="scope-list">
-                    <div class="scope-item">
-                        <span class="scope-item-title">State-Dependent Rules</span>
-                        <p class="scope-item-desc">Ensures complex UI states are valid (e.g., "Error inputs must have helper text").</p>
-                    </div>
-                    <div class="scope-item">
-                        <span class="scope-item-title">Architectural Limits</span>
-                        <p class="scope-item-desc">Enforces hierarchy rules, such as limiting the number of Primary buttons per screen.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="scope-col">
-                <div class="scope-img-box">
-                    <img src="plagin3.jpg" class="scope-img" alt="A11y Error Example">
-                </div>
-                <span class="scope-num">03_LEGAL</span>
-                <h3 class="scope-title">Accessibility<br>Gate</h3>
-                <div class="scope-list">
-                    <div class="scope-item">
-                        <span class="scope-item-title">WCAG 2.1 AA</span>
-                        <p class="scope-item-desc">Automated checks for contrast ratios, touch target sizes (44px+), and heading hierarchy.</p>
-                    </div>
-                    <div class="scope-item">
-                        <span class="scope-item-title">EAA Readiness</span>
-                        <p class="scope-item-desc">Protects against fines by validating Focus indicators and Input logic before dev handover.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="engine-section reveal-up">
-
-        <div class="engine-grid">
-            <div class="engine-text">
-                <h2 class="scope-title" style="font-size: 3rem;">What we fix<br><span style="color: var(--c-error);">automatically</span></h2>
-                <ul class="check-list">
-                    <li class="check-item">Automated Token Mapping</li>
-                    <li class="check-item">AutoLayout Restructuring</li>
-                    <li class="check-item">Resizing & Constraints Optimization</li>
-                    <li class="check-item">Smart Icon Instance Swap</li>
-                </ul>
-            </div>
-            <div class="engine-visual">
-                <img src="img_1.jpg" alt="Automated fixes demo" style="width:100%; height:100%; object-fit:cover;">
-            </div>
-        </div>
-
-        <div class="engine-grid reverse">
-            <div class="engine-text">
-                <h2 class="scope-title" style="font-size: 3rem;">What we find<br><span style="color: var(--c-error);">& flag</span></h2>
-                <ul class="check-list">
-                    <li class="check-item">Image Contrast Errors</li>
-                    <li class="check-item">Confusing UI Patterns</li>
-                    <li class="check-item">Detached Components</li>
-                    <li class="check-item">Semantic Token Misuse (e.g., success color for errors)</li>
-                    <li class="check-item">"Baked" Text inside Images</li>
-                </ul>
-            </div>
-            <div class="engine-visual">
-                <img src="img_2.jpg" alt="Design audit annotations" style="width:100%; height:100%; object-fit:cover;">
-                <div class="annotation-note" style="top: 25%; left: 15%; transform: rotate(-5deg);">Wrong Token!</div>
-                <div class="annotation-note" style="bottom: 20%; right: 10%; transform: rotate(3deg);">Low Contrast</div>
-            </div>
-        </div>
-
-    </section>
-
-</div>
-
-    <div class="page-container">
-    <section class="ai-workflow-section reveal-up">
-        <div class="impact-layout">
-
-            <div class="impact-left">
-                <h2 class="impact-headline" style="margin-bottom: 24px;">AI-Native<br>Workflow</h2>
-                <p class="hero-desc" style="margin-bottom: 32px; max-width: 100%;">Figma's MCP infrastructure now lets AI agents push rendered UI directly to the canvas. Françoise runs its Quality Gate on every frame, regardless of origin.</p>
-
-                <div class="ai-closing">
-                    The same gate. Every frame.<br><span style="color: var(--c-error);">Human or agent.</span>
-                </div>
-
-                <div>
-                    <span class="ai-tools-label">Compatible via Figma MCP:</span>
-                    <div class="ai-tools-list">
-                        <span class="ai-tool-tag">Claude Code</span>
-                        <span class="ai-tool-tag">Cursor</span>
-                        <span class="ai-tool-tag">GitHub Copilot</span>
-                        <span class="ai-tool-tag">Codex</span>
-                        <span class="ai-tool-tag">Factory</span>
-                        <span class="ai-tool-tag">Augment</span>
-                        <span class="ai-tool-tag">Warp</span>
-                        <span class="ai-tool-tag">Firebender</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="impact-right">
-                <div class="ai-step">
-                    <span class="ai-step-num">01. GENERATION</span>
-                    <h3 class="ai-step-title">Agent generates UI</h3>
-                    <p class="ai-step-desc">Any AI dev tool writes code and pushes rendered frames to Figma via MCP. Claude Code renders live UI from production code using Figma's native <code style="background: var(--c-surface); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.9em; border: 1px solid var(--c-grey-light);">generate_figma_design</code> tool — producing fully editable frames with auto-layout, components, and variables.</p>
-                </div>
-
-                <div class="ai-step">
-                    <span class="ai-step-num">02. VALIDATION</span>
-                    <h3 class="ai-step-title">Françoise validates instantly</h3>
-                    <p class="ai-step-desc">The same three-layer check runs automatically — System Semantics, Brand Constraints, Accessibility Gate — before any human reviews the frame.</p>
-                </div>
-
-                <div class="ai-step">
-                    <span class="ai-step-num">03. APPROVAL</span>
-                    <h3 class="ai-step-title">Only clean frames proceed</h3>
-                    <p class="ai-step-desc">Non-compliant frames are flagged with exact fix instructions on the canvas. Jira handover remains blocked until validation passes.</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-</div>
-
-    <section class="full-width-section bg-surface">
-        <div class="page-container">
-            <section class="impact-section reveal-up">
-                <div class="impact-layout">
-
-                    <div class="impact-left">
-                        <h2 class="impact-headline">The Impact on Your Workflow</h2>
-                        <p class="break-even-text">
-                            At standard professional rates, recovering just <strong>3 hours</strong> of cross-functional
-                            review time covers your entire monthly Professional subscription. The rest is pure velocity.
-                        </p>
-                    </div>
-
-                    <div class="impact-right">
-                        <div class="impact-item">
-                            <span class="impact-val">10<span style="font-size: 1.5rem; vertical-align: super;">+</span></span>
-                            <span class="impact-role">Hours Saved Monthly</span>
-                            <p class="impact-desc">Eliminate tedious manual checks for paddings, contrast ratios, and
-                                correct token usage.</p>
-                        </div>
-
-                        <div class="impact-item">
-                            <span class="impact-val">0</span>
-                            <span class="impact-role">Handoff Friction</span>
-                            <p class="impact-desc">Deliver pixel-perfect, dev-ready frames that pass Jira quality gates
-                                on the first try.</p>
-                        </div>
-
-                        <div class="impact-item">
-                            <span class="impact-val">100%</span>
-                            <span class="impact-role">EAA Compliance</span>
-                            <p class="impact-desc">Design with confidence. Françoise ensures every component meets
-                                strict legal standards.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-        </div>
-    </section>
-
-    <section class="full-width-section mode-technical">
-
-        <div class="chapter-label">02. Specs</div>
-
-        <div class="page-container">
-
-
-            <section class="tech-specs-section reveal-up">
-
-                <div class="specs-header">
-
-                    <h2 class="specs-headline">Enterprise Security</h2>
-
-                    <p class="specs-sub">Built for regulated industries. Your IP never leaves your control
-                        perimeter.</p>
-
-                </div>
-
-
-                <div class="specs-grid">
-
-
-                    <div class="spec-col">
-
-                        <h3 class="spec-col-title">Data Privacy & Sovereignty</h3>
-
-                        <div class="spec-list">
-
-                            <div class="spec-item">
-
-                                <span class="spec-label">Zero-Retention Processing</span>
-
-                                <p class="spec-desc">We process design files in ephemeral memory. Once the validation is
-                                    complete, all data is immediately wiped.</p>
-
-                            </div>
-
-                            <div class="spec-item">
-
-                                <span class="spec-label">No AI Training</span>
-
-                                <p class="spec-desc">We guarantee contractually that your Intellectual Property is never
-                                    used to train our models.</p>
-
-                            </div>
-
-                            <div class="spec-item">
-
-                                <span class="spec-label">Regional Data Residency</span>
-
-                                <p class="spec-desc">Option to pin data processing to specific regions (EU Frankfurt /
-                                    US Virginia).</p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="spec-col">
-
-                        <h3 class="spec-col-title">Infrastructure & Control</h3>
-
-                        <div class="spec-list">
-
-                            <div class="spec-item">
-
-                                <span class="spec-label">Private Cloud / On-Premises</span>
-
-                                <p class="spec-desc">Deploy Françoise within your own Virtual Private Cloud (VPC) or
-                                    fully air-gapped environment.</p>
-
-                            </div>
-
-                            <div class="spec-item">
-
-                                <span class="spec-label">SSO & Governance</span>
-
-                                <p class="spec-desc">Integrate with Okta, Azure AD, or Google Workspace. Enforce MFA via
-                                    your Identity Provider.</p>
-
-                            </div>
-
-                            <div class="spec-item">
-
-                                <span class="spec-label">Compliance Roadmap</span>
-
-                                <p class="spec-desc">Aligned with industry standards (SOC 2 Type II & ISO 27001 In
-                                    Progress).</p>
-
-                                <div class="compliance-badges">
-
-                                    <img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=SOC2"
-                                         alt="SOC 2 Type II compliance certification badge">
-
-                                    <img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=GDPR"
-                                         alt="GDPR compliance and data privacy badge">
-
-                                    <img class="badge-img" src="https://placehold.co/100x40/EEE/999?text=ISO27001"
-                                         alt="ISO 27001 information security certification badge">
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </section>
-
-
-        </div>
-
-    </section>
-
-    <section class="full-width-section" id="pricing">
-        <div class="chapter-label">02. Pricing</div>
-        <div class="page-container">
-            <section class="phases-section reveal-up">
-                <div class="specs-header">
-                    <h2 class="specs-headline">Built for Designers.<br>Scaled for Enterprise.</h2>
-                    <p class="specs-sub">Select the Professional plan for immediate impact, or scale globally with
-                        Enterprise controls. Every plan includes expert, manual mapping of your Design System to ensure
-                        absolute accuracy from day one.</p>
-                </div>
-
-                <div class="pricing-grid">
-
-                    <div class="pricing-card is-popular delay-100">
-
-
-                        <h3 class="pricing-title">Professional</h3>
-                        <p class="pricing-desc">For product designers and agile squads ready to automate their quality
-                            assurance.</p>
-
-                        <div class="pricing-price-block">
-                            <div class="pricing-val accent">
-                                $199 <span class="pricing-period">/ mo</span>
-                            </div>
-                            <div class="pricing-subtext">billed annually or $249 month-to-month</div>
-                        </div>
-
-                        <ul class="pricing-features">
-                            <li class="pricing-feature-item is-bold">Core Capabilities:</li>
-                            <li class="pricing-feature-item">Expert Design System Mapping included</li>
-                            <li class="pricing-feature-item">1 Figma Editor License</li>
-                            <li class="pricing-feature-item">Unlimited Canvas Validations</li>
-                            <li class="pricing-feature-item">WCAG 2.1 & EAA Accessibility Gate</li>
-                        </ul>
-
-                        <button id="profBtnOnboarding" class="btn-primary" style="align-self: flex-start;" aria-label="Start onboarding with Françoise Professional plan">Start
-                            onboarding
-                        </button>
-                    </div>
-
-                    <div class="pricing-card delay-200" style="background: var(--c-surface);">
-
-                        <h3 class="pricing-title">Enterprise</h3>
-                        <p class="pricing-desc">For global teams requiring absolute code consistency and advanced
-                            security.</p>
-
-                        <div class="pricing-price-block" style="display: flex; align-items: center;">
-                            <div class="pricing-val" style="font-size: 2.5rem;">Custom</div>
-                        </div>
-
-                        <ul class="pricing-features">
-                            <li class="pricing-feature-item is-bold">Everything in Professional, plus:</li>
-                            <li class="pricing-feature-item">Unlimited Figma Seats</li>
-                            <li class="pricing-feature-item">Native CI/CD Pipeline Blocking</li>
-                            <li class="pricing-feature-item">On-Premise / VPC Deployment</li>
-                            <li class="pricing-feature-item">SSO / SAML & Advanced Security</li>
-                        </ul>
-
-                        <button id="entBtn" class="btn-secondary" style="align-self: flex-start;" aria-label="Book a demo of Françoise Enterprise">Book Demo</button>
-                    </div>
-
-                </div>
-            </section>
-
-            <section class="faq-section reveal-up">
-                <div class="faq-header">
-                    <h2 class="faq-headline">Frequently Asked Questions</h2>
-                </div>
-                <div class="faq-list">
-
-                    <details class="faq-item">
-                        <summary class="faq-summary">Do we need to refactor our design system to use Françoise?</summary>
-                        <div class="faq-content">
-                            Not at all. Françoise offers Hybrid Support, meaning it works seamlessly with modern Variables, traditional Styles, and even legacy components simultaneously. You can start validating immediately without any prior restructuring.
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary class="faq-summary">Does Françoise train its AI on our design data?</summary>
-                        <div class="faq-content">
-                            Absolutely not. We guarantee contractually that your Intellectual Property is never used to train our models. We use Zero-Retention Processing, meaning your data is held in ephemeral memory only during the validation process and is immediately wiped afterward.
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary class="faq-summary">How does the Jira integration block tickets?</summary>
-                        <div class="faq-content">
-                            When a designer attempts to transition a Jira ticket to "Ready for Dev," our integration automatically checks the linked Figma frames. If Françoise detects critical errors (like WCAG 2.1 AA violations or broken token logic), the transition is blocked until the designer resolves the issues on the canvas.
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary class="faq-summary">Can we host Françoise on our own servers?</summary>
-                        <div class="faq-content">
-                            Yes, our Enterprise plan includes options for Private Cloud (VPC) or fully On-Premises deployment. This ensures that Françoise operates entirely within your organization's security perimeter, meeting the strict compliance needs of regulated industries.
-                        </div>
-                    </details>
-
-                </div>
-            </section>
-
-            <footer class="site-footer reveal-up">
-                <div class="footer-brand">
-                    <a href="/" class="footer-logo">Françoise</a>
-                    <span class="footer-copyright">© 2026 Françoise Design Inc. All rights reserved.</span>
-                </div>
-
-                <div class="footer-nav">
-                    <div class="footer-col">
-                        <span class="footer-col-title">Legal & Security</span>
-                        <a href="/terms">Terms of Service</a>
-                        <a href="/privacy-policy">Privacy Policy</a>
-                        <a href="/security">Security Overview</a>
-                        <a href="/subprocessors">Subprocessors</a>
-                    </div>
-                    <div class="footer-col">
-                        <span class="footer-col-title">Contact</span>
-                        <a href="mailto:ceo@francoise.design">ceo@francoise.design</a>
-                        <a href="https://wa.me/79035176391">WhatsApp</a>
-                    </div>
-                </div>
-            </footer>
-
-        </div>
-    </section>
-
-    <div id="onboardingModal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">×</button>
-            <div id="stepForm">
-                <h2 class="modal-title">Start Onboarding</h2>
-                <p class="modal-sub">Quick details before booking a slot.</p>
-                <form id="onboardingForm" onsubmit="handleFormSubmit(event)">
-                    <input type="hidden" id="leadSource" value="Professional">
-
-                    <div class="form-group"><label>Work Email</label><input type="email" id="userEmail"
-                                                                            class="form-input" required
-                                                                            placeholder="name@company.com"></div>
-                    <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                        <div class="form-group"><label>Role</label><input type="text" id="userRole" class="form-input"
-                                                                          required></div>
-                        <div class="form-group"><label>Company</label><input type="text" id="userCompany"
-                                                                             class="form-input" required></div>
-                    </div>
-                    <div class="form-group">
-                        <label>Team Size</label>
-                        <select id="userTeamSize" class="form-select">
-                            <option value="1-5">1-5 designers</option>
-                            <option value="5-20">5-20 designers</option>
-                            <option value="20-50">20-50 designers</option>
-                            <option value="50+">50+ designers</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Design System Type</label>
-                        <select id="dsType" class="form-select">
-                            <option value="In-house">In-house / Custom</option>
-                            <option value="Open Source">Open Source Based</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group"
-                         style="display: flex; gap: 8px; align-items: flex-start; margin-bottom: 24px;">
-                        <input type="checkbox" id="privacyConsent" required style="margin-top: 4px; cursor: pointer;">
-                        <label for="privacyConsent"
-                               style="text-transform: none; font-weight: normal; font-size: 0.85rem; color: var(--c-grey-mid); line-height: 1.4;">
-                            I agree to the <a href="privacy-policy.html" target="_blank"
-                                              style="text-decoration: underline; color: var(--c-black);">Privacy
-                            Policy</a> and consent to data processing.
-                        </label>
-                    </div>
-
-                    <div id="formError"
-                         style="color: var(--c-error); font-size: 0.85rem; margin-bottom: 12px; display: none;">
-                        Something went wrong. Please try again.
-                    </div>
-
-                    <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%;">Continue</button>
-                </form>
-            </div>
-            <div id="stepSuccess" style="display: none; text-align: center;">
-                <h2 class="modal-title">Success!</h2>
-                <p class="modal-sub">Now please choose your slot in the calendar.</p>
-                <a href="https://meet.francoise.design" id="finalBookingLink" target="_blank" class="btn-primary"
-                   style="width: 100%; display: inline-flex; justify-content: center; margin-top: 20px;">Open Booking
-                    Calendar</a>
-            </div>
-        </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="text-align: center;">
+    <div class="h2">Try it on your messiest file</div>
+    <div class="body" style="font-size:17px; margin: 16px auto 0;">Set up your account and start cleaning up your design system debt today.</div>
+    <div class="cta-row" style="justify-content: center; display: flex;">
+      <a href="/register" style="text-decoration: none; color: inherit;" class="cta">Start for Free</a>
     </div>
-</main>
+  </div>
+</section>
 
-<script>
+<div id="onboardingModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closeModal()">×</button>
 
-    /* Hero Video Logic */
-    function toggleHeroVideo() {
-        const v = document.getElementById('heroVideo'), c = document.getElementById('heroVideoFrame');
-        if (v.paused) { v.play(); c.classList.remove('video-paused'); } else { v.pause(); c.classList.add('video-paused'); }
-    }
+    <div id="stepForm">
+      <div class="h2" style="font-size: 32px; margin-bottom: 8px;">Get the Plugin</div>
+      <div class="body" style="font-size: 16px; margin-top: 0; margin-bottom: 32px;">Drop your details to download the latest build.</div>
 
-    function pauseAutoPlay() {
-        if(globalTabInterval) clearInterval(globalTabInterval);
-    }
+      <form id="onboardingForm" onsubmit="handleFormSubmit(event)">
 
-    /* --- ИСПРАВЛЕННАЯ ЛОГИКА МОДАЛКИ И ТЕЛЕГРАМ --- */
-    const modalOverlay = document.getElementById('onboardingModal');
+        <div class="form-group">
+          <label>Work Email</label>
+          <input type="email" id="userEmail" class="form-input" required placeholder="name@company.com">
+        </div>
 
-    function openOnboarding(source) {
-        document.getElementById('leadSource').value = source;
-        document.querySelector('.modal-title').innerText = (source === 'Enterprise') ? 'Book Enterprise Demo' : 'Start Onboarding';
+        <div style="display: flex; gap: 16px; margin-bottom: 20px;">
+          <div class="form-group" style="flex: 1; margin-bottom: 0;">
+            <label>Role</label>
+            <input type="text" id="userRole" class="form-input" required>
+          </div>
+          <div class="form-group" style="flex: 1; margin-bottom: 0;">
+            <label>Company</label>
+            <input type="text" id="userCompany" class="form-input" required>
+          </div>
+        </div>
 
-        // Плавное открытие
-        modalOverlay.classList.add('is-active');
-        document.body.style.overflow = 'hidden';
-    }
+        <div id="formError" style="color: red; font-family: ui-monospace, Menlo, monospace; font-size: 12px; margin-bottom: 16px; display: none;">
+          Something went wrong. Please try again.
+        </div>
 
-    function closeModal() {
-        modalOverlay.classList.remove('is-active');
-        document.body.style.overflow = 'auto';
+        <button type="submit" id="submitBtn" class="cta" style="width: 100%; background: var(--ink); color: var(--bg); cursor: pointer;">
+          Submit & Download
+        </button>
+      </form>
+    </div>
 
-        // Сброс формы при закрытии
-        setTimeout(() => {
-            document.getElementById('stepForm').style.display = 'block';
-            document.getElementById('stepSuccess').style.display = 'none';
-            document.getElementById('formError').style.display = 'none';
-            document.getElementById('submitBtn').innerText = 'Continue';
-            document.getElementById('submitBtn').disabled = false;
-        }, 300); // Ждем окончания анимации
-    }
+    <div id="stepSuccess" style="display: none; text-align: center;">
+      <div class="h2" style="font-size: 32px;">Success.</div>
+      <div class="body" style="font-size: 16px;">The plugin archive is downloading.<br>Check your downloads folder.</div>
+    </div>
 
-    // Закрытие по клику на темный фон
-    modalOverlay.addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-    });
-
-    async function handleFormSubmit(event) {
-        event.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        const errorMsg = document.getElementById('formError');
-
-        btn.innerText = 'Sending...';
-        btn.disabled = true;
-        errorMsg.style.display = 'none';
-
-        const source = document.getElementById('leadSource').value;
-
-        const formData = new FormData();
-        formData.append('email', document.getElementById('userEmail').value);
-        formData.append('role', document.getElementById('userRole').value);
-        formData.append('company', document.getElementById('userCompany').value);
-        formData.append('team', document.getElementById('userTeamSize').value);
-        formData.append('ds', document.getElementById('dsType').value);
-        formData.append('source', document.getElementById('leadSource').value);
-
-        try {
-            const response = await fetch(`https://francoise-api-v1.azurewebsites.net/api/submit-lead`, {
-                method: 'POST',
-                // headers: { 'Content-Type': 'application/json' }, // НЕ НУЖЕН для FormData
-                body: formData // Отправляем как Form Data
-            });
-
-            if (!response.ok) throw new Error("Network response was not ok");
-
-            document.getElementById('finalBookingLink').href = `https://meet.francoise.design/?email=${encodeURIComponent(formData.get('email'))}`;
-            document.getElementById('stepForm').style.display = 'none';
-            document.getElementById('stepSuccess').style.display = 'block';
-        } catch (e) {
-            console.error("А вот и реальная ошибка:", e); // <--- ДОБАВИТЬ ЭТ
-            errorMsg.style.display = 'block';
-            btn.disabled = false;
-            btn.innerText = 'Continue';
-        }
-    }
-
-    /* SCROLL REVEAL & INIT */
-    document.addEventListener("DOMContentLoaded", () => {
-
-        const observerOptions = { threshold: 0.1 };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-
-                    if(entry.target.id === 'ecosystemSection') {
-                        entry.target.classList.add('animation-active');
-                        isAutoPlaying = true;
-                        startAutoPlay();
-                    }
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
-
-        document.querySelectorAll('.js-scroll-to').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
-                }
-            });
-        });
-
-        // ИСПРАВЛЕННАЯ ПРИВЯЗКА КНОПОК
-        const profBtn = document.getElementById('profBtnOnboarding');
-        if(profBtn) profBtn.onclick = (e) => { e.preventDefault(); openOnboarding('Professional'); };
-
-        const entBtn = document.getElementById('entBtn');
-        if(entBtn) entBtn.onclick = (e) => { e.preventDefault(); openOnboarding('Enterprise'); };
-    });
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Françoise",
-  "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Figma Plugin",
-  "description": "AI-powered design quality gate that validates Figma designs against design tokens, brand rules, and WCAG 2.1 AA accessibility standards before dev handover.",
-  "url": "https://francoise.design",
-  "offers": [
-    {
-      "@type": "Offer",
-      "name": "Professional",
-      "price": "199",
-      "priceCurrency": "USD",
-      "billingIncrement": "monthly"
-    },
-    {
-      "@type": "Offer",
-      "name": "Enterprise",
-      "price": "0",
-      "priceCurrency": "USD",
-      "description": "Custom pricing for enterprise teams"
-    }
-  ],
-  "featureList": [
-    "Figma design token validation",
-    "WCAG 2.1 AA accessibility checks",
-    "EAA compliance validation",
-    "Jira integration and handover blocking",
-    "DesignOps health dashboard",
-    "On-premise and VPC deployment"
-  ],
-  "applicationSuite": "Figma",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Françoise Design Inc.",
-    "url": "https://francoise.design",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "ceo@francoise.design"
-    }
-  }
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is Françoise?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Françoise is an AI-powered design quality gate that automates QA directly in Figma. It validates designs against design system tokens, brand logic rules, and WCAG 2.1 AA / EAA accessibility standards before dev handover."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How does Françoise check WCAG accessibility in Figma?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Françoise runs automated checks for contrast ratios, touch target sizes (44px minimum), heading hierarchy, focus indicators, and input logic — all within Figma, before designs reach development."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is EAA compliance in design?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The European Accessibility Act (EAA) requires digital products in EU markets to meet accessibility standards by 2025. Françoise validates EAA requirements at the design stage in Figma, preventing costly post-launch fixes."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can Françoise work with existing Figma design systems?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Françoise supports Variables, Styles, and Legacy components simultaneously — no prior refactoring of your design system is required."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is Françoise secure for enterprise use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Françoise uses zero-retention processing — design files are processed in ephemeral memory and immediately wiped after validation. It supports on-premise and VPC deployment, SSO via Okta/Azure AD, and is aligned with SOC 2 Type II and ISO 27001 standards."
-      }
-    }
-  ]
-}
-</script>
-
+  </div>
+</div>
 
 </body>
+
+<script>
+  const modalOverlay = document.getElementById('onboardingModal');
+
+  // 1. Открытие и закрытие модалки
+  function openOnboarding(source) {
+    modalOverlay.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('is-active');
+    document.body.style.overflow = 'auto';
+
+    // Возвращаем форму в исходное состояние после завершения анимации
+    setTimeout(() => {
+      document.getElementById('stepForm').style.display = 'block';
+      document.getElementById('stepSuccess').style.display = 'none';
+      document.getElementById('formError').style.display = 'none';
+      const btn = document.getElementById('submitBtn');
+      btn.innerText = 'Submit & Download';
+      btn.disabled = false;
+      document.getElementById('onboardingForm').reset();
+    }, 300);
+  }
+
+  // Закрытие по клику вне контента
+  modalOverlay.addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // 2. Обработка отправки формы
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('formError');
+
+    btn.innerText = 'Processing...';
+    btn.disabled = true;
+    errorMsg.style.display = 'none';
+
+    // Собираем данные
+    const formData = new FormData();
+    formData.append('email', document.getElementById('userEmail').value);
+    formData.append('role', document.getElementById('userRole').value);
+    formData.append('company', document.getElementById('userCompany').value);
+
+    try {
+      const response = await fetch(`https://francoise-api-v1.azurewebsites.net/api/submit-lead`, {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!response.ok) throw new Error("Network response was not ok");
+
+      // Показываем экран успеха
+      document.getElementById('stepForm').style.display = 'none';
+      document.getElementById('stepSuccess').style.display = 'block';
+
+      // 3. ЗАПУСК СКАЧИВАНИЯ АРХИВА
+      // Вставь сюда реальный URL твоего архива с плагином
+      const pluginArchiveUrl = 'FrancoisePlugin_v4.1.3.zip';
+      const downloadFilename = 'FrancoisePlugin_v4.1.3.zip';
+
+      triggerDownload(downloadFilename, pluginArchiveUrl);
+
+    } catch (e) {
+      console.error("Submission error:", e);
+      errorMsg.style.display = 'block';
+      btn.disabled = false;
+      btn.innerText = 'Submit & Download';
+    }
+  }
+
+  // Функция принудительного скачивания файла
+  function triggerDownload(filename, url) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  // 4. Перехватываем все кнопки "Start for Free" или ссылки на регистрацию
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[href="/register"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openOnboarding();
+      });
+    });
+  });
+</script>
 </html>
