@@ -754,12 +754,17 @@
     setTimeout(() => {
       overlay.classList.add('active');
     }, 10);
-    document.body.style.overflow = 'hidden'; 
+    document.body.style.overflow = 'hidden';
+    history.replaceState(null, null, '#' + id);
   }
   
   function closeModal(id) {
     const overlay = document.getElementById(id);
     overlay.classList.remove('active');
+
+    // Добавленная строка: убирает якорь из URL при закрытии окна
+    history.replaceState(null, null, ' ');
+
     // Wait for the transition to finish before hiding completely
     setTimeout(() => {
       overlay.style.display = 'none';
@@ -776,8 +781,19 @@
 
   // Intersection Observer for scroll animations
   document.addEventListener("DOMContentLoaded", () => {
+    // --- НОВЫЙ КОД ДЛЯ ЯКОРЕЙ НАЧАЛО ---
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      const modal = document.getElementById(hash);
+      if (modal && modal.classList.contains('modal-overlay')) {
+        openModal(hash);
+      }
+    }
+    // --- НОВЫЙ КОД ДЛЯ ЯКОРЕЙ КОНЕЦ ---
+
+    // Дальше идет твой существующий код...
     const revealElements = document.querySelectorAll('.reveal');
-    
+
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
