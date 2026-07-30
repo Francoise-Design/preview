@@ -241,7 +241,7 @@
     </div>
 
     <div class="block-illu reveal delay-1" style="aspect-ratio: 64 / 33;">
-      <video controls autoplay loop muted playsinline class="media-asset" >
+      <video controls loop muted playsinline class="media-asset" >
         <source src="creo-5.mp4" type="video/mp4">
         <source src="creo-5.webm" type="video/webm">
       </video>
@@ -296,7 +296,7 @@
     </div>
 
     <div class="block-illu reveal delay-1" style="aspect-ratio: 16 / 5;">
-      <video controls autoplay loop muted playsinline class="media-asset"  style="object-position: top;">
+      <video controls loop muted playsinline class="media-asset"  style="object-position: top;">
         <source src="creo-10.mp4" type="video/mp4">
         <source src="creo-10.webm" type="video/webm">
       </video>
@@ -409,7 +409,7 @@
       <div class="bento-top">
         <div class="bento-card large reveal delay-1">
           <div class="ph" style="aspect-ratio: 16/10; overflow:hidden;">
-             <video controls autoplay loop muted playsinline class="media-asset" >
+             <video controls loop muted playsinline class="media-asset" >
               <source src="creo-20.mp4" type="video/mp4">
               <source src="creo-20.webm" type="video/webm">
             </video>
@@ -419,7 +419,7 @@
         </div>
         <div class="bento-card large reveal delay-1">
           <div class="ph" style="aspect-ratio: 16/10; overflow:hidden;">
-             <video controls autoplay loop muted playsinline class="media-asset" >
+             <video controls loop muted playsinline class="media-asset" >
               <source src="creo-21.mp4" type="video/mp4">
               <source src="creo-21.webm" type="video/webm">
             </video>
@@ -450,7 +450,7 @@
     </div>
 
     <div class="block-illu reveal delay-1" style="width: 100%; min-height: 400px; aspect-ratio: 16/9;">
-      <video controls autoplay loop muted playsinline class="media-asset"  style="width: 100%;">
+      <video controls loop muted playsinline class="media-asset"  style="width: 100%;">
         <source src="creo-22.mp4" type="video/mp4">
         <source src="creo-22.webm" type="video/webm">
       </video>
@@ -715,7 +715,6 @@
   function openModal(id) {
     const overlay = document.getElementById(id);
     overlay.style.display = 'flex';
-    // Small delay to allow display:flex to apply before adding opacity class
     setTimeout(() => {
       overlay.classList.add('active');
     }, 10);
@@ -726,26 +725,22 @@
   function closeModal(id) {
     const overlay = document.getElementById(id);
     overlay.classList.remove('active');
-
-    // Корректный сброс хэша для WebKit (без пробела в URL)
     history.replaceState(null, null, window.location.pathname + window.location.search);
 
-    // Wait for the transition to finish before hiding completely
     setTimeout(() => {
       overlay.style.display = 'none';
       document.body.style.overflow = 'auto';
     }, 300);
   }
 
-  // Close modals when clicking outside
   window.onclick = function(event) {
     if (event.target.classList.contains('modal-overlay')) {
       closeModal(event.target.id);
     }
   }
 
-  // Intersection Observer for scroll animations
   document.addEventListener("DOMContentLoaded", () => {
+    // 1. Открытие модалок по хэшу из URL
     const hash = window.location.hash.substring(1);
     if (hash) {
       const modal = document.getElementById(hash);
@@ -754,24 +749,45 @@
       }
     }
 
+    // 2. Анимация появления блоков (Reveal)
     const revealElements = document.querySelectorAll('.reveal');
-
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-          observer.unobserve(entry.target); // Animates only once
+          observer.unobserve(entry.target);
         }
       });
     }, {
       root: null,
-      rootMargin: "0px 0px 0px 0px", // Исправлено для надёжного срабатывания в Safari на мобильных
+      rootMargin: "0px 0px 0px 0px",
       threshold: 0.1
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Optional: Header shadow on scroll
+    // 3. УМНОЕ УПРАВЛЕНИЕ ВИДЕО (Защита от краша Safari по памяти)
+    const videos = document.querySelectorAll('video');
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          // Запускаем видео только когда оно видно
+          video.play().catch(() => {});
+        } else {
+          // Ставим на паузу, когда ушло из области видимости, освобождая ресурсы iOS
+          video.pause();
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: "100px 0px 100px 0px", // Начинаем грузить чуть заранее до появления
+      threshold: 0.05
+    });
+
+    videos.forEach(video => videoObserver.observe(video));
+
+    // 4. Тень шапки при скролле
     const header = document.getElementById('main-header');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
