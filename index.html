@@ -56,7 +56,7 @@
   footer a:hover { color: var(--ink); }
 
   /* Visuals & Cards */
-  .media-asset {
+.media-asset {
     width: 100%;
     height: 100%;
     display: block;
@@ -66,6 +66,7 @@
     transition: transform 0.5s ease;
     object-fit: cover;
     object-position: center;
+    cursor: pointer; /* <-- Добавь эту строку */
   }
 
   .hero-media{
@@ -186,7 +187,7 @@
       <a href="https://www.figma.com/community/plugin/1617922498584623166" target="_blank" rel="noopener noreferrer" class="cta">Install Figma Plugin</a>
     </div>
     <div class="hero-media">
-      <video controls autoplay loop muted playsinline class="media-asset">
+      <video autoplay loop muted playsinline class="media-asset">
         <source src="creo-1.mp4" type="video/mp4">
         <source src="creo-1.webm" type="video/webm">
       </video>
@@ -241,7 +242,7 @@
     </div>
 
     <div class="block-illu reveal delay-1" style="aspect-ratio: 64 / 33;">
-      <video controls loop muted playsinline preload="none" class="media-asset" >
+      <video loop muted playsinline preload="none" class="media-asset" >
         <source src="creo-5.mp4" type="video/mp4">
         <source src="creo-5.webm" type="video/webm">
       </video>
@@ -296,7 +297,7 @@
     </div>
 
     <div class="block-illu reveal delay-1" style="aspect-ratio: 16 / 5;">
-      <video controls loop muted playsinline preload="none" class="media-asset"  style="object-position: top;">
+      <video loop muted playsinline preload="none" class="media-asset"  style="object-position: top;">
         <source src="creo-10.mp4" type="video/mp4">
         <source src="creo-10.webm" type="video/webm">
       </video>
@@ -409,7 +410,7 @@
       <div class="bento-top">
         <div class="bento-card large reveal delay-1">
           <div class="ph" style="aspect-ratio: 16/10; overflow:hidden;">
-             <video controls loop muted playsinline preload="none" class="media-asset" >
+             <video loop muted playsinline preload="none" class="media-asset" >
               <source src="creo-20.mp4" type="video/mp4">
               <source src="creo-20.webm" type="video/webm">
             </video>
@@ -419,7 +420,7 @@
         </div>
         <div class="bento-card large reveal delay-1">
           <div class="ph" style="aspect-ratio: 16/10; overflow:hidden;">
-             <video controls loop muted playsinline preload="none" class="media-asset" >
+             <video loop muted playsinline preload="none" class="media-asset" >
               <source src="creo-21.mp4" type="video/mp4">
               <source src="creo-21.webm" type="video/webm">
             </video>
@@ -450,7 +451,7 @@
     </div>
 
     <div class="block-illu reveal delay-1" style="width: 100%; min-height: 400px; aspect-ratio: 16/9;">
-      <video controls loop muted playsinline preload="none" class="media-asset"  style="width: 100%;">
+      <video loop muted playsinline preload="none" class="media-asset"  style="width: 100%;">
         <source src="creo-22.mp4" type="video/mp4">
         <source src="creo-22.webm" type="video/webm">
       </video>
@@ -768,6 +769,18 @@
 
     // 3. УМНОЕ УПРАВЛЕНИЕ ВИДЕО (Защита от краша Safari по памяти)
     const videos = document.querySelectorAll('video');
+
+    // ДОБАВЛЕННЫЙ КОД: Пауза и воспроизведение по клику
+    videos.forEach(video => {
+      video.addEventListener('click', () => {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    });
+
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const video = entry.target;
