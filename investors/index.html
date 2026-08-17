@@ -1,270 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Françoise — The IR Layer between Design and Code</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Serif+Text:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --teal: #005F6B;
-    --teal-darker: #002F36;
-    --yellow: #F1A900;
-    --cyan: #00B9D1;
-    --paper: #FAF9F6;
-    --ink: #1A1310;
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Françoise Demo</title>
+  <style>
+    :root {
+      --bg: #f6f6f4;
+      --text: #0a0a0a;
+      --muted: #6d6a63;
+      --accent: #8c43ff;
+      --content: 1440px;
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; }
 
-  html, body {
-    background: var(--teal);
-    color: var(--paper);
-    font-family: 'Inter', system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    height: 100vh;
-    overflow: hidden;
-  }
+    html, body { margin: 0; min-height: 100%; }
 
-  @media (max-width: 1024px) {
-    html, body { height: auto; overflow: auto; }
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  /* Layout Frame */
-  .screen {
-    width: 100%;
-    height: 100%;
-    padding: 48px 64px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    z-index: 2;
-  }
+    .section {
+      min-height: 100vh;
+      padding: clamp(56px, 6vw, 104px) clamp(28px, 5.5vw, 106px) clamp(48px, 5vw, 88px);
+      display: flex;
+      align-items: center;
+    }
 
-  @media (max-width: 768px) {
-    .screen { padding: 32px 24px; min-height: 100vh; }
-  }
+    .wrap {
+      width: min(100%, var(--content));
+      margin: 0 auto;
+    }
 
-  /* Header Layout */
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    h1 {
+      margin: 0 0 clamp(34px, 3.4vw, 56px);
+      font-size: clamp(56px, 5.3vw, 102px);
+      line-height: .95;
+      letter-spacing: -0.065em;
+      font-weight: 700;
+    }
 
-  .header-left {
-    display: flex;
-    align-items: baseline;
-    gap: 24px;
-  }
+    .video-shell {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 6.05;
+      overflow: hidden;
+      background: #fff;
+    }
 
-  header .logo {
-    font-family: 'DM Serif Text', serif;
-    font-style: italic;
-    text-transform: none;
-    letter-spacing: 0;
-    font-size: 18px;
-  }
+    .video-shell video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
 
-  .header-meta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    opacity: 0.6;
-  }
+    .footer-row {
+      margin-top: clamp(28px, 2.4vw, 42px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
 
-  .header-right {
-    display: flex;
-    align-items: center;
-  }
+    .eyebrow {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(16px, 1.16vw, 22px);
+      line-height: 1;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      white-space: nowrap;
+    }
 
-  .link-book {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--paper);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(250, 249, 246, 0.3);
-    padding-bottom: 2px;
-    transition: all 0.2s ease;
-  }
-  .link-book:hover {
-    color: var(--yellow);
-    border-bottom-color: var(--yellow);
-  }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 306px;
+      min-height: 82px;
+      padding: 20px 34px;
+      border-radius: 14px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-size: clamp(18px, 1.2vw, 24px);
+      line-height: 1;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      transition: transform .18s ease, opacity .18s ease;
+    }
 
-  /* Main Section */
-  main {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 80px;
-    align-items: end; /* Изменено с center на end: теперь левая и правая колонки идеально выровнены по нижней границе */
-    margin: auto 0;
-  }
+    .button:hover { transform: translateY(-2px); }
+    .button:active { transform: translateY(0); opacity: .92; }
 
-  @media (max-width: 1024px) {
-    main { grid-template-columns: 1fr; gap: 48px; margin: 48px 0; align-items: stretch; }
-  }
-
-  /* Left Column */
-  .hero-content {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .tagline {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(38px, 4.5vw, 54px);
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-  }
-
-  .tagline .highlight-yellow { color: var(--yellow); }
-  .tagline .highlight-cyan { color: var(--cyan); }
-
-  .btn-deck {
-    background: var(--yellow);
-    color: var(--ink);
-    padding: 16px 36px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: background 0.2s ease;
-    align-self: flex-start;
-  }
-  .btn-deck:hover {
-    background: var(--paper);
-  }
-
-  /* Right Column (Video 16:9) */
-  .demo-container {
-    width: 100%;
-    aspect-ratio: 2090 / 1080;
-    background: var(--teal-darker);
-    border: 1px solid rgba(250,249,246,0.1);
-    position: relative;
-    box-shadow: 0 32px 64px rgba(0,0,0,0.25);
-    overflow: hidden;
-  }
-
-  .demo-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* Footer Layout */
-  footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    border-top: 1px solid rgba(250,249,246,0.12);
-    padding-top: 24px;
-  }
-
-  @media (max-width: 768px) {
-    footer { flex-direction: column; gap: 24px; align-items: flex-start; }
-  }
-
-  .copyright {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.05em;
-    opacity: 0.5;
-    line-height: 1.5;
-  }
-
-  .contacts-block {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    align-items: flex-end;
-  }
-
-  @media (max-width: 768px) {
-    .contacts-block { align-items: flex-start; }
-  }
-
-  .contacts-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    opacity: 0.4;
-    margin-bottom: 2px;
-  }
-
-  .contact-link {
-    font-family: 'Inter', sans-serif;
-    font-size: 13.5px;
-    color: var(--paper);
-    opacity: 0.7;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    border-bottom: 1px dashed rgba(250,249,246,0.15);
-  }
-  .contact-link:hover {
-    opacity: 1;
-    color: var(--yellow);
-    border-bottom-color: var(--yellow);
-  }
-</style>
+    @media (max-width: 900px) {
+      .section { padding: 40px 22px 32px; }
+      h1 { margin-bottom: 28px; }
+      .video-shell { aspect-ratio: 16 / 8.2; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+      .button { width: 100%; min-width: 0; min-height: 68px; }
+      .eyebrow { white-space: normal; line-height: 1.25; }
+    }
+  </style>
 </head>
 <body>
+  <main class="section">
+    <div class="wrap">
+      <h1>Françoise Demo</h1>
 
-<div class="screen">
+      <div class="video-shell">
+        <video autoplay muted loop playsinline preload="metadata" poster="Section.png">
+          <source src="demo.webm" type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
 
-  <header>
-    <div class="header-left">
-      <span class="logo">Françoise</span>
-      <span class="header-meta">Pre-seed · 2026</span>
-    </div>
-    <div class="header-right">
-      <a href="https://meet.francoise.design/" class="link-book">Book a meeting</a>
-    </div>
-  </header>
-
-  <main>
-    <div class="hero-content">
-      <h1 class="tagline">
-        The <span class="highlight-yellow">intermediate representation</span> layer
-        between <span class="highlight-cyan">design</span> and code
-      </h1>
-
-      <a href="Pitch Deck.pdf" class="btn-deck">Download a deck</a>
-    </div>
-
-    <div class="demo-container">
-      <video class="demo-video" autoplay loop muted playsinline controls poster="poster.jpg">
-        <source src="video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <div class="footer-row">
+        <p class="eyebrow">Interface Operations Infrastructure</p>
+        <a class="button" href="pitch.pdf" download>Download Pitch</a>
+      </div>
     </div>
   </main>
-
-  <footer>
-    <div class="copyright">
-      <div>© Françoise Design Inc.</div>
-      <div style="opacity: 0.6;">US incorporated</div>
-    </div>
-
-    <div class="contacts-block">
-      <div class="contacts-label">Connect</div>
-      <a href="mailto:daria@francoise.design" class="contact-link">daria@francoise.design</a>
-      <a href="https://www.linkedin.com/in/daria-kamyshina" target="_blank" rel="noopener" class="contact-link">linkedin.com/in/daria-kamyshina</a>
-    </div>
-  </footer>
-
-</div>
-
 </body>
 </html>
