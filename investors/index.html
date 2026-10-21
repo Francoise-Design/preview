@@ -1,256 +1,161 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Françoise Demo</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Françoise — Platform Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+          --text-main: #111111;
+          --text-muted: #52525b;
+          --border-color: #e4e4e7;
+          --accent: #111111;
+        }
 
-  <style>
-    :root {
-      --bg: #f6f6f4;
-      --text: #0a0a0a;
-      --muted: #6d6a63;
-      --line: #d9d8d4;
-      --accent: #9b43f7;
-      --accent-hover: #832edb;
-      --content: 980px;
-    }
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          color: var(--text-main);
+          background-color: #ffffff;
+          -webkit-font-smoothing: antialiased;
+          text-rendering: optimizeLegibility;
+          line-height: 1.5;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        h1, h2 { text-wrap: balance; letter-spacing: -0.02em; }
+        p { text-wrap: pretty; }
 
-    html,
-    body {
-      margin: 0;
-      min-height: 100%;
-    }
+        /* Editorial Grid Layout */
+        .editorial-grid {
+          max-width: 1280px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 64px;
+        }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Times New Roman", Times, serif;
-      -webkit-font-smoothing: antialiased;
-    }
+        @media (min-width: 1024px) {
+          .editorial-grid {
+            grid-template-columns: 4fr 7fr;
+            gap: 80px;
+            align-items: center;
+          }
+        }
 
-    .section {
-      min-height: 100vh;
-      padding: clamp(24px, 3vh, 40px) clamp(24px, 5vw, 72px);
-      display: flex;
-      align-items: center;
-    }
+        /* Minimalist Player Window */
+        .player-window {
+          border: 1px solid var(--border-color);
+          border-radius: 8px;
+          background: #ffffff;
+          box-shadow: 0 4px 24px -6px rgba(0, 0, 0, 0.05);
+          overflow: hidden;
+        }
 
-    .wrap {
-      width: min(100%, var(--content));
-      margin: 0 auto;
-    }
-
-    h1 {
-      margin: 0 0 clamp(18px, 2vh, 28px);
-      font-size: clamp(42px, 4.3vw, 68px);
-      line-height: 0.9;
-      letter-spacing: -0.055em;
-      font-weight: 700;
-    }
-
-
-.video-shell {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1.6 / 1;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: #fff;
-}
-
-.video-shell iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 101%;
-  height: 101%;
-  transform: translate(-50%, -50%);
-  display: block;
-  border: 0;
-}
-
-    .footer-row {
-      margin-top: clamp(18px, 2vh, 28px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-.footer-copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  min-width: 0;
-}
-
-    .eyebrow,
-    .email {
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(12px, 0.85vw, 15px);
-      line-height: 1.2;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .email {
-      color: var(--text);
-      letter-spacing: 0.03em;
-      text-transform: none;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .email:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .buttons {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 164px;
-      min-height: 48px;
-      padding: 12px 18px;
-      border: 1px solid var(--accent);
-      border-radius: 0;
-      background: var(--accent);
-      color: #fff;
-      text-decoration: none;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 12px;
-      line-height: 1;
-      letter-spacing: 0.075em;
-      text-transform: uppercase;
-      font-weight: 700;
-      white-space: nowrap;
-      transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
-    }
-
-    .button:hover {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
-    }
-
-    .button:active {
-      transform: translateY(0);
-    }
-
-    .button-secondary {
-      border-color: var(--text);
-      background: transparent;
-      color: var(--text);
-    }
-
-    .button-secondary:hover {
-      background: var(--text);
-      color: #fff;
-    }
-
-    @media (max-width: 900px) {
-      .section {
-        min-height: auto;
-        padding: 36px 22px 44px;
-      }
-
-      .wrap {
-        width: 100%;
-      }
-
-      h1 {
-        margin-bottom: 22px;
-      }
-
-      .video-shell {
-        aspect-ratio: 1.7 / 1;
-      }
-
-      .footer-row {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 22px;
-        margin-top: 24px;
-      }
-
-      .footer-copy {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .buttons {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .button {
-        width: 100%;
-        min-width: 0;
-        min-height: 54px;
-      }
-    }
-  </style>
+        .player-header {
+          display: flex;
+          align-items: center;
+          padding: 12px 16px;
+          background: #fafafa;
+          border-bottom: 1px solid var(--border-color);
+        }
+    </style>
 </head>
+<body class="relative min-h-screen flex flex-col selection:bg-zinc-900 selection:text-white">
 
-<body>
-  <main class="section">
-    <div class="wrap">
-      <h1>Françoise Demo</h1>
+<!-- Minimal Header -->
+<header class="w-full p-6 md:px-12 md:py-8 flex justify-between items-center border-b border-zinc-100">
+    <div class="text-xl font-bold tracking-tight text-zinc-900">Françoise</div>
+</header>
 
-      <div class="video-shell">
-        <iframe
-          src="https://www.loom.com/embed/8e68017d26d74c2b990e30548e7fed07?hideEmbedTopBar=true&hide_title=true&hide_owner=true&hide_share=true"
-          title="Françoise product demo"
-          allowfullscreen
-          webkitallowfullscreen
-          mozallowfullscreen
-        ></iframe>
-      </div>
+<!-- Main Content -->
+<main class="flex-1 flex items-center justify-center p-6 md:p-12 py-8 md:py-12">
+    <div class="editorial-grid w-full">
 
-      <div class="footer-row">
-        <div class="footer-copy">
-          <p class="eyebrow">Interface Operations Infrastructure</p>
-          <a class="email" href="mailto:ceo@francoise.design">ceo@francoise.design</a>
+        <!-- Left Column: Context & CTAs -->
+        <div class="space-y-8">
+            <div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 mb-6 leading-[1.1]">
+                    The Semantic Infrastructure Layer for Enterprise UI
+                </h1>
+                <p class="text-lg text-zinc-600 leading-relaxed">
+                    Watch Françoise deterministically compile raw visual intent into production code while <strong
+                        class="text-zinc-900 font-semibold">slashing agent token consumption by 10x+</strong> in
+                    real-time workflows.
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 pt-4">
+                <!-- Primary CTA: Pitch Deck -->
+                <a aria-disabled="true"
+                   class="flex items-center justify-center gap-3 bg-zinc-900 text-white px-6 py-4 font-bold text-xs uppercase tracking-wider hover:bg-zinc-800 transition-colors cursor-pointer whitespace-nowrap"
+                   data-resource="pitchDeck" role="link">
+                    <span>Read Pitch Deck</span>
+                    <span class="text-base leading-none mt-0.5">↓</span>
+                </a>
+                <!-- Secondary CTA: Setup Call -->
+                <a href="https://meet.francoise.design "
+                   class="flex items-center justify-center border border-zinc-300 text-zinc-900 px-6 py-4 font-bold text-xs uppercase tracking-wider hover:border-zinc-900 transition-colors whitespace-nowrap">
+                    Book Setup Call
+                </a>
+            </div>
+            <p class="text-xs text-zinc-500 mt-2" id="stand-link-note">Raising $3M to scale enterprise infrastructure &
+                platform distribution</p>
         </div>
 
-        <div class="buttons">
-          <a
-            class="button button-secondary"
-            href="Francoise_one-pager.pdf"
-            target="_blank"
-            rel="noopener"
-          >
-            View One-Pager
-          </a>
+        <!-- Right Column: Minimalist Video Player -->
+        <div class="w-full">
+            <div class="player-window">
 
-          <a
-            class="button"
-            href="Francoise_pitch.pdf"
-            download
-          >
-            Download Pitch
-          </a>
+
+                <!-- Video Container -->
+                <!-- Виджет-превью YouTube с отложенной загрузкой -->
+                <div
+                        class="relative w-full aspect-video border border-zinc-200 bg-zinc-900 overflow-hidden cursor-pointer group"
+                        onclick="this.innerHTML = '<iframe class=\'w-full h-full\' src=\'https://www.youtube.com/embed/4U9YebAEL-E?autoplay=1&rel=0\' title=\'Françoise Demo\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\' allowfullscreen></iframe>'">
+
+                    <!-- Превью-картинка с YouTube -->
+                    <img
+                            src="https://i.ytimg.com/vi/4U9YebAEL-E/maxresdefault.jpg"
+                            onerror="this.src='https://i.ytimg.com/vi/4U9YebAEL-E/hqdefault.jpg'"
+                            alt="Video Preview"
+                            class="w-full h-full object-cover opacity-90 group-hover:scale-[1.02] group-hover:opacity-100 transition-all duration-300"/>
+
+                    <!-- Затемнение и кнопка Play в стиле сайта -->
+                    <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
+                        <div class="w-16 h-16 bg-zinc-900/90 text-white flex items-center justify-center border border-zinc-700 shadow-lg group-hover:bg-white group-hover:text-zinc-900 transition-colors">
+                            <svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
     </div>
-  </main>
+</main>
+
+<footer class="w-full p-6 md:px-12 text-zinc-400 text-sm font-medium border-t border-zinc-100 flex justify-between items-center">
+    <div>&copy; 2026 Françoise Design Inc.</div>
+    <a href="mailto:daria@francoise.design" class="hover:text-zinc-900 transition-colors">daria@francoise.design</a>
+</footer>
+
+<script>
+    const FRANCOISE_LINKS = { pitchDeck: "Francoise_Deck.pdf" };
+
+    const deckLink = document.querySelector('[data-resource="pitchDeck"]');
+    const note = document.getElementById('stand-link-note');
+
+    if(FRANCOISE_LINKS.pitchDeck) {
+      deckLink.href = FRANCOISE_LINKS.pitchDeck;
+      deckLink.target = '_blank';
+      deckLink.rel = 'noopener noreferrer';
+      deckLink.removeAttribute('aria-disabled');
+      note.hidden = true;
+    }
+</script>
 </body>
 </html>

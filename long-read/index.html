@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Françoise — Architectural Breakthrough & Interface Infrastructure</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --text-main: #111111;
+      --text-muted: #52525b;
+      --border-color: #e4e4e7;
+      --accent: #111111;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-main);
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.5;
+    }
+
+    /* Editorial Typography */
+    h1, h2, h3, h4 { text-wrap: balance; letter-spacing: -0.02em; }
+    p, li { text-wrap: pretty; }
+    
+    .thesis-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    
+    .thesis-summary {
+      font-size: 1.125rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Swiss Links */
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 2px;
+      transition: border-color 0.2s ease;
+    }
+    .source-link:hover { border-color: var(--accent); }
+
+    /* Editorial Grid Layout */
+    .editorial-section {
+      padding: clamp(80px, 10vw, 140px) clamp(24px, 5vw, 48px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .editorial-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 64px;
+    }
+    
+    @media (min-width: 1024px) {
+      .editorial-grid {
+        grid-template-columns: 4fr 7fr; /* Classic asymmetrical Swiss ratio */
+        gap: 80px;
+        align-items: start;
+      }
+      .sticky-thesis {
+        position: sticky;
+        top: 80px;
+      }
+    }
+
+    /* Diagram containers */
+    .diagram-wrapper {
+      margin-bottom: 40px;
+      width: 100%;
+    }
+    .diagram-wrapper svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Custom UI Elements */
+    .data-point {
+      border-top: 2px solid var(--accent);
+      padding-top: 16px;
+    }
+    
+    .dashed-bridge {
+      background-image: linear-gradient(to right, #111 50%, rgba(255,255,255,0) 0%);
+      background-position: bottom;
+      background-size: 6px 1px;
+      background-repeat: repeat-x;
+      height: 1px;
+    }
+
+    .market-labels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px 24px;
+      margin-bottom: 32px;
+    }
+    @media (min-width: 768px) {
+      .market-labels { grid-template-columns: repeat(6, 1fr); }
+    }
+</style>
+</head>
+<body class="selection:bg-zinc-900 selection:text-white">
+
+<main class="w-full">
+<!-- ================================================================= -->
+<!-- MARKET OPPORTUNITY -->
+<!-- ================================================================= -->
+<section class="editorial-section" id="market">
+  <div class="editorial-grid">
+    <div class="sticky-thesis">
+      <h1 class="thesis-title">The Market for Interface Infrastructure</h1>
+      <p class="thesis-summary">
+        Figma estimates a $33B market opportunity across the software-design workforce. Françoise will provide the foundational infrastructure for this entire market.
+      </p>
+    </div>
+    
+    <div>
+      <div class="data-point">
+        <h3 class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">Total Addressable Market</h3>
+        <div class="text-6xl lg:text-7xl font-bold tracking-tighter mb-6">$33B</div>
+        <p class="text-xl font-medium text-zinc-900 mb-4 leading-relaxed">
+          AI is changing how interfaces are built. Instead of competing for a single application layer, Françoise is deploying the underlying infrastructure that connects design tools, codebases, and agents.
+        </p>
+        <p class="text-[16px] text-zinc-600 mb-6 leading-relaxed">
+          We are positioning ourselves to capture this value by working directly with the platforms that occupy this market, supplying them with the semantic representations they lack.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- CHAPTER 1: ARCHITECTURAL BREAKTHROUGH -->
+<!-- ================================================================= -->
+<section class="editorial-section" id="chapter-1">
+  <div class="editorial-grid">
+    <div class="sticky-thesis">
+      <h2 class="thesis-title">Each Era’s Leadership Is Driven by an Architectural Breakthrough</h2>
+      <p class="thesis-summary">
+        From pixels to vectors to cloud components, market dominance shifts only when the underlying technical primitive evolves to solve a scaling bottleneck.
+      </p>
+    </div>
+    
+    <div>
+      <!-- DIAGRAM 1: Market Share Chart -->
+      <div class="diagram-wrapper">
+        <svg viewBox="0 0 980 360" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="aiGreenGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#148F58" stop-opacity="0.15"></stop>
+              <stop offset="85%" stop-color="#148F58" stop-opacity="0.03"></stop>
+              <stop offset="100%" stop-color="#148F58" stop-opacity="0.0"></stop>
+            </linearGradient>
+          </defs>
+          <g class="text-[12px] fill-[#717e95] font-medium" style="font-family: 'Inter', sans-serif;">
+            <text text-anchor="end" x="48" y="25">100%</text>
+            <line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="60" x2="962" y1="21" y2="21"></line>
+            <text text-anchor="end" x="48" y="85">80%</text>
+            <line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="60" x2="962" y1="81" y2="81"></line>
+            <text text-anchor="end" x="48" y="145">60%</text>
+            <line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="60" x2="962" y1="141" y2="141"></line>
+            <text text-anchor="end" x="48" y="205">40%</text>
+            <line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="60" x2="962" y1="201" y2="201"></line>
+            <text text-anchor="end" x="48" y="265">20%</text>
+            <line stroke="#e2e8f0" stroke-dasharray="3,3" stroke-width="1" x1="60" x2="962" y1="261" y2="261"></line>
+            <text text-anchor="end" x="48" y="328">0%</text>
+            <line stroke="#cbd5e1" stroke-width="1.5" x1="60" x2="962" y1="324" y2="324"></line>
+          </g>
+          <text class="text-[18px] font-extrabold fill-[#1e1e1e] tracking-tight" style="font-family: 'Inter', sans-serif;" x="60" y="26">MARKET SHARE</text>
+          <g class="text-[12px] fill-[#526077] font-medium" style="font-family: 'Inter', sans-serif;" text-anchor="middle">
+            <text x="60" y="349">2010</text>
+            <text x="172" y="349">2012</text>
+            <text x="285" y="349">2014</text>
+            <text x="342" y="349">2015</text>
+            <text x="455" y="349">2017</text>
+            <text x="567" y="349">2019</text>
+            <text x="680" y="349">2021</text>
+            <text x="736" y="349">2022</text>
+            <text x="849" y="349">2024</text>
+            <text x="962" y="349">2026</text>
+          </g>
+          <path d="M 736 321 L 792 300 L 849 258 L 962 117 L 962 324 L 736 324 Z" fill="url(#aiGreenGrad)"></path>
+          <path d="M 60 56 C 135 68, 215 98, 285 141" fill="none" stroke="#5477f5" stroke-dasharray="5,5" stroke-width="2.6"></path>
+          <path d="M 285 141 L 342 186 L 455 278 L 511 300 L 567 313 L 680 321 L 736 322 L 849 323.5" fill="none" stroke="#93aff7" stroke-width="2.2"></path>
+          <path d="M 60 319 C 145 308, 215 245, 285 177" fill="none" stroke="#cf823a" stroke-dasharray="5,5" stroke-width="2.6"></path>
+          <path d="M 285 177 L 342 169 L 455 126 L 511 141 L 567 231 L 624 270 L 680 294 L 736 309 L 849 318.5" fill="none" stroke="#c87328" stroke-linejoin="round" stroke-width="3"></path>
+          <path d="M 455 294 L 511 278 L 567 211 L 624 150 L 680 111 L 736 81 L 792 75 L 849 81 L 962 106" fill="none" stroke="#682ae9" stroke-linejoin="round" stroke-width="3.2"></path>
+          <path d="M 736 321 L 792 300 L 849 258 L 962 117" fill="none" stroke="#2c8c60" stroke-dasharray="5.5,5.5" stroke-width="2.8"></path>
+          <circle cx="962" cy="117" fill="#2c8c60" r="4.8"></circle>
+          <text class="text-[18px] font-bold fill-[#4774f6]" style="font-family: 'Inter', sans-serif;" x="252" y="114">PHOTOSHOP</text>
+          <text class="text-[18px] font-bold fill-[#d97706]" style="font-family: 'Inter', sans-serif;" x="423" y="114">SKETCH</text>
+          <text class="text-[18px] font-bold fill-[#7c2ae8]" style="font-family: 'Inter', sans-serif;" x="603" y="114">FIGMA</text>
+          <g class="text-[17.5px] font-bold fill-[#108953]" style="font-family: 'Inter', sans-serif;">
+            <text x="816" y="114">AI CODE</text>
+            <text x="816" y="137">GENERATORS</text>
+            <text x="816" y="160">&amp; AGENTS</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Logic Flow: Architecture -> Transition -->
+      <div class="space-y-12">
+        <!-- RASTER -> VECTOR -->
+        <div class="border-t border-zinc-200 pt-6">
+          <div class="flex items-center gap-4 mb-4">
+            <h3 class="text-xl font-bold">Raster <span class="text-zinc-400 font-normal">⟶ Vector</span></h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-[15.5px] text-zinc-600 mb-4 leading-relaxed">
+            <p>Retina screens (2x/3x) and Android display variations broke the fixed 960px grid. Bitmap mockups blurred, and multi-screen files grew to multiple gigabytes.</p>
+            <p>In April 2014, Bohemian Coding released Sketch 3. Instead of pixels, it stored vector math, artboards, and Symbols (reusable components with text overrides).</p>
+          </div>
+          <div class="bg-zinc-50 p-4 border-l-2 border-zinc-900 font-medium text-zinc-900">
+            Within two years, Sketch overtook Photoshop as the primary UI design tool worldwide.
+          </div>
+        </div>
+
+        <!-- VECTOR -> WEBGL -->
+        <div class="border-t border-zinc-200 pt-6">
+          <div class="flex items-center gap-4 mb-4">
+            <h3 class="text-xl font-bold">Vector <span class="text-zinc-400 font-normal">⟶ WebGL Canvas</span></h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-[15.5px] text-zinc-600 mb-4 leading-relaxed">
+            <p>Tech companies scaled design teams from solo contributors to groups of 5–10 people. Local sketch files and manual file-sharing became a critical bottleneck.</p>
+            <p>Figma built a browser-based, cloud infrastructure powered by WebGL and CRDTs. Multiple people could work in the same file simultaneously, and layouts were linked through shared design-system libraries.</p>
+          </div>
+          <div class="bg-zinc-50 p-4 border-l-2 border-zinc-900 font-medium text-zinc-900">
+            Within four years, Figma overtook Sketch and captured over 80% of the market.
+          </div>
+        </div>
+
+        <!-- WEBGL -> AI -->
+        <div class="border-t border-zinc-200 pt-6">
+          <div class="flex items-center gap-4 mb-4">
+            <h3 class="text-xl font-bold">WebGL Canvas <span class="text-zinc-400 font-normal">⟶ AI Agents</span></h3>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-[15.5px] text-zinc-600 mb-4 leading-relaxed">
+            <p>Design teams expanded to dozens of people, making manual quality control impossible. Designers routinely detach instances, create rogue hex colors, tweak paddings by 2px, and duplicate components.</p>
+            <p>Finding and fixing these discrepancies still requires manual auditing. Because Figma stores visual boxes rather than code contracts, automatic handoff remains broken.</p>
+          </div>
+          <div class="bg-zinc-50 p-4 border-l-2 border-zinc-900 font-medium text-zinc-900">
+            AI allowed teams to shift this manual auditing and reconstruction onto LLM tokens and exposes that the current canvas format has reached its limit and a new foundation is required.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- CHAPTER 2: INTERFACE MONOPOLY BATTLE -->
+<!-- ================================================================= -->
+<section class="editorial-section bg-zinc-50" id="chapter-2">
+  <div class="editorial-grid">
+    <div class="sticky-thesis">
+      <h2 class="thesis-title">The Battle for the Next Monopoly</h2>
+      <p class="thesis-summary">
+        Whoever controls how software interfaces are created and deployed commands enterprise software margins and downstream compute. The gold rush has begun.
+      </p>
+    </div>
+
+    <div>
+      <!-- DIAGRAM 2: Gold Rush Pickaxes -->
+      <div class="diagram-wrapper mb-12">
+        <div class="market-labels">
+          <div><span class="text-[11px] font-bold text-zinc-500 uppercase tracking-widest block mb-2">Canvas startups</span></div>
+          <div>
+            <span class="text-[11px] font-bold text-zinc-500 uppercase tracking-widest block mb-2">Frontier AI labs</span>
+            <p class="text-sm font-semibold mb-1">Anthropic</p><p class="text-sm font-semibold mb-1">OpenAI</p><p class="text-sm font-semibold">Gemini</p>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold text-zinc-500 uppercase tracking-widest block mb-2">Design suites</span>
+            <p class="text-sm font-semibold mb-1">Figma</p><p class="text-sm font-semibold mb-1">Adobe</p><p class="text-sm font-semibold">Canva</p>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold text-zinc-500 uppercase tracking-widest block mb-2">Code-gen platforms</span>
+            <p class="text-sm font-semibold mb-1">v0</p><p class="text-sm font-semibold mb-1">Lovable</p><p class="text-sm font-semibold">Cursor</p>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold text-zinc-500 uppercase tracking-widest block mb-2">Big tech</span>
+            <p class="text-sm font-semibold mb-1">Microsoft</p><p class="text-sm font-semibold mb-1">Google</p><p class="text-sm font-semibold">Atlassian</p>
+          </div>
+          <div><span class="text-[11px] font-bold text-zinc-500 uppercase tracking-widest block mb-2">Enterprise</span><p class="text-sm font-semibold">Internal systems</p></div>
+        </div>
+        <svg viewBox="0 80 980 160" xmlns="http://www.w3.org/2000/svg">
+          <line stroke="#52525b" stroke-width="1" x1="90" x2="835" y1="143" y2="143"></line>
+          <g fill="none" stroke="#111" stroke-linecap="round" stroke-width="3">
+            <line x1="56" x2="103" y1="92" y2="134"></line><path d="M 102 113 C 103 128, 96 142, 79 149"></path><path d="M 106 113 C 107 123, 104 131, 98 138"></path>
+          </g>
+          <g fill="none" stroke="#111" stroke-linecap="round" stroke-width="3">
+            <line x1="182" x2="229" y1="90" y2="132"></line><path d="M 228 111 C 229 126, 222 140, 205 147"></path><path d="M 232 111 C 233 121, 230 129, 224 136"></path>
+          </g>
+          <g fill="none" stroke="#111" stroke-linecap="round" stroke-width="3">
+            <line x1="316" x2="363" y1="92" y2="134"></line><path d="M 362 113 C 363 128, 356 142, 339 149"></path><path d="M 366 113 C 367 123, 364 131, 358 138"></path>
+          </g>
+          <g fill="none" stroke="#111" stroke-linecap="round" stroke-width="3">
+            <line x1="592" x2="545" y1="92" y2="134"></line><path d="M 546 113 C 545 128, 552 142, 569 149"></path><path d="M 542 113 C 541 123, 544 131, 550 138"></path>
+          </g>
+          <g fill="none" stroke="#111" stroke-linecap="round" stroke-width="3">
+            <line x1="724" x2="677" y1="90" y2="132"></line><path d="M 678 111 C 677 126, 684 140, 701 147"></path><path d="M 674 111 C 673 121, 676 129, 682 136"></path>
+          </g>
+          <g fill="none" stroke="#111" stroke-linecap="round" stroke-width="3">
+            <line x1="856" x2="809" y1="92" y2="134"></line><path d="M 810 113 C 809 128, 816 142, 833 149"></path><path d="M 806 113 C 805 123, 808 131, 814 138"></path>
+          </g>
+          <!-- Vein -->
+          <path d="M 306 232 C 306 213, 323 204, 342 208 C 344 191, 351 178, 372 191 C 378 164, 389 152, 405 168 C 424 156, 439 149, 452 164 C 468 148, 493 147, 504 156 C 503 166, 502 175, 502 177 C 519 185, 526 193, 534 197 C 553 197, 577 199, 584 222 C 589 225, 594 228, 592 232" fill="none" stroke="#fbd437" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+        </svg>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+        <div class="data-point">
+          <h4 class="font-bold text-lg mb-2">Legacy Design Suites</h4>
+          <p class="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-3">Figma, Adobe, Canva</p>
+          <p class="text-[15px] text-zinc-600 mb-3">Already own customer access and the day-to-day workflow.</p>
+          <ul class="text-[14px] text-zinc-600 space-y-2 border-t border-zinc-200 pt-3">
+            <li><strong class="text-zinc-900">Figma:</strong> Defends its market monopoly against tools that bypass design files and generate code directly.</li>
+            <li><strong class="text-zinc-900">Adobe:</strong> Blocked from buying Figma, it cannot afford to lose creative workflows as Figma expands into presentations and assets.</li>
+            <li><strong class="text-zinc-900">Canva:</strong> Moving upmarket into enterprise accounts; capturing interface design justifies its enterprise valuation.</li>
+          </ul>
+        </div>
+        <div class="data-point">
+          <h4 class="font-bold text-lg mb-2">Big Tech Ecosystems</h4>
+          <p class="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-3">Microsoft, Atlassian, Google</p>
+          <p class="text-[15px] text-zinc-600 mb-3">Already own the rest of the software delivery lifecycle; want to close the loop end-to-end.</p>
+          <ul class="text-[14px] text-zinc-600 space-y-2 border-t border-zinc-200 pt-3">
+            <li><strong class="text-zinc-900">Microsoft/GitHub:</strong> Closes the last mile by letting Copilot compile designs straight into pull requests.</li>
+            <li><strong class="text-zinc-900">Atlassian:</strong> Bridges product specs in Jira and Confluence directly to code, eliminating the need for enterprise Figma seats.</li>
+          </ul>
+        </div>
+        <div class="data-point">
+          <h4 class="font-bold text-lg mb-2">Code-Gen Platforms</h4>
+          <p class="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-3">v0, Lovable, Cursor, Bolt</p>
+          <p class="text-[15px] text-zinc-600 leading-relaxed">Conquered prototyping and greenfield frontends; enterprise production software is their biggest revenue opportunity and key to survival.</p>
+        </div>
+        <div class="data-point">
+          <h4 class="font-bold text-lg mb-2">Frontier AI Labs</h4>
+          <p class="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-3">OpenAI, Anthropic</p>
+          <p class="text-[15px] text-zinc-600 leading-relaxed">Own the core technology layer (LLMs); aiming to remove every middleman between customer budgets and their compute.</p>
+        </div>
+        <div class="data-point">
+          <h4 class="font-bold text-lg mb-2">Internal Enterprise Systems</h4>
+          <p class="text-[15px] text-zinc-600 leading-relaxed mt-2">They want proprietary pipelines to autonomously spin up internal tools, dashboards, and workflows without recurring seat licenses or vendor lock-in.</p>
+        </div>
+        <div class="data-point">
+          <h4 class="font-bold text-lg mb-2">Canvas Startups</h4>
+          <p class="text-[15px] text-zinc-600 leading-relaxed mt-2">Aiming to capitalize on the paradigm shift through fast marketing and lightweight UX.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- CHAPTER 3: INHERITING ARCHITECTURAL DEBT -->
+<!-- ================================================================= -->
+<section class="editorial-section" id="chapter-3">
+  <div class="editorial-grid">
+    <div class="sticky-thesis">
+      <h2 class="thesis-title">Inheriting Architectural Debt</h2>
+      <p class="thesis-summary">
+        Because every market player relies on the legacy canvas architecture paired with standard LLMs, they all hit the exact same structural walls.
+      </p>
+    </div>
+
+    <div>
+      <!-- DIAGRAM 3: Structural Walls -->
+      <div class="diagram-wrapper mb-16">
+        <svg viewBox="0 0 980 230" xmlns="http://www.w3.org/2000/svg">
+          <text class="text-[34px] font-extrabold fill-[#141414]" font-family="Inter" text-anchor="middle" x="484" y="34">AI</text>
+          <line stroke="#111" stroke-width="2" x1="28" x2="948" y1="68" y2="68"></line>
+          <!-- Pickaxes -->
+          <g fill="none" stroke="#111" stroke-linecap="round" stroke-width="3.2">
+            <line x1="2" x2="61" y1="6" y2="56"></line><path d="M 63 32 C 63 52, 51 66, 30 76"></path>
+            <line x1="135" x2="194" y1="2" y2="54"></line><path d="M 196 30 C 196 50, 184 64, 163 74"></path>
+            <line x1="297" x2="356" y1="5" y2="56"></line><path d="M 358 32 C 358 52, 346 66, 325 76"></path>
+            <line x1="676" x2="617" y1="5" y2="56"></line><path d="M 615 32 C 615 52, 627 66, 648 76"></path>
+            <line x1="838" x2="779" y1="2" y2="54"></line><path d="M 777 30 C 777 50, 789 64, 810 74"></path>
+            <line x1="978" x2="919" y1="5" y2="56"></line><path d="M 917 32 C 917 52, 929 66, 950 76"></path>
+          </g>
+          <!-- Crack -->
+          <path d="M 297 216 C 291 203, 293 177, 296 168 C 304 166, 327 170, 336 167 C 340 156, 338 135, 345 131 C 354 131, 362 135, 367 134 C 362 117, 358 103, 375 96 C 392 90, 405 91, 412 106 C 406 87, 408 81, 421 79 C 436 77, 452 77, 458 77 M 465 83 C 468 65, 485 58, 509 58 C 517 65, 517 85, 521 94 C 528 99, 539 82, 549 83 C 561 86, 572 106, 570 121 C 583 116, 594 100, 613 102 C 632 105, 639 128, 644 142 C 652 145, 661 139, 667 142 C 676 151, 676 177, 679 197 C 687 195, 699 182, 707 183 C 718 189, 725 207, 734 215 C 737 204, 745 199, 756 202 C 767 205, 771 214, 776 219 C 805 213, 855 212, 888 213 C 886 218, 881 223, 880 228" fill="none" stroke="#fbd437" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+          
+          <text class="text-[20px] font-extrabold fill-[#111]" font-family="Inter" x="95" y="139">CODEGEN</text>
+          <g fill="none" stroke="#111" stroke-width="2"><line x1="215" x2="265" y1="133" y2="133"></line><path d="M 260 128 L 266 133 L 260 138"></path></g>
+          <text class="text-[20px] font-extrabold fill-[#111]" font-family="Inter" x="280" y="139">AGENTS</text>
+          <text class="text-[12px] font-bold fill-[#52525b]" font-family="Inter" x="95" y="164">CANNOT BE VISUALLY GOVERNED &amp; COSTS EXPLODE</text>
+          
+          <text class="text-[20px] font-extrabold fill-[#111]" font-family="Inter" x="535" y="139">CANVAS</text>
+          <g fill="none" stroke="#111" stroke-width="2"><line x1="640" x2="690" y1="133" y2="133"></line><path d="M 685 128 L 691 133 L 685 138"></path></g>
+          <text class="text-[20px] font-extrabold fill-[#111]" font-family="Inter" x="705" y="139">HANDOFF</text>
+          <text class="text-[12px] font-bold fill-[#52525b]" font-family="Inter" x="535" y="164">DUAL MAINTENANCE TAX &amp; HANDOFF PERSISTS</text>
+        </svg>
+      </div>
+
+      <!-- The 3 Walls (Cascading failure list) -->
+      <div class="space-y-12 border-l-2 border-zinc-900 pl-6 md:pl-10">
+        <div>
+          <h3 class="font-bold text-2xl mb-4">Wall 1: Exponential Cost Growth Despite Falling Token Prices</h3>
+          <p class="text-[15.5px] text-zinc-600 leading-relaxed mb-4">Single-turn prompt-to-code models cannot handle real software interfaces. As a result, only autonomous multi-agent systems can attempt this work. In multi-step agentic workflows, token consumption compounds quadratically. On every step, the agent re-transmits the accumulated conversation history, schemas, tool outputs, and prior failed states.</p>
+          <div class="flex items-center gap-6 mb-4">
+            <a class="source-link" href="#arxiv" onclick="return false">arXiv</a>
+            <a class="source-link" href="#mckinsey" onclick="return false">McKinsey</a>
+            <a class="source-link" href="#fortune" onclick="return false">Fortune</a>
+          </div>
+          <p class="text-zinc-900 font-semibold bg-zinc-50 p-4 border border-zinc-200">Result: The compute cost of running an iterative multi-agent system rapidly becomes equivalent to the cost of manual human engineering.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-2xl mb-4">Wall 2: Code-First Design Systems Are Visually Unmanageable</h3>
+          <p class="text-[15.5px] text-zinc-600 leading-relaxed mb-4">Describing an entire enterprise design system purely in code removes visual craftsmanship from the design process. Because agents hallucinate component relationships when parsing huge codebases, they bypass existing shared libraries and generate isolated, one-off inline styles. To minimize compile errors, models regress to the mean—churning out homogenous, cookie-cutter templates that lack brand distinction and visual polish.</p>
+          <div class="mb-4">
+            <a class="source-link" href="#gitclear" onclick="return false">GitClear Research</a>
+          </div>
+          <p class="text-zinc-900 font-semibold bg-zinc-50 p-4 border border-zinc-200">Result: The design system degrades in code just as fast and chaotic as it degraded under manual human maintenance.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-2xl mb-4">Wall 3: The Only Visual Tool Has No Code Reality</h3>
+          <p class="text-[15.5px] text-zinc-600 leading-relaxed mb-4">The canvas remains the only medium where teams can intuitively craft, balance, and govern the visual ergonomics of complex interfaces. But automated design-to-code handoff has only ever worked in artificial demo environments with “technically pristine” files (perfect auto-layout, zero detached components, rigid token adherence).</p>
+          <p class="text-zinc-900 font-semibold bg-zinc-50 p-4 border border-zinc-200">Result: Teams are forced right back to the original starting problem: manually reconciling broken canvas drafts with production code.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- CHAPTER 4: THE CORE BREAKTHROUGH -->
+<!-- ================================================================= -->
+<section class="editorial-section bg-zinc-900 text-white" id="chapter-4">
+  <div class="editorial-grid">
+    <div class="sticky-thesis text-white">
+      <h2 class="thesis-title">The Core Breakthrough</h2>
+      <p class="thesis-summary text-zinc-400">
+        Transforming arbitrary visual layouts into deterministic component trees is mathematically NP-hard. We spent a year building the compiler to solve it.
+      </p>
+    </div>
+
+    <div class="space-y-16">
+      <!-- BEFORE / INCUMBENTS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center border-b border-zinc-700 pb-16">
+        <div>
+          <h3 class="font-bold text-2xl mb-4">The Incumbent Trap</h3>
+          <p class="text-zinc-300 text-[15.5px] leading-relaxed mb-6">
+            Incumbents are trapped by a market land grab. No leadership team can justify allocating top-tier engineering talent and millions in capital to high-risk, multi-year compiler R&D with an uncertain timeline.
+          </p>
+          <p class="text-white font-bold text-sm bg-zinc-800 p-3 inline-block">Consequence: Generating code without semantic structure.</p>
+        </div>
+        <div class="flex justify-center bg-white rounded-sm p-6">
+          <svg viewBox="0 0 445 215" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[260px]">
+            <!-- Factory without smoke -->
+            <path d="M 108 156 L 108 118 C 108 98, 125 91, 156 90 C 187 89, 206 93, 207 104 C 208 122, 205 141, 213 146 C 221 150, 236 151, 242 151 C 254 139, 276 108, 287 102 C 298 97, 307 111, 323 127 C 334 138, 338 147, 341 146 C 343 126, 346 100, 344 81 C 342 62, 341 50, 347 48 C 353 46, 363 45, 367 47 C 372 58, 373 80, 371 95 C 369 110, 364 126, 369 127 C 374 124, 393 126, 400 124 C 401 103, 404 73, 402 53 C 400 33, 396 10, 403 6 C 409 3, 423 1, 428 3 C 431 36, 436 144, 437 183" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+            <path d="M 134 196 L 132 158 L 176 157 M 159 158 L 161 196 M 182 164 L 182 196" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+            <path d="M 290 193 C 290 180, 286 169, 284 160 L 301 160 C 308 163, 310 177, 310 190" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+            <path d="M 4 201 C 38 212, 98 200, 134 199 C 205 197, 315 199, 402 202" fill="none" stroke="#111" stroke-linecap="round" stroke-width="4"></path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- AFTER / FRANCOISE -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h3 class="font-bold text-3xl mb-4">Interface Graph IR</h3>
+          <p class="text-zinc-300 text-[15.5px] leading-relaxed mb-8">
+            Françoise spent the past year building an Interface Graph Intermediate Representation: a deterministic compiler layer that transforms raw interface intent into structured, maintainable code.
+          </p>
+          <ul class="space-y-6 text-[15px] text-zinc-300 border-l-2 border-zinc-600 pl-5">
+            <li>
+              <strong class="text-white block mb-1">Zero token overhead</strong>
+              Compiles and transforms interface structures deterministically, without LLM calls for those operations.
+            </li>
+            <li>
+              <strong class="text-white block mb-1">Noise-resilient</strong>
+              Works with messy production drafts and inconsistent design-system structures.
+            </li>
+            <li>
+              <strong class="text-white block mb-1">Tool-agnostic</strong>
+              Connects canvases, codebases, and AI agents through a shared representation.
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-center bg-white rounded-sm p-6">
+          <svg viewBox="0 0 445 320" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[260px]">
+            <!-- Factory with smoke -->
+            <path d="M 88 66 C 122 68, 152 68, 156 29 C 158 -2, 128 -2, 128 24 C 127 56, 161 81, 184 76 C 212 70, 232 52, 220 31 C 209 19, 190 19, 191 49 C 190 78, 211 96, 231 91 C 259 86, 286 76, 278 58 C 271 39, 256 26, 254 57 C 252 87, 282 108, 307 110 C 329 109, 336 96, 332 76 C 325 71, 300 77, 303 95 C 306 111, 332 128, 354 130" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+            <path d="M 108 260 L 108 222 C 108 202, 125 195, 156 194 C 187 193, 206 197, 207 208 C 208 226, 205 245, 213 250 C 221 254, 236 255, 242 255 C 254 243, 276 212, 287 206 C 298 201, 307 215, 323 231 C 334 242, 338 251, 341 250 C 343 230, 346 204, 344 185 C 342 166, 341 154, 347 152 C 353 150, 363 149, 367 151 C 372 162, 373 184, 371 199 C 369 214, 364 230, 369 231 C 374 228, 393 230, 400 228 C 401 207, 404 177, 402 157 C 400 137, 396 114, 403 110 C 409 107, 423 105, 428 107 C 431 140, 436 248, 437 287" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+            <path d="M 134 300 L 132 262 L 176 261 M 159 262 L 161 300 M 182 268 L 182 300" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+            <path d="M 290 297 C 290 284, 286 273, 284 264 L 301 264 C 308 267, 310 281, 310 294" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+            <path d="M 4 305 C 38 316, 98 304, 134 303 C 205 301, 315 303, 402 306" fill="none" stroke="#111" stroke-linecap="round" stroke-width="4"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- CHAPTER 5: TRACTION & DEMO -->
+<!-- ================================================================= -->
+<section class="editorial-section" id="chapter-5">
+  <div class="editorial-grid">
+    <div class="sticky-thesis">
+      <h2 class="thesis-title">Technical Validation & Proof</h2>
+      <p class="thesis-summary">
+        Benchmarked on complex corporate systems, proving a dramatic reduction in token consumption and true resilience to messy production data.
+      </p>
+    </div>
+
+    <div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 mb-12">
+        <div class="data-point">
+          <div class="text-5xl font-bold tracking-tighter mb-2">10×</div>
+          <p class="font-bold text-zinc-900 mb-2">Lower token costs</p>
+          <p class="text-[14px] text-zinc-600">Demonstrated in the agent workflow demo.</p>
+        </div>
+        <div class="data-point">
+          <div class="text-5xl font-bold tracking-tighter mb-2">35</div>
+          <p class="font-bold text-zinc-900 mb-2">Enterprise Systems</p>
+          <p class="text-[14px] text-zinc-600">Validated by a closed cohort of beta engineers.</p>
+        </div>
+        <div class="data-point">
+          <div class="text-5xl font-bold tracking-tighter mb-2">7</div>
+          <p class="font-bold text-zinc-900 mb-2">Engineering Teams</p>
+          <p class="text-[14px] text-zinc-600">Tested heavily, including global mobility unicorn inDrive.</p>
+        </div>
+      </div>
+
+<!-- Встроенное MP4 видео -->
+      <!-- Виджет-превью YouTube с отложенной загрузкой -->
+      <div
+        class="relative w-full aspect-video border border-zinc-200 bg-zinc-900 overflow-hidden cursor-pointer group"
+        onclick="this.innerHTML = '<iframe class=\'w-full h-full\' src=\'https://www.youtube.com/embed/4U9YebAEL-E?autoplay=1&rel=0\' title=\'Françoise Demo\' frameborder=\'0\' allow=\'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\' allowfullscreen></iframe>'">
+
+        <!-- Превью-картинка с YouTube -->
+        <img
+          src="https://i.ytimg.com/vi/4U9YebAEL-E/maxresdefault.jpg"
+          onerror="this.src='https://i.ytimg.com/vi/4U9YebAEL-E/hqdefault.jpg'"
+          alt="Video Preview"
+          class="w-full h-full object-cover opacity-90 group-hover:scale-[1.02] group-hover:opacity-100 transition-all duration-300" />
+
+        <!-- Затемнение и кнопка Play в стиле сайта -->
+        <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
+          <div class="w-16 h-16 bg-zinc-900/90 text-white flex items-center justify-center border border-zinc-700 shadow-lg group-hover:bg-white group-hover:text-zinc-900 transition-colors">
+            <svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- CHAPTER 6: PRODUCT & BUSINESS MODEL -->
+<!-- ================================================================= -->
+<section class="editorial-section bg-zinc-50" id="chapter-6">
+  <div class="editorial-grid">
+    <div class="sticky-thesis">
+      <h2 class="thesis-title">Infrastructure & Business Model</h2>
+      <p class="thesis-summary">
+        While other players burn budgets acquiring users on an unsustainable foundation, Françoise provides the underlying tools they need to operate profitably.
+      </p>
+    </div>
+
+    <div class="space-y-16">
+      <!-- Market Offerings -->
+      <ul class="space-y-8 text-[16px] text-zinc-600 border-l-2 border-zinc-900 pl-6 leading-relaxed">
+        <li><strong class="text-zinc-900 text-lg block mb-1">MCP Server for AI Agents:</strong> An interface protocol that provides agents with a clean, token-efficient semantic graph, slashing compute costs by an order of magnitude.</li>
+        <li><strong class="text-zinc-900 text-lg block mb-1">Automated Interface Linting & Self-Healing:</strong> Deterministic validation and repair of interface discrepancies across both codebases and Figma files, enforcing design-system contracts without human auditing.</li>
+        <li><strong class="text-zinc-900 text-lg block mb-1">Seamless Legacy Migration:</strong> Automated ingestion of unstructured, historical Figma design files, compiling them directly into maintainable, production-ready design tokens and component trees.</li>
+        <li><strong class="text-zinc-900 text-lg block mb-1">Bi-Directional Code-Canvas Synchronization:</strong> A synchronized bridge where visual edits in the design tool and programmatic changes in the repository remain locked to a single source of truth.</li>
+      </ul>
+
+      <!-- Business Model Box -->
+      <div class="bg-white border border-zinc-200 p-8 md:p-12 shadow-sm">
+        <h3 class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">Business Model</h3>
+        <div class="text-4xl md:text-5xl font-bold tracking-tight mb-8">$50K base + volume tiers</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h4 class="font-bold text-lg mb-2">Enterprises with AI Agents</h4>
+            <p class="text-zinc-600 text-[15px] leading-relaxed">Cut token waste, free engineering time from manual rework, and keep outputs strictly aligned with corporate design systems.</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-2">AI Platforms & Agent Builders</h4>
+            <p class="text-zinc-600 text-[15px] leading-relaxed">Reduce model inference costs dramatically, enabling higher generation limits at lower subscription prices for end-users.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- CHAPTER 7: STRATEGY & THE ROUND -->
+<!-- ================================================================= -->
+<section class="editorial-section" id="chapter-7">
+  <div class="editorial-grid">
+    <div class="sticky-thesis">
+      <h2 class="thesis-title">Agnostic Strategy & The Round</h2>
+      <p class="thesis-summary">
+        We supply the shovels to the interface gold rush. By providing the necessary infrastructure, we win regardless of which frontend generator captures the consumer market.
+      </p>
+    </div>
+
+    <div class="space-y-20">
+      <!-- DIAGRAM 5: Shovel Seller Diagram -->
+      <div class="diagram-wrapper">
+        <svg viewBox="0 0 980 295" xmlns="http://www.w3.org/2000/svg">
+          <text class="text-[27px] font-extrabold fill-[#141414] tracking-tight" style="font-family: 'Inter', sans-serif;" text-anchor="middle" x="444" y="24">FRANÇOISE</text>
+          <g class="text-[12px] fill-[#6b6b6b] font-bold tracking-widest" style="font-family: 'Inter', sans-serif;">
+            <text x="2" y="56">CANVAS</text>
+            <text x="2" y="70">STARTUPS</text>
+            <text x="868" y="54">INTERNAL</text>
+            <text x="868" y="68">ENTERPRISE</text>
+            <text x="868" y="82">SYSTEMS</text>
+          </g>
+          <g class="text-[19px] font-extrabold fill-[#18181b]" style="font-family: 'Inter', sans-serif;">
+            <text x="112" y="61">ANTHROPIC</text>
+            <text x="112" y="85">OPENAI</text>
+            <text x="112" y="109">GEMINI</text>
+            <text x="251" y="61">FIGMA</text>
+            <text x="251" y="85">ADOBE</text>
+            <text x="251" y="109">CANVA</text>
+            <text x="563" y="61">v0 (VERCEL)</text>
+            <text x="563" y="85">LOVABLE</text>
+            <text x="563" y="109">CURSOR</text>
+            <text x="702" y="61">MICROSOFT</text>
+            <text x="702" y="85">GOOGLE</text>
+            <text x="702" y="109">ATLASSIAN</text>
+          </g>
+          <!-- Center Cart Stacked with 4 Shovels -->
+          <g fill="none" stroke="#18181b" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M 420 51 C 397 45, 381 51, 378 63 C 377 74, 388 85, 419 88 L 420 77"></path>
+            <line x1="409" x2="469" y1="62" y2="57"></line>
+            <path d="M 458 40 L 459 49 M 462 41 C 483 35, 499 42, 501 54 C 501 66, 487 77, 459 78 L 458 68"></path>
+            <line x1="409" x2="469" y1="68" y2="73"></line>
+            <path d="M 420 82 C 397 76, 381 82, 378 94 C 377 105, 388 116, 419 119 L 420 108"></path>
+            <line x1="409" x2="469" y1="93" y2="88"></line>
+            <path d="M 458 71 L 459 80 M 462 72 C 483 66, 499 73, 501 85 C 501 97, 487 108, 459 109 L 458 99"></path>
+            <line x1="409" x2="469" y1="99" y2="104"></line>
+          </g>
+          <polygon fill="none" points="392,96 482,96 467,137 406,137" stroke="#18181b" stroke-width="2"></polygon>
+          <ellipse cx="417" cy="146" fill="none" rx="5.2" ry="8.5" stroke="#18181b" stroke-width="2"></ellipse>
+          <ellipse cx="456" cy="146" fill="none" rx="5.2" ry="8.5" stroke="#18181b" stroke-width="2"></ellipse>
+          <line stroke="#52525b" stroke-width="2" x1="67" x2="823" y1="163" y2="163"></line>
+          <!-- 6 Shovels -->
+          <g fill="none" stroke="#18181b" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2">
+            <line x1="20" x2="30" y1="94" y2="154"></line><path d="M 10 148 L 19 146 M 37 141 L 48 139 C 51 153, 54 166, 47 177 C 41 187, 29 187, 21 178 C 14 170, 13 158, 13 152"></path>
+            <line x1="151" x2="162" y1="92" y2="153"></line><path d="M 142 146 L 151 144 M 169 139 L 179 138 C 183 152, 185 165, 178 176 C 172 186, 160 186, 152 177 C 145 169, 144 157, 144 151"></path>
+            <line x1="286" x2="297" y1="96" y2="156"></line><path d="M 276 150 L 286 148 M 304 142 L 314 141 C 318 155, 320 168, 313 179 C 307 189, 295 189, 287 180 C 280 172, 279 160, 279 154"></path>
+            <line x1="594" x2="583" y1="88" y2="149"></line><path d="M 604 142 L 594 141 M 576 135 L 566 133 C 562 147, 560 160, 567 171 C 573 181, 585 181, 593 172 C 600 164, 601 152, 601 146"></path>
+            <line x1="728" x2="718" y1="85" y2="145"></line><path d="M 738 139 L 729 137 M 711 131 L 700 130 C 697 144, 695 157, 701 168 C 708 178, 720 178, 728 169 C 735 161, 736 149, 736 143"></path>
+            <line x1="860" x2="849" y1="86" y2="146"></line><path d="M 870 140 L 860 138 M 842 133 L 832 131 C 828 145, 826 158, 833 169 C 839 179, 851 179, 859 170 C 866 162, 867 150, 867 144"></path>
+          </g>
+          <!-- Golden Mountain Vein -->
+          <path d="M 279 283 C 274 268, 276 245, 282 242 C 292 241, 305 244, 313 241 C 315 229, 314 218, 319 214 C 327 213, 334 217, 339 216 C 334 202, 330 191, 348 185 C 365 181, 370 185, 375 193 C 371 178, 372 173, 385 171 C 396 170, 408 170, 413 170 M 420 175 C 423 161, 439 155, 456 155 C 464 162, 462 178, 467 185 C 474 189, 483 174, 491 175 C 501 178, 509 194, 507 205 C 517 202, 526 189, 541 191 C 556 193, 565 211, 569 224 C 577 226, 583 220, 588 222 C 596 230, 596 250, 599 266 C 607 264, 617 254, 624 256 C 632 260, 639 275, 645 282 C 648 273, 655 268, 664 271 C 672 274, 675 281, 679 285 C 708 279, 745 279, 773 280 C 770 284, 767 288, 766 292" fill="none" stroke="#fbd437" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2"></path>
+        </svg>
+      </div>
+
+      <!-- The Round & Immediate Targets -->
+      <div>
+        <div class="flex flex-col md:flex-row gap-6 md:items-end mb-12">
+          <div class="text-6xl md:text-8xl font-bold tracking-tighter leading-none">$3M</div>
+          <p class="text-2xl text-zinc-900 font-bold mb-2">to scale enterprise distribution<br/>and establish the standard.</p>
+        </div>
+
+        <h3 class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">Targets to Unlock Series A</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
+          <div class="data-point">
+            <div class="text-4xl font-bold tracking-tighter mb-2">$2M</div>
+            <h4 class="font-bold text-zinc-900 text-[15px]">ARR Target</h4>
+          </div>
+          <div class="data-point">
+            <div class="text-4xl font-bold tracking-tighter mb-2">25</div>
+            <h4 class="font-bold text-zinc-900 text-[15px]">Enterprise Deployments</h4>
+          </div>
+          <div class="data-point">
+            <div class="text-4xl font-bold tracking-tighter mb-2">5</div>
+            <h4 class="font-bold text-zinc-900 text-[15px]">Commercial OEM Integrations</h4>
+          </div>
+        </div>
+        
+        <!-- De-emphasized allocation -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-zinc-200 pt-6">
+          <div>
+            <p class="text-sm font-bold text-zinc-400 mb-1">45% GTM</p>
+            <p class="text-xs text-zinc-500">Founder-led enterprise sales & platform partner expansion.</p>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-zinc-400 mb-1">30% Tech Scale</p>
+            <p class="text-xs text-zinc-500">Finalize Production API & MCP infrastructure.</p>
+          </div>
+          <div>
+            <p class="text-sm font-bold text-zinc-400 mb-1">25% Readiness</p>
+            <p class="text-xs text-zinc-500">SOC 2 compliance & strategic operating reserve.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- CHAPTER 8: THE PATH TO SERIES A (VISION) -->
+<!-- ================================================================= -->
+<section class="editorial-section bg-zinc-900 text-white" id="chapter-8">
+  <div class="editorial-grid">
+    <div class="sticky-thesis text-white">
+      <h2 class="thesis-title">The Path to Series A & Beyond</h2>
+      <p class="thesis-summary text-zinc-400">
+        Our immediate goal is to hit our revenue milestones and solidify Françoise as the infrastructural standard. But our long-term trajectory goes far beyond that.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-3xl font-bold mb-6">True Version Control System for UI</h3>
+      <p class="text-lg text-zinc-300 leading-relaxed mb-12 max-w-2xl border-l-4 border-zinc-500 pl-6">
+        Our technology is the precursor to a unicorn-scale company. By capturing the semantic graph of interfaces, we unlock the long-standing missing primitive in software development: True UI VCS.
+      </p>
+
+      <div class="space-y-10">
+        <div class="border-t border-zinc-700 pt-6">
+          <h4 class="font-bold mb-2 text-xl">Structural Branching</h4>
+          <p class="text-[16px] text-zinc-400">Branching interfaces at the level of semantic component trees, allowing teams to explore UI directions deterministically rather than comparing flat, isolated screen snapshots.</p>
+        </div>
+        <div class="border-t border-zinc-700 pt-6">
+          <h4 class="font-bold mb-2 text-xl">Semantic Visual Diffing</h4>
+          <p class="text-[16px] text-zinc-400">Pinpointing exact structural and design-system token changes (e.g. <code class="bg-zinc-800 px-1.5 py-0.5 rounded text-[14px] font-mono text-white">padding-sm</code> modified) rather than meaningless pixel differences that computers can't parse.</p>
+        </div>
+        <div class="border-t border-zinc-700 pt-6">
+          <h4 class="font-bold mb-2 text-xl">Conflict-Free Merging</h4>
+          <p class="text-[16px] text-zinc-400">Merging changes made visually on a design canvas directly with changes committed programmatically to a Git repository, completely eliminating regressions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================= -->
+<!-- ENTERPRISE ONBOARDING / CONTACT -->
+<!-- ================================================================= -->
+<section class="bg-[#111] text-white py-24 px-6 border-t border-zinc-800" id="contact">
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div>
+      <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6">Enterprise Deployment</h2>
+      <p class="text-lg text-zinc-400 leading-relaxed max-w-md">
+        We configure the infrastructure manually for enterprise environments to ensure deterministic integration with your existing codebase, design systems, and compliance requirements.
+      </p>
+    </div>
+    
+    <div class="flex flex-col gap-4 max-w-sm md:ml-auto w-full">
+      <a class="flex items-center justify-between bg-white text-zinc-900 px-6 py-4 font-bold text-sm uppercase tracking-wider hover:bg-zinc-200 transition-colors" href="https://meet.francoise.design/">
+        <span>Request Setup Call</span> <span>↗</span>
+      </a>
+      <a aria-disabled="true" class="flex items-center justify-between border border-zinc-700 text-white px-6 py-4 font-bold text-sm uppercase tracking-wider hover:border-zinc-400 transition-colors cursor-pointer" data-resource="agentDemo" role="link" href="/investors">
+        <span>Watch Agent Demo</span> <span>↗</span>
+      </a>
+      <a aria-disabled="true" class="flex items-center justify-between border border-zinc-700 text-white px-6 py-4 font-bold text-sm uppercase tracking-wider hover:border-zinc-400 transition-colors cursor-pointer" data-resource="pitchDeck" role="link" href="Francoise_Deck.pdf">
+        <span>View Pitch Deck</span> <span>↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+const FRANCOISE_LINKS = {agentDemo:"", pitchDeck:""};
+for(const link of document.querySelectorAll('[data-resource]')) {
+ const url=FRANCOISE_LINKS[link.dataset.resource];
+ if(!url) continue;
+ link.href=url;link.target='_blank';link.rel='noopener noreferrer';link.removeAttribute('aria-disabled');
+}
+if(Object.values(FRANCOISE_LINKS).every(Boolean)) document.getElementById('link-setup-note').hidden=true;
+
+(() => {
+ const chapters = [...document.querySelectorAll('main > .editorial-section')]
+   .filter(section => section.querySelector('h1,h2'));
+ if(!chapters.length) return;
+ const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+ let pendingIndex = null;
+ let idleTimer;
+ const top = section => section.getBoundingClientRect().top + window.scrollY - 24;
+ function activeIndex() {
+   const y=window.scrollY + 40;
+   let index=0;
+   chapters.forEach((chapter,i) => {if(top(chapter)<=y) index=i;});
+   return index;
+ }
+ function go(index) {
+   if(index<0 || index>=chapters.length) return;
+   pendingIndex=index;
+   window.scrollTo({top:Math.max(0,top(chapters[index])),behavior:reduced.matches?'instant':'smooth'});
+   clearTimeout(idleTimer);
+   idleTimer=setTimeout(()=>{pendingIndex=null;},1200);
+ }
+ window.addEventListener('scroll',()=>{
+   clearTimeout(idleTimer);
+   idleTimer=setTimeout(()=>{pendingIndex=null;},180);
+ },{passive:true});
+ for(const event of ['wheel','touchstart','pointerdown']) {
+   window.addEventListener(event,()=>{pendingIndex=null;},{passive:true});
+ }
+ window.addEventListener('keydown',e=>{
+   if(e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+   const target=e.target;
+   if(target instanceof Element && (target.closest('input,textarea,select,button,a,[role="slider"],[role="textbox"],[role="combobox"],[role="listbox"],[role="menu"],[role="tablist"]') || target.isContentEditable)) return;
+   const directions={ArrowDown:1,ArrowRight:1,PageDown:1,ArrowUp:-1,ArrowLeft:-1,PageUp:-1};
+   if(!(e.key in directions) && e.key!=='Home' && e.key!=='End') return;
+   if(e.repeat) {e.preventDefault();return;}
+   const current=pendingIndex ?? activeIndex();
+   let next;
+   if(e.key==='Home') next=0;
+   else if(e.key==='End') next=chapters.length-1;
+   else next=current+directions[e.key];
+   if(next<0 || next>=chapters.length) return;
+   e.preventDefault();go(next);
+ });
+})();
+</script>
+</body>
+</html>
