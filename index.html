@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Françoise — On-system UI in Figma and in code</title>
-    <meta name="description" content="Auto-fix messy Figma mockups before handoff and make coding agents ship production UI with your real components on the first try — 74x cheaper in tokens.">
+    <title>Françoise | On-system UI in Figma and in code</title>
+    <meta name="description" content="Auto-fix messy Figma mockups before handoff and make coding agents ship production UI with your real components on the first try, cutting token spend 74x.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #F8F8F7;
-            --paper: #FFFFFF;
-            --ink: #11110F;
-            --text: #2B2A27;
-            --muted: #6E6B64;
-            --line: #DFDFD9;
-            --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            --bg: #FFFFFF;
+            --ink: #0F0F0E;
+            --text: #292825;
+            --muted: #6B6860;
+            --inactive: #9E9B93;
+            --rule: #E6E6E1;
+            --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
             --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
         body {
             background: var(--bg);
             color: var(--ink);
             font-family: var(--sans);
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
             font-size: 17px;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
@@ -31,25 +36,20 @@
         a { color: inherit; }
 
         .wrap {
-            max-width: 1060px;
+            max-width: 1080px;
             margin: 0 auto;
-            padding: 0 28px;
+            padding: 0 32px;
         }
 
         /* Header */
         header {
-            border-bottom: 1px solid var(--line);
-            background: rgba(248, 248, 247, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 80;
-            backdrop-filter: blur(6px);
+            padding: 28px 0;
         }
 
         .header-row {
-            max-width: 1060px;
+            max-width: 1080px;
             margin: 0 auto;
-            padding: 18px 28px;
+            padding: 0 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -59,20 +59,21 @@
         .logo {
             font-size: 21px;
             font-weight: 600;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.038em;
             text-decoration: none;
         }
 
         .nav {
             display: flex;
             align-items: center;
-            gap: 26px;
+            gap: 28px;
             font-size: 14px;
         }
 
         .nav a {
             text-decoration: none;
             color: var(--muted);
+            transition: color 0.15s ease;
         }
 
         .nav a:hover {
@@ -81,47 +82,47 @@
 
         .nav .nav-cta {
             background: var(--ink);
-            color: var(--paper);
-            padding: 9px 15px;
+            color: var(--bg);
+            padding: 9px 16px;
             font-size: 13px;
             font-weight: 500;
         }
 
         .nav .nav-cta:hover {
-            color: var(--paper);
-            opacity: 0.88;
+            color: var(--bg);
+            opacity: 0.85;
         }
 
         /* Typography */
         h1 {
-            font-size: clamp(40px, 5.5vw, 66px);
-            line-height: 1.01;
+            font-size: clamp(44px, 6vw, 74px);
+            line-height: 0.97;
             font-weight: 600;
-            letter-spacing: -0.038em;
-            max-width: 880px;
+            letter-spacing: -0.045em;
+            max-width: 920px;
         }
 
         h2 {
-            font-size: clamp(30px, 3.8vw, 46px);
-            line-height: 1.06;
+            font-size: clamp(32px, 4vw, 50px);
+            line-height: 1.03;
             font-weight: 600;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.038em;
             max-width: 760px;
         }
 
         h3 {
-            font-size: 24px;
+            font-size: 23px;
             line-height: 1.2;
             font-weight: 600;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.025em;
         }
 
-        .lead {
-            margin-top: 22px;
-            font-size: clamp(19px, 1.8vw, 22px);
-            line-height: 1.48;
-            color: var(--text);
-            max-width: 720px;
+        .product-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--muted);
+            margin-bottom: 12px;
         }
 
         /* Buttons */
@@ -134,112 +135,85 @@
             text-decoration: none;
             border: 1.5px solid var(--ink);
             cursor: pointer;
-            background: transparent;
+            background: var(--bg);
             color: var(--ink);
             font-family: var(--sans);
             text-align: center;
-            transition: background 0.15s ease, color 0.15s ease;
+            transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
         }
 
         .btn-solid {
             background: var(--ink);
-            color: var(--paper);
+            color: var(--bg);
         }
 
         .btn-solid:hover {
-            background: #2B2A27;
-            border-color: #2B2A27;
-        }
-
-        .btn-ghost {
-            background: var(--paper);
-            color: var(--ink);
+            opacity: 0.85;
         }
 
         .btn-ghost:hover {
             background: var(--ink);
-            color: var(--paper);
+            color: var(--bg);
         }
 
         .inline-link {
             font-size: 14px;
-            color: var(--muted);
+            font-weight: 500;
+            color: var(--ink);
             text-decoration: underline;
             text-underline-offset: 4px;
+            text-decoration-color: #B8B5AC;
             background: none;
             border: none;
             cursor: pointer;
             font-family: var(--sans);
             padding: 0;
+            transition: text-decoration-color 0.15s ease;
         }
 
         .inline-link:hover {
-            color: var(--ink);
+            text-decoration-color: var(--ink);
         }
 
         /* Hero */
         .hero {
-            padding: 76px 0 64px;
-            border-bottom: 1px solid var(--line);
+            padding: 68px 0 72px;
         }
 
         .two-doors {
-            margin-top: 48px;
+            margin-top: 60px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            border-top: 1.5px solid var(--ink);
-            border-bottom: 1px solid var(--line);
+            gap: 64px;
         }
 
         .door {
-            padding: 32px 0;
+            border-top: 2px solid var(--ink);
+            padding-top: 26px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             gap: 28px;
         }
 
-        .door:first-child {
-            padding-right: 40px;
-            border-right: 1px solid var(--line);
-        }
-
-        .door:last-child {
-            padding-left: 40px;
-        }
-
-        .door-who {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--muted);
-            margin-bottom: 10px;
-        }
-
         .door p {
-            margin-top: 10px;
+            margin-top: 12px;
             font-size: 16px;
-            line-height: 1.5;
+            line-height: 1.52;
             color: var(--text);
+            max-width: 450px;
         }
 
         .door-cta {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 22px;
         }
 
         /* Main Product Sections */
         .product-section {
-            padding: 88px 0;
-            border-bottom: 1px solid var(--line);
-        }
-
-        .section-kicker {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--muted);
-            margin-bottom: 14px;
+            padding: 76px 0;
         }
 
         .section-sub {
@@ -247,23 +221,23 @@
             font-size: 19px;
             line-height: 1.5;
             color: var(--text);
-            max-width: 680px;
+            max-width: 660px;
         }
 
         /* MCP Section */
         .mcp-layout {
-            margin-top: 44px;
+            margin-top: 48px;
             display: grid;
             grid-template-columns: 1.45fr 1fr;
-            gap: 40px;
-            align-items: start;
+            gap: 48px;
+            align-items: center;
         }
 
         .video-box {
             background: #000;
-            border: 1px solid var(--ink);
             aspect-ratio: 16 / 9;
             width: 100%;
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.08);
         }
 
         .video-box iframe {
@@ -273,28 +247,28 @@
             display: block;
         }
 
-        .caption-line {
-            margin-top: 10px;
-            font-size: 13px;
-            color: var(--muted);
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-        }
-
         .comparison-list {
-            border-top: 1.5px solid var(--ink);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            font-variant-numeric: tabular-nums;
         }
 
         .comp-item {
-            padding: 18px 0;
-            border-bottom: 1px solid var(--line);
+            padding: 6px 0 18px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .comp-item:nth-child(2) {
+            border-bottom: none;
+            padding-bottom: 6px;
         }
 
         .comp-head {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
+            gap: 12px;
             font-size: 15px;
         }
 
@@ -311,14 +285,14 @@
         .comp-note {
             font-size: 14px;
             color: var(--muted);
-            margin-top: 4px;
+            margin-top: 5px;
+            line-height: 1.45;
         }
 
         .comp-item.ours {
-            background: var(--paper);
-            padding: 18px 16px;
-            margin: 0 -16px;
-            border-bottom: 1.5px solid var(--ink);
+            border: 1.5px solid var(--ink);
+            padding: 20px 22px;
+            background: var(--bg);
         }
 
         .comp-item.ours .comp-meta,
@@ -327,29 +301,27 @@
         }
 
         .three-facts {
-            margin-top: 48px;
+            margin-top: 60px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 36px;
+            gap: 44px;
         }
 
         .fact h4 {
             font-size: 17px;
             font-weight: 600;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.015em;
             margin-bottom: 8px;
         }
 
         .fact p {
             font-size: 15px;
-            color: var(--text);
-            line-height: 1.5;
+            color: var(--muted);
+            line-height: 1.52;
         }
 
-        .callout-row {
+        .callout-line {
             margin-top: 48px;
-            padding-top: 32px;
-            border-top: 1px solid var(--line);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -357,7 +329,7 @@
             gap: 24px;
         }
 
-        .callout-row p {
+        .callout-line p {
             font-size: 16px;
             color: var(--text);
             max-width: 600px;
@@ -365,15 +337,16 @@
 
         /* Figma Plugin Section */
         .plugin-showcase {
-            margin-top: 44px;
+            margin-top: 48px;
             display: grid;
-            grid-template-columns: 340px 1fr;
-            gap: 36px;
-            align-items: start;
+            grid-template-columns: 330px 1fr;
+            gap: 48px;
+            align-items: center;
         }
 
         .job-list {
-            border-top: 1.5px solid var(--ink);
+            display: flex;
+            flex-direction: column;
         }
 
         .job-btn {
@@ -381,35 +354,37 @@
             text-align: left;
             background: none;
             border: none;
-            border-bottom: 1px solid var(--line);
-            padding: 18px 0;
+            border-left: 2px solid var(--rule);
+            padding: 14px 0 14px 22px;
             cursor: pointer;
             font-family: var(--sans);
-            color: var(--muted);
-            transition: color 0.15s ease;
+            color: var(--inactive);
+            transition: color 0.15s ease, border-color 0.15s ease;
         }
 
         .job-btn:hover {
-            color: var(--ink);
+            color: var(--text);
         }
 
         .job-btn.active {
             color: var(--ink);
+            border-left-color: var(--ink);
         }
 
         .job-btn .job-title {
             display: block;
             font-size: 17px;
             font-weight: 600;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.018em;
+            line-height: 1.25;
         }
 
         .job-btn .job-desc {
             display: none;
             margin-top: 8px;
             font-size: 14px;
-            line-height: 1.48;
-            color: var(--text);
+            line-height: 1.5;
+            color: var(--muted);
         }
 
         .job-btn.active .job-desc {
@@ -417,8 +392,9 @@
         }
 
         .job-stage {
-            background: var(--paper);
-            border: 1px solid var(--line);
+            background: var(--bg);
+            border: 1px solid var(--rule);
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.06);
         }
 
         .job-panel {
@@ -438,16 +414,15 @@
             cursor: pointer;
         }
 
-        /* Quiet Pricing Drawer */
+        /* Crisp White Plugin Pricing Drawer */
         .pricing-bar {
-            margin-top: 44px;
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
+            margin-top: 56px;
+            border-top: 1.5px solid var(--ink);
         }
 
         .pricing-bar summary {
             list-style: none;
-            padding: 22px 0;
+            padding: 22px 0 0;
             cursor: pointer;
             display: flex;
             align-items: baseline;
@@ -479,16 +454,15 @@
         }
 
         .pricing-columns {
-            padding: 8px 0 20px;
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid var(--rule);
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+            gap: 40px;
         }
 
         .plan-box {
-            background: var(--paper);
-            border: 1px solid var(--line);
-            padding: 26px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -501,16 +475,18 @@
         }
 
         .plan-cost {
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 600;
-            letter-spacing: -0.03em;
+            letter-spacing: -0.038em;
             margin: 6px 0 14px;
+            font-variant-numeric: tabular-nums;
         }
 
         .plan-cost span {
             font-size: 14px;
             font-weight: 400;
             color: var(--muted);
+            letter-spacing: 0;
         }
 
         .plan-features {
@@ -521,49 +497,52 @@
         }
 
         .plan-features li::before {
-            content: "– ";
+            content: "· ";
             color: var(--muted);
+            font-weight: 600;
         }
 
         .billing-portal-note {
-            padding: 0 0 24px;
+            margin-top: 28px;
             font-size: 13px;
             color: var(--muted);
         }
 
-        /* Why It Works / Enterprise & Trust */
+        /* Proof & Figures Section */
         .trust-section {
-            padding: 84px 0;
+            padding: 76px 0 88px;
         }
 
         .stats-row {
-            margin-top: 44px;
+            margin-top: 56px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            border-top: 1.5px solid var(--ink);
-            border-bottom: 1px solid var(--line);
-            padding: 28px 0;
-            gap: 24px;
+            gap: 36px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-col {
+            border-top: 2px solid var(--ink);
+            padding-top: 20px;
         }
 
         .stat-big {
-            font-size: clamp(32px, 3.4vw, 44px);
+            font-size: clamp(36px, 4.2vw, 52px);
             font-weight: 600;
-            letter-spacing: -0.035em;
+            letter-spacing: -0.045em;
             line-height: 1;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .stat-caption {
             font-size: 14px;
             color: var(--muted);
-            line-height: 1.4;
+            line-height: 1.45;
         }
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--line);
-            padding: 40px 0 56px;
+            padding: 28px 0 56px;
             font-size: 13px;
             color: var(--muted);
         }
@@ -579,7 +558,7 @@
         .footer-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 22px;
+            gap: 24px;
         }
 
         .footer-links a {
@@ -597,7 +576,7 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(17, 17, 15, 0.5);
+            background: rgba(15, 15, 14, 0.45);
             z-index: 999;
             align-items: center;
             justify-content: center;
@@ -609,20 +588,21 @@
         }
 
         .modal-box {
-            background: var(--paper);
-            border: 1px solid var(--ink);
-            max-width: 540px;
+            background: var(--bg);
+            border: 1.5px solid var(--ink);
+            max-width: 520px;
             width: 100%;
             max-height: 88vh;
             overflow-y: auto;
-            padding: 36px;
+            padding: 40px;
             position: relative;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
         }
 
         .modal-close {
             position: absolute;
-            top: 18px;
-            right: 22px;
+            top: 20px;
+            right: 24px;
             font-size: 24px;
             color: var(--muted);
             background: none;
@@ -648,9 +628,9 @@
 
         .input-field {
             width: 100%;
-            padding: 11px 13px;
-            border: 1px solid var(--line);
-            background: var(--paper);
+            padding: 12px 14px;
+            border: 1px solid var(--rule);
+            background: var(--bg);
             font-family: var(--sans);
             font-size: 15px;
             color: var(--ink);
@@ -670,7 +650,7 @@
         .billing-toggle {
             display: flex;
             border: 1px solid var(--ink);
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .billing-tab {
@@ -679,24 +659,25 @@
             text-align: center;
             font-size: 13px;
             cursor: pointer;
-            background: var(--paper);
+            background: var(--bg);
             color: var(--muted);
             user-select: none;
         }
 
         .billing-tab.active {
             background: var(--ink);
-            color: var(--paper);
+            color: var(--bg);
             font-weight: 500;
         }
 
         .calc-breakdown {
-            background: var(--bg);
-            border: 1px solid var(--line);
-            padding: 16px;
-            margin: 18px 0;
+            border-top: 1px solid var(--ink);
+            border-bottom: 1px solid var(--rule);
+            padding: 16px 0;
+            margin: 20px 0;
             font-family: var(--mono);
             font-size: 12px;
+            font-variant-numeric: tabular-nums;
         }
 
         .calc-row {
@@ -714,7 +695,7 @@
         .calc-row.total {
             margin-top: 10px;
             padding-top: 10px;
-            border-top: 1px solid var(--line);
+            border-top: 1px solid var(--rule);
             font-size: 14px;
             font-weight: 600;
             color: var(--ink);
@@ -731,7 +712,6 @@
             display: flex;
             align-items: flex-start;
             gap: 10px;
-            margin-bottom: 8px;
             cursor: pointer;
         }
 
@@ -758,20 +738,18 @@
         }
 
         @media (max-width: 860px) {
+            .wrap,
+            .header-row {
+                padding-left: 22px;
+                padding-right: 22px;
+            }
             .two-doors,
             .mcp-layout,
             .plugin-showcase,
             .three-facts,
             .pricing-columns {
                 grid-template-columns: 1fr;
-            }
-            .door:first-child {
-                padding-right: 0;
-                border-right: none;
-                border-bottom: 1px solid var(--line);
-            }
-            .door:last-child {
-                padding-left: 0;
+                gap: 36px;
             }
             .stats-row {
                 grid-template-columns: 1fr 1fr;
@@ -796,22 +774,18 @@
         </div>
     </header>
 
-    <!-- HERO: Pure Customer Outcome + Two Clear Doors -->
+    <!-- HERO -->
     <section class="hero">
         <div class="wrap">
             <h1>UI that follows your design system on the first try.</h1>
-            <p class="lead">
-                You built a design system to ship fast. Instead, design leads spend hours fixing detached Figma layers, and coding agents burn tokens inventing broken CSS. Françoise fixes both — without changing how your team works.
-            </p>
 
             <div class="two-doors">
                 <!-- Door 1: Engineering -->
                 <div class="door">
                     <div>
-                        <div class="door-who">01 · FOR ENGINEERING (FREE CLOSED ALPHA)</div>
                         <h3>Françoise MCP Server</h3>
                         <p>
-                            Plugs into Cursor, Claude Code, and Cline so coding agents assemble screens from your real Storybook components on the first pass — 74x cheaper in tokens, zero retry loops.
+                            Plugs into Cursor, Claude Code, and Cline so coding agents assemble screens from your real Storybook components on the first pass. 74x lower token spend, zero retry loops.
                         </p>
                     </div>
                     <div class="door-cta">
@@ -823,14 +797,13 @@
                 <!-- Door 2: Design -->
                 <div class="door">
                     <div>
-                        <div class="door-who">02 · FOR DESIGN TEAMS (LIVE PLUGIN)</div>
                         <h3>Françoise Check for Figma</h3>
                         <p>
-                            Finds detached instances, hand-drawn duplicates, and real contrast errors over photos — and fixes the Figma file automatically before a developer ever opens it.
+                            Finds detached instances, hand-drawn duplicates, and real contrast errors over photos, then fixes the Figma file automatically before a developer ever opens it.
                         </p>
                     </div>
                     <div class="door-cta">
-                        <a data-link="figmaPlugin" href="https://www.figma.com/community/plugin/1617922498584623166/francoise-check" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Run 20 Free Checks</a>
+                        <a data-link="figmaPlugin" href="https://www.figma.com/community/plugin/1617922498584623166/francoise-check" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Run Free Checks</a>
                         <a href="#figma" class="inline-link">See how it works ↓</a>
                     </div>
                 </div>
@@ -838,10 +811,10 @@
         </div>
     </section>
 
-    <!-- PRODUCT 01: MCP SERVER FOR ENGINEERING -->
+    <!-- PRODUCT 01: MCP SERVER -->
     <section id="mcp" class="product-section">
         <div class="wrap">
-            <div class="section-kicker">01 · FRANÇOISE MCP SERVER</div>
+            <div class="product-label">Françoise MCP Server</div>
             <h2>Stop paying coding agents to guess your frontend.</h2>
             <p class="section-sub">
                 Feeding Storybook docs into an agent prompt bloats context 5x and still ends in hallucinated props, custom CSS, and 8 rounds of retries. Françoise gives your agent a deterministic compiler step: rough intent goes in, merge-ready component code comes out.
@@ -855,10 +828,6 @@
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                             title="Françoise MCP Benchmark">
                         </iframe>
-                    </div>
-                    <div class="caption-line">
-                        <span>Same complex enterprise screen built in 3 setups: raw agent vs. Storybook MCP vs. Françoise MCP.</span>
-                        <a href="https://vimeo.com/1246746021" target="_blank" rel="noopener noreferrer" class="inline-link" style="white-space: nowrap;">Vimeo ↗</a>
                     </div>
                 </div>
 
@@ -902,26 +871,26 @@
                 </div>
                 <div class="fact">
                     <h4>Zero LLMs inside our server</h4>
-                    <p>Code assembly and even custom icon matching run deterministically without external model calls — fast, predictable, and VPC-ready.</p>
+                    <p>Code assembly and custom icon matching run deterministically without external model calls. Fast, predictable, and VPC-ready.</p>
                 </div>
             </div>
 
-            <div class="callout-row">
+            <div class="callout-line">
                 <p>
-                    <strong>Free Closed Alpha:</strong> We are onboarding engineering teams directly. Bring your own component library — we will connect it live on a call with our founders.
+                    <strong>Free Closed Alpha:</strong> Bring your own component library and we will connect it live on a call with our founders.
                 </p>
                 <a data-link="meet" href="https://meet.francoise.design" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Book Alpha Call</a>
             </div>
         </div>
     </section>
 
-    <!-- PRODUCT 02: FIGMA PLUGIN FOR DESIGN DIRECTORS -->
+    <!-- PRODUCT 02: FIGMA PLUGIN -->
     <section id="figma" class="product-section">
         <div class="wrap">
-            <div class="section-kicker">02 · FRANÇOISE CHECK (FIGMA PLUGIN)</div>
+            <div class="product-label">Françoise Check for Figma</div>
             <h2>Messy Figma in. Handoff-ready file out.</h2>
             <p class="section-sub">
-                Designers detach instances and eyeball spacing to hit deadlines — leaving leads to police layers manually and burning ~30% of frontend time on layout rework. Françoise reads what is visually on screen, not layer names, and repairs the file automatically.
+                Françoise reads what is visually on screen and repairs the file automatically.
             </p>
 
             <div class="plugin-showcase">
@@ -979,7 +948,7 @@
                 </div>
             </div>
 
-            <!-- Unobtrusive Plugin Self-Serve Plans -->
+            <!-- Crisp White Plugin Self-Serve Plans -->
             <div id="plugin-plans">
                 <details id="pricingDrawer" class="pricing-bar">
                     <summary>
@@ -997,10 +966,10 @@
                                 <ul class="plan-features">
                                     <li>Full component, token &amp; WCAG 2.2 audit</li>
                                     <li>Works with public &amp; private UI kits</li>
-                                    <li>Run directly in Figma — no web signup</li>
+                                    <li>Runs directly in Figma with no web signup</li>
                                 </ul>
                             </div>
-                            <a data-link="figmaPlugin" href="https://www.figma.com/community/plugin/1617922498584623166/francoise-check" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Run 20 Free Checks</a>
+                            <a data-link="figmaPlugin" href="https://www.figma.com/community/plugin/1617922498584623166/francoise-check" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Run Free Checks</a>
                         </div>
 
                         <div class="plan-box">
@@ -1040,39 +1009,38 @@
         </div>
     </section>
 
-    <!-- WHY IT WORKS: Grounded Proof for CTOs, InfoSec & Investors -->
+    <!-- PROOF & ARCHITECTURE -->
     <section class="trust-section">
         <div class="wrap">
-            <div class="section-kicker">UNDER THE HOOD</div>
             <h2>Deterministic math.</h2>
             <p class="section-sub">
-                Rule-based linters break as soon as a designer detaches a frame, and LLMs hallucinate on complex component trees. Built by applied mathematicians and infrastructure leads, Françoise resolves messy visual layouts deterministically — fast enough for live IDE and canvas workflows.
+                Rule-based linters break as soon as a designer detaches a frame, and LLMs hallucinate on complex component trees. Built by applied mathematicians and infrastructure leads, Françoise resolves messy visual layouts deterministically at speeds built for live IDE and canvas workflows.
             </p>
 
             <div class="stats-row">
-                <div>
+                <div class="stat-col">
                     <div class="stat-big">37</div>
                     <div class="stat-caption">Design systems calibrated across public standards and closed enterprise libraries</div>
                 </div>
-                <div>
+                <div class="stat-col">
                     <div class="stat-big">99.2%</div>
                     <div class="stat-caption">Component &amp; state recognition accuracy validated on live production flows</div>
                 </div>
-                <div>
+                <div class="stat-col">
                     <div class="stat-big">0 bytes</div>
-                    <div class="stat-caption">Of your mockups stored on disk — processed in memory only (EU Azure) and never used for training</div>
+                    <div class="stat-caption">Of your mockups stored on disk. Processed in memory only (EU Azure) and never used for training</div>
                 </div>
-                <div>
+                <div class="stat-col">
                     <div class="stat-big">VPC</div>
                     <div class="stat-caption">Isolated private-cloud deployment &amp; OEM licensing available for enterprise agent fleets</div>
                 </div>
             </div>
 
-            <div class="callout-row" style="border-top: none; margin-top: 28px; padding-top: 0;">
+            <div class="callout-line">
                 <p>
                     Running a large design organization, scaling internal coding agents, or evaluating Françoise as an investor?
                 </p>
-                <div style="display: flex; align-items: center; gap: 22px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
                     <a data-link="meet" href="https://meet.francoise.design" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Talk to the Founders</a>
                     <a href="mailto:ceo@francoise.design" class="inline-link">ceo@francoise.design</a>
                 </div>
@@ -1099,7 +1067,7 @@
     <div id="orgModal" class="modal-overlay">
         <div class="modal-box">
             <button class="modal-close" onclick="closeModal('orgModal')" aria-label="Close">&times;</button>
-            <h3 style="margin-bottom: 6px;">Organization Plan — Françoise Check</h3>
+            <h3 style="margin-bottom: 6px;">Organization Plan · Françoise Check</h3>
             <p style="color: var(--muted); font-size: 14px; margin-bottom: 20px;">
                 Select billing interval and team size
             </p>
@@ -1232,7 +1200,7 @@
             <p style="color: var(--muted); font-size: 12px;">Effective date: July 20, 2026</p>
             <p>All self-serve purchases are processed by our Merchant of Record, Lemon Squeezy, LLC. Our Free plan lets you evaluate Françoise Check with 20 full-featured layout checks at no cost before purchasing.</p>
             <h3>14-Day Refund Window</h3>
-            <p>If you are not satisfied with an initial Pro or Organization subscription, email contact@francoise.design within 14 days of purchase with your account email and order number for a full refund (processed within 5–10 business days back to your original payment method).</p>
+            <p>If you are not satisfied with an initial Pro or Organization subscription, email contact@francoise.design within 14 days of purchase with your account email and order number for a full refund (processed within 5 to 10 business days back to your original payment method).</p>
         </div>
     </div>
 
