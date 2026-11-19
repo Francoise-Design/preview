@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Françoise | On-system UI in Figma and in code</title>
-    <meta name="description" content="Auto-fix messy Figma mockups before handoff and make coding agents ship production UI with your real components on the first try, cutting token spend 74x.">
+    <meta name="description" content="Deterministically compile AI agent concepts into exact production UI from your repo, and automate Figma prototype handoff, UI kit migrations, and WCAG 2.2 audits.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -221,7 +221,7 @@
             font-size: 19px;
             line-height: 1.5;
             color: var(--text);
-            max-width: 660px;
+            max-width: 680px;
         }
 
         /* MCP Section */
@@ -247,77 +247,49 @@
             display: block;
         }
 
-        .comparison-list {
+        .mcp-specs {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            border-top: 2px solid var(--ink);
             font-variant-numeric: tabular-nums;
         }
 
-        .comp-item {
-            padding: 6px 0 18px;
+        .spec-item {
+            padding: 18px 0;
             border-bottom: 1px solid var(--rule);
         }
 
-        .comp-item:nth-child(2) {
+        .spec-item:last-child {
             border-bottom: none;
-            padding-bottom: 6px;
+            padding-bottom: 0;
         }
 
-        .comp-head {
+        .spec-head {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             gap: 12px;
-            font-size: 15px;
         }
 
-        .comp-head strong {
+        .spec-item h4 {
+            font-size: 16px;
             font-weight: 600;
-        }
-
-        .comp-meta {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--muted);
-        }
-
-        .comp-note {
-            font-size: 14px;
-            color: var(--muted);
-            margin-top: 5px;
-            line-height: 1.45;
-        }
-
-        .comp-item.ours {
-            border: 1.5px solid var(--ink);
-            padding: 20px 22px;
-            background: var(--bg);
-        }
-
-        .comp-item.ours .comp-meta,
-        .comp-item.ours .comp-note {
+            letter-spacing: -0.015em;
             color: var(--ink);
         }
 
-        .three-facts {
-            margin-top: 60px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 44px;
+        .spec-meta {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ink);
+            white-space: nowrap;
         }
 
-        .fact h4 {
-            font-size: 17px;
-            font-weight: 600;
-            letter-spacing: -0.015em;
-            margin-bottom: 8px;
-        }
-
-        .fact p {
-            font-size: 15px;
+        .spec-item p {
+            margin-top: 6px;
+            font-size: 14px;
             color: var(--muted);
-            line-height: 1.52;
+            line-height: 1.48;
         }
 
         .callout-line {
@@ -332,14 +304,14 @@
         .callout-line p {
             font-size: 16px;
             color: var(--text);
-            max-width: 600px;
+            max-width: 640px;
         }
 
         /* Figma Plugin Section */
         .plugin-showcase {
             margin-top: 48px;
             display: grid;
-            grid-template-columns: 330px 1fr;
+            grid-template-columns: 340px 1fr;
             gap: 48px;
             align-items: center;
         }
@@ -746,7 +718,6 @@
             .two-doors,
             .mcp-layout,
             .plugin-showcase,
-            .three-facts,
             .pricing-columns {
                 grid-template-columns: 1fr;
                 gap: 36px;
@@ -768,7 +739,7 @@
             <nav class="nav">
                 <a href="#mcp">For Coding Agents</a>
                 <a href="#figma">For Figma</a>
-                <a href="#plugin-plans" onclick="openPricingDrawer()">Pricing</a>
+                <a href="#plugin-plans" onclick="openPricingDrawer()">Plugin Pricing</a>
                 <a data-link="meet" href="https://meet.francoise.design" target="_blank" rel="noopener noreferrer" class="nav-cta">Join MCP Alpha</a>
             </nav>
         </div>
@@ -783,14 +754,14 @@
                 <!-- Door 1: Engineering -->
                 <div class="door">
                     <div>
-                        <h3>Françoise MCP Server</h3>
+                        <h3>Françoise UI Compiler</h3>
                         <p>
-                            Plugs into Cursor, Claude Code, and Cline so coding agents assemble screens from your real Storybook components on the first pass. 74x lower token spend, zero retry loops.
+                            Plugs into any MCP-compatible coding agent or internal pipeline. Agents explore UI solutions freely while our algorithm deterministically assembles exact code from your repo on the first pass, with zero retry loops.
                         </p>
                     </div>
                     <div class="door-cta">
                         <a data-link="meet" href="https://meet.francoise.design" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Book Alpha Setup</a>
-                        <a href="#mcp" class="inline-link">Watch benchmark ↓</a>
+                        <a href="#mcp" class="inline-link">Watch demo ↓</a>
                     </div>
                 </div>
 
@@ -799,7 +770,7 @@
                     <div>
                         <h3>Françoise Check for Figma</h3>
                         <p>
-                            Finds detached instances, hand-drawn duplicates, and real contrast errors over photos, then fixes the Figma file automatically before a developer ever opens it.
+                            Turns fast prototypes into clean Dev Mode specs, automates UI kit migrations and rebrands, and audits real pixel contrast over photos for WCAG 2.2, EAA, and ADA compliance.
                         </p>
                     </div>
                     <div class="door-cta">
@@ -811,13 +782,13 @@
         </div>
     </section>
 
-    <!-- PRODUCT 01: MCP SERVER -->
+    <!-- PRODUCT 01: UI COMPILER (MCP) -->
     <section id="mcp" class="product-section">
         <div class="wrap">
-            <div class="product-label">Françoise MCP Server</div>
-            <h2>Stop paying coding agents to guess your frontend.</h2>
+            <div class="product-label">Françoise UI Compiler · MCP</div>
+            <h2>Agents explore the layout. An algorithm assembles the code.</h2>
             <p class="section-sub">
-                Feeding Storybook docs into an agent prompt bloats context 5x and still ends in hallucinated props, custom CSS, and 8 rounds of retries. Françoise gives your agent a deterministic compiler step: rough intent goes in, merge-ready component code comes out.
+                With doc-serving MCPs, developers still spend iterations finding broken props and layout bugs to paste back into chat. Françoise splits the work: any connected agent drafts UI concepts freely, and our deterministic compiler builds merge-ready code straight from your repo in one pass.
             </p>
 
             <div class="mcp-layout">
@@ -826,58 +797,39 @@
                         <iframe
                             src="https://player.vimeo.com/video/1246746021?badge=0&amp;autopause=0&amp;title=0&amp;byline=0&amp;portrait=0"
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                            title="Françoise MCP Benchmark">
+                            title="Françoise UI Compiler Demo">
                         </iframe>
                     </div>
                 </div>
 
-                <div>
-                    <div class="comparison-list">
-                        <div class="comp-item">
-                            <div class="comp-head">
-                                <strong>Raw Coding Agent</strong>
-                                <span class="comp-meta">4.7M tokens · 8 attempts</span>
-                            </div>
-                            <div class="comp-note">Invents custom wrappers and hardcoded styles that fail PR review.</div>
+                <div class="mcp-specs">
+                    <div class="spec-item">
+                        <div class="spec-head">
+                            <h4>Compiled by algorithm in one pass</h4>
+                            <span class="spec-meta">63k tokens · 1 shot</span>
                         </div>
-
-                        <div class="comp-item">
-                            <div class="comp-head">
-                                <strong>Agent + Storybook MCP</strong>
-                                <span class="comp-meta">1.8M tokens · 3 attempts</span>
-                            </div>
-                            <div class="comp-note">Reads component docs, but still guesses spatial layout and breaks props.</div>
-                        </div>
-
-                        <div class="comp-item ours">
-                            <div class="comp-head">
-                                <strong>Agent + Françoise MCP</strong>
-                                <span class="comp-meta">63k tokens · 1 shot</span>
-                            </div>
-                            <div class="comp-note"><strong>74x cheaper</strong> than a raw agent (28x vs. Storybook MCP). 100% strict design-system code.</div>
-                        </div>
+                        <p>Exact repo components with zero retry loops. Uses 28x fewer tokens than doc-serving MCPs (74x vs. raw agents).</p>
                     </div>
-                </div>
-            </div>
 
-            <div class="three-facts">
-                <div class="fact">
-                    <h4>Keep your current IDE and agents</h4>
-                    <p>Works as a standard MCP server inside Cursor, Claude Code, Cline, or your internal agent pipeline. Nothing new for developers to learn.</p>
-                </div>
-                <div class="fact">
-                    <h4>Connected in under 20 minutes</h4>
-                    <p>Point Françoise at your repository and Figma kit. No manual token files to write, tag, or maintain when your library changes.</p>
-                </div>
-                <div class="fact">
-                    <h4>Zero LLMs inside our server</h4>
-                    <p>Code assembly and custom icon matching run deterministically without external model calls. Fast, predictable, and VPC-ready.</p>
+                    <div class="spec-item">
+                        <div class="spec-head">
+                            <h4>Plugs into any MCP agent setup</h4>
+                        </div>
+                        <p>Connects via standard MCP to Cursor, Claude Code, Cline, web agents, or custom internal agent pipelines.</p>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-head">
+                            <h4>Zero LLMs inside our server</h4>
+                        </div>
+                        <p>Code assembly and custom icon matching run deterministically without external model calls. Fast, predictable, and VPC-ready.</p>
+                    </div>
                 </div>
             </div>
 
             <div class="callout-line">
                 <p>
-                    <strong>Free Closed Alpha:</strong> Bring your own component library and we will connect it live on a call with our founders.
+                    <strong>Free Closed Alpha:</strong> Hands-on onboarding with our founders to calibrate Françoise directly to your component repository. No per-developer seat pricing.
                 </p>
                 <a data-link="meet" href="https://meet.francoise.design" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Book Alpha Call</a>
             </div>
@@ -888,31 +840,31 @@
     <section id="figma" class="product-section">
         <div class="wrap">
             <div class="product-label">Françoise Check for Figma</div>
-            <h2>Messy Figma in. Handoff-ready file out.</h2>
+            <h2>Fast prototypes in. Handoff-ready, compliant specs out.</h2>
             <p class="section-sub">
-                Françoise reads what is visually on screen and repairs the file automatically.
+                Explore concepts without policing layers, migrate flows to a new UI kit, or run regulatory accessibility audits. Françoise reads rendered visuals on screen and binds everything to your live design system automatically.
             </p>
 
             <div class="plugin-showcase">
                 <div class="job-list" role="tablist">
                     <button class="job-btn active" type="button" onclick="selectJob(0)">
-                        <span class="job-title">Relink detached &amp; custom elements</span>
-                        <span class="job-desc">Spots hand-drawn frames and broken overrides that visually match your UI kit, and swaps them back to clean library instances.</span>
+                        <span class="job-title">Turn fast prototypes into handoff specs</span>
+                        <span class="job-desc">Detach frames and explore ideas at full speed. Françoise spots custom layers that visually match your UI kit and swaps them back to clean library instances before Dev Mode handoff.</span>
                     </button>
 
                     <button class="job-btn" type="button" onclick="selectJob(1)">
-                        <span class="job-title">Check real contrast on photos &amp; blur</span>
-                        <span class="job-desc">Evaluates rendered pixels across background images, gradients, and translucent layers for audit-ready WCAG 2.2, EAA, and ADA compliance.</span>
+                        <span class="job-title">Migrate flows for rebrands &amp; new UI kits</span>
+                        <span class="job-desc">Rebranding, shipping dark mode, consolidating products, or importing AI drafts into Figma? Map existing screens onto your target design system automatically.</span>
                     </button>
 
                     <button class="job-btn" type="button" onclick="selectJob(2)">
-                        <span class="job-title">Clean up legacy archives in batches</span>
-                        <span class="job-desc">Select dozens of old product screens on a canvas and clear hundreds of token and component errors in one pass.</span>
+                        <span class="job-title">Pass EAA, ADA &amp; WCAG 2.2 audits</span>
+                        <span class="job-desc">Evaluates rendered pixels across background photos, gradients, and translucent blur layers for audit-ready European and US accessibility compliance.</span>
                     </button>
 
                     <button class="job-btn" type="button" onclick="selectJob(3)">
-                        <span class="job-title">Move screens to a new UI kit</span>
-                        <span class="job-desc">Rebranding, consolidating products, or importing AI drafts into Figma? Map existing screens onto your target design system automatically.</span>
+                        <span class="job-title">Audit &amp; repair multi-screen flows in batches</span>
+                        <span class="job-desc">Select dozens of screens across an entire user journey and resolve hundreds of token mismatches and detached components in one pass.</span>
                     </button>
                 </div>
 
@@ -921,28 +873,28 @@
                         <video autoplay loop muted playsinline poster="creo-1.gif">
                             <source src="creo-1.mp4" type="video/mp4">
                             <source src="creo-1.webm" type="video/webm">
-                            <img src="creo-1.gif" alt="Auto-fixing detached Figma components">
+                            <img src="creo-1.gif" alt="Auto-fixing detached Figma prototype components for handoff">
                         </video>
                     </div>
                     <div class="job-panel" data-job="1">
-                        <video loop muted playsinline poster="creo-5.gif">
-                            <source src="creo-5.mp4" type="video/mp4">
-                            <source src="creo-5.webm" type="video/webm">
-                            <img src="creo-5.gif" alt="Rendered WCAG 2.2 contrast and token validation">
-                        </video>
-                    </div>
-                    <div class="job-panel" data-job="2">
-                        <video loop muted playsinline poster="creo-21.gif">
-                            <source src="creo-21.mp4" type="video/mp4">
-                            <source src="creo-21.webm" type="video/webm">
-                            <img src="creo-21.gif" alt="Batch cleanup across legacy Figma screens">
-                        </video>
-                    </div>
-                    <div class="job-panel" data-job="3">
                         <video loop muted playsinline poster="creo-20.gif">
                             <source src="creo-20.mp4" type="video/mp4">
                             <source src="creo-20.webm" type="video/webm">
-                            <img src="creo-20.gif" alt="Migrating screens between design systems">
+                            <img src="creo-20.gif" alt="Migrating screens between design systems and rebrands">
+                        </video>
+                    </div>
+                    <div class="job-panel" data-job="2">
+                        <video loop muted playsinline poster="creo-5.gif">
+                            <source src="creo-5.mp4" type="video/mp4">
+                            <source src="creo-5.webm" type="video/webm">
+                            <img src="creo-5.gif" alt="Rendered WCAG 2.2, EAA, and ADA contrast validation">
+                        </video>
+                    </div>
+                    <div class="job-panel" data-job="3">
+                        <video loop muted playsinline poster="creo-21.gif">
+                            <source src="creo-21.mp4" type="video/mp4">
+                            <source src="creo-21.webm" type="video/webm">
+                            <img src="creo-21.gif" alt="Batch token and component repair across multi-screen Figma flows">
                         </video>
                     </div>
                 </div>
